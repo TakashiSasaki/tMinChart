@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.graphics.Point;
 
 import java.lang.reflect.Method;
+import java.nio.DoubleBuffer;
 
 import com.gmail.takashi316.tminchart.R;
 
@@ -163,6 +165,17 @@ public class DisplayPropertyFragment extends Fragment {
             x.setText(Integer.toString(activity.getDecorViewWidth()));
             final EditText y = (EditText) view.findViewById(R.id.editTextViewHeight);
             y.setText(Integer.toString(activity.getDecorViewHeight()));
+        }
+        {
+            final DisplayMetrics display_metrics = new DisplayMetrics();
+            display.getMetrics(display_metrics);
+            ((EditText)view.findViewById(R.id.editTextDensity)).setText(Float.toString(display_metrics.density));
+            ((EditText)view.findViewById(R.id.editTextDensityDpi)).setText(Integer.toString(display_metrics.densityDpi));
+            ((EditText)view.findViewById(R.id.editTextHeightPixels)).setText(Integer.toString(display_metrics.heightPixels));
+            ((EditText)view.findViewById(R.id.editTextWidthPixels)).setText(Integer.toString(display_metrics.widthPixels));
+            ((EditText)view.findViewById(R.id.editTextXDpi)).setText(Float.toString(display_metrics.xdpi));
+            ((EditText)view.findViewById(R.id.editTextYDpi)).setText(Float.toString(display_metrics.ydpi));
+            ((EditText)view.findViewById(R.id.editTextScaledDensity)).setText(Float.toString(display_metrics.scaledDensity));
         }
 
     }//onResume
