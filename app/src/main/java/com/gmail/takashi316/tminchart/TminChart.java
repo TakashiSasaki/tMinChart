@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -32,6 +33,8 @@ public class TminChart extends Activity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private int decorViewWidth = -1;
+    private int decorViewHeight = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,16 @@ public class TminChart extends Activity
 
     }
 
+    @Override
+    public int getDecorViewWidth() {
+        return this.decorViewWidth;
+    }
+
+    @Override
+    public int getDecorViewHeight() {
+        return this.decorViewHeight;
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -149,4 +162,17 @@ public class TminChart extends Activity
         }
     }//PlaceHolderFragment
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if(!hasFocus) return;
+        final View decor_view = this.getWindow().getDecorView();
+        final ViewGroup view_group = (ViewGroup) decor_view;
+        final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
+        this.decorViewHeight = decor_view.getHeight();
+        this.decorViewWidth = decor_view.getWidth();
+
+        final Fragment display_property_fragment = this.getFragmentManager().findFragmentById(R.id.display_property);
+        display_property_fragment.onResume();
+    }//onWindowFocusChanged
 }//TminChart activity

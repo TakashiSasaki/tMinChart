@@ -117,6 +117,8 @@ public class DisplayPropertyFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+        public int getDecorViewWidth();
+        public int getDecorViewHeight();
     }
 
     @Override
@@ -156,14 +158,11 @@ public class DisplayPropertyFragment extends Fragment {
             y.setText(Integer.toString(point.y));
         }
         {
-            final View decor_view = this.getActivity().getWindow().getDecorView();
-            final ViewGroup view_group = (ViewGroup) decor_view;
-            final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
-            final View root_view = view_group.getRootView();
+            final OnFragmentInteractionListener activity = (OnFragmentInteractionListener) this.getActivity();
             final EditText x = (EditText) view.findViewById(R.id.editTextViewWidth);
-            x.setText(Integer.toString(view.getWidth()));
+            x.setText(Integer.toString(activity.getDecorViewWidth()));
             final EditText y = (EditText) view.findViewById(R.id.editTextViewHeight);
-            y.setText(Integer.toString(view.getHeight()));
+            y.setText(Integer.toString(activity.getDecorViewHeight()));
         }
 
     }//onResume
