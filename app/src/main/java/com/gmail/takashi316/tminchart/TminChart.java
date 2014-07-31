@@ -141,6 +141,6 @@ public class TminChart extends Activity
             ((TminChart) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
-    }
+    }//PlaceHolderFragment
 
-}
+}//TminChart activity
