@@ -2,12 +2,20 @@ package com.gmail.takashi316.tminchart;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.graphics.Point;
 
+import java.lang.reflect.Method;
+
+import com.gmail.takashi316.tminchart.R;
 
 
 /**
@@ -64,8 +72,39 @@ public class DisplayPropertyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_display_property, container, false);
+
+        //LCD size
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point real = new Point(0,0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            display.getRealSize(real);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2){
+            try {
+                Method getRawWidth = Display.class.getMethod("getRawWidth");
+                Method getRawHeight = Display.class.getMethod("getRawHeight");
+                final int width = (Integer) getRawWidth.invoke(display);
+                final int height = (Integer) getRawHeight.invoke(display);
+                real.set(width, height);
+            } catch (Exception e){
+                e.printStackTrace();
+            }//try
+        }//if
+
+        {
+            final EditText w = (EditText) view.findViewById(R.id.editTextRawWidth);
+            w.setText(Integer.toString(real.x));
+            final EditText h = (EditText) view.findViewById(R.id.editTextRawHeight);
+            h.setText(Integer.toString(real.y));
+        }
+        {
+            final EditText x = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
+            final EditText y = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
+        }
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_display_property, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
