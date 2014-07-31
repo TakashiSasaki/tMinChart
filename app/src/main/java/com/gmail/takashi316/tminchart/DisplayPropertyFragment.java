@@ -75,34 +75,6 @@ public class DisplayPropertyFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_display_property, container, false);
 
-        //LCD size
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point real = new Point(0,0);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
-            display.getRealSize(real);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2){
-            try {
-                Method getRawWidth = Display.class.getMethod("getRawWidth");
-                Method getRawHeight = Display.class.getMethod("getRawHeight");
-                final int width = (Integer) getRawWidth.invoke(display);
-                final int height = (Integer) getRawHeight.invoke(display);
-                real.set(width, height);
-            } catch (Exception e){
-                e.printStackTrace();
-            }//try
-        }//if
-
-        {
-            final EditText w = (EditText) view.findViewById(R.id.editTextRawWidth);
-            w.setText(Integer.toString(real.x));
-            final EditText h = (EditText) view.findViewById(R.id.editTextRawHeight);
-            h.setText(Integer.toString(real.y));
-        }
-        {
-            final EditText x = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
-            final EditText y = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
-        }
-
         // Inflate the layout for this fragment
         return view;
     }
@@ -146,4 +118,37 @@ public class DisplayPropertyFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        final View view = this.getView();
+
+        //LCD size
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point real = new Point(0,0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            display.getRealSize(real);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2){
+            try {
+                Method getRawWidth = Display.class.getMethod("getRawWidth");
+                Method getRawHeight = Display.class.getMethod("getRawHeight");
+                final int width = (Integer) getRawWidth.invoke(display);
+                final int height = (Integer) getRawHeight.invoke(display);
+                real.set(width, height);
+            } catch (Exception e){
+                e.printStackTrace();
+            }//try
+        }//if
+
+        {
+            final EditText w = (EditText) view.findViewById(R.id.editTextRawWidth);
+            w.setText(Integer.toString(real.x));
+            final EditText h = (EditText) view.findViewById(R.id.editTextRawHeight);
+            h.setText(Integer.toString(real.y));
+        }
+        {
+            final EditText x = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
+            final EditText y = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
+        }
+    }
 }

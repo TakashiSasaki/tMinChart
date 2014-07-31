@@ -7,8 +7,8 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
@@ -29,6 +29,13 @@
                 android:text="HardwareSize"
                 android:id="@+id/textView2" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="X="
+                android:id="@+id/textView4" />
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,6 +47,13 @@
                 android:focusable="false"
                 android:inputType="none|number"
                 android:enabled="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=", Y="
+                android:id="@+id/textView5" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -63,6 +77,13 @@
                 android:text="DisplaySize"
                 android:id="@+id/textView3" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="X="
+                android:id="@+id/textView6" />
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,6 +91,13 @@
                 android:text="X"
                 android:enabled="true"
                 android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=", Y="
+                android:id="@+id/textView7" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -84,8 +112,8 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
