@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Point;
 
@@ -147,8 +148,23 @@ public class DisplayPropertyFragment extends Fragment {
             h.setText(Integer.toString(real.y));
         }
         {
+            Point point = new Point(0,0);
+            display.getSize(point);
             final EditText x = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
-            final EditText y = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
+            x.setText(Integer.toString(point.x));
+            final EditText y = (EditText) view.findViewById(R.id.editTextDisplaySizeY);
+            y.setText(Integer.toString(point.y));
         }
-    }
+        {
+            final View decor_view = this.getActivity().getWindow().getDecorView();
+            final ViewGroup view_group = (ViewGroup) decor_view;
+            final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
+            final View root_view = view_group.getRootView();
+            final EditText x = (EditText) view.findViewById(R.id.editTextViewWidth);
+            x.setText(Integer.toString(view.getWidth()));
+            final EditText y = (EditText) view.findViewById(R.id.editTextViewHeight);
+            y.setText(Integer.toString(view.getHeight()));
+        }
+
+    }//onResume
 }
