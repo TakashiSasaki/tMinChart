@@ -96,8 +96,8 @@ public class UserInfoFragment extends Fragment {
                         final SQLiteDatabase database = sqlite_open_helper.getReadableDatabase();
                         final Cursor cursor = database.query("UserInfo", new String[]{"name", "age", "sex", "affiliation", "correction", "fatigue"},
                                 null, null, null, null, null, null);
-                        final String names[] = new String [cursor.getCount()];
-                        for(int i=0; i<cursor.getCount(); ++i){
+                        final String names[] = new String[cursor.getCount()];
+                        for (int i = 0; i < cursor.getCount(); ++i) {
                             cursor.moveToPosition(i);
                             names[i] = cursor.getString(0);
                         }//for
@@ -108,7 +108,35 @@ public class UserInfoFragment extends Fragment {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                    }
+                                        final String name = names[which];
+                                        SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
+                                        final SQLiteDatabase database = sqlite_open_helper.getReadableDatabase();
+                                        final Cursor cursor = database.query("UserInfo", new String[]{"name", "age", "sex", "affiliation", "correction", "fatigue"},
+                                                "name = ?", new String[] {name}, null, null, null, null);
+                                        editTextName.setText(name);
+                                        if(cursor.getCount()==0) return;
+                                        cursor.moveToFirst();
+                                        String age;
+                                        try {
+                                            final int int_age = cursor.getInt(1);
+                                            age = (new Integer(int_age)).toString();
+                                        } catch (Exception e){
+                                            age = "";
+                                        }//try
+                                        if(radioButtonMale.getText().toString().equals(cursor.getString(2))) radioButtonMale.setChecked(true);
+                                        if(radioButtonFemale.getText().toString().equals(cursor.getString(2))) radioButtonFemale.setChecked(true);
+                                        final String affiliation = cursor.getString(3);
+                                        if(radioButtonContactLens.getText().toString().equals(cursor.getString(4))) radioButtonContactLens.setChecked(true);
+                                        if(radioButtonOtherCorrection.getText().toString().equals(cursor.getString(4))) radioButtonOtherCorrection.setChecked(true);
+                                        if(radioButtonGlasses.getText().toString().equals(cursor.getString(4))) radioButtonGlasses.setChecked(true);
+                                        if(radioButtonNoCorrection.getText().toString().equals(cursor.getString(4))) radioButtonNoCorrection.setChecked(true);
+                                        if(radioButtonAfterDayShift.getText().toString().equals(cursor.getString(5))) radioButtonAfterDayShift.setChecked(true);
+                                        if(radioButtonAfterNightShift.getText().toString().equals(cursor.getString(5))) radioButtonAfterNightShift.setChecked(true);
+                                        if(radioButtonAfterTwilightShift.getText().toString().equals(cursor.getString(5))) radioButtonAfterTwilightShift.setChecked(true);
+                                        if(radioButtonBeforeNightShift.getText().toString().equals(cursor.getString(5))) radioButtonBeforeNightShift.setChecked(true);
+                                        if(radioButtonBeforeDayShift.getText().toString().equals(cursor.getString(5))) radioButtonBeforeDayShift.setChecked(true);
+                                        if(radioButtonBeforeTwilgihtShift.getText().toString().equals(cursor.getString(5))) radioButtonBeforeTwilgihtShift.setChecked(true);
+                                    }//onClick
                                 });
                         builder.show();
                     }//onClick
