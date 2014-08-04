@@ -10,4 +10,10 @@
         android:layout_height="match_parent"
         android:text="@string/title_section3" />
 
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left|top"
+        android:id="@+id/tableLayoutTminChart"></TableLayout>
+
 </FrameLayout>

@@ -1,13 +1,19 @@
 package com.gmail.takashi316.tminchart;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.LayoutDirection;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 /**
@@ -28,6 +34,8 @@ public class TconChartFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private TableLayout tableLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -66,6 +74,17 @@ public class TconChartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tcon_chart, container, false);
+        tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
+        for(int x = 0; x<5; ++x) {
+            TableRow table_row = new TableRow(getActivity());
+            for(int y=0; y<5; ++y){
+                TextView text_view = new TextView(getActivity());
+                text_view.setText(Integer.toString(x) + Integer.toString(y));
+                table_row.addView(text_view);
+            }//for y
+            tableLayout.addView(table_row);
+        }//for x
+
         return view;
     }//onCreateView
 
