@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
+import android.os.Handler;
+import android.os.Vibrator;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -26,7 +30,11 @@ public class Konoji extends View {
     private float constrast;
     private int gap;
     private int orientation;
-    private boolean touched;
+    private boolean touched = false;
+
+    public boolean isTouched(){
+        return touched;
+    }//isTouched
 
     public Konoji(Context context) {
         super(context);
@@ -51,6 +59,7 @@ public class Konoji extends View {
         this.constrast = a.getFloat(R.styleable.Konoji_contrast, 0.5f);
         this.gap = a.getInt(R.styleable.Konoji_gap, 30);
         this.orientation = a.getInt(R.styleable.Konoji_gap, 0);
+        this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
         mExampleString = a.getString(
                 R.styleable.Konoji_exampleString);
@@ -78,6 +87,27 @@ public class Konoji extends View {
 
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements();
+
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                touched = touched ? false: true;
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    public void run() {
+                        invalidate();
+                        Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                        if(touched) {
+                            vibrator.vibrate(new long[]{0, 60, 60, 60}, -1);
+                        } else {
+                            vibrator.vibrate(new long[]{0, 100}, -1);
+                        }//if
+                        ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
+                        tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                    }//run
+                });
+            }//onClick
+        });
     }
 
     private void invalidateTextPaintAndMeasurements() {
@@ -96,10 +126,18 @@ public class Konoji extends View {
         background_paint.setColor(Color.YELLOW);
         fillCanvas(canvas, background_paint);
         final Paint konoji_paint = new Paint();
-        konoji_paint.setColor(Color.BLACK);
+        if(touched) {
+            konoji_paint.setColor(Color.RED);
+        } else {
+            konoji_paint.setColor(Color.BLACK);
+        }//if
         canvas.drawRect(0,0,gap*3-1, gap*3-1, konoji_paint);
         final Paint gap_paint = new Paint();
         gap_paint.setColor(Color.WHITE);
+        drawKonoji(canvas, gap_paint);
+    }//onDraw
+
+    private void drawKonoji(Canvas canvas, Paint gap_paint){
         switch(orientation){
             case 0:
                 canvas.drawRect(gap, 0, gap*2-1, gap*2-1, gap_paint);
