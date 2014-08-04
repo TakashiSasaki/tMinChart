@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="過去に入力した名前から選択する"
-            android:id="@+id/button" />
+            android:id="@+id/buttonUserList" />
     </LinearLayout>
 
     <TextView
