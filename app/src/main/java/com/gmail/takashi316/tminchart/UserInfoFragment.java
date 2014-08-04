@@ -92,9 +92,19 @@ public class UserInfoFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         final CharSequence[] users = {"山田花子", "鈴木一郎", "吉田二郎"};
+                        SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
+                        final SQLiteDatabase database = sqlite_open_helper.getReadableDatabase();
+                        final Cursor cursor = database.query("UserInfo", new String[]{"name", "age", "sex", "affiliation", "correction", "fatigue"},
+                                null, null, null, null, null, null);
+                        final String names[] = new String [cursor.getCount()];
+                        for(int i=0; i<cursor.getCount(); ++i){
+                            cursor.moveToPosition(i);
+                            names[i] = cursor.getString(0);
+                        }//for
+                        cursor.close();
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("名前を選択してください");
-                        builder.setItems(users,
+                        builder.setItems(names,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
