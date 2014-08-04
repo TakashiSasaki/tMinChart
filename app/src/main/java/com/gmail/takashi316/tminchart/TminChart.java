@@ -23,7 +23,11 @@ import android.widget.TextView;
 
 
 public class TminChart extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, DisplayPropertyFragment.OnFragmentInteractionListener, UserInfoFragment.OnFragmentInteractionListener{
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        TminChartFragment.OnFragmentInteractionListener,
+        TconChartFragment.OnFragmentInteractionListener,
+        DisplayPropertyFragment.OnFragmentInteractionListener,
+        UserInfoFragment.OnFragmentInteractionListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -151,15 +155,21 @@ public class TminChart extends Activity
         public static Fragment newInstance(int sectionNumber) {
             Fragment fragment;
             switch (sectionNumber){
-            case 1:
-                fragment = new UserInfoFragment();
-                break;
-            case 4:
-                fragment = new DisplayPropertyFragment();
-                break;
-            default:
-                fragment = new PlaceholderFragment();
-                break;
+                case 1:
+                    fragment = new UserInfoFragment();
+                    break;
+                case 2:
+                    fragment = new TconChartFragment();
+                    break;
+                case 3:
+                    fragment = new TminChartFragment();
+                    break;
+                case 4:
+                    fragment = new DisplayPropertyFragment();
+                    break;
+                default:
+                    fragment = new PlaceholderFragment();
+                    break;
             }
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
