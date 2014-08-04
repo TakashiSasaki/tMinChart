@@ -61,7 +61,8 @@
             android:text="不明"
             android:inputType="none|number"
             android:enabled="true"
-            android:editable="false" />
+            android:editable="false"
+            android:focusable="false"/>
 
     </LinearLayout>
 
@@ -92,7 +93,8 @@
             android:id="@+id/editTextDisplaySizeX"
             android:text="不明"
             android:enabled="true"
-            android:editable="false" />
+            android:editable="false"
+            android:focusable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -115,7 +117,8 @@
             android:layout_gravity="right|top"
             android:text="不明"
             android:enabled="true"
-            android:editable="false" />
+            android:editable="false"
+            android:focusable="false"/>
 
     </LinearLayout>
 

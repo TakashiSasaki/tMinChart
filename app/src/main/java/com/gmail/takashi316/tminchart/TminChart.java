@@ -71,8 +71,11 @@ public class TminChart extends Activity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
-        }
-    }
+            case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
+        }//switch
+    }//onSectionAttached
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
@@ -136,8 +139,13 @@ public class TminChart extends Activity
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static Fragment newInstance(int sectionNumber) {
+            Fragment fragment;
+            if(sectionNumber == 4){
+                fragment = new DisplayPropertyFragment();
+            } else {
+                fragment = new PlaceholderFragment();
+            }
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
@@ -168,11 +176,15 @@ public class TminChart extends Activity
         if(!hasFocus) return;
         final View decor_view = this.getWindow().getDecorView();
         final ViewGroup view_group = (ViewGroup) decor_view;
-        final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
-        this.decorViewHeight = decor_view.getHeight();
-        this.decorViewWidth = decor_view.getWidth();
+        try {
+            final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
+            this.decorViewHeight = decor_view.getHeight();
+            this.decorViewWidth = decor_view.getWidth();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
-        final Fragment display_property_fragment = this.getFragmentManager().findFragmentById(R.id.display_property);
-        display_property_fragment.onResume();
+        //final Fragment display_property_fragment = this.getFragmentManager().findFragmentById(R.id.display_property);
+        //display_property_fragment.onResume();
     }//onWindowFocusChanged
 }//TminChart activity
