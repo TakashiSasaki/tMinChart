@@ -6,6 +6,10 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,13 +25,16 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 
 public class TminChart extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         TminChartFragment.OnFragmentInteractionListener,
         TconChartFragment.OnFragmentInteractionListener,
         DisplayPropertyFragment.OnFragmentInteractionListener,
-        UserInfoFragment.OnFragmentInteractionListener{
+        UserInfoFragment.OnFragmentInteractionListener,
+        SensorEventListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -40,6 +47,9 @@ public class TminChart extends Activity
     private CharSequence mTitle;
     private int decorViewWidth = -1;
     private int decorViewHeight = -1;
+
+    private SensorManager sensorManager;
+    private float lightSensorValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,8 @@ public class TminChart extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         maximizeBrightness();
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
     }//onCreate
 
     private void maximizeBrightness(){
@@ -138,6 +150,18 @@ public class TminChart extends Activity
         return this.decorViewHeight;
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(event.sensor.getType()==Sensor.TYPE_LIGHT){
+            this.lightSensorValue = event.values[0];
+        }//if
+    }//onSensorChanged
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -212,4 +236,20 @@ public class TminChart extends Activity
         //final Fragment display_property_fragment = this.getFragmentManager().findFragmentById(R.id.display_property);
         //display_property_fragment.onResume();
     }//onWindowFocusChanged
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Sensor> light_sensors = sensorManager.getSensorList(Sensor.TYPE_LIGHT);
+        if(light_sensors.size()>0) {
+            Sensor light_sensor = light_sensors.get(0);
+            sensorManager.registerListener(this, light_sensor, SensorManager.SENSOR_DELAY_UI);
+        }//if
+    }//onResume
 }//TminChart activity
