@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">視覚特性検査システム</string>
-    <string name="title_section1">ユーザー情報の設定</string>
+    <string name="title_section1">被験者情報の入力</string>
     <string name="title_section2">tConChart</string>
     <string name="title_section3">tMinChart</string>
     <string name="title_section4">端末情報の確認</string>
@@ -10,6 +10,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_blank_fragment">検査対象者情報設定</string>
+    <string name="hello_blank_fragment">被験者情報の入力</string>
 
 </resources>
