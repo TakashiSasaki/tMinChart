@@ -22,6 +22,9 @@
         android:layout_below="@+id/section_label"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="205dp"
-        app:exampleString="あああ"/>
+        app:exampleString="あああ"
+        app:exampleColor="#0000ff"
+        app:exampleDrawable="#00ff00"
+        app:exampleDimension="@dimen/activity_horizontal_margin"/>
 
 </RelativeLayout>

@@ -4,5 +4,7 @@
         <attr name="exampleDimension" format="dimension" />
         <attr name="exampleColor" format="color" />
         <attr name="exampleDrawable" format="color|reference" />
+        <attr name="contrast" format="float"/>
+        <attr name="gap" format="integer"/>
     </declare-styleable>
 </resources>

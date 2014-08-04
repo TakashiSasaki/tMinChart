@@ -23,6 +23,8 @@ public class Konoji extends View {
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
+    private float constrast;
+    private int gap;
 
     public Konoji(Context context) {
         super(context);
@@ -43,6 +45,9 @@ public class Konoji extends View {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.Konoji, defStyle, 0);
+
+        this.constrast = a.getFloat(R.styleable.Konoji_contrast, 0.5f);
+        this.gap = a.getInt(R.styleable.Konoji_gap, 30);
 
         mExampleString = a.getString(
                 R.styleable.Konoji_exampleString);
@@ -96,6 +101,7 @@ public class Konoji extends View {
         int contentHeight = getHeight() - paddingTop - paddingBottom;
 
         // Draw the text.
+        mTextPaint = new TextPaint();
         canvas.drawText(mExampleString,
                 paddingLeft + (contentWidth - mTextWidth) / 2,
                 paddingTop + (contentHeight + mTextHeight) / 2,
@@ -107,6 +113,13 @@ public class Konoji extends View {
                     paddingLeft + contentWidth, paddingTop + contentHeight);
             mExampleDrawable.draw(canvas);
         }
+
+        // Draw the text again.
+        mTextPaint = new TextPaint();
+        canvas.drawText(mExampleString,
+                paddingLeft + (contentWidth - mTextWidth) / 2,
+                paddingTop + (contentHeight + mTextHeight) / 2,
+                mTextPaint);
     }
 
     /**
