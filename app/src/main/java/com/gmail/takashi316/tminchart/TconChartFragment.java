@@ -93,14 +93,14 @@ public class TconChartFragment extends Fragment {
         final int TEXT_SIZE = 70;
         TextView tv_tc  = new TextView(getActivity());
         tv_tc.setTextSize(TEXT_SIZE);
-        tv_tc.setText("TC");
+        tv_tc.setText("[c]");
         tr_index.addView(tv_tc);
         final int COLUMNS = 20;
         final int ROWS = 10;
         for(int x = 1; x <= COLUMNS; ++x ){
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize(TEXT_SIZE);
-            text_view.setText(Integer.toString(x));
+            text_view.setText(new String(new byte[]{(byte)(x+64)}));
             tr_index.addView(text_view);
         }//for
         tableLayout.addView(tr_index);
