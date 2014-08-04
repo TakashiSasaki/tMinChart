@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -93,20 +95,10 @@ public class TminChartFragment extends Fragment {
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
-                TextView text_view = new TextView(getActivity());
-                text_view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        v.setBackgroundColor(Color.RED);
-                    }
-                });
                 final double size = TEXT_SIZE / Math.pow(1.3, y);
-                text_view.setTextSize((int) size);
-                ;
-                text_view.setText("あ");
                 final int intention = 255 - (int) (255 / Math.pow(1.3, x));
-                text_view.setTextColor(Color.rgb(intention, intention, intention));
-                table_row.addView(text_view);
+                Konoji konoji = new Konoji(getActivity(), 10, 9, 10);
+                table_row.addView(konoji);
             }//for y
             tableLayout.addView(table_row);
         }//for x

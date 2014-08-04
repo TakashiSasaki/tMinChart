@@ -13,6 +13,7 @@ import android.os.Vibrator;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
 
 
 /**
@@ -27,7 +28,7 @@ public class Konoji extends View {
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
-    private float constrast;
+    private float contrast;
     private int gap;
     private int orientation;
     private boolean touched = false;
@@ -39,6 +40,16 @@ public class Konoji extends View {
     public Konoji(Context context) {
         super(context);
         init(null, 0);
+    }
+
+    public Konoji(Context context, int gap, int orientation, float contrast) {
+        super(context);
+        init(null, 0);
+        this.gap = gap;
+        this.orientation = orientation;
+        this.contrast = contrast;
+        this.mExampleString = "a";
+
     }
 
     public Konoji(Context context, AttributeSet attrs) {
@@ -56,7 +67,7 @@ public class Konoji extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.Konoji, defStyle, 0);
 
-        this.constrast = a.getFloat(R.styleable.Konoji_contrast, 0.5f);
+        this.contrast = a.getFloat(R.styleable.Konoji_contrast, 0.5f);
         this.gap = a.getInt(R.styleable.Konoji_gap, 30);
         this.orientation = a.getInt(R.styleable.Konoji_gap, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
@@ -111,20 +122,24 @@ public class Konoji extends View {
     }
 
     private void invalidateTextPaintAndMeasurements() {
-        mTextPaint.setTextSize(mExampleDimension);
-        mTextPaint.setColor(mExampleColor);
-        mTextWidth = mTextPaint.measureText(mExampleString);
+        try {
+            mTextPaint.setTextSize(mExampleDimension);
+            mTextPaint.setColor(mExampleColor);
+            mTextWidth = mTextPaint.measureText(mExampleString);
 
-        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        mTextHeight = fontMetrics.bottom;
-    }
+            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+            mTextHeight = fontMetrics.bottom;
+        } catch (Exception e){
+            e.printStackTrace();
+        }//try
+    }//invalidateTextPaintAndMeasurements
 
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         final Paint background_paint = new Paint();
-        background_paint.setColor(Color.YELLOW);
-        fillCanvas(canvas, background_paint);
+        //background_paint.setColor(Color.YELLOW);
+        //fillCanvas(canvas, background_paint);
         final Paint konoji_paint = new Paint();
         if(touched) {
             konoji_paint.setColor(Color.RED);
@@ -136,6 +151,20 @@ public class Konoji extends View {
         gap_paint.setColor(Color.WHITE);
         drawKonoji(canvas, gap_paint);
     }//onDraw
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width_mode = MeasureSpec.getMode(widthMeasureSpec);
+        int width_size = MeasureSpec.getSize(widthMeasureSpec);
+        int height_mode = MeasureSpec.getMode(heightMeasureSpec);
+        int height_size = MeasureSpec.getSize(heightMeasureSpec);
+        width_size = 80;
+        height_size = 80;
+        setMeasuredDimension(width_size, height_size);
+        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+
 
     private void drawKonoji(Canvas canvas, Paint gap_paint){
         switch(orientation){
