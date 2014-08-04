@@ -14,6 +14,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +36,7 @@ public class TminChartFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TableLayout tableLayout;
+    private Random random= new Random();
 
     private OnFragmentInteractionListener mListener;
 
@@ -79,8 +82,8 @@ public class TminChartFragment extends Fragment {
         tv_tc.setTextSize(TEXT_SIZE);
         tv_tc.setText("[m]");
         tr_index.addView(tv_tc);
-        final int COLUMNS = 20;
-        final int ROWS = 10;
+        final int COLUMNS = 18;
+        final int ROWS = 13;
         for (int x = 1; x <= COLUMNS; ++x) {
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize(TEXT_SIZE);
@@ -96,8 +99,8 @@ public class TminChartFragment extends Fragment {
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
                 final double size = TEXT_SIZE / Math.pow(1.3, y);
-                final int intention = 255 - (int) (255 / Math.pow(1.3, x));
-                Konoji konoji = new Konoji(getActivity(), 10, 9, 10);
+                final int intention = 255 - (int) (255 / Math.pow(1.3, x + y*COLUMNS));
+                Konoji konoji = new Konoji(getActivity(), (int)(size/3.0), random.nextInt(2)*3, 10);
                 table_row.addView(konoji);
             }//for y
             tableLayout.addView(table_row);
