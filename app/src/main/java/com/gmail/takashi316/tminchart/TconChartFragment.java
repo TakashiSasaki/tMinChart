@@ -2,6 +2,7 @@ package com.gmail.takashi316.tminchart;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -15,6 +16,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +29,11 @@ import android.widget.TextView;
  *
  */
 public class TconChartFragment extends Fragment {
+    final String[] TCON_STRINGS  = {"講",	"謝", "績", "厳", "縮", "優", "覧", "曖", "臆",	"嚇",
+        "轄", "環", "擬", "犠", "矯", "謹", "謙", "鍵", "購", "懇",
+        "擦", "爵", "醜", "償", "礁", "繊", "鮮", "燥", "霜", "戴",
+        "濯", "鍛", "聴", "謄", "瞳", "謎", "鍋", "頻", "闇", "翼", "療", "瞭", "齢"};
+    
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,6 +46,12 @@ public class TconChartFragment extends Fragment {
     private TableLayout tableLayout;
 
     private OnFragmentInteractionListener mListener;
+
+    private Random random = new Random();
+    private String getTconString(){
+        final int r = random.nextInt(TCON_STRINGS.length);
+        return TCON_STRINGS[r];
+    }//getTconString
 
     /**
      * Use this factory method to create a new instance of
@@ -75,11 +89,40 @@ public class TconChartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tcon_chart, container, false);
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
-        for(int x = 0; x<5; ++x) {
+        TableRow tr_index = new TableRow(getActivity());
+        final int TEXT_SIZE = 70;
+        TextView tv_tc  = new TextView(getActivity());
+        tv_tc.setTextSize(TEXT_SIZE);
+        tv_tc.setText("TC");
+        tr_index.addView(tv_tc);
+        final int COLUMNS = 20;
+        final int ROWS = 10;
+        for(int x = 1; x <= COLUMNS; ++x ){
+            TextView text_view = new TextView(getActivity());
+            text_view.setTextSize(TEXT_SIZE);
+            text_view.setText(Integer.toString(x));
+            tr_index.addView(text_view);
+        }//for
+        tableLayout.addView(tr_index);
+        for(int y = 0; y<ROWS; ++y) {
             TableRow table_row = new TableRow(getActivity());
-            for(int y=0; y<5; ++y){
+            TextView tv_index = new TextView(getActivity());
+            tv_index.setTextSize(TEXT_SIZE);
+            tv_index.setText(Integer.toString(y));
+            table_row.addView(tv_index);
+            for(int x=0; x<COLUMNS; ++x){
                 TextView text_view = new TextView(getActivity());
-                text_view.setText(Integer.toString(x) + Integer.toString(y));
+                text_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setBackgroundColor(Color.RED);
+                    }
+                });
+                final double size = TEXT_SIZE / Math.pow(1.3, y);
+                text_view.setTextSize((int)size);;
+                text_view.setText(getTconString());
+                final int intention = 255-(int)(255/Math.pow(1.3,x));
+                text_view.setTextColor(Color.rgb(intention, intention,intention));
                 table_row.addView(text_view);
             }//for y
             tableLayout.addView(table_row);
