@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,7 +50,15 @@ public class TminChart extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        maximizeBrightness();
     }//onCreate
+
+    private void maximizeBrightness(){
+        WindowManager.LayoutParams layout_params = getWindow().getAttributes();
+        layout_params.screenBrightness = 1.0f;
+        getWindow().setAttributes(layout_params);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
