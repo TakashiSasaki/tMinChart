@@ -1,13 +1,16 @@
 package com.gmail.takashi316.tminchart;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 /**
@@ -28,6 +31,7 @@ public class TminChartFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TableLayout tableLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +69,48 @@ public class TminChartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tmin_chart2, container, false);
+        View view = inflater.inflate(R.layout.fragment_tmin_chart2, container, false);
+        tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTminChart);
+        TableRow tr_index = new TableRow(getActivity());
+        final int TEXT_SIZE = 70;
+        TextView tv_tc = new TextView(getActivity());
+        tv_tc.setTextSize(TEXT_SIZE);
+        tv_tc.setText("[m]");
+        tr_index.addView(tv_tc);
+        final int COLUMNS = 20;
+        final int ROWS = 10;
+        for (int x = 1; x <= COLUMNS; ++x) {
+            TextView text_view = new TextView(getActivity());
+            text_view.setTextSize(TEXT_SIZE);
+            text_view.setText(new String(new byte[]{(byte) (x + 64)}));
+            tr_index.addView(text_view);
+        }//for
+        tableLayout.addView(tr_index);
+        for (int y = 0; y < ROWS; ++y) {
+            TableRow table_row = new TableRow(getActivity());
+            TextView tv_index = new TextView(getActivity());
+            tv_index.setTextSize(TEXT_SIZE);
+            tv_index.setText(Integer.toString(y));
+            table_row.addView(tv_index);
+            for (int x = 0; x < COLUMNS; ++x) {
+                TextView text_view = new TextView(getActivity());
+                text_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setBackgroundColor(Color.RED);
+                    }
+                });
+                final double size = TEXT_SIZE / Math.pow(1.3, y);
+                text_view.setTextSize((int) size);
+                ;
+                text_view.setText("あ");
+                final int intention = 255 - (int) (255 / Math.pow(1.3, x));
+                text_view.setTextColor(Color.rgb(intention, intention, intention));
+                table_row.addView(text_view);
+            }//for y
+            tableLayout.addView(table_row);
+        }//for x
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -83,14 +128,14 @@ public class TminChartFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
-    }
+        }//try
+    }//onAttach
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }//onDetach
 
     /**
      * This interface must be implemented by activities that contain this
