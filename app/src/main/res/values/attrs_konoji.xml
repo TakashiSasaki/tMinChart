@@ -6,5 +6,6 @@
         <attr name="exampleDrawable" format="color|reference" />
         <attr name="contrast" format="float"/>
         <attr name="gap" format="integer"/>
+        <attr name="orientation" format="integer"/>
     </declare-styleable>
 </resources>

@@ -25,6 +25,8 @@ public class Konoji extends View {
     private float mTextHeight;
     private float constrast;
     private int gap;
+    private int orientation;
+    private boolean touched;
 
     public Konoji(Context context) {
         super(context);
@@ -48,6 +50,7 @@ public class Konoji extends View {
 
         this.constrast = a.getFloat(R.styleable.Konoji_contrast, 0.5f);
         this.gap = a.getInt(R.styleable.Konoji_gap, 30);
+        this.orientation = a.getInt(R.styleable.Konoji_gap, 0);
 
         mExampleString = a.getString(
                 R.styleable.Konoji_exampleString);
@@ -87,8 +90,41 @@ public class Konoji extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
+        final Paint background_paint = new Paint();
+        background_paint.setColor(Color.YELLOW);
+        fillCanvas(canvas, background_paint);
+        final Paint konoji_paint = new Paint();
+        konoji_paint.setColor(Color.BLACK);
+        canvas.drawRect(0,0,gap*3-1, gap*3-1, konoji_paint);
+        final Paint gap_paint = new Paint();
+        gap_paint.setColor(Color.WHITE);
+        switch(orientation){
+            case 0:
+                canvas.drawRect(gap, 0, gap*2-1, gap*2-1, gap_paint);
+                break;
+            case 3:
+                canvas.drawRect(gap, gap, gap*3-1, gap*2-1, gap_paint);
+                break;
+            case 6:
+                canvas.drawRect(gap, gap, gap*2-1, gap*3-1, gap_paint);
+                break;
+            case 9:
+                canvas.drawRect(0,gap, gap*2-1, gap*2-1, gap_paint);
+                break;
+            default:
+                canvas.drawLine(0,0, gap*3-1, gap*3-1, gap_paint);
+                break;
+        }//switch
+    }
+
+    private void fillCanvas(Canvas canvas, Paint paint){
+        canvas.drawRect(0,0,canvas.getWidth(), canvas.getHeight(), paint);
+    }//fillCanvas
+
+    protected void onDraw_(Canvas canvas) {
+        //super.onDraw(canvas);
 
         // TODO: consider storing these as member variables to reduce
         // allocations per draw cycle.
