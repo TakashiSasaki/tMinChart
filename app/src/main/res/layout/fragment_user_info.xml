@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/editTextName"
             android:layout_row="0"
             android:layout_column="1" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText2" />
+        android:id="@+id/editTextAge" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,14 +73,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="女性"
-            android:id="@+id/radioButton"
+            android:id="@+id/radioButtonFemale"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="男性"
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButtonMale"
             android:checked="false" />
 
     </RadioGroup>
@@ -95,7 +95,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
+        android:id="@+id/editTextAffiliation"
         android:minWidth="200px" />
 
     <TextView
@@ -113,14 +113,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="無し"
-            android:id="@+id/radioButton6"
+            android:id="@+id/radioButtonNoCorrection"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="コンタクトレンズ"
-            android:id="@+id/radioButton3"
+            android:id="@+id/radioButtonContactLens"
             android:layout_row="4"
             android:layout_column="1"
             android:checked="false" />
@@ -129,14 +129,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="眼鏡"
-            android:id="@+id/radioButton4"
+            android:id="@+id/radioButtonGlasses"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="その他"
-            android:id="@+id/radioButton5"
+            android:id="@+id/radioButtonOtherCorrection"
             android:checked="false" />
 
     </RadioGroup>
@@ -156,42 +156,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="日勤前"
-            android:id="@+id/radioButton7"
+            android:id="@+id/radioButtonBeforeDayShift"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="日勤後"
-            android:id="@+id/radioButton8"
+            android:id="@+id/radioButtonAfterDayShift"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="準夜勤前"
-            android:id="@+id/radioButton9"
+            android:id="@+id/radioButtonBeforeTwilighShift"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="準夜勤後"
-            android:id="@+id/radioButton10"
+            android:id="@+id/radioButtonAfterTwilightShift"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="夜勤前"
-            android:id="@+id/radioButton11"
+            android:id="@+id/radioButtonBeforeNightShift"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="夜勤後"
-            android:id="@+id/radioButton12"
+            android:id="@+id/radioButtonAfterNightShift"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="勤務日外"
+            android:id="@+id/radioButtonNoDuty"
             android:checked="false" />
 
     </RadioGroup>
