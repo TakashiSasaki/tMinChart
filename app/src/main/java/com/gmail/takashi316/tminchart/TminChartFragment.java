@@ -26,7 +26,6 @@ import java.util.Random;
  * to handle interaction events.
  * Use the {@link TminChartFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class TminChartFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -39,7 +38,7 @@ public class TminChartFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TableLayout tableLayout;
-    private Random random= new Random();
+    private Random random = new Random();
 
     private OnFragmentInteractionListener mListener;
     private ArrayList<Konoji> konojiViews = new ArrayList<Konoji>();
@@ -61,6 +60,7 @@ public class TminChartFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public TminChartFragment() {
         // Required empty public constructor
     }
@@ -104,8 +104,8 @@ public class TminChartFragment extends Fragment {
             tv_index.setGravity(Gravity.CENTER);
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
-                final double gap_inch = MAX_GAP_INCH / Math.pow(1.03, x + y*COLUMNS);
-                Konoji konoji = new Konoji(getActivity(), (float)gap_inch, (float)MAX_GAP_INCH * 4, konojiViews);
+                final double gap_inch = MAX_GAP_INCH / Math.pow(1.03, x + y * COLUMNS);
+                Konoji konoji = new Konoji(getActivity(), (float) gap_inch, (float) MAX_GAP_INCH * 4, konojiViews);
                 konojiViews.add(konoji);
                 table_row.addView(konoji);
             }//for y
@@ -143,7 +143,7 @@ public class TminChartFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
