@@ -151,6 +151,26 @@ public class TminChart extends Activity
     }
 
     @Override
+    public float getLightSensorValue() {
+        return lightSensorValue;
+    }
+
+    @Override
+    public float getAccelerometerX() {
+        return 0;
+    }
+
+    @Override
+    public float getAccelerometerY() {
+        return 0;
+    }
+
+    @Override
+    public float getAccelerometerZ() {
+        return 0;
+    }
+
+    @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType()==Sensor.TYPE_LIGHT){
             this.lightSensorValue = event.values[0];

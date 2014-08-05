@@ -3,8 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context="com.gmail.takashi316.tminchart.DisplayPropertyFragment"
-    android:rowCount="8"
-    android:columnCount="3">
+    android:rowCount="10"
+    android:columnCount="4">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -290,6 +290,41 @@
         android:layout_column="2"
         android:text="不明"
         android:focusable="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="明るさ"
+        android:layout_column="0"
+        android:id="@+id/textView8" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextLightSensor"
+        android:focusable="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加速度"
+        android:id="@+id/textView9"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextAccelerometerX" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextAccelerometerY" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextAccelerometerZ" />
 
 
 </GridLayout>

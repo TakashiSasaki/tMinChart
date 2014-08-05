@@ -20,7 +20,6 @@ import java.nio.DoubleBuffer;
 
 import com.gmail.takashi316.tminchart.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -41,6 +40,11 @@ public class DisplayPropertyFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private EditText editTextLightSensor;
+    private EditText editTextAccelerometerX;
+    private EditText getEditTextAccelerometerY;
+    private EditText getEditTextAccelerometerZ;
 
     /**
      * Use this factory method to create a new instance of
@@ -77,6 +81,7 @@ public class DisplayPropertyFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_display_property, container, false);
+        editTextLightSensor = (EditText) view.findViewById(R.id.editTextLightSensor);
 
         // Inflate the layout for this fragment
         return view;
@@ -121,12 +126,17 @@ public class DisplayPropertyFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
         public int getDecorViewWidth();
         public int getDecorViewHeight();
+        public float getLightSensorValue();
+        public float getAccelerometerX();
+        public float getAccelerometerY();
+        public float getAccelerometerZ();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         final View view = this.getView();
+        final OnFragmentInteractionListener activity = (OnFragmentInteractionListener) this.getActivity();
 
         //LCD size
         Display display = getActivity().getWindowManager().getDefaultDisplay();
@@ -160,7 +170,6 @@ public class DisplayPropertyFragment extends Fragment {
             y.setText(Integer.toString(point.y));
         }
         {
-            final OnFragmentInteractionListener activity = (OnFragmentInteractionListener) this.getActivity();
             final EditText x = (EditText) view.findViewById(R.id.editTextViewWidth);
             x.setText(Integer.toString(activity.getDecorViewWidth()));
             final EditText y = (EditText) view.findViewById(R.id.editTextViewHeight);
@@ -177,6 +186,6 @@ public class DisplayPropertyFragment extends Fragment {
             ((EditText)view.findViewById(R.id.editTextYDpi)).setText(Float.toString(display_metrics.ydpi));
             ((EditText)view.findViewById(R.id.editTextScaledDensity)).setText(Float.toString(display_metrics.scaledDensity));
         }
-
+        editTextLightSensor.setText(Float.toString(activity.getLightSensorValue()));
     }//onResume
 }
