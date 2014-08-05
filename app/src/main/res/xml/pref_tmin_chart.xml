@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <EditTextPreference
+        android:defaultValue="@string/pref_default_display_name"
+        android:inputType="numberDecimal"
+        android:key="tcon_chart_max_gap"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:title="tConChart最大サイズ（インチ）" />
+    <EditTextPreference
+        android:defaultValue="0.99"
+        android:inputType="numberDecimal"
+        android:key="tcon_chart_size_ratio"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="tConChart縮小率" />
+    <EditTextPreference
+        android:defaultValue="20"
+        android:inputType="numberDecimal"
+        android:key="tcon_chart_rows"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="tConChart縮小回数" />
+    <EditTextPreference
+        android:defaultValue="0.99"
+        android:inputType="numberDecimal"
+        android:key="tcon_chart_contrast_ratio"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="tConChart減衰率" />
+    <EditTextPreference
+        android:defaultValue="0.99"
+        android:inputType="numberDecimal"
+        android:key="tcon_chart_columns"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="tConChart減衰回数" />
+    <EditTextPreference
+        android:defaultValue="0.3"
+        android:inputType="numberDecimal"
+        android:key="tmin_chart_max_gap"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="tMinChart最大ギャップ（インチ）" />
+    <EditTextPreference
+        android:defaultValue="0.99"
+        android:inputType="numberDecimal"
+        android:key="tmin_chart_ratio"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="tMinChart縮小率" />
+    <EditTextPreference
+        android:defaultValue="0.99"
+        android:inputType="numberDecimal"
+        android:key="tmin_chart_count"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="tMinChart縮小回数" />
+</PreferenceScreen>

@@ -3,6 +3,11 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
+        android:fragment="com.gmail.takashi316.tminchart.SettingsActivity$TminChartPreferenceFragment"
+        android:title="視覚特性検査に関する設定">
+
+    </header>
+    <header
         android:fragment="com.gmail.takashi316.tminchart.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 

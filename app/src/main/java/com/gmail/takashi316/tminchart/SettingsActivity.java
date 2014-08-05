@@ -95,6 +95,15 @@ public class SettingsActivity extends PreferenceActivity {
             return;
         }
 
+        addPreferencesFromResource(R.xml.pref_tmin_chart);
+        bindPreferenceSummaryToValue(findPreference("tcon_chart_max_gap"));
+        bindPreferenceSummaryToValue(findPreference("tcon_chart_size_ratio"));
+        bindPreferenceSummaryToValue(findPreference("tcon_chart_rows"));
+        bindPreferenceSummaryToValue(findPreference("tcon_chart_contrast_ratio"));
+        bindPreferenceSummaryToValue(findPreference("tcon_chart_columns"));
+        bindPreferenceSummaryToValue(findPreference("tmin_chart_max_gap"));
+        bindPreferenceSummaryToValue(findPreference("tmin_chart_ratio"));
+        bindPreferenceSummaryToValue(findPreference("tmin_chart_count"));
         // In the simplified UI, fragments are not used at all and we instead
         // use the older PreferenceActivity APIs.
 
@@ -231,6 +240,17 @@ public class SettingsActivity extends PreferenceActivity {
                         .getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), ""));
     }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class TminChartPreferenceFragment extends PreferenceFragment{
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_tmin_chart);
+            bindPreferenceSummaryToValue(findPreference("example_text"));
+            bindPreferenceSummaryToValue(findPreference("example_list"));
+        }
+    }//TminChartPreferenceFragment
 
     /**
      * This fragment shows general preferences only. It is used when the

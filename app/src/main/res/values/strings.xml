@@ -12,5 +12,6 @@
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">被験者情報の入力</string>
     <string name="title_section_result">結果の確認</string>
+    <string name="pref_header_tmin_chart">視覚特性検査に関する設定</string>
 
 </resources>
