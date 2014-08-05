@@ -78,12 +78,12 @@ public class TminChartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tmin_chart2, container, false);
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTminChart);
         TableRow tr_index = new TableRow(getActivity());
-        final int TEXT_SIZE = 80;
+        final int TEXT_SIZE = 50;
         TextView tv_tc = new TextView(getActivity());
         tv_tc.setTextSize(TEXT_SIZE);
-        tv_tc.setText("[m]");
+        tv_tc.setText("m");
         tr_index.addView(tv_tc);
-        final int COLUMNS = 18;
+        final int COLUMNS = 7;
         final int ROWS = 13;
         for (int x = 1; x <= COLUMNS; ++x) {
             TextView text_view = new TextView(getActivity());

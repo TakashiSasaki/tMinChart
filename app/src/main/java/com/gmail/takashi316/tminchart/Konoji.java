@@ -167,14 +167,18 @@ public class Konoji extends View {
         super.onDraw(canvas);
         final Paint konoji_paint = new Paint();
         if(touched) {
-            konoji_paint.setColor(Color.RED);
+           // konoji_paint.setColor(Color.RED);
+            setBackgroundColor(Color.RED);
         } else {
-            konoji_paint.setColor(Color.BLACK);
+            setBackgroundColor(Color.WHITE);
+            //konoji_paint.setColor(Color.BLACK);
         }//if
         final int xgap = (int)(xdpi * gap);
         final int ygap = (int)(ydpi * gap);
-        final int top_margin = xgap / 2;
-        final int left_margin = ygap / 2;
+        final int view_width = (int)(width_inch * xdpi);
+        final int view_height = (int)(width_inch * ydpi);
+        final int top_margin = (view_width - xgap * 3) / 2;
+        final int left_margin = (view_width - ygap* 3) / 2;
         canvas.drawRect(left_margin, top_margin, xgap * 3 - 1 + left_margin, ygap * 3 - 1 + top_margin, konoji_paint);
         final Paint gap_paint = new Paint();
         gap_paint.setColor(Color.WHITE);
