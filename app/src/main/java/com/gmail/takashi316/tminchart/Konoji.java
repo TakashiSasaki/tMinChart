@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -42,6 +43,7 @@ public class Konoji extends View {
     private int orientation;
     private boolean touched = false;
     static Random random = new Random();
+    private ArrayList<Konoji> konojis;
 
     public boolean isTouched(){
         return touched;
@@ -53,7 +55,7 @@ public class Konoji extends View {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public Konoji(Context context,  float gap_inch, float width_inch) {
+    public Konoji(Context context,  float gap_inch, float width_inch, ArrayList<Konoji> konojis) {
         super(context);
         init(null, 0);
         gap = gap_inch;
@@ -65,6 +67,7 @@ public class Konoji extends View {
         this.ydpi = display_metrics.ydpi;
         this.orientation = random.nextInt(3)*3;
         this.width_inch = width_inch;
+        this.konojis = konojis;
         this.mExampleString = "a";
     }
 
@@ -117,11 +120,18 @@ public class Konoji extends View {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                touched = touched ? false: true;
+                if(konojis != null) {
+                    for (Konoji konoji : konojis) {
+                        konoji.touched = false;
+                    }//for
+                }//if
+                touched = true;
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     public void run() {
-                        invalidate();
+                        for(Konoji konoji: konojis){
+                            konoji.invalidate();
+                        }
                         Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                         if(touched) {
                             vibrator.vibrate(new long[]{0, 60, 60, 60}, -1);

@@ -14,6 +14,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -40,6 +41,7 @@ public class TminChartFragment extends Fragment {
     private Random random= new Random();
 
     private OnFragmentInteractionListener mListener;
+    private ArrayList<Konoji> konojiViews = new ArrayList<Konoji>();
 
     /**
      * Use this factory method to create a new instance of
@@ -84,7 +86,7 @@ public class TminChartFragment extends Fragment {
         tv_tc.setText("m");
         tr_index.addView(tv_tc);
         final int COLUMNS = 7;
-        final int ROWS = 13;
+        final int ROWS = 20;
         for (int x = 1; x <= COLUMNS; ++x) {
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize(TEXT_SIZE);
@@ -100,7 +102,8 @@ public class TminChartFragment extends Fragment {
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
                 final double gap_inch = MAX_GAP_INCH / Math.pow(1.03, x + y*COLUMNS);
-                Konoji konoji = new Konoji(getActivity(), (float)gap_inch, (float)MAX_GAP_INCH * 4);
+                Konoji konoji = new Konoji(getActivity(), (float)gap_inch, (float)MAX_GAP_INCH * 4, konojiViews);
+                konojiViews.add(konoji);
                 table_row.addView(konoji);
             }//for y
             tableLayout.addView(table_row);
