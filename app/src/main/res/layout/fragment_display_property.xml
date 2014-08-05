@@ -440,7 +440,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextUser"
+        android:id="@+id/buttonNextToTconChart"
         android:layout_columnSpan="2" />
 
 

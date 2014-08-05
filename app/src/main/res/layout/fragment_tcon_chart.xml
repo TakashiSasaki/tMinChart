@@ -25,5 +25,12 @@
         </HorizontalScrollView>
     </ScrollView>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="次へ"
+        android:id="@+id/buttonNextToTconChart"
+        android:layout_gravity="left|top" />
+
 
 </FrameLayout>

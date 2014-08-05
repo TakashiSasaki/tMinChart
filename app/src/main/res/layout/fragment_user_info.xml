@@ -204,10 +204,11 @@
     </RadioGroup>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="被験者情報を設定する"
         android:id="@+id/buttonSetUserInfo"
-        android:layout_columnSpan="2" />
+        android:layout_columnSpan="2"
+        android:layout_gravity="center_horizontal" />
 
 </GridLayout>
