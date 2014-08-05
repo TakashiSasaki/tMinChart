@@ -50,6 +50,9 @@ public class TminChart extends Activity
 
     private SensorManager sensorManager;
     private float lightSensorValue;
+    private float accelerometerValueX;
+    private float accelerometerValueY;
+    private float accelerometerValueZ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,23 +160,28 @@ public class TminChart extends Activity
 
     @Override
     public float getAccelerometerX() {
-        return 0;
+        return accelerometerValueX;
     }
 
     @Override
     public float getAccelerometerY() {
-        return 0;
+        return accelerometerValueY;
     }
 
     @Override
     public float getAccelerometerZ() {
-        return 0;
+        return accelerometerValueZ;
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType()==Sensor.TYPE_LIGHT){
             this.lightSensorValue = event.values[0];
+        }//if
+        if(event.sensor.getType()==Sensor.TYPE_ACCELEROMETER){
+            this.accelerometerValueX = event.values[0];
+            this.accelerometerValueY = event.values[1];
+            this.accelerometerValueZ = event.values[2];
         }//if
     }//onSensorChanged
 
@@ -270,6 +278,10 @@ public class TminChart extends Activity
         if(light_sensors.size()>0) {
             Sensor light_sensor = light_sensors.get(0);
             sensorManager.registerListener(this, light_sensor, SensorManager.SENSOR_DELAY_UI);
+        }//if
+        Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if(accelerometer != null){
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
         }//if
     }//onResume
 }//TminChart activity

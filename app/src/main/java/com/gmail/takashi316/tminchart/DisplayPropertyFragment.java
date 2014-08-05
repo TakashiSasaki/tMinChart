@@ -43,8 +43,8 @@ public class DisplayPropertyFragment extends Fragment {
 
     private EditText editTextLightSensor;
     private EditText editTextAccelerometerX;
-    private EditText getEditTextAccelerometerY;
-    private EditText getEditTextAccelerometerZ;
+    private EditText editTextAccelerometerY;
+    private EditText editTextAccelerometerZ;
 
     /**
      * Use this factory method to create a new instance of
@@ -82,7 +82,9 @@ public class DisplayPropertyFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_display_property, container, false);
         editTextLightSensor = (EditText) view.findViewById(R.id.editTextLightSensor);
-
+        editTextAccelerometerX= (EditText) view.findViewById(R.id.editTextAccelerometerX);
+        editTextAccelerometerY = (EditText) view.findViewById(R.id.editTextAccelerometerY);
+        editTextAccelerometerZ= (EditText) view.findViewById(R.id.editTextAccelerometerZ);
         // Inflate the layout for this fragment
         return view;
     }
@@ -187,5 +189,9 @@ public class DisplayPropertyFragment extends Fragment {
             ((EditText)view.findViewById(R.id.editTextScaledDensity)).setText(Float.toString(display_metrics.scaledDensity));
         }
         editTextLightSensor.setText(Float.toString(activity.getLightSensorValue()));
+        editTextAccelerometerX.setText(Float.toString(activity.getAccelerometerX()));
+        editTextAccelerometerY.setText(Float.toString(activity.getAccelerometerY()));
+        editTextAccelerometerZ.setText(Float.toString(activity.getAccelerometerZ()));
     }//onResume
-}
+}//DisplayPropertyFragment
+
