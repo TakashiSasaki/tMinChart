@@ -1,5 +1,6 @@
 package com.gmail.takashi316.tminchart;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -8,11 +9,15 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 
@@ -28,8 +33,9 @@ public class Konoji extends View {
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
-    private float contrast;
-    private int gap;
+    private float gap;
+    private float xdpi;
+    private float ydpi;
     private int orientation;
     private boolean touched = false;
 
@@ -42,14 +48,19 @@ public class Konoji extends View {
         init(null, 0);
     }
 
-    public Konoji(Context context, int gap, int orientation, float contrast) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public Konoji(Context context,  float gap_inch, int orientation) {
         super(context);
         init(null, 0);
-        this.gap = gap;
+        gap = gap_inch;
+        final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        final Display display = window_manager.getDefaultDisplay();
+        final DisplayMetrics display_metrics = new DisplayMetrics();
+        display.getMetrics(display_metrics);
+        this.xdpi = display_metrics.xdpi;
+        this.ydpi = display_metrics.ydpi;
         this.orientation = orientation;
-        this.contrast = contrast;
         this.mExampleString = "a";
-
     }
 
     public Konoji(Context context, AttributeSet attrs) {
@@ -67,7 +78,6 @@ public class Konoji extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.Konoji, defStyle, 0);
 
-        this.contrast = a.getFloat(R.styleable.Konoji_contrast, 0.5f);
         this.gap = a.getInt(R.styleable.Konoji_gap, 30);
         this.orientation = a.getInt(R.styleable.Konoji_gap, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
@@ -135,53 +145,50 @@ public class Konoji extends View {
     }//invalidateTextPaintAndMeasurements
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width_mode = MeasureSpec.getMode(widthMeasureSpec);
+        int width_size = MeasureSpec.getSize(widthMeasureSpec);
+        int height_mode = MeasureSpec.getMode(heightMeasureSpec);
+        int height_size = MeasureSpec.getSize(heightMeasureSpec);
+        height_size = (int)(gap * xdpi * 4);
+        width_size = (int)(gap * ydpi * 4);
+        setMeasuredDimension(width_size, height_size);
+        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+
+    @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        final Paint background_paint = new Paint();
-        //background_paint.setColor(Color.YELLOW);
-        //fillCanvas(canvas, background_paint);
         final Paint konoji_paint = new Paint();
         if(touched) {
             konoji_paint.setColor(Color.RED);
         } else {
             konoji_paint.setColor(Color.BLACK);
         }//if
-        canvas.drawRect(0,0,gap*3-1, gap*3-1, konoji_paint);
+        final int xgap = (int)(xdpi * gap);
+        final int ygap = (int)(ydpi * gap);
+        final int top_margin = xgap / 2;
+        final int left_margin = ygap / 2;
+        canvas.drawRect(left_margin, top_margin, xgap * 3 - 1 + left_margin, ygap * 3 - 1 + top_margin, konoji_paint);
         final Paint gap_paint = new Paint();
         gap_paint.setColor(Color.WHITE);
-        drawKonoji(canvas, gap_paint);
-    }//onDraw
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width_mode = MeasureSpec.getMode(widthMeasureSpec);
-        int width_size = MeasureSpec.getSize(widthMeasureSpec);
-        int height_mode = MeasureSpec.getMode(heightMeasureSpec);
-        int height_size = MeasureSpec.getSize(heightMeasureSpec);
-        width_size = 100;
-        height_size = 100;
-        setMeasuredDimension(width_size, height_size);
-        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-
-
-    private void drawKonoji(Canvas canvas, Paint gap_paint){
         switch(orientation){
             case 0:
-                canvas.drawRect(gap, 0, gap*2-1, gap*2-1, gap_paint);
+                canvas.drawRect(left_margin+ xgap, top_margin, xgap * 2 - 1 + left_margin, ygap * 2 - 1 + top_margin, gap_paint);
                 break;
             case 3:
-                canvas.drawRect(gap, gap, gap*3-1, gap*2-1, gap_paint);
+                canvas.drawRect(left_margin + xgap, top_margin + ygap, xgap * 3 - 1 + left_margin, ygap * 2 - 1 + top_margin, gap_paint);
                 break;
             case 6:
-                canvas.drawRect(gap, gap, gap*2-1, gap*3-1, gap_paint);
+                canvas.drawRect(left_margin + xgap, top_margin + ygap, xgap * 2 - 1 + left_margin, ygap * 3 - 1 +top_margin, gap_paint);
                 break;
             case 9:
-                canvas.drawRect(0,gap, gap*2-1, gap*2-1, gap_paint);
+                canvas.drawRect(left_margin, top_margin + ygap, xgap * 2 - 1 + left_margin, ygap * 2 - 1 +top_margin, gap_paint);
                 break;
             default:
-                canvas.drawLine(0,0, gap*3-1, gap*3-1, gap_paint);
+                canvas.drawLine(left_margin, top_margin, xgap*3-1+left_margin, ygap*3-1+ygap, gap_paint);
+                canvas.drawLine(xgap*3-1+left_margin, top_margin , left_margin, ygap*3-1+ygap,  gap_paint);
                 break;
         }//switch
     }

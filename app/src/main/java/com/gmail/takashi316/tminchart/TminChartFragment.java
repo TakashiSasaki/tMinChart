@@ -31,6 +31,7 @@ public class TminChartFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    final double MAX_GAP_INCH = 0.3;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,7 +78,7 @@ public class TminChartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tmin_chart2, container, false);
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTminChart);
         TableRow tr_index = new TableRow(getActivity());
-        final int TEXT_SIZE = 70;
+        final int TEXT_SIZE = 80;
         TextView tv_tc = new TextView(getActivity());
         tv_tc.setTextSize(TEXT_SIZE);
         tv_tc.setText("[m]");
@@ -98,8 +99,8 @@ public class TminChartFragment extends Fragment {
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
-                final double size = TEXT_SIZE / Math.pow(1.3, x + y*COLUMNS);
-                Konoji konoji = new Konoji(getActivity(), (int)(size/3.0), random.nextInt(2)*3, 10);
+                final double gap_inch = MAX_GAP_INCH / Math.pow(1.03, x + y*COLUMNS);
+                Konoji konoji = new Konoji(getActivity(), (float)gap_inch, random.nextInt(3)*3);
                 table_row.addView(konoji);
             }//for y
             tableLayout.addView(table_row);
