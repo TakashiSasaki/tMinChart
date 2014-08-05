@@ -168,7 +168,8 @@ public class Konoji extends View {
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
         height_size = (int)(width_inch * xdpi);
         width_size = (int)(width_inch * ydpi);
-        setMeasuredDimension(width_size, height_size);
+        setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
+                MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }
 
 

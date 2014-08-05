@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,7 @@ public class TminChartFragment extends Fragment {
         final int TEXT_SIZE = 50;
         TextView tv_tc = new TextView(getActivity());
         tv_tc.setTextSize(TEXT_SIZE);
-        tv_tc.setText("m");
+        tv_tc.setText(" ");
         tr_index.addView(tv_tc);
         final int COLUMNS = 7;
         final int ROWS = 20;
@@ -91,6 +92,7 @@ public class TminChartFragment extends Fragment {
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize(TEXT_SIZE);
             text_view.setText(new String(new byte[]{(byte) (x + 64)}));
+            text_view.setGravity(Gravity.CENTER);
             tr_index.addView(text_view);
         }//for
         tableLayout.addView(tr_index);
@@ -99,6 +101,7 @@ public class TminChartFragment extends Fragment {
             TextView tv_index = new TextView(getActivity());
             tv_index.setTextSize(TEXT_SIZE);
             tv_index.setText(Integer.toString(y));
+            tv_index.setGravity(Gravity.CENTER);
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
                 final double gap_inch = MAX_GAP_INCH / Math.pow(1.03, x + y*COLUMNS);
