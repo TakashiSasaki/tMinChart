@@ -27,7 +27,6 @@ import com.gmail.takashi316.tminchart.R;
  * to handle interaction events.
  * Use the {@link DisplayPropertyFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class DisplayPropertyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -63,6 +62,7 @@ public class DisplayPropertyFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public DisplayPropertyFragment() {
         // Required empty public constructor
     }
@@ -82,9 +82,9 @@ public class DisplayPropertyFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_display_property, container, false);
         editTextLightSensor = (EditText) view.findViewById(R.id.editTextLightSensor);
-        editTextAccelerometerX= (EditText) view.findViewById(R.id.editTextAccelerometerX);
+        editTextAccelerometerX = (EditText) view.findViewById(R.id.editTextAccelerometerX);
         editTextAccelerometerY = (EditText) view.findViewById(R.id.editTextAccelerometerY);
-        editTextAccelerometerZ= (EditText) view.findViewById(R.id.editTextAccelerometerZ);
+        editTextAccelerometerZ = (EditText) view.findViewById(R.id.editTextAccelerometerZ);
         // Inflate the layout for this fragment
         return view;
     }
@@ -118,7 +118,7 @@ public class DisplayPropertyFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
@@ -126,11 +126,17 @@ public class DisplayPropertyFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+
         public int getDecorViewWidth();
+
         public int getDecorViewHeight();
+
         public float getLightSensorValue();
+
         public float getAccelerometerX();
+
         public float getAccelerometerY();
+
         public float getAccelerometerZ();
     }
 
@@ -142,17 +148,17 @@ public class DisplayPropertyFragment extends Fragment {
 
         //LCD size
         Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point real = new Point(0,0);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+        Point real = new Point(0, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             display.getRealSize(real);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2){
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             try {
                 Method getRawWidth = Display.class.getMethod("getRawWidth");
                 Method getRawHeight = Display.class.getMethod("getRawHeight");
                 final int width = (Integer) getRawWidth.invoke(display);
                 final int height = (Integer) getRawHeight.invoke(display);
                 real.set(width, height);
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }//try
         }//if
@@ -164,7 +170,7 @@ public class DisplayPropertyFragment extends Fragment {
             h.setText(Integer.toString(real.y));
         }
         {
-            Point point = new Point(0,0);
+            Point point = new Point(0, 0);
             display.getSize(point);
             final EditText x = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
             x.setText(Integer.toString(point.x));
@@ -180,13 +186,13 @@ public class DisplayPropertyFragment extends Fragment {
         {
             final DisplayMetrics display_metrics = new DisplayMetrics();
             display.getMetrics(display_metrics);
-            ((EditText)view.findViewById(R.id.editTextDensity)).setText(Float.toString(display_metrics.density));
-            ((EditText)view.findViewById(R.id.editTextDensityDpi)).setText(Integer.toString(display_metrics.densityDpi));
-            ((EditText)view.findViewById(R.id.editTextHeightPixels)).setText(Integer.toString(display_metrics.heightPixels));
-            ((EditText)view.findViewById(R.id.editTextWidthPixels)).setText(Integer.toString(display_metrics.widthPixels));
-            ((EditText)view.findViewById(R.id.editTextXDpi)).setText(Float.toString(display_metrics.xdpi));
-            ((EditText)view.findViewById(R.id.editTextYDpi)).setText(Float.toString(display_metrics.ydpi));
-            ((EditText)view.findViewById(R.id.editTextScaledDensity)).setText(Float.toString(display_metrics.scaledDensity));
+            ((EditText) view.findViewById(R.id.editTextDensity)).setText(Float.toString(display_metrics.density));
+            ((EditText) view.findViewById(R.id.editTextDensityDpi)).setText(Integer.toString(display_metrics.densityDpi));
+            ((EditText) view.findViewById(R.id.editTextHeightPixels)).setText(Integer.toString(display_metrics.heightPixels));
+            ((EditText) view.findViewById(R.id.editTextWidthPixels)).setText(Integer.toString(display_metrics.widthPixels));
+            ((EditText) view.findViewById(R.id.editTextXDpi)).setText(Float.toString(display_metrics.xdpi));
+            ((EditText) view.findViewById(R.id.editTextYDpi)).setText(Float.toString(display_metrics.ydpi));
+            ((EditText) view.findViewById(R.id.editTextScaledDensity)).setText(Float.toString(display_metrics.scaledDensity));
         }
         editTextLightSensor.setText(Float.toString(activity.getLightSensorValue()));
         editTextAccelerometerX.setText(Float.toString(activity.getAccelerometerX()));
