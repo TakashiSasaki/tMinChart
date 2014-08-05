@@ -34,6 +34,7 @@ public class TminChart extends Activity
         TconChartFragment.OnFragmentInteractionListener,
         DisplayPropertyFragment.OnFragmentInteractionListener,
         UserInfoFragment.OnFragmentInteractionListener,
+        ResultFragment.OnFragmentInteractionListener,
         SensorEventListener{
 
     /**
@@ -100,6 +101,9 @@ public class TminChart extends Activity
                 mTitle = getString(R.string.title_section3);
                 break;
             case 4:
+                mTitle = getString(R.string.title_section_result);
+                break;
+            case 5:
                 mTitle = getString(R.string.title_section4);
                 break;
         }//switch
@@ -217,6 +221,9 @@ public class TminChart extends Activity
                     fragment = new TminChartFragment();
                     break;
                 case 4:
+                    fragment = new ResultFragment();
+                    break;
+                case 5:
                     fragment = new DisplayPropertyFragment();
                     break;
                 default:
