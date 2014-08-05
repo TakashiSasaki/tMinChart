@@ -20,6 +20,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import java.util.Random;
+
 
 /**
  * TODO: document your custom view class.
@@ -34,10 +36,12 @@ public class Konoji extends View {
     private float mTextWidth;
     private float mTextHeight;
     private float gap;
+    private float width_inch;
     private float xdpi;
     private float ydpi;
     private int orientation;
     private boolean touched = false;
+    static Random random = new Random();
 
     public boolean isTouched(){
         return touched;
@@ -49,7 +53,7 @@ public class Konoji extends View {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public Konoji(Context context,  float gap_inch, int orientation) {
+    public Konoji(Context context,  float gap_inch, float width_inch) {
         super(context);
         init(null, 0);
         gap = gap_inch;
@@ -59,7 +63,8 @@ public class Konoji extends View {
         display.getMetrics(display_metrics);
         this.xdpi = display_metrics.xdpi;
         this.ydpi = display_metrics.ydpi;
-        this.orientation = orientation;
+        this.orientation = random.nextInt(3)*3;
+        this.width_inch = width_inch;
         this.mExampleString = "a";
     }
 
@@ -146,14 +151,14 @@ public class Konoji extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width_mode = MeasureSpec.getMode(widthMeasureSpec);
         int width_size = MeasureSpec.getSize(widthMeasureSpec);
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
-        height_size = (int)(gap * xdpi * 4);
-        width_size = (int)(gap * ydpi * 4);
+        height_size = (int)(width_inch * xdpi);
+        width_size = (int)(width_inch * ydpi);
         setMeasuredDimension(width_size, height_size);
-        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
 

@@ -100,7 +100,7 @@ public class TminChartFragment extends Fragment {
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
                 final double gap_inch = MAX_GAP_INCH / Math.pow(1.03, x + y*COLUMNS);
-                Konoji konoji = new Konoji(getActivity(), (float)gap_inch, random.nextInt(3)*3);
+                Konoji konoji = new Konoji(getActivity(), (float)gap_inch, (float)MAX_GAP_INCH * 4);
                 table_row.addView(konoji);
             }//for y
             tableLayout.addView(table_row);
