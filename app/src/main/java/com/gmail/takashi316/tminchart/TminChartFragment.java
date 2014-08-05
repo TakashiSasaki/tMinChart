@@ -71,8 +71,8 @@ public class TminChartFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        }//if
+    }//onCreate
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,8 +118,8 @@ public class TminChartFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
+        }//if
+    }//onButtonPressed
 
     @Override
     public void onAttach(Activity activity) {
@@ -151,6 +151,7 @@ public class TminChartFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
-    }
+    }//OnFragmentInteractionListener
 
-}
+}//TminChartFragment
+
