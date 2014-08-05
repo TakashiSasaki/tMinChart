@@ -19,7 +19,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".TminChart" >
+            android:parentActivityName=".TminChart"
+            android:launchMode="singleInstance">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gmail.takashi316.tminchart.TminChart" />
