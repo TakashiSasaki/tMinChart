@@ -98,8 +98,7 @@ public class TminChartFragment extends Fragment {
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
-                final double size = TEXT_SIZE / Math.pow(1.3, y);
-                final int intention = 255 - (int) (255 / Math.pow(1.3, x + y*COLUMNS));
+                final double size = TEXT_SIZE / Math.pow(1.3, x + y*COLUMNS);
                 Konoji konoji = new Konoji(getActivity(), (int)(size/3.0), random.nextInt(2)*3, 10);
                 table_row.addView(konoji);
             }//for y
