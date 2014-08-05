@@ -326,5 +326,122 @@
         android:layout_height="wrap_content"
         android:id="@+id/editTextAccelerometerZ" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BOARD"
+        android:id="@+id/textView15"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextBoard"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BRAND"
+        android:id="@+id/textView17"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextBrand"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DEVICE"
+        android:id="@+id/textView18"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDevice"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HARDWARE"
+        android:id="@+id/textView19"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextHardware"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOST"
+        android:id="@+id/textView20"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextHost"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MANUFACTURER"
+        android:id="@+id/textView21"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextManufacturer"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MODEL"
+        android:id="@+id/textView22"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextModel"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PRODUCT"
+        android:id="@+id/textView23"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextProduct"
+        android:layout_columnSpan="2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USER"
+        android:id="@+id/textView24"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextUser"
+        android:layout_columnSpan="2" />
+
 
 </GridLayout>

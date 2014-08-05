@@ -198,6 +198,18 @@ public class DisplayPropertyFragment extends Fragment {
         editTextAccelerometerX.setText(Float.toString(activity.getAccelerometerX()));
         editTextAccelerometerY.setText(Float.toString(activity.getAccelerometerY()));
         editTextAccelerometerZ.setText(Float.toString(activity.getAccelerometerZ()));
+        {
+            ((EditText)view.findViewById(R.id.editTextBoard)).setText(Build.BOARD);
+            ((EditText)view.findViewById(R.id.editTextBrand)).setText(Build.BRAND);
+            ((EditText)view.findViewById(R.id.editTextDevice)).setText(Build.DEVICE);
+            ((EditText)view.findViewById(R.id.editTextHardware)).setText(Build.HARDWARE);
+            ((EditText)view.findViewById(R.id.editTextHost)).setText(Build.HOST);
+            ((EditText)view.findViewById(R.id.editTextModel)).setText(Build.MODEL);
+            ((EditText)view.findViewById(R.id.editTextProduct)).setText(Build.PRODUCT);
+            ((EditText)view.findViewById(R.id.editTextUser)).setText(Build.USER);
+            ((EditText)view.findViewById(R.id.editTextManufacturer)).setText(Build.MANUFACTURER);
+
+        }
     }//onResume
 }//DisplayPropertyFragment
 
