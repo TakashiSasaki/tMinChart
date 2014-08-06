@@ -91,6 +91,11 @@ public class TminChart extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        if(position == 5){
+            Intent intent = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent);
+            return;
+        }//if
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -114,6 +119,7 @@ public class TminChart extends Activity
             case 5:
                 mTitle = getString(R.string.title_section4);
                 break;
+            case 6:
         }//switch
     }//onSectionAttached
 
