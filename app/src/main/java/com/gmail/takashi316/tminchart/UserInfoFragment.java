@@ -225,6 +225,7 @@ public class UserInfoFragment extends Fragment {
                 content_values.put("correction", correction);
                 content_values.put("fatigue", fatigue);
                 writable_database.insert("UserInfo", null, content_values);
+                writable_database.close();
                 dateTime = Calendar.getInstance().getTime();
                 ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(1);
             }//onClick
