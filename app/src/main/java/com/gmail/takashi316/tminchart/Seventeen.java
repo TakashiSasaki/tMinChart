@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
+import android.os.Handler;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -41,10 +44,12 @@ public class Seventeen extends View {
     private double intensity;
     private int textSize;
     private int color;
+    private boolean touched = false;
+    private String tconString;
 
     static private Random random = new Random();
 
-    public Seventeen(Context context, double width_inch, double intensity, ArrayList<Seventeen> seventeens) {
+    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens) {
         super(context);
         init(null, 0);
         final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -62,7 +67,30 @@ public class Seventeen extends View {
         this.color = Color.rgb((int) intensity, (int) intensity, (int) intensity);
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
+        this.tconString = getTconString();
 
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(seventeens != null){
+                    for(Seventeen seventeen: seventeens){
+                        seventeen.touched = false;
+                    }//for
+                }//if
+                touched = true;
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(Seventeen seventeen: seventeens){
+                            seventeen.invalidate();
+                        }//for
+                        ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
+                        tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                    }//run
+                });//post
+            }//onClick
+        });//setOnClickListener
     }// custom constructor
 
     public Seventeen(Context context) {
@@ -134,7 +162,12 @@ public class Seventeen extends View {
         final Paint.FontMetrics font_metrics = mTextPaint.getFontMetrics();
         final float width_margin = (canvas_width - pixels) / 2;
         final float height_margin = (canvas_height - pixels) / 2;
-        canvas.drawText(getTconString(), width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
+        canvas.drawText(tconString, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
+        if(touched){
+            this.setBackgroundColor(Color.RED);
+        } else {
+            this.setBackgroundColor(Color.WHITE);
+        }//if
     }//onDraw
 
     protected void onDraw_(Canvas canvas) {

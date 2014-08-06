@@ -45,7 +45,6 @@ public class TconChartFragment extends Fragment {
     private TableLayout tableLayout;
 
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
 
     /**
      * Use this factory method to create a new instance of
@@ -97,13 +96,13 @@ public class TconChartFragment extends Fragment {
             tr_index.addView(text_view);
         }//for
         tableLayout.addView(tr_index);
-        this.seventeens.clear();
         for(int y = 0; y<ROWS; ++y) {
             TableRow table_row = new TableRow(getActivity());
             TextView tv_index = new TextView(getActivity());
             tv_index.setTextSize(TEXT_SIZE_PIXELS);
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
+            ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
             for(int x=0; x<COLUMNS; ++x){
                 TextView text_view = new TextView(getActivity());
                 text_view.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +117,7 @@ public class TconChartFragment extends Fragment {
                 seventeen.setMinimumHeight(200);
                 seventeen.setMinimumWidth(200);
                 table_row.addView(seventeen);
-                this.seventeens.add(seventeen);
+                seventeens.add(seventeen);
             }//for y
             tableLayout.addView(table_row);
         }//for x
