@@ -7,6 +7,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -64,6 +66,14 @@ public class TminChart extends Activity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+        try{
+            PackageInfo package_info = getPackageManager().getPackageInfo("com.gmail.takashi316.tminchart", PackageManager.GET_META_DATA);
+            final int versionCode = package_info.versionCode;
+            final String versionName = package_info.versionName;
+            mTitle = mTitle + " " + versionName;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
