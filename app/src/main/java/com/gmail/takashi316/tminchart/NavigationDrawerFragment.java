@@ -107,7 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section3),
                         getString(R.string.title_section_result),
                         getString(R.string.title_section4),
-                        "tMinChartとtConChartに関する設定"
+                        "計測方法に関する設定"
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

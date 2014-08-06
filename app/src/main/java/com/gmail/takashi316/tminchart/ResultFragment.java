@@ -144,6 +144,12 @@ public class ResultFragment extends Fragment {
                 SQLiteDatabase sqlite_database = results_sqlite_open_helper.getWritableDatabase();
                 sqlite_database.insert("ResultsTable", null, content_values);
                 buttonSaveResults.setText("保存しました \n" + Calendar.getInstance().getTime().toString());
+                buttonSaveResults.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((NavigationDrawerFragment.NavigationDrawerCallbacks)getActivity()).onNavigationDrawerItemSelected(0);
+                    }//onClick
+                });
             }//onClick
         });
 
