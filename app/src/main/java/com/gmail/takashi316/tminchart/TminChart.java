@@ -55,6 +55,10 @@ public class TminChart extends Activity
     private float accelerometerValueY;
     private float accelerometerValueZ;
 
+    private UserInfoFragment userInfoFragment;
+    private TconChartFragment tconChartFragment;
+    private TminChartFragment tminChartFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +102,7 @@ public class TminChart extends Activity
         }//if
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, getFragment(position))
                 .commit();
     }//onNavigationDrawerItemSelected
 
@@ -244,6 +248,26 @@ public class TminChart extends Activity
 
     }
 
+    private Fragment getFragment(int section){
+        switch(section){
+            case 0:
+                return userInfoFragment != null ? userInfoFragment : (userInfoFragment = new UserInfoFragment());
+            case 1:
+                return tconChartFragment != null ? tconChartFragment : (tconChartFragment = new TconChartFragment());
+            case 2:
+                return tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());
+            case 3:
+                return new ResultFragment();
+            case 4:
+                return new DisplayPropertyFragment();
+            case 5:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                this.startActivity(intent);
+                return null;
+            default:
+                return null;
+        }//switch
+    }//getFragment
     /**
      * A placeholder fragment containing a simple view.
      */
