@@ -5,7 +5,7 @@
     <EditTextPreference
         android:defaultValue="@string/pref_default_display_name"
         android:inputType="numberDecimal"
-        android:key="tcon_chart_max_gap"
+        android:key="tcon_chart_max_inch"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:maxLines="1"
@@ -41,7 +41,7 @@
     <EditTextPreference
         android:defaultValue="0.3"
         android:inputType="numberDecimal"
-        android:key="tmin_chart_max_gap"
+        android:key="tmin_chart_max_gap_inch"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tMinChart最大ギャップ（インチ）" />

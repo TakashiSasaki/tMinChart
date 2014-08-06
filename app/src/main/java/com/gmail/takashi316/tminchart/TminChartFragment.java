@@ -1,10 +1,12 @@
 package com.gmail.takashi316.tminchart;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -59,7 +61,7 @@ public class TminChartFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
+    }//newInstance
 
     public TminChartFragment() {
         // Required empty public constructor
@@ -104,7 +106,7 @@ public class TminChartFragment extends Fragment {
             tv_index.setGravity(Gravity.CENTER);
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
-                final double gap_inch = MAX_GAP_INCH / Math.pow(1.03, x + y * COLUMNS);
+                final double gap_inch = MAX_GAP_INCH *  Math.pow(0.98, x + y * COLUMNS);
                 Konoji konoji = new Konoji(getActivity(), (float) gap_inch, (float) MAX_GAP_INCH * 4, konojiViews);
                 konojiViews.add(konoji);
                 table_row.addView(konoji);
@@ -152,6 +154,22 @@ public class TminChartFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }//OnFragmentInteractionListener
+
+    // will be overridden by shared preferences
+    private double tminChartMaxGapInch = 0.5;
+    private double tminChartRatio = 0.98;
+    private int tminChartCount = 100;
+
+    public void readSharedPreferences(){
+            try{
+                final SharedPreferences shared_preferences = PreferenceManager.getDefaultSharedPreferences(getActivity()) ;
+                tminChartMaxGapInch = Double.parseDouble(shared_preferences.getString("tmin_chart_max_gap_inch", Double.toString(tminChartMaxGapInch)));
+                tminChartRatio = Double.parseDouble(shared_preferences.getString("tmin_chart_ratio", Double.toString(tminChartRatio)));
+                tminChartCount = Integer.parseInt(shared_preferences.getString("tmin_chart_count", Integer.toString(tminChartCount)));
+            } catch (Exception e){
+                e.printStackTrace();
+            }//try
+        }//readSharedPreferences
 
 }//TminChartFragment
 
