@@ -155,7 +155,7 @@ public class Seventeen extends View {
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
             mTextHeight = fontMetrics.bottom;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }//try
     }//invalidateTextPaintAndMeasurements
 
