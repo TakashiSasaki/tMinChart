@@ -1,6 +1,8 @@
 package com.gmail.takashi316.tminchart;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,8 +11,10 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -78,6 +82,7 @@ public class ResultFragment extends Fragment {
     EditText editTextDpi;
     EditText editTextTconChartResult;
     EditText editTextTminChartRresult;
+    Button buttonSaveResults;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,6 +102,51 @@ public class ResultFragment extends Fragment {
         editTextDpi = (EditText)view.findViewById(R.id.editTextDpi);
         editTextTconChartResult = (EditText) view.findViewById(R.id.editTextTconChartResult);
         editTextTminChartRresult = (EditText) view.findViewById(R.id.editTextTminChartResult);
+
+        buttonSaveResults = (Button) view.findViewById(R.id.buttonSaveResults);
+        buttonSaveResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
+
+                editTextName.setText(l.getName());
+                editTextAge.setText(Integer.toString(l.getAge()));
+                editTextSex.setText(l.getSex());
+                editTextAffiliation.setText(l.getAffiliation());
+                editTextCorrection.setText(l.getCorrection());
+                editTextFatigue.setText(l.getFatigue());
+                editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
+                editTextAccelerometer.setText(l.getAccelerometerString());
+                editTextDevice.setText(Build.DEVICE);
+                editTextDpi .setText("("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
+                editTextTconChartResult.setText(l.getTconChartResultString());
+                editTextTminChartRresult.setText(l.getTminChartResultString());
+
+                ContentValues content_values = new ContentValues();
+                {
+                    Date date = l.getDateTime();
+                    if(date == null) date = Calendar.getInstance().getTime();
+                    content_values.put("date", date.toString());
+                }
+                content_values.put("name", l.getName());
+                content_values.put("age", l.getAge());
+                content_values.put("sex", l.getSex());
+                content_values.put("affiliation", l.getAffiliation());
+                content_values.put("correction", l.getCorrection());
+                content_values.put("fatigue", l.getFatigue());
+                content_values.put("light_sensor_value", l.getLightSensorValue());
+                content_values.put("accelerometer", l.getAccelerometerString());
+                content_values.put("device", Build.DEVICE);
+                content_values.put("dpi", "("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
+                content_values.put("tcon_chart_results", l.getTconChartResultString());
+                content_values.put("tmin_chart_results",l.getTminChartResultString());
+                ResultsSqliteOpenHelper results_sqlite_open_helper = new ResultsSqliteOpenHelper(getActivity());
+                SQLiteDatabase sqlite_database = results_sqlite_open_helper.getWritableDatabase();
+                sqlite_database.insert("ResultsTable", null, content_values);
+                buttonSaveResults.setText("保存しました \n" + Calendar.getInstance().getTime().toString());
+            }//onClick
+        });
+
         return view;
     }
 
@@ -107,7 +157,7 @@ public class ResultFragment extends Fragment {
         if(l.getDateTime() != null) {
             editTextDateTime.setText(l.getDateTime().toString());
         } else {
-            editTextDateTime.setText("被検者未登録");
+            editTextDateTime.setText("未設定");
         }
         editTextName.setText(l.getName());
         editTextAge.setText(Integer.toString(l.getAge()));
