@@ -16,6 +16,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -29,11 +30,9 @@ import java.util.Random;
  *
  */
 public class TconChartFragment extends Fragment {
-    final String[] TCON_STRINGS  = {"講",	"謝", "績", "厳", "縮", "優", "覧", "曖", "臆",	"嚇",
-        "轄", "環", "擬", "犠", "矯", "謹", "謙", "鍵", "購", "懇",
-        "擦", "爵", "醜", "償", "礁", "繊", "鮮", "燥", "霜", "戴",
-        "濯", "鍛", "聴", "謄", "瞳", "謎", "鍋", "頻", "闇", "翼", "療", "瞭", "齢"};
-    
+    final double MAX_WIDTH_INCH = 0.7;
+    final int TEXT_SIZE_PIXELS = 50;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -46,12 +45,7 @@ public class TconChartFragment extends Fragment {
     private TableLayout tableLayout;
 
     private OnFragmentInteractionListener mListener;
-
-    private Random random = new Random();
-    private String getTconString(){
-        final int r = random.nextInt(TCON_STRINGS.length);
-        return TCON_STRINGS[r];
-    }//getTconString
+    private ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
 
     /**
      * Use this factory method to create a new instance of
@@ -90,24 +84,24 @@ public class TconChartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tcon_chart, container, false);
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
         TableRow tr_index = new TableRow(getActivity());
-        final int TEXT_SIZE = 70;
         TextView tv_tc  = new TextView(getActivity());
-        tv_tc.setTextSize(TEXT_SIZE);
+        tv_tc.setTextSize(TEXT_SIZE_PIXELS);
         tv_tc.setText("[c]");
         tr_index.addView(tv_tc);
         final int COLUMNS = 20;
         final int ROWS = 10;
         for(int x = 1; x <= COLUMNS; ++x ){
             TextView text_view = new TextView(getActivity());
-            text_view.setTextSize(TEXT_SIZE);
+            text_view.setTextSize(TEXT_SIZE_PIXELS);
             text_view.setText(new String(new byte[]{(byte)(x+64)}));
             tr_index.addView(text_view);
         }//for
         tableLayout.addView(tr_index);
+        this.seventeens.clear();
         for(int y = 0; y<ROWS; ++y) {
             TableRow table_row = new TableRow(getActivity());
             TextView tv_index = new TextView(getActivity());
-            tv_index.setTextSize(TEXT_SIZE);
+            tv_index.setTextSize(TEXT_SIZE_PIXELS);
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
             for(int x=0; x<COLUMNS; ++x){
@@ -118,12 +112,11 @@ public class TconChartFragment extends Fragment {
                         v.setBackgroundColor(Color.RED);
                     }
                 });
-                final double size = TEXT_SIZE / Math.pow(1.3, y);
-                text_view.setTextSize((int)size);;
-                text_view.setText(getTconString());
-                final int intention = 255-(int)(255/Math.pow(1.3,x));
-                text_view.setTextColor(Color.rgb(intention, intention,intention));
-                table_row.addView(text_view);
+                final double width_inch = MAX_WIDTH_INCH / Math.pow(1.3, y);
+                final double intention = 255.0 -  (255.0/Math.pow(1.3,x));
+                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens);
+                table_row.addView(seventeen);
+                this.seventeens.add(seventeen);
             }//for y
             tableLayout.addView(table_row);
         }//for x

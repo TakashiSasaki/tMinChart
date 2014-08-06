@@ -8,14 +8,25 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
  * TODO: document your custom view class.
  */
 public class Seventeen extends View {
-    private String mExampleString; // TODO: use a default from R.string...
+    static final String[] TCON_STRINGS  = {"講",	"謝", "績", "厳", "縮", "優", "覧", "曖", "臆",	"嚇",
+            "轄", "環", "擬", "犠", "矯", "謹", "謙", "鍵", "購", "懇",
+            "擦", "爵", "醜", "償", "礁", "繊", "鮮", "燥", "霜", "戴",
+            "濯", "鍛", "聴", "謄", "瞳", "謎", "鍋", "頻", "闇", "翼", "療", "瞭", "齢"};
+
+    private String mExampleString = ""; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
@@ -23,6 +34,33 @@ public class Seventeen extends View {
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
+    private double widthInch;
+    private float xdpi, ydpi;
+    private float xpixels, ypixels;
+    private float pixels;
+    private double intensity;
+    private int textSize;
+    private int color;
+
+    static private Random random = new Random();
+
+    public Seventeen(Context context, double width_inch, double intensity, ArrayList<Seventeen> seventeens){
+        super(context);
+        init(null, 0);
+        final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        final Display display = window_manager.getDefaultDisplay();
+        final DisplayMetrics display_metrics = new DisplayMetrics();
+        display.getMetrics(display_metrics);
+        this.xdpi = display_metrics.xdpi;
+        this.ydpi = display_metrics.ydpi;
+        this.widthInch = width_inch;
+        this.intensity = intensity;
+        this.xpixels = (float)(this.xdpi * this.widthInch);
+        this.ypixels = (float)(this.ydpi * this.widthInch);
+        this.pixels = Math.max(xpixels, ypixels);
+        this.mExampleString = "a";
+        this.color = Color.rgb((int)intensity, (int)intensity, (int)intensity);
+    }// custom constructor
 
     public Seventeen(Context context) {
         super(context);
@@ -42,22 +80,22 @@ public class Seventeen extends View {
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.Seventeen, defStyle, 0);
+                attrs, R.styleable.Konoji, defStyle, 0);
 
         mExampleString = a.getString(
-                R.styleable.Seventeen_exampleString);
+                R.styleable.Konoji_exampleString);
         mExampleColor = a.getColor(
-                R.styleable.Seventeen_exampleColor,
+                R.styleable.Konoji_exampleColor,
                 mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
         mExampleDimension = a.getDimension(
-                R.styleable.Seventeen_exampleDimension,
+                R.styleable.Konoji_exampleDimension,
                 mExampleDimension);
 
-        if (a.hasValue(R.styleable.Seventeen_exampleDrawable)) {
+        if (a.hasValue(R.styleable.Konoji_exampleDrawable)) {
             mExampleDrawable = a.getDrawable(
-                    R.styleable.Seventeen_exampleDrawable);
+                    R.styleable.Konoji_exampleDrawable);
             mExampleDrawable.setCallback(this);
         }
 
@@ -73,17 +111,29 @@ public class Seventeen extends View {
     }
 
     private void invalidateTextPaintAndMeasurements() {
-        mTextPaint.setTextSize(mExampleDimension);
-        mTextPaint.setColor(mExampleColor);
-        mTextWidth = mTextPaint.measureText(mExampleString);
+        try {
+            mTextPaint.setTextSize(mExampleDimension);
+            mTextPaint.setColor(mExampleColor);
+            mTextWidth = mTextPaint.measureText(mExampleString);
 
-        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        mTextHeight = fontMetrics.bottom;
-    }
+            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+            mTextHeight = fontMetrics.bottom;
+        } catch (Exception e){
+            e.printStackTrace();
+        }//try
+    }//invalidateTextPaintAndMeasurements
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        final int canvas_width = canvas.getWidth();
+        final int canvas_height = canvas.getHeight();
+        mTextPaint.setTextSize(pixels);
+        canvas.drawText(getTconString(), 0, canvas_height, mTextPaint);
+    }//onDraw
+
+    protected void onDraw_(Canvas canvas) {
+        //super.onDraw(canvas);
 
         // TODO: consider storing these as member variables to reduce
         // allocations per draw cycle.
@@ -106,8 +156,8 @@ public class Seventeen extends View {
             mExampleDrawable.setBounds(paddingLeft, paddingTop,
                     paddingLeft + contentWidth, paddingTop + contentHeight);
             mExampleDrawable.draw(canvas);
-        }
-    }
+        }//if
+    }//onDraw_
 
     /**
      * Gets the example string attribute value.
@@ -179,4 +229,22 @@ public class Seventeen extends View {
     public void setExampleDrawable(Drawable exampleDrawable) {
         mExampleDrawable = exampleDrawable;
     }
-}
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width_mode = MeasureSpec.getMode(widthMeasureSpec);
+        int width_size = MeasureSpec.getSize(widthMeasureSpec);
+        int height_mode = MeasureSpec.getMode(heightMeasureSpec);
+        int height_size = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(MeasureSpec.makeMeasureSpec((int)pixels+1, width_mode),
+                MeasureSpec.makeMeasureSpec((int)pixels+1, height_mode));
+    }//onMeasure
+
+    private String getTconString(){
+        final int r = random.nextInt(TCON_STRINGS.length);
+        return TCON_STRINGS[r];
+    }//getTconString
+
+}//Seventeen
