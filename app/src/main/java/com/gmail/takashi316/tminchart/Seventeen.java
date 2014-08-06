@@ -72,12 +72,13 @@ public class Seventeen extends View {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean previously_touched = touched;
                 if(seventeens != null){
                     for(Seventeen seventeen: seventeens){
                         seventeen.touched = false;
                     }//for
                 }//if
-                touched = true;
+                touched = !previously_touched;
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     @Override

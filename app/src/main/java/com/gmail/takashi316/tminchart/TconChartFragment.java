@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.LayoutDirection;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,7 @@ public class TconChartFragment extends Fragment {
         for(int x = 1; x <= COLUMNS; ++x ){
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize(TEXT_SIZE_PIXELS);
+            text_view.setGravity(Gravity.CENTER);
             text_view.setText(new String(new byte[]{(byte)(x+64)}));
             tr_index.addView(text_view);
         }//for
