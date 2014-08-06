@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -33,8 +34,7 @@ import java.util.Random;
  *
  */
 public class TconChartFragment extends Fragment {
-    final double MAX_WIDTH_INCH = 0.7;
-    final int TEXT_SIZE_PIXELS = 50;
+    final static double MARGIN_INCH = 0.1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,18 +83,19 @@ public class TconChartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
         View view = inflater.inflate(R.layout.fragment_tcon_chart, container, false);
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
         TableRow tr_index = new TableRow(getActivity());
         TextView tv_tc  = new TextView(getActivity());
-        tv_tc.setTextSize(TEXT_SIZE_PIXELS);
-        tv_tc.setText("[c]");
+        tv_tc.setTextSize((float)tconChartMaxInch * l.getXdpi());
+        tv_tc.setText(" ");
         tr_index.addView(tv_tc);
         final int COLUMNS = 20;
         final int ROWS = 10;
         for(int x = 1; x <= COLUMNS; ++x ){
             TextView text_view = new TextView(getActivity());
-            text_view.setTextSize(TEXT_SIZE_PIXELS);
+            text_view.setTextSize((float)tconChartMaxInch * l.getXdpi() /2);
             text_view.setGravity(Gravity.CENTER);
             text_view.setText(new String(new byte[]{(byte)(x+64)}));
             tr_index.addView(text_view);
@@ -103,7 +104,7 @@ public class TconChartFragment extends Fragment {
         for(int y = 0; y<ROWS; ++y) {
             TableRow table_row = new TableRow(getActivity());
             TextView tv_index = new TextView(getActivity());
-            tv_index.setTextSize(TEXT_SIZE_PIXELS);
+            tv_index.setTextSize((float)tconChartMaxInch * l.getXdpi()/2);
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
@@ -115,11 +116,11 @@ public class TconChartFragment extends Fragment {
                         v.setBackgroundColor(Color.RED);
                     }
                 });
-                final double width_inch = MAX_WIDTH_INCH / Math.pow(1.3, y);
+                final double width_inch = tconChartMaxInch / Math.pow(1.3, y);
                 final double intention = 255.0 -  (255.0/Math.pow(1.3,x));
                 Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens);
-                seventeen.setMinimumHeight(200);
-                seventeen.setMinimumWidth(200);
+                seventeen.setMinimumHeight((int)((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
+                seventeen.setMinimumWidth((int)((tconChartMaxInch + MARGIN_INCH) * l.getXdpi()));
                 table_row.addView(seventeen);
                 seventeens.add(seventeen);
             }//for y
