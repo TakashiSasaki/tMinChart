@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.os.Handler;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -168,7 +169,14 @@ public class Seventeen extends View {
         final float height_margin = (canvas_height - pixels) / 2;
         canvas.drawText(tconString, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
         if(touched){
-            this.setBackgroundColor(Color.RED);
+            //this.setBackgroundColor(Color.RED);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                this.setBackgroundDrawable(frame);
+            } else {
+                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                this.setBackground(frame);
+            }
         } else {
             this.setBackgroundColor(Color.WHITE);
         }//if
