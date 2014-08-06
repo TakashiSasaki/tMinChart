@@ -74,6 +74,7 @@ public class TconChartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        readSharedPreferences();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -92,9 +93,7 @@ public class TconChartFragment extends Fragment {
         tv_tc.setTextSize((float) tconChartMaxInch * l.getXdpi());
         tv_tc.setText(" ");
         tr_index.addView(tv_tc);
-        final int COLUMNS = 20;
-        final int ROWS = 10;
-        for (int x = 1; x <= COLUMNS; ++x) {
+        for (int x = 1; x <= tconChartColumns; ++x) {
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize((float) tconChartMaxInch * l.getXdpi() / 2);
             text_view.setGravity(Gravity.CENTER);
@@ -102,14 +101,14 @@ public class TconChartFragment extends Fragment {
             tr_index.addView(text_view);
         }//for
         tableLayout.addView(tr_index);
-        for (int y = 0; y < ROWS; ++y) {
+        for (int y = 0; y < tconChartRows; ++y) {
             TableRow table_row = new TableRow(getActivity());
             TextView tv_index = new TextView(getActivity());
             tv_index.setTextSize((float) tconChartMaxInch * l.getXdpi() / 2);
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
-            for (int x = 0; x < COLUMNS; ++x) {
+            for (int x = 0; x < tconChartColumns; ++x) {
                 TextView text_view = new TextView(getActivity());
                 text_view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -177,7 +176,7 @@ public class TconChartFragment extends Fragment {
     }//OnFragmentInteractionListener
 
     // will be overridden by shared preferences
-    private double tconChartMaxInch = 0.3;
+    private double tconChartMaxInch = 0.5;
     private double tconChartSizeRatio = 0.9;
     private int tconChartRows = 20;
     private double tconCharContrastRatio = 0.9;

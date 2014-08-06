@@ -3,6 +3,7 @@ package com.gmail.takashi316.tminchart;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -70,6 +71,7 @@ public class TminChartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        readSharedPreferences();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -88,8 +90,10 @@ public class TminChartFragment extends Fragment {
         tv_tc.setTextSize(TEXT_SIZE);
         tv_tc.setText(" ");
         tr_index.addView(tv_tc);
-        final int COLUMNS = 7;
-        final int ROWS = 20;
+        OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
+        final int width_pixels = (int) (tminChartMaxGapInch * 4 * l.getXdpi());
+        final int COLUMNS = l.getWidthPixels()/width_pixels;
+        final int ROWS = tminChartCount / COLUMNS;
         for (int x = 1; x <= COLUMNS; ++x) {
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize(TEXT_SIZE);
@@ -151,8 +155,10 @@ public class TminChartFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+        public float getXdpi();
+        public float getYdpi();
+        public int getWidthPixels();
     }//OnFragmentInteractionListener
 
     // will be overridden by shared preferences
