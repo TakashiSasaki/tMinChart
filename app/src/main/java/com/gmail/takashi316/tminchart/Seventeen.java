@@ -21,7 +21,7 @@ import java.util.Random;
  * TODO: document your custom view class.
  */
 public class Seventeen extends View {
-    static final String[] TCON_STRINGS  = {"講",	"謝", "績", "厳", "縮", "優", "覧", "曖", "臆",	"嚇",
+    static final String[] TCON_STRINGS = {"講", "謝", "績", "厳", "縮", "優", "覧", "曖", "臆", "嚇",
             "轄", "環", "擬", "犠", "矯", "謹", "謙", "鍵", "購", "懇",
             "擦", "爵", "醜", "償", "礁", "繊", "鮮", "燥", "霜", "戴",
             "濯", "鍛", "聴", "謄", "瞳", "謎", "鍋", "頻", "闇", "翼", "療", "瞭", "齢"};
@@ -44,7 +44,7 @@ public class Seventeen extends View {
 
     static private Random random = new Random();
 
-    public Seventeen(Context context, double width_inch, double intensity, ArrayList<Seventeen> seventeens){
+    public Seventeen(Context context, double width_inch, double intensity, ArrayList<Seventeen> seventeens) {
         super(context);
         init(null, 0);
         final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -55,11 +55,11 @@ public class Seventeen extends View {
         this.ydpi = display_metrics.ydpi;
         this.widthInch = width_inch;
         this.intensity = intensity;
-        this.xpixels = (float)(this.xdpi * this.widthInch);
-        this.ypixels = (float)(this.ydpi * this.widthInch);
+        this.xpixels = (float) (this.xdpi * this.widthInch);
+        this.ypixels = (float) (this.ydpi * this.widthInch);
         this.pixels = Math.max(xpixels, ypixels);
         this.mExampleString = "a";
-        this.color = Color.rgb((int)intensity, (int)intensity, (int)intensity);
+        this.color = Color.rgb((int) intensity, (int) intensity, (int) intensity);
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
 
@@ -121,7 +121,7 @@ public class Seventeen extends View {
 
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
             mTextHeight = fontMetrics.bottom;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }//try
     }//invalidateTextPaintAndMeasurements
@@ -134,7 +134,7 @@ public class Seventeen extends View {
         final Paint.FontMetrics font_metrics = mTextPaint.getFontMetrics();
         final float width_margin = (canvas_width - pixels) / 2;
         final float height_margin = (canvas_height - pixels) / 2;
-        canvas.drawText(getTconString(), width_margin, canvas_height - font_metrics.bottom - (height_margin/2), mTextPaint);
+        canvas.drawText(getTconString(), width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
     }//onDraw
 
     protected void onDraw_(Canvas canvas) {
@@ -166,6 +166,7 @@ public class Seventeen extends View {
 
     /**
      * Gets the example string attribute value.
+     *
      * @return The example string attribute value.
      */
     public String getExampleString() {
@@ -175,6 +176,7 @@ public class Seventeen extends View {
     /**
      * Sets the view's example string attribute value. In the example view, this string
      * is the text to draw.
+     *
      * @param exampleString The example string attribute value to use.
      */
     public void setExampleString(String exampleString) {
@@ -184,6 +186,7 @@ public class Seventeen extends View {
 
     /**
      * Gets the example color attribute value.
+     *
      * @return The example color attribute value.
      */
     public int getExampleColor() {
@@ -193,6 +196,7 @@ public class Seventeen extends View {
     /**
      * Sets the view's example color attribute value. In the example view, this color
      * is the font color.
+     *
      * @param exampleColor The example color attribute value to use.
      */
     public void setExampleColor(int exampleColor) {
@@ -202,6 +206,7 @@ public class Seventeen extends View {
 
     /**
      * Gets the example dimension attribute value.
+     *
      * @return The example dimension attribute value.
      */
     public float getExampleDimension() {
@@ -211,6 +216,7 @@ public class Seventeen extends View {
     /**
      * Sets the view's example dimension attribute value. In the example view, this dimension
      * is the font size.
+     *
      * @param exampleDimension The example dimension attribute value to use.
      */
     public void setExampleDimension(float exampleDimension) {
@@ -220,6 +226,7 @@ public class Seventeen extends View {
 
     /**
      * Gets the example drawable attribute value.
+     *
      * @return The example drawable attribute value.
      */
     public Drawable getExampleDrawable() {
@@ -229,6 +236,7 @@ public class Seventeen extends View {
     /**
      * Sets the view's example drawable attribute value. In the example view, this drawable is
      * drawn above the text.
+     *
      * @param exampleDrawable The example drawable attribute value to use.
      */
     public void setExampleDrawable(Drawable exampleDrawable) {
@@ -247,7 +255,7 @@ public class Seventeen extends View {
                 MeasureSpec.makeMeasureSpec(getSuggestedMinimumHeight(), height_mode));
     }//onMeasure
 
-    private String getTconString(){
+    private String getTconString() {
         final int r = random.nextInt(TCON_STRINGS.length);
         return TCON_STRINGS[r];
     }//getTconString
