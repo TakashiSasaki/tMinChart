@@ -34,6 +34,7 @@ public class TminChart extends Activity
         ResultFragment.OnFragmentInteractionListener,
         SensorEventListener {
 
+    private static final boolean USE_ACTION_BAR = false;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -124,7 +125,7 @@ public class TminChart extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+        if (!mNavigationDrawerFragment.isDrawerOpen() && USE_ACTION_BAR) {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
