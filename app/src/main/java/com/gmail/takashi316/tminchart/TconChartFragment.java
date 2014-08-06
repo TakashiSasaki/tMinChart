@@ -2,10 +2,12 @@ package com.gmail.takashi316.tminchart;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.util.LayoutDirection;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -166,4 +168,23 @@ public class TconChartFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    // will be overridden by shared preferences
+    private double tconChartMaxInch = 0.3;
+    private double tconChartSizeRatio = 0.9;
+    private int tconChartRows = 20;
+    private double tconCharContrastRatio = 0.9;
+    private int tconChartColumns = 20;
+
+    private void readSharedPreferences(){
+            try{
+                final SharedPreferences shared_preferences = PreferenceManager.getDefaultSharedPreferences(getActivity()) ;
+                tconChartMaxInch = Double.parseDouble(shared_preferences.getString("tcon_chart_max_inch", Double.toString(tconChartMaxInch)));
+                tconChartSizeRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_size_ratio", Double.toString(tconChartSizeRatio)));
+                tconChartRows = Integer.parseInt(shared_preferences.getString("tcon_chart_rows", Integer.toString(tconChartRows)));
+                tconCharContrastRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_contrast_ratio", Double.toString(tconCharContrastRatio)));
+                tconChartColumns = Integer.parseInt(shared_preferences.getString("tcon_chart_columns", Integer.toString(tconChartColumns)));
+            } catch (Exception e){
+                e.printStackTrace();
+            }//try
+    }//readSharedPreferences
 }
