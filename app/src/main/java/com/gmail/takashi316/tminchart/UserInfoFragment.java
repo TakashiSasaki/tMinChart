@@ -128,12 +128,12 @@ public class UserInfoFragment extends Fragment {
                                         editTextName.setText(name);
                                         if (cursor.getCount() == 0) return;
                                         cursor.moveToFirst();
-                                        String age;
                                         try {
-                                            final int int_age = cursor.getInt(1);
-                                            age = (new Integer(int_age)).toString();
+                                            age = cursor.getInt(1);
+                                            final String age_string = (new Integer(age)).toString();
+                                            editTextAge.setText(age_string);
                                         } catch (Exception e) {
-                                            age = "";
+                                            age = -1;
                                         }//try
                                         if (radioButtonMale.getText().toString().equals(cursor.getString(2)))
                                             radioButtonMale.setChecked(true);
