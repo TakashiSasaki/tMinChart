@@ -60,6 +60,8 @@ public class Seventeen extends View {
         this.pixels = Math.max(xpixels, ypixels);
         this.mExampleString = "a";
         this.color = Color.rgb((int)intensity, (int)intensity, (int)intensity);
+        this.mTextPaint.setColor(color);
+        this.mTextPaint.setTextSize(pixels);
     }// custom constructor
 
     public Seventeen(Context context) {
@@ -128,7 +130,6 @@ public class Seventeen extends View {
         super.onDraw(canvas);
         final int canvas_width = canvas.getWidth();
         final int canvas_height = canvas.getHeight();
-        mTextPaint.setTextSize(pixels);
         canvas.drawText(getTconString(), 0, canvas_height, mTextPaint);
     }//onDraw
 
