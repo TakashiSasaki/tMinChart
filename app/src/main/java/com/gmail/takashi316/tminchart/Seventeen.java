@@ -38,7 +38,7 @@ public class Seventeen extends View {
     private float mTextWidth;
     private float mTextHeight;
     private double widthInch;
-    private float xdpi, ydpi;
+    static private float xdpi, ydpi;
     private float xpixels, ypixels;
     private float pixels;
     private double intensity;
@@ -48,16 +48,19 @@ public class Seventeen extends View {
     private String tconString;
 
     static private Random random = new Random();
+    static DisplayMetrics displayMetrics;
 
     public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens) {
         super(context);
         init(null, 0);
-        final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        final Display display = window_manager.getDefaultDisplay();
-        final DisplayMetrics display_metrics = new DisplayMetrics();
-        display.getMetrics(display_metrics);
-        this.xdpi = display_metrics.xdpi;
-        this.ydpi = display_metrics.ydpi;
+        if(displayMetrics == null) {
+            final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            final Display display = window_manager.getDefaultDisplay();
+            displayMetrics = new DisplayMetrics();
+            display.getMetrics(displayMetrics);
+            this.xdpi = displayMetrics.xdpi;
+            this.ydpi = displayMetrics.ydpi;
+        }//if
         this.widthInch = width_inch;
         this.intensity = intensity;
         this.xpixels = (float) (this.xdpi * this.widthInch);
