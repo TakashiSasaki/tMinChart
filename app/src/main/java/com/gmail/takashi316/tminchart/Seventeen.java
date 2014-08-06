@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -305,4 +306,16 @@ public class Seventeen extends View {
         return TCON_STRINGS[r];
     }//getTconString
 
+    public Pair<Float, Integer> getResult(){
+        return new Pair<Float, Integer>(pixels, (int)intensity);
+    }//getResult
+
+    public boolean isTouched(){
+        return touched;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + Float.toString(pixels) + "," + Integer.toString((int)intensity) + ")";
+    }//toString
 }//Seventeen

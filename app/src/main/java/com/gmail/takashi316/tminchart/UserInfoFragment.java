@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +55,14 @@ public class UserInfoFragment extends Fragment {
     private RadioButton radioButtonAfterTwilightShift;
     private RadioButton radioButtonBeforeNightShift;
     private RadioButton radioButtonAfterNightShift;
+    private Date dateTime;
+    private String name;
+    private int age;
+    private String sex;
+    private String affiliation;
+    private String correction;
+    private String fatigue;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -163,17 +174,17 @@ public class UserInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(editTextName.getText().toString().isEmpty()) return;
-                final String name = editTextName.getText().toString();
-                final Integer age = editTextAge.getText().toString().isEmpty() ? null : Integer.parseInt(editTextAge.getText().toString());
-                final String sex = radioButtonMale.isChecked() ? "男性" : radioButtonFemale.isChecked() ? "女性" : "未回答";
-                final String affiliation = editTextAffiliation.getText().toString();
-                final String fatigue = radioButtonAfterDayShift.isChecked() ? radioButtonAfterDayShift.getText().toString():
+                name = editTextName.getText().toString();
+                age = editTextAge.getText().toString().isEmpty() ? null : Integer.parseInt(editTextAge.getText().toString());
+                sex = radioButtonMale.isChecked() ? "男性" : radioButtonFemale.isChecked() ? "女性" : "未回答";
+                affiliation = editTextAffiliation.getText().toString();
+                fatigue = radioButtonAfterDayShift.isChecked() ? radioButtonAfterDayShift.getText().toString():
                         radioButtonAfterNightShift.isChecked()? radioButtonAfterNightShift.getText().toString():
                                 radioButtonAfterTwilightShift.isChecked() ? radioButtonAfterTwilightShift.getText().toString():
                                         radioButtonBeforeDayShift.isChecked()? radioButtonBeforeDayShift.getText().toString():
                                                 radioButtonBeforeNightShift.isChecked()?radioButtonBeforeNightShift.getText().toString():
                                                         radioButtonBeforeTwilgihtShift.isChecked()?radioButtonBeforeTwilgihtShift.getText().toString() : null;
-                final String correction = radioButtonNoCorrection.isChecked()? radioButtonNoCorrection.getText().toString():
+                correction = radioButtonNoCorrection.isChecked()? radioButtonNoCorrection.getText().toString():
                         radioButtonOtherCorrection.isChecked()?radioButtonOtherCorrection.getText().toString():
                                 radioButtonContactLens.isChecked()?radioButtonContactLens.getText().toString():
                                         radioButtonGlasses.isChecked()?radioButtonGlasses.getText().toString() : null;
@@ -195,6 +206,8 @@ public class UserInfoFragment extends Fragment {
                 content_values.put("correction", correction);
                 content_values.put("fatigue", fatigue);
                 writable_database.insert("UserInfo", null, content_values);
+                dateTime = Calendar.getInstance().getTime();
+
             }//onClick
         });
         return view;
@@ -239,4 +252,31 @@ public class UserInfoFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    public Date getDateTime(){
+        return dateTime;
+    }
+
+    public String getName(){
+        return editTextName.getText().toString();
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getSex(){
+        return sex;
+    }
+
+    public String getAffiliation(){
+        return affiliation;
+    }
+
+    public String getCorrection(){
+        return getCorrection();
+    }
+
+    public String getFatigue(){
+        return fatigue;
+    }
 }

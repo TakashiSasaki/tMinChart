@@ -7,7 +7,9 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import java.util.Date;
 
 
 /**
@@ -61,11 +63,23 @@ public class ResultFragment extends Fragment {
         }
     }
 
+
+    EditText editTextTconChartResult;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        View view = inflater.inflate(R.layout.fragment_result, container, false);
+        editTextTconChartResult = (EditText) view.findViewById(R.id.editTextTconChartResult);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
+        editTextTconChartResult.setText(l.getTconChartResultString());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,7 +104,7 @@ public class ResultFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }//onDetach
 
     /**
      * This interface must be implemented by activities that contain this
@@ -105,6 +119,18 @@ public class ResultFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
-    }
+
+        public String getTconChartResultString();
+        public String getTminChartResultString();
+        public Date getDateTime();
+        public String getName();
+        public int getAge();
+        public String getSex();
+        public String getAffiliation();
+        public String getCorrection();
+        public String getFatigue();
+        public float getLightSensorValue();
+        public String getAccelerometerString();
+    }//OnFragmentInteractionListener
 
 }

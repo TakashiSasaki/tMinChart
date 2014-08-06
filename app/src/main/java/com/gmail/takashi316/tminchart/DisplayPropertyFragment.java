@@ -131,7 +131,7 @@ public class DisplayPropertyFragment extends Fragment {
 
         public int getDecorViewHeight();
 
-        public float getLightSensorValue();
+        public float  getLightSensorValue();
 
         public float getAccelerometerX();
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.preference.PreferenceManager;
 import android.util.LayoutDirection;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -48,6 +50,7 @@ public class TconChartFragment extends Fragment {
     private TableLayout tableLayout;
 
     private OnFragmentInteractionListener mListener;
+    ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new     ArrayList<ArrayList<Seventeen>>();
 
     /**
      * Use this factory method to create a new instance of
@@ -101,6 +104,7 @@ public class TconChartFragment extends Fragment {
             tr_index.addView(text_view);
         }//for
         tableLayout.addView(tr_index);
+        seventeenArrayLists.clear();
         for (int y = 0; y < tconChartRows; ++y) {
             TableRow table_row = new TableRow(getActivity());
             TextView tv_index = new TextView(getActivity());
@@ -108,6 +112,7 @@ public class TconChartFragment extends Fragment {
             tv_index.setText(Integer.toString(y));
             table_row.addView(tv_index);
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
+            seventeenArrayLists.add(seventeens);
             for (int x = 0; x < tconChartColumns; ++x) {
                 TextView text_view = new TextView(getActivity());
                 text_view.setOnClickListener(new View.OnClickListener() {
@@ -194,4 +199,19 @@ public class TconChartFragment extends Fragment {
             e.printStackTrace();
         }//try
     }//readSharedPreferences
-}
+
+    @Override
+    public String toString(){
+        StringWriter string_writer = new StringWriter();
+        for(ArrayList<Seventeen> seventeens : seventeenArrayLists){
+            for(Seventeen seventeen: seventeens) {
+                if (seventeen.isTouched()){
+                    string_writer.write(seventeen.toString());
+                    string_writer.write(" ");
+                }//if
+            }//for
+        }//for
+        return string_writer.getBuffer().toString();
+    }//toString
+}//TconChartFragment
+

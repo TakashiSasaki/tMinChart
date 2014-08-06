@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -165,6 +166,64 @@ public class TminChart extends Activity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public String getTconChartResultString() {
+        if(tconChartFragment != null){
+            return tconChartFragment.toString();
+        }else {
+            return "tConChartは未測定です";
+        }//if
+    }//getTconChartResultString
+
+    @Override
+    public String getTminChartResultString() {
+        if(tminChartFragment != null){
+            return tminChartFragment.toString();
+        } else {
+            return "tMinChartは未測定です";
+        }//if
+    }//getTminChartResultString
+
+    @Override
+    public Date getDateTime() {
+        return userInfoFragment.getDateTime();
+    }
+
+    @Override
+    public String getName() {
+        return userInfoFragment.getName();
+    }
+
+    @Override
+    public int getAge() {
+        return userInfoFragment.getAge();
+    }
+
+    @Override
+    public String getSex() {
+        return userInfoFragment.getSex();
+    }
+
+    @Override
+    public String getAffiliation() {
+        return userInfoFragment.getAffiliation();
+    }
+
+    @Override
+    public String getCorrection() {
+        return userInfoFragment.getCorrection();
+    }
+
+    @Override
+    public String getFatigue() {
+        return userInfoFragment.getFatigue();
+    }
+
+    @Override
+    public String getAccelerometerString() {
+        return "("+getAccelerometerX()+","+getAccelerometerY()+","+getAccelerometerZ()+")";
     }
 
     @Override
