@@ -187,7 +187,7 @@
         android:layout_height="wrap_content"
         android:text="この結果を保存する"
         android:id="@+id/buttonSaveResults"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_gravity="right|bottom"
         android:textSize="20pt"
         android:minHeight="50pt" />
 </FrameLayout>

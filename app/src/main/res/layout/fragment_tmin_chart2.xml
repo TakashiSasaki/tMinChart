@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="この計測（tMinChart）を終了し\n結果を確認する"
         android:id="@+id/buttonStartResultFragment"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_gravity="right|bottom"
         android:textSize="30dp" />
 
 </FrameLayout>

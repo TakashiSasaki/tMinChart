@@ -19,7 +19,7 @@
         android:text="被検者情報を設定し\n計測を開始する"
         android:id="@+id/buttonSetUserInfo"
         android:layout_columnSpan="2"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_gravity="right|bottom"
         android:textSize="20pt" />
     <GridLayout
         android:layout_width="wrap_content"
