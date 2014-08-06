@@ -195,7 +195,7 @@ public class TconChartFragment extends Fragment {
     private double tconChartSizeRatio = 0.9;
     private int tconChartRows = 20;
     private double tconCharContrastRatio = 0.9;
-    private int tconChartColumns = 20;
+    private int tconChartColumns = 26;
 
     private void readSharedPreferences() {
         try {
