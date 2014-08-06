@@ -36,7 +36,7 @@ public class Konoji extends View {
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
-    private float gap;
+    private float gapInch;
     private float width_inch;
     private float xdpi;
     private float ydpi;
@@ -58,7 +58,7 @@ public class Konoji extends View {
     public Konoji(Context context,  float gap_inch, float width_inch, ArrayList<Konoji> konojis) {
         super(context);
         init(null, 0);
-        gap = gap_inch;
+        gapInch = gap_inch;
         final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         final Display display = window_manager.getDefaultDisplay();
         final DisplayMetrics display_metrics = new DisplayMetrics();
@@ -86,7 +86,7 @@ public class Konoji extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.Konoji, defStyle, 0);
 
-        this.gap = a.getInt(R.styleable.Konoji_gap, 30);
+        this.gapInch = a.getInt(R.styleable.Konoji_gap, 30);
         this.orientation = a.getInt(R.styleable.Konoji_gap, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
@@ -184,8 +184,8 @@ public class Konoji extends View {
             setBackgroundColor(Color.WHITE);
             //konoji_paint.setColor(Color.BLACK);
         }//if
-        final int xgap = (int)(xdpi * gap);
-        final int ygap = (int)(ydpi * gap);
+        final int xgap = (int)(xdpi * gapInch);
+        final int ygap = (int)(ydpi * gapInch);
         final int view_width = (int)(width_inch * xdpi);
         final int view_height = (int)(width_inch * ydpi);
         final int top_margin = (view_width - xgap * 3) / 2;
@@ -321,5 +321,9 @@ public class Konoji extends View {
      */
     public void setExampleDrawable(Drawable exampleDrawable) {
         mExampleDrawable = exampleDrawable;
+    }
+
+    public float getGapInch(){
+        return this.gapInch;
     }
 }

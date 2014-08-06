@@ -113,6 +113,7 @@ public class UserInfoFragment extends Fragment {
                             names[i] = cursor.getString(0);
                         }//for
                         cursor.close();
+                        database.close();
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("名前を選択してください");
                         builder.setItems(names,
@@ -123,30 +124,44 @@ public class UserInfoFragment extends Fragment {
                                         SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
                                         final SQLiteDatabase database = sqlite_open_helper.getReadableDatabase();
                                         final Cursor cursor = database.query("UserInfo", new String[]{"name", "age", "sex", "affiliation", "correction", "fatigue"},
-                                                "name = ?", new String[] {name}, null, null, null, null);
+                                                "name = ?", new String[]{name}, null, null, null, null);
                                         editTextName.setText(name);
-                                        if(cursor.getCount()==0) return;
+                                        if (cursor.getCount() == 0) return;
                                         cursor.moveToFirst();
                                         String age;
                                         try {
                                             final int int_age = cursor.getInt(1);
                                             age = (new Integer(int_age)).toString();
-                                        } catch (Exception e){
+                                        } catch (Exception e) {
                                             age = "";
                                         }//try
-                                        if(radioButtonMale.getText().toString().equals(cursor.getString(2))) radioButtonMale.setChecked(true);
-                                        if(radioButtonFemale.getText().toString().equals(cursor.getString(2))) radioButtonFemale.setChecked(true);
+                                        if (radioButtonMale.getText().toString().equals(cursor.getString(2)))
+                                            radioButtonMale.setChecked(true);
+                                        if (radioButtonFemale.getText().toString().equals(cursor.getString(2)))
+                                            radioButtonFemale.setChecked(true);
                                         final String affiliation = cursor.getString(3);
-                                        if(radioButtonContactLens.getText().toString().equals(cursor.getString(4))) radioButtonContactLens.setChecked(true);
-                                        if(radioButtonOtherCorrection.getText().toString().equals(cursor.getString(4))) radioButtonOtherCorrection.setChecked(true);
-                                        if(radioButtonGlasses.getText().toString().equals(cursor.getString(4))) radioButtonGlasses.setChecked(true);
-                                        if(radioButtonNoCorrection.getText().toString().equals(cursor.getString(4))) radioButtonNoCorrection.setChecked(true);
-                                        if(radioButtonAfterDayShift.getText().toString().equals(cursor.getString(5))) radioButtonAfterDayShift.setChecked(true);
-                                        if(radioButtonAfterNightShift.getText().toString().equals(cursor.getString(5))) radioButtonAfterNightShift.setChecked(true);
-                                        if(radioButtonAfterTwilightShift.getText().toString().equals(cursor.getString(5))) radioButtonAfterTwilightShift.setChecked(true);
-                                        if(radioButtonBeforeNightShift.getText().toString().equals(cursor.getString(5))) radioButtonBeforeNightShift.setChecked(true);
-                                        if(radioButtonBeforeDayShift.getText().toString().equals(cursor.getString(5))) radioButtonBeforeDayShift.setChecked(true);
-                                        if(radioButtonBeforeTwilgihtShift.getText().toString().equals(cursor.getString(5))) radioButtonBeforeTwilgihtShift.setChecked(true);
+                                        if (radioButtonContactLens.getText().toString().equals(cursor.getString(4)))
+                                            radioButtonContactLens.setChecked(true);
+                                        if (radioButtonOtherCorrection.getText().toString().equals(cursor.getString(4)))
+                                            radioButtonOtherCorrection.setChecked(true);
+                                        if (radioButtonGlasses.getText().toString().equals(cursor.getString(4)))
+                                            radioButtonGlasses.setChecked(true);
+                                        if (radioButtonNoCorrection.getText().toString().equals(cursor.getString(4)))
+                                            radioButtonNoCorrection.setChecked(true);
+                                        if (radioButtonAfterDayShift.getText().toString().equals(cursor.getString(5)))
+                                            radioButtonAfterDayShift.setChecked(true);
+                                        if (radioButtonAfterNightShift.getText().toString().equals(cursor.getString(5)))
+                                            radioButtonAfterNightShift.setChecked(true);
+                                        if (radioButtonAfterTwilightShift.getText().toString().equals(cursor.getString(5)))
+                                            radioButtonAfterTwilightShift.setChecked(true);
+                                        if (radioButtonBeforeNightShift.getText().toString().equals(cursor.getString(5)))
+                                            radioButtonBeforeNightShift.setChecked(true);
+                                        if (radioButtonBeforeDayShift.getText().toString().equals(cursor.getString(5)))
+                                            radioButtonBeforeDayShift.setChecked(true);
+                                        if (radioButtonBeforeTwilgihtShift.getText().toString().equals(cursor.getString(5)))
+                                            radioButtonBeforeTwilgihtShift.setChecked(true);
+                                        cursor.close();
+                                        database.close();
                                     }//onClick
                                 });
                         builder.show();
@@ -175,7 +190,11 @@ public class UserInfoFragment extends Fragment {
             public void onClick(View v) {
                 if(editTextName.getText().toString().isEmpty()) return;
                 name = editTextName.getText().toString();
-                age = editTextAge.getText().toString().isEmpty() ? null : Integer.parseInt(editTextAge.getText().toString());
+                {
+                    final CharSequence cs = editTextAge.getText();
+                    final String s = cs.toString();
+                    if(s != null && !s.isEmpty()) age = Integer.parseInt(s);
+                }
                 sex = radioButtonMale.isChecked() ? "男性" : radioButtonFemale.isChecked() ? "女性" : "未回答";
                 affiliation = editTextAffiliation.getText().toString();
                 fatigue = radioButtonAfterDayShift.isChecked() ? radioButtonAfterDayShift.getText().toString():
@@ -273,7 +292,7 @@ public class UserInfoFragment extends Fragment {
     }
 
     public String getCorrection(){
-        return getCorrection();
+        return correction;
     }
 
     public String getFatigue(){

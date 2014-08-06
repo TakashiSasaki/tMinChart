@@ -177,5 +177,14 @@ public class TminChartFragment extends Fragment {
             }//try
         }//readSharedPreferences
 
+    @Override
+    public String toString(){
+        for(Konoji konoji: konojiViews){
+            if(konoji.isTouched()){
+                return Float.toString(konoji.getGapInch());
+            }//if
+        }//for
+        return "未測定";
+    }//toString
 }//TminChartFragment
 

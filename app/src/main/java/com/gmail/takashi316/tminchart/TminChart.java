@@ -188,7 +188,7 @@ public class TminChart extends Activity
 
     @Override
     public Date getDateTime() {
-        return userInfoFragment.getDateTime();
+       return userInfoFragment.getDateTime();
     }
 
     @Override

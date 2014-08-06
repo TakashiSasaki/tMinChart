@@ -113,7 +113,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextBrightness" />
+            android:id="@+id/editTextLightSensorValue" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,6 +140,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editTextDevice" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="ピクセル密度(x,y)"
+            android:id="@+id/textView13"
+            android:layout_column="0" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextDpi" />
 
         <TextView
             android:layout_width="wrap_content"

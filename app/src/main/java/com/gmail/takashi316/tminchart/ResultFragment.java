@@ -2,8 +2,10 @@ package com.gmail.takashi316.tminchart;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,15 +65,38 @@ public class ResultFragment extends Fragment {
         }
     }
 
-
+    EditText editTextDateTime;
+    EditText editTextName;
+    EditText editTextAge;
+    EditText editTextSex;
+    EditText editTextAffiliation;
+    EditText editTextCorrection;
+    EditText editTextFatigue;
+    EditText editTextLightSensorValue;
+    EditText editTextAccelerometer;
+    EditText editTextDevice;
+    EditText editTextDpi;
     EditText editTextTconChartResult;
+    EditText editTextTminChartRresult;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_result, container, false);
+        editTextDateTime = (EditText) view.findViewById(R.id.editTextDateTime);
+        editTextName = (EditText) view.findViewById(R.id.editTextName);
+        editTextAge = (EditText)view.findViewById(R.id.editTextAge);
+        editTextSex =(EditText)view.findViewById(R.id.editTextSex);
+        editTextAffiliation=(EditText)view.findViewById(R.id.editTextAffiliation);
+        editTextCorrection = (EditText)view.findViewById(R.id.editTextCorrection);
+        editTextFatigue = (EditText)view.findViewById(R.id.editTextFatigue);
+        editTextLightSensorValue = (EditText)view.findViewById(R.id.editTextLightSensorValue);
+        editTextAccelerometer = (EditText)view.findViewById(R.id.editTextAccelerometer);
+        editTextDevice = (EditText)view.findViewById(R.id.editTextDevice);
+        editTextDpi = (EditText)view.findViewById(R.id.editTextDpi);
         editTextTconChartResult = (EditText) view.findViewById(R.id.editTextTconChartResult);
+        editTextTminChartRresult = (EditText) view.findViewById(R.id.editTextTminChartResult);
         return view;
     }
 
@@ -79,7 +104,23 @@ public class ResultFragment extends Fragment {
     public void onResume() {
         super.onResume();
         OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
+        if(l.getDateTime() != null) {
+            editTextDateTime.setText(l.getDateTime().toString());
+        } else {
+            editTextDateTime.setText("被検者未登録");
+        }
+        editTextName.setText(l.getName());
+        editTextAge.setText(Integer.toString(l.getAge()));
+        editTextSex.setText(l.getSex());
+        editTextAffiliation.setText(l.getAffiliation());
+        editTextCorrection.setText(l.getCorrection());
+        editTextFatigue.setText(l.getFatigue());
+        editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
+        editTextAccelerometer.setText(l.getAccelerometerString());
+        editTextDevice.setText(Build.DEVICE);
+        editTextDpi .setText("("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
         editTextTconChartResult.setText(l.getTconChartResultString());
+        editTextTminChartRresult.setText(l.getTminChartResultString());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -131,6 +172,7 @@ public class ResultFragment extends Fragment {
         public String getFatigue();
         public float getLightSensorValue();
         public String getAccelerometerString();
+        public DisplayMetrics getDisplayMetrics();
     }//OnFragmentInteractionListener
 
 }
