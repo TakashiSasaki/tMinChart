@@ -1,11 +1,9 @@
 package com.gmail.takashi316.tminchart;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -14,19 +12,15 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -38,7 +32,7 @@ public class TminChart extends Activity
         DisplayPropertyFragment.OnFragmentInteractionListener,
         UserInfoFragment.OnFragmentInteractionListener,
         ResultFragment.OnFragmentInteractionListener,
-        SensorEventListener{
+        SensorEventListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -66,12 +60,12 @@ public class TminChart extends Activity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-        try{
+        try {
             PackageInfo package_info = getPackageManager().getPackageInfo("com.gmail.takashi316.tminchart", PackageManager.GET_META_DATA);
             final int versionCode = package_info.versionCode;
             final String versionName = package_info.versionName;
             mTitle = mTitle + " " + versionName;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -80,11 +74,11 @@ public class TminChart extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         maximizeBrightness();
-        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
     }//onCreate
 
-    private void maximizeBrightness(){
+    private void maximizeBrightness() {
         WindowManager.LayoutParams layout_params = getWindow().getAttributes();
         layout_params.screenBrightness = 1.0f;
         getWindow().setAttributes(layout_params);
@@ -192,10 +186,10 @@ public class TminChart extends Activity
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if(event.sensor.getType()==Sensor.TYPE_LIGHT){
+        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
             this.lightSensorValue = event.values[0];
         }//if
-        if(event.sensor.getType()==Sensor.TYPE_ACCELEROMETER){
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             this.accelerometerValueX = event.values[0];
             this.accelerometerValueY = event.values[1];
             this.accelerometerValueZ = event.values[2];
@@ -223,7 +217,7 @@ public class TminChart extends Activity
          */
         public static Fragment newInstance(int sectionNumber) {
             Fragment fragment;
-            switch (sectionNumber){
+            switch (sectionNumber) {
                 case 1:
                     fragment = new UserInfoFragment();
                     break;
@@ -254,7 +248,7 @@ public class TminChart extends Activity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_tmin_chart, container, false);
             return rootView;
         }
@@ -270,14 +264,14 @@ public class TminChart extends Activity
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(!hasFocus) return;
+        if (!hasFocus) return;
         final View decor_view = this.getWindow().getDecorView();
         final ViewGroup view_group = (ViewGroup) decor_view;
         try {
             final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
             this.decorViewHeight = decor_view.getHeight();
             this.decorViewWidth = decor_view.getWidth();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -295,12 +289,12 @@ public class TminChart extends Activity
     protected void onResume() {
         super.onResume();
         List<Sensor> light_sensors = sensorManager.getSensorList(Sensor.TYPE_LIGHT);
-        if(light_sensors.size()>0) {
+        if (light_sensors.size() > 0) {
             Sensor light_sensor = light_sensors.get(0);
             sensorManager.registerListener(this, light_sensor, SensorManager.SENSOR_DELAY_UI);
         }//if
         Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        if(accelerometer != null){
+        if (accelerometer != null) {
             sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
         }//if
     }//onResume
