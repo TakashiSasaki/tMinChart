@@ -166,7 +166,10 @@ public class TconChartFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
-    }
+        public float getXdpi();
+        public float getYdpi();
+        public int getWidthPixels();
+    }//OnFragmentInteractionListener
 
     // will be overridden by shared preferences
     private double tconChartMaxInch = 0.3;

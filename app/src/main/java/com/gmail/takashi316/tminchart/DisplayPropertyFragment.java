@@ -138,7 +138,9 @@ public class DisplayPropertyFragment extends Fragment {
         public float getAccelerometerY();
 
         public float getAccelerometerZ();
-    }
+        public DisplayMetrics getDisplayMetrics();
+        public Display getDisplay();
+    }//OnFragmentInteractionListener
 
     @Override
     public void onResume() {
@@ -147,16 +149,15 @@ public class DisplayPropertyFragment extends Fragment {
         final OnFragmentInteractionListener activity = (OnFragmentInteractionListener) this.getActivity();
 
         //LCD size
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point real = new Point(0, 0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            display.getRealSize(real);
+            activity.getDisplay().getRealSize(real);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             try {
                 Method getRawWidth = Display.class.getMethod("getRawWidth");
                 Method getRawHeight = Display.class.getMethod("getRawHeight");
-                final int width = (Integer) getRawWidth.invoke(display);
-                final int height = (Integer) getRawHeight.invoke(display);
+                final int width = (Integer) getRawWidth.invoke(activity.getDisplay());
+                final int height = (Integer) getRawHeight.invoke(activity.getDisplay());
                 real.set(width, height);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -171,7 +172,7 @@ public class DisplayPropertyFragment extends Fragment {
         }
         {
             Point point = new Point(0, 0);
-            display.getSize(point);
+            activity.getDisplay().getSize(point);
             final EditText x = (EditText) view.findViewById(R.id.editTextDisplaySizeX);
             x.setText(Integer.toString(point.x));
             final EditText y = (EditText) view.findViewById(R.id.editTextDisplaySizeY);
@@ -184,8 +185,7 @@ public class DisplayPropertyFragment extends Fragment {
             y.setText(Integer.toString(activity.getDecorViewHeight()));
         }
         {
-            final DisplayMetrics display_metrics = new DisplayMetrics();
-            display.getMetrics(display_metrics);
+            final DisplayMetrics display_metrics = activity.getDisplayMetrics();
             ((EditText) view.findViewById(R.id.editTextDensity)).setText(Float.toString(display_metrics.density));
             ((EditText) view.findViewById(R.id.editTextDensityDpi)).setText(Integer.toString(display_metrics.densityDpi));
             ((EditText) view.findViewById(R.id.editTextHeightPixels)).setText(Integer.toString(display_metrics.heightPixels));

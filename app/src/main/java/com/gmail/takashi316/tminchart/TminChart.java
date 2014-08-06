@@ -14,6 +14,8 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -156,6 +158,21 @@ public class TminChart extends Activity
     }
 
     @Override
+    public float getXdpi() {
+        return getDisplayMetrics().xdpi;
+    }
+
+    @Override
+    public float getYdpi() {
+        return getDisplayMetrics().ydpi;
+    }
+
+    @Override
+    public int getWidthPixels() {
+        return getDisplayMetrics().widthPixels;
+    }
+
+    @Override
     public int getDecorViewWidth() {
         return this.decorViewWidth;
     }
@@ -184,6 +201,25 @@ public class TminChart extends Activity
     public float getAccelerometerZ() {
         return accelerometerValueZ;
     }
+
+    DisplayMetrics displayMetrics;
+    @Override
+    public DisplayMetrics getDisplayMetrics() {
+        if(displayMetrics == null){
+            displayMetrics = new DisplayMetrics();
+            getDisplay().getMetrics(displayMetrics);
+        }//if
+        return displayMetrics;
+    }
+
+    private Display display;
+    @Override
+    public Display getDisplay() {
+        if(display == null){
+            display = getWindowManager().getDefaultDisplay();
+        }//if
+        return display;
+    } // getDisplay
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -299,4 +335,11 @@ public class TminChart extends Activity
             sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
         }//if
     }//onResume
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.display = null;
+        this.displayMetrics = null;
+    }
 }//TminChart activity
