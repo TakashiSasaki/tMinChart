@@ -7,9 +7,10 @@
         android:title="視覚特性検査に関する設定">
 
     </header>
+   <!--
     <header
         android:fragment="com.gmail.takashi316.tminchart.SettingsActivity$GeneralPreferenceFragment"
-        android:title="@string/pref_header_general" />
+        android:title="@string/pref_header_general"/>
 
     <header
         android:fragment="com.gmail.takashi316.tminchart.SettingsActivity$NotificationPreferenceFragment"
@@ -18,5 +19,5 @@
     <header
         android:fragment="com.gmail.takashi316.tminchart.SettingsActivity$DataSyncPreferenceFragment"
         android:title="@string/pref_header_data_sync" />
-
+    -->
 </preference-headers>
