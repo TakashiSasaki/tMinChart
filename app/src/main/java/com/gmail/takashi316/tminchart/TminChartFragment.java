@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -78,11 +79,21 @@ public class TminChartFragment extends Fragment {
         }//if
     }//onCreate
 
+    Button buttonStartResultFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tmin_chart2, container, false);
+        buttonStartResultFragment = (Button)view.findViewById(R.id.buttonStartResultFragment);
+        buttonStartResultFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((NavigationDrawerFragment.NavigationDrawerCallbacks)getActivity()).onNavigationDrawerItemSelected(3);
+            }//onClick
+        });
+
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTminChart);
         TableRow tr_index = new TableRow(getActivity());
         final int TEXT_SIZE = 50;

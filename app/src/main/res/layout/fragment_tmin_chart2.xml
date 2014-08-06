@@ -22,8 +22,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="次へ"
-        android:id="@+id/buttonNextToTminChart"
-        android:layout_gravity="left|top" />
+        android:text="この計測（tMinChart）を終了し\n結果を確認する"
+        android:id="@+id/buttonStartResultFragment"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textSize="30dp" />
 
 </FrameLayout>

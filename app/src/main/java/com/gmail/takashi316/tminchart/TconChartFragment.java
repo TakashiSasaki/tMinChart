@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -84,12 +85,21 @@ public class TconChartFragment extends Fragment {
         }
     }
 
+    Button buttonStartTminChartFragment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
         View view = inflater.inflate(R.layout.fragment_tcon_chart, container, false);
+        buttonStartTminChartFragment = (Button) view.findViewById(R.id.buttonStartTminChartFragment);
+        buttonStartTminChartFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((NavigationDrawerFragment.NavigationDrawerCallbacks)getActivity()).onNavigationDrawerItemSelected(2);
+            }//onClick
+        });
+
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
         TableRow tr_index = new TableRow(getActivity());
         TextView tv_tc = new TextView(getActivity());

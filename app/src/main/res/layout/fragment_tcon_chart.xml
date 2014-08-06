@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gmail.takashi316.tminchart.TconChartFragment"
-    android:background="#ffffffff">
+    android:background="#ffffffff"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -28,9 +29,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="次へ"
-        android:id="@+id/buttonNextToTconChart"
-        android:layout_gravity="left|top" />
+        android:text="この計測（tConChart）を終了し\n次の計測（tMinChart）を開始する"
+        android:id="@+id/buttonStartTminChartFragment"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textSize="30dp" />
 
 
 </FrameLayout>
