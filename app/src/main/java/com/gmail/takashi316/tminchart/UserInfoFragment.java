@@ -226,7 +226,7 @@ public class UserInfoFragment extends Fragment {
                 content_values.put("fatigue", fatigue);
                 writable_database.insert("UserInfo", null, content_values);
                 dateTime = Calendar.getInstance().getTime();
-
+                ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(1);
             }//onClick
         });
         return view;
@@ -298,4 +298,5 @@ public class UserInfoFragment extends Fragment {
     public String getFatigue(){
         return fatigue;
     }
+
 }
