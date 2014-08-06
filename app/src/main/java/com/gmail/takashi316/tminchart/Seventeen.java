@@ -62,6 +62,7 @@ public class Seventeen extends View {
         this.color = Color.rgb((int)intensity, (int)intensity, (int)intensity);
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
+
     }// custom constructor
 
     public Seventeen(Context context) {
@@ -130,7 +131,10 @@ public class Seventeen extends View {
         super.onDraw(canvas);
         final int canvas_width = canvas.getWidth();
         final int canvas_height = canvas.getHeight();
-        canvas.drawText(getTconString(), 0, canvas_height, mTextPaint);
+        final Paint.FontMetrics font_metrics = mTextPaint.getFontMetrics();
+        final float width_margin = (canvas_width - pixels) / 2;
+        final float height_margin = (canvas_height - pixels) / 2;
+        canvas.drawText(getTconString(), width_margin, canvas_height - font_metrics.bottom - (height_margin/2), mTextPaint);
     }//onDraw
 
     protected void onDraw_(Canvas canvas) {
@@ -239,8 +243,8 @@ public class Seventeen extends View {
         int width_size = MeasureSpec.getSize(widthMeasureSpec);
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
-        setMeasuredDimension(MeasureSpec.makeMeasureSpec((int)pixels+1, width_mode),
-                MeasureSpec.makeMeasureSpec((int)pixels+1, height_mode));
+        setMeasuredDimension(MeasureSpec.makeMeasureSpec(getSuggestedMinimumWidth(), width_mode),
+                MeasureSpec.makeMeasureSpec(getSuggestedMinimumHeight(), height_mode));
     }//onMeasure
 
     private String getTconString(){

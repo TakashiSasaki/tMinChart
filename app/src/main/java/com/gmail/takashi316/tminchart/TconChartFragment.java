@@ -115,6 +115,8 @@ public class TconChartFragment extends Fragment {
                 final double width_inch = MAX_WIDTH_INCH / Math.pow(1.3, y);
                 final double intention = 255.0 -  (255.0/Math.pow(1.3,x));
                 Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens);
+                seventeen.setMinimumHeight(200);
+                seventeen.setMinimumWidth(200);
                 table_row.addView(seventeen);
                 this.seventeens.add(seventeen);
             }//for y
