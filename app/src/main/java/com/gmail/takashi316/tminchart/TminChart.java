@@ -67,12 +67,13 @@ public class TminChart extends Activity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        this.mTitle = getTitle();
         try {
             PackageInfo package_info = getPackageManager().getPackageInfo("com.gmail.takashi316.tminchart", PackageManager.GET_META_DATA);
             final int versionCode = package_info.versionCode;
             final String versionName = package_info.versionName;
-            mTitle = mTitle + " " + versionName;
+            this.mTitle = mTitle + " " + versionName;
+            setTitle(this.mTitle);
         } catch (Exception e) {
             e.printStackTrace();
         }
