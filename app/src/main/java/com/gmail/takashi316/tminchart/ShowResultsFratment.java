@@ -1,13 +1,24 @@
 package com.gmail.takashi316.tminchart;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 
 /**
@@ -28,6 +39,8 @@ public class ShowResultsFratment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private SimpleAdapter simpleAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,15 +71,36 @@ public class ShowResultsFratment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        }//if
+
+        List<Map<String, String>> results = new ArrayList<Map<String, String>>();
+
+        ResultsSqliteOpenHelper open_hehlper = new ResultsSqliteOpenHelper(getActivity());
+        SQLiteDatabase database = open_hehlper.getReadableDatabase();
+        Cursor cursor = database.query("ResultsTable", new String[]{"_id", "date", "name", "tcon_chart_results", "tmin_chart_results", "device", "dpi"}, null, null, null, null, "_id DESC", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("name_and_datetime", cursor.getString(2) + " at " + cursor.getString(1));
+            map.put("summary_results", "_id=" + Integer.toString(cursor.getInt(0)) + " tcon_chart_results=" + cursor.getString(3) + " tmin_chart_results=" + cursor.getString(4) + " device=" + cursor.getString(5) + " dpi=" + cursor.getString(6));
+            results.add(map);
+            cursor.moveToNext();
+        }//while
+        cursor.close();
+
+        simpleAdapter = new SimpleAdapter(getActivity(), results,
+                android.R.layout.simple_list_item_2, new String[]{"name_and_datetime", "summary_results"}, new int[]{android.R.id.text1, android.R.id.text2 });
+    }//onCreate
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_show_results, container, false);
-    }
+        View view =  inflater.inflate(R.layout.fragment_show_results, container, false);
+        final ListView list_view = (ListView)view.findViewById(R.id.listViewResults);
+        list_view.setAdapter(simpleAdapter);
+        return view;
+    }//onCreateView
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
