@@ -101,19 +101,6 @@ public class TconChartFragment extends Fragment {
         });
 
         tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
-        TableRow tr_index = new TableRow(getActivity());
-        TextView tv_tc = new TextView(getActivity());
-        tv_tc.setTextSize((float) tconChartMaxInch * l.getXdpi());
-        tv_tc.setText(" ");
-        tr_index.addView(tv_tc);
-        for (int x = 1; x <= tconChartColumns; ++x) {
-            TextView text_view = new TextView(getActivity());
-            text_view.setTextSize((float) tconChartMaxInch * l.getXdpi() / 2);
-            text_view.setGravity(Gravity.CENTER);
-            text_view.setText(new String(new byte[]{(byte) (x + 64)}));
-            tr_index.addView(text_view);
-        }//for
-        tableLayout.addView(tr_index);
         seventeenArrayLists.clear();
         for (int y = 0; y < tconChartRows; ++y) {
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
