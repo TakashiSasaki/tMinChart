@@ -35,6 +35,7 @@ public class TminChart extends Activity
         DisplayPropertyFragment.OnFragmentInteractionListener,
         UserInfoFragment.OnFragmentInteractionListener,
         ResultFragment.OnFragmentInteractionListener,
+        ShowResultsFratment.OnFragmentInteractionListener,
         SensorEventListener {
 
     private static final boolean USE_ACTION_BAR = false;
@@ -324,6 +325,8 @@ public class TminChart extends Activity
                 Intent intent = new Intent(this, SettingsActivity.class);
                 this.startActivity(intent);
                 return null;
+            case 6:
+                return new ShowResultsFratment();
             default:
                 return null;
         }//switch
