@@ -49,10 +49,10 @@ public class Seventeen extends View {
     private boolean touched = false;
     private String tconString;
 
-    static private Random random = new Random();
+    static final private Random random = new Random();
     static DisplayMetrics displayMetrics;
 
-    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens) {
+    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string) {
         super(context);
         init(null, 0);
         if(displayMetrics == null) {
@@ -69,10 +69,14 @@ public class Seventeen extends View {
         this.ypixels = (float) (this.ydpi * this.widthInch);
         this.pixels = Math.max(xpixels, ypixels);
         this.mExampleString = "a";
-        this.color = Color.rgb((int) intensity, (int) intensity, (int) intensity);
+        this.color = Color.rgb((int) Math.max(intensity, 0),  (int) Math.max(intensity,0), (int) Math.max(intensity,0));
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
-        this.tconString = getTconString();
+        if(string == null) {
+            this.tconString = getTconString();
+        } else {
+            this.tconString = string;
+        }//if
 
         setOnClickListener(new OnClickListener() {
             @Override
@@ -168,7 +172,7 @@ public class Seventeen extends View {
         final Paint.FontMetrics font_metrics = mTextPaint.getFontMetrics();
         final float width_margin = (canvas_width - pixels) / 2;
         final float height_margin = (canvas_height - pixels) / 2;
-        canvas.drawText(tconString, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
+        canvas.drawText(this.tconString, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
         if(touched){
             //this.setBackgroundColor(Color.RED);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {

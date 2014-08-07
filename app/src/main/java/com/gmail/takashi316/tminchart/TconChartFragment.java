@@ -116,13 +116,15 @@ public class TconChartFragment extends Fragment {
         tableLayout.addView(tr_index);
         seventeenArrayLists.clear();
         for (int y = 0; y < tconChartRows; ++y) {
-            TableRow table_row = new TableRow(getActivity());
-            TextView tv_index = new TextView(getActivity());
-            tv_index.setTextSize((float) tconChartMaxInch * l.getXdpi() / 2);
-            tv_index.setText(Integer.toString(y));
-            table_row.addView(tv_index);
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
             seventeenArrayLists.add(seventeens);
+            double width_inch = tconChartMaxInch * Math.pow(tconChartSizeRatio, y);
+            Seventeen leftmost = new Seventeen(getActivity(), tconChartMaxInch, -1.0, seventeens, "×");
+            leftmost.setMinimumHeight((int)((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
+            leftmost.setMinimumWidth((int) ((tconChartMaxInch + MARGIN_INCH) * l.getXdpi()));
+            TableRow table_row = new TableRow(getActivity());
+            table_row.addView(leftmost);
+            seventeens.add(leftmost);
             for (int x = 0; x < tconChartColumns; ++x) {
                 TextView text_view = new TextView(getActivity());
                 text_view.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +133,6 @@ public class TconChartFragment extends Fragment {
                         v.setBackgroundColor(Color.RED);
                     }
                 });
-                final double width_inch = tconChartMaxInch * Math.pow(tconChartSizeRatio, y);
                 final double intention = 255.0 - (255.0 * Math.pow(tconCharContrastRatio, x));
                 Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null);
                 seventeen.setMinimumHeight((int) ((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
