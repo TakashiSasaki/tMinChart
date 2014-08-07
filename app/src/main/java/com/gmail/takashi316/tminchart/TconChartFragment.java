@@ -131,9 +131,9 @@ public class TconChartFragment extends Fragment {
                         v.setBackgroundColor(Color.RED);
                     }
                 });
-                final double width_inch = tconChartMaxInch / Math.pow(1.3, y);
-                final double intention = 255.0 - (255.0 / Math.pow(1.3, x));
-                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens);
+                final double width_inch = tconChartMaxInch * Math.pow(tconChartSizeRatio, y);
+                final double intention = 255.0 - (255.0 * Math.pow(tconCharContrastRatio, x));
+                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null);
                 seventeen.setMinimumHeight((int) ((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
                 seventeen.setMinimumWidth((int) ((tconChartMaxInch + MARGIN_INCH) * l.getXdpi()));
                 table_row.addView(seventeen);
