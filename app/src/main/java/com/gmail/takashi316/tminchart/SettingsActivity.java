@@ -16,6 +16,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
@@ -315,4 +316,9 @@ public class SettingsActivity extends PreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("sync_frequency"));
         }
     }
-}
+
+    protected boolean isValidFragment(String fragmentName){
+        Log.v("isValidFragment", fragmentName);
+        return true;
+    }//isValidFragment
+}//SettingsActivity
