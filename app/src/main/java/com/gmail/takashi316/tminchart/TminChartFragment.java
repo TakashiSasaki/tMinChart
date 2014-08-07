@@ -173,9 +173,9 @@ public class TminChartFragment extends Fragment {
     }//OnFragmentInteractionListener
 
     // will be overridden by shared preferences
-    private double tminChartMaxGapInch = 0.2;
-    private double tminChartRatio = 0.97;
-    private int tminChartCount = 160;
+    private double tminChartMaxGapInch = ConstantValues.TMIN_CHART_MAX_GAP_INCH;
+    private double tminChartRatio = ConstantValues.TMIN_CHART_RATIO;
+    private int tminChartCount = ConstantValues.TMIN_CHART_COUNT;
 
     public void readSharedPreferences(){
             try{

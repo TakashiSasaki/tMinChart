@@ -2,12 +2,14 @@ package com.gmail.takashi316.tminchart;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -17,8 +19,11 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.view.View;
+import android.widget.Button;
 
 
 import java.util.List;
@@ -42,12 +47,39 @@ public class SettingsActivity extends PreferenceActivity {
      * shown on tablets.
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
+    Button buttonReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.preference_with_button);
         setupActionBar();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem menu_item = menu.add("値をリセットする");
+        menu_item.setOnMenuItemClickListener(
+                new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        final SharedPreferences shared_preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        final SharedPreferences.Editor editor = shared_preferences.edit();
+                        editor.putString("tcon_chart_max_inch", Double.toString(ConstantValues.TCON_CHART_MAX_INCH));
+                        editor.putString("tcon_chart_size_ratio", Double.toString(ConstantValues.TCON_CHART_SIZE_RATIO));
+                        editor.putString("tcon_chart_rows", Integer.toString(ConstantValues.TCON_CHART_ROWS));
+                        editor.putString("tcon_chart_contrast_ratio", Double.toString(ConstantValues.TCON_CHART_CONTRAST_RATIO));
+                        editor.putString("tcon_chart_columns", Integer.toString(ConstantValues.TCON_CHART_COLUMNS));
+                        editor.putString("tmin_chart_max_gap_inch", Double.toString(ConstantValues.TMIN_CHART_MAX_GAP_INCH));
+                        editor.putString("tmin_chart_ratio", Double.toString(ConstantValues.TMIN_CHART_RATIO));
+                        editor.putString("tmin_chart_count", Integer.toString(ConstantValues.TMIN_CHART_COUNT));
+                        editor.commit();
+                        return true;
+                    }//onMenuItemClick
+                }
+        );
+        return super.onCreateOptionsMenu(menu);
+    }//onCreateOptionsMenu
 
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.

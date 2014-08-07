@@ -192,11 +192,11 @@ public class TconChartFragment extends Fragment {
     }//OnFragmentInteractionListener
 
     // will be overridden by shared preferences
-    private double tconChartMaxInch = 0.5;
-    private double tconChartSizeRatio = 0.9;
-    private int tconChartRows = 20;
-    private double tconCharContrastRatio = 0.9;
-    private int tconChartColumns = 26;
+    private double tconChartMaxInch = ConstantValues.TCON_CHART_MAX_INCH;
+    private double tconChartSizeRatio = ConstantValues.TCON_CHART_SIZE_RATIO;
+    private int tconChartRows = ConstantValues.TCON_CHART_ROWS;
+    private double tconCharContrastRatio = ConstantValues.TCON_CHART_CONTRAST_RATIO;
+    private int tconChartColumns = ConstantValues.TCON_CHART_COLUMNS;
 
     private void readSharedPreferences() {
         try {
