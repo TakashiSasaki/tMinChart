@@ -102,15 +102,15 @@ public class UserInfoFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final CharSequence[] users = {"山田花子", "鈴木一郎", "吉田二郎"};
-                        SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
+                        final SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
                         final SQLiteDatabase database = sqlite_open_helper.getReadableDatabase();
-                        final Cursor cursor = database.query("UserInfo", new String[]{"name", "age", "sex", "affiliation", "correction", "fatigue"},
-                                null, null, null, null, null, null);
+                        final Cursor cursor = UsersTable.getCursorUserInfo(database);
                         final String names[] = new String[cursor.getCount()];
                         for (int i = 0; i < cursor.getCount(); ++i) {
                             cursor.moveToPosition(i);
-                            names[i] = cursor.getString(0);
+                            UsersTable users_table = new UsersTable();
+                            users_table.readUsersTable(cursor);
+                            names[i] = users_table.textName;
                         }//for
                         cursor.close();
                         database.close();
@@ -121,10 +121,9 @@ public class UserInfoFragment extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         final String name = names[which];
-                                        SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
+                                        final SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
                                         final SQLiteDatabase database = sqlite_open_helper.getReadableDatabase();
-                                        final Cursor cursor = database.query("UserInfo", new String[]{"name", "age", "sex", "affiliation", "correction", "fatigue"},
-                                                "name = ?", new String[]{name}, null, null, null, null);
+                                        final Cursor cursor = UsersTable.getCursorUsersTable(database, "name = ?", new String[]{name}, null, null, null, null);
                                         editTextName.setText(name);
                                         if (cursor.getCount() == 0) return;
                                         cursor.moveToFirst();
@@ -217,15 +216,14 @@ public class UserInfoFragment extends Fragment {
                     writable_database.delete("UserInfo", "name = ?", new String[]{name});
                 }//if
                 cursor.close();
-                ContentValues content_values = new ContentValues();
-                content_values.put("name", name);
-                content_values.put("age", age);
-                content_values.put("sex", sex);
-                content_values.put("affiliation", affiliation);
-                content_values.put("correction", correction);
-                content_values.put("fatigue", fatigue);
-                writable_database.insert("UserInfo", null, content_values);
-                writable_database.close();
+                final UsersTable users_table = new UsersTable();
+                users_table.textName = name;
+                users_table.integerAge = age;
+                users_table.textSex = sex;
+                users_table.textAffiliation = affiliation;
+                users_table.textCorrection = correction;
+                users_table.textFatigue = fatigue;
+                users_table.writeUsersTable(writable_database);
                 dateTime = Calendar.getInstance().getTime();
                 ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(1);
             }//onClick

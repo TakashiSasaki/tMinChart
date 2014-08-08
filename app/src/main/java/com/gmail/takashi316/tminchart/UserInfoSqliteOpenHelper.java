@@ -1,14 +1,18 @@
 package com.gmail.takashi316.tminchart;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteAbortException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import org.apache.http.client.UserTokenHandler;
 
 /**
  * Created by sasaki on 2014/08/04.
  */
 public class UserInfoSqliteOpenHelper extends SQLiteOpenHelper{
-    static final int DATABASE_VERSION = 1;
+    static final int DATABASE_VERSION = 3;
     static final String DATABASE_FILE_NAME = "UserInfo.sqlite";
 
     public UserInfoSqliteOpenHelper(Context context) {
@@ -17,13 +21,26 @@ public class UserInfoSqliteOpenHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE UserInfo (_id INTEGER PRIMARY KEY autoincrement, " +
-                " name TEXT NOT NULL, age INTEGER, sex TEXT, affiliation TEXT, " +
-                " correction TEXT, fatigue TEXT )");
+        db.execSQL(UsersTable.CREATE_UsersTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE userinfo");
+        if((oldVersion==1 || oldVersion==2) && newVersion==3){
+            try {
+                db.execSQL(UsersTable.DROP_UsersTable);
+            } catch (SQLiteAbortException e){
+            }
+            db.execSQL(UsersTable.CREATE_UsersTable);
+            Cursor cursor_user_info = UsersTable.getCursorUserInfo(db);
+            cursor_user_info.moveToFirst();
+            UsersTable users_table = new UsersTable();
+            while(!cursor_user_info.isAfterLast()){
+                users_table.readUserInfo(cursor_user_info);
+                users_table.writeUsersTable(db);
+                cursor_user_info.moveToNext();
+            }//while
+        }
+        //db.execSQL("DROP TABLE userinfo");
     }
 }
