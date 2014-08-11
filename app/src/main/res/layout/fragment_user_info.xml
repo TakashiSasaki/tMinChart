@@ -159,12 +159,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="疲労状態"
+            android:text="勤務状態"
             android:id="@+id/textView6" />
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -172,6 +173,12 @@
                 android:text="日勤前"
                 android:id="@+id/radioButtonBeforeDayShift"
                 android:checked="false" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日勤中"
+                android:id="@+id/radioButton" />
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -221,6 +228,68 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView9"
+            android:layout_column="0" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:singleLine="true"
+            android:layout_column="1"
+            android:maxWidth="500dp"
+            android:hint="その他の勤務状態についてはこちらにご記入下さい"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="ケア状態"
+            android:id="@+id/textView10" />
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="なし"
+                android:id="@+id/radioButton2"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="湿熱加温アイマスク"
+                android:id="@+id/radioButton3" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="非湿熱加温アイマスク"
+                android:id="@+id/radioButton4" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView11" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText2"
+            android:layout_column="1"
+            android:hint="その他のケアを行っている場合はこちらにご記入下さい。"
+            android:maxWidth="500dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="計測場所"
             android:id="@+id/textView8"
             android:layout_column="0" />
@@ -228,7 +297,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextLocation" />
+            android:id="@+id/editTextAddress" />
 
     </GridLayout>
 </FrameLayout>
