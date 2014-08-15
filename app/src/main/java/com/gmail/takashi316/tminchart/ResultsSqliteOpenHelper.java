@@ -39,4 +39,4 @@ public class ResultsSqliteOpenHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE ResultsTable ADD COLUMN fatigueEx;");
         }
     }//onUpgrade
-}
+}//ResultsSqliteOpenHelper
