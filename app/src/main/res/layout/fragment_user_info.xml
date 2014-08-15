@@ -235,7 +235,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/editTextFatigueEx"
             android:singleLine="true"
             android:layout_column="1"
             android:maxWidth="500dp"
@@ -257,20 +257,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="なし"
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButtoNoCare"
                 />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="湿熱加温アイマスク"
-                android:id="@+id/radioButton3" />
+                android:id="@+id/radioButtonHotMask" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="非湿熱加温アイマスク"
-                android:id="@+id/radioButton4" />
+                android:id="@+id/radioButtonNormalMask" />
         </RadioGroup>
 
         <TextView
@@ -282,7 +282,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/editTextCareEx"
             android:layout_column="1"
             android:hint="その他のケアを行っている場合はこちらにご記入下さい。"
             android:maxWidth="500dp" />
