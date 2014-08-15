@@ -76,6 +76,10 @@ public class ResultFragment extends Fragment {
     EditText editTextAffiliation;
     EditText editTextCorrection;
     EditText editTextFatigue;
+    EditText editTextFatigueEx;
+    EditText editTextCare;
+    EditText editTextCareEx;
+    EditText editTextAddress;
     EditText editTextLightSensorValue;
     EditText editTextAccelerometer;
     EditText editTextDevice;
@@ -96,6 +100,10 @@ public class ResultFragment extends Fragment {
         editTextAffiliation=(EditText)view.findViewById(R.id.editTextAffiliation);
         editTextCorrection = (EditText)view.findViewById(R.id.editTextCorrection);
         editTextFatigue = (EditText)view.findViewById(R.id.editTextFatigue);
+        editTextFatigueEx =(EditText)view.findViewById(R.id.editTextFatigueEx);
+        editTextCare = (EditText)view.findViewById(R.id.editTextCare);
+        editTextCareEx = (EditText)view.findViewById(R.id.editTextCareEx);
+        editTextAddress = (EditText)view.findViewById(R.id.editTextAddress);
         editTextLightSensorValue = (EditText)view.findViewById(R.id.editTextLightSensorValue);
         editTextAccelerometer = (EditText)view.findViewById(R.id.editTextAccelerometer);
         editTextDevice = (EditText)view.findViewById(R.id.editTextDevice);
@@ -180,8 +188,12 @@ public class ResultFragment extends Fragment {
         editTextAge.setText(l.getUsersTable().integerAge != null ? l.getUsersTable().integerAge.toString() : "未入力" );
         editTextSex.setText(l.getUsersTable().textSex != null ? l.getUsersTable().textSex.toString(): "未入力");
         editTextAffiliation.setText(l.getUsersTable().textAffiliation != null ? l.getUsersTable().textAffiliation.toString():"未入力");
-        editTextCorrection.setText(l.getUsersTable().textAffiliation != null ? l.getUsersTable().textAffiliation.toString():"未入力");
+        editTextCorrection.setText(l.getUsersTable().textCorrection != null ? l.getUsersTable().textCorrection.toString():"未入力");
         editTextFatigue.setText(l.getUsersTable().textFatigue != null ? l.getUsersTable().textFatigue.toString():"未入力");
+        editTextFatigueEx.setText(l.getUsersTable().textFatigueEx != null ? l.getUsersTable().textFatigueEx.toString():"未入力");
+        editTextCare.setText(l.getUsersTable().textCare != null ? l.getUsersTable().textCare.toString():"未入力");
+        editTextCareEx.setText(l.getUsersTable().textCareEx != null ? l.getUsersTable().textCareEx.toString():"未入力");
+        editTextAddress.setText(l.getUsersTable().textAddress != null ? l.getUsersTable().textAddress.toString():"未入力");
         editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
         editTextAccelerometer.setText(l.getAccelerometerString());
         editTextDevice.setText(Build.DEVICE);
