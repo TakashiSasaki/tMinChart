@@ -110,7 +110,7 @@ public class UsersTable {
         content_values.put("fatigue", this.textFatigue);
         content_values.put("fatigueEx", this.textFatigueEx);
         content_values.put("care", this.textCare);
-        content_values.put("careEx", this.textCare);
+        content_values.put("careEx", this.textCareEx);
         content_values.put("longitude", this.realLongitude);
         content_values.put("latitude", this.realLatitude);
         content_values.put("address", this.textAddress);
