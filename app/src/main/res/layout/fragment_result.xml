@@ -9,7 +9,8 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:columnCount="4">
+        android:columnCount="4"
+        android:id="@+id/GridLayout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -217,7 +218,8 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextTconChartResult" />
+            android:id="@+id/editTextTconChartResult"
+            android:maxLength="100" />
 
         <TextView
             android:layout_width="wrap_content"

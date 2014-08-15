@@ -280,7 +280,7 @@ public class SettingsActivity extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_tmin_chart);
-            bindPreferenceSummaryToValue(findPreference("tcon_chart_max_inch"));
+            bindPreferenceSummaryToValue(findPreference("tcon_chart_max_gap_inch"));
             bindPreferenceSummaryToValue(findPreference("tcon_chart_size_ratio"));
             bindPreferenceSummaryToValue(findPreference("tcon_chart_rows"));
             bindPreferenceSummaryToValue(findPreference("tcon_chart_contrast_ratio"));
