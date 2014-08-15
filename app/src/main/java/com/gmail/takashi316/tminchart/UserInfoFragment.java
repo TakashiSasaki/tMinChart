@@ -2,20 +2,22 @@ package com.gmail.takashi316.tminchart;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.os.Debug;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -104,7 +106,7 @@ public class UserInfoFragment extends Fragment {
                     public void onClick(View v) {
                         final SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
                         final SQLiteDatabase database = sqlite_open_helper.getReadableDatabase();
-                        final Cursor cursor = UsersTable.getCursorUserInfo(database);
+                        final Cursor cursor = UsersTable.getCursorUsersTable(database);
                         final String names[] = new String[cursor.getCount()];
                         for (int i = 0; i < cursor.getCount(); ++i) {
                             cursor.moveToPosition(i);
@@ -209,11 +211,11 @@ public class UserInfoFragment extends Fragment {
 
                 SQLiteOpenHelper  sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
                 SQLiteDatabase writable_database = sqlite_open_helper.getWritableDatabase();
-                Cursor cursor = writable_database.query("UserInfo",
-                        new String[]{"name", "age", "sex", "affiliation", "correction", "fatigue"},
+                Cursor cursor = writable_database.query("UsersTable",
+                        UsersTable.ALL_COLUMN_NAMES_UsersTable,
                         null, null, null, null, null, null);
                 if(cursor.getCount() > 0){
-                    writable_database.delete("UserInfo", "name = ?", new String[]{name});
+                    writable_database.delete("UsersTable", "name = ?", new String[]{name});
                 }//if
                 cursor.close();
                 final UsersTable users_table = new UsersTable();
@@ -223,7 +225,15 @@ public class UserInfoFragment extends Fragment {
                 users_table.textAffiliation = affiliation;
                 users_table.textCorrection = correction;
                 users_table.textFatigue = fatigue;
-                users_table.writeUsersTable(writable_database);
+                try {
+                    users_table.writeUsersTable(writable_database);
+                } catch (SQLException e){
+                    Log.e(UserInfoFragment.class.getSimpleName(), e.getMessage());
+                }//try
+                if(Debug.isDebuggerConnected()){
+                    assert(UsersTable.hasUniqueName(writable_database, name));
+                }//if
+                writable_database.close();
                 dateTime = Calendar.getInstance().getTime();
                 ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(1);
             }//onClick
@@ -236,7 +246,7 @@ public class UserInfoFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
+    }//onButtonPressed
 
     @Override
     public void onAttach(Activity activity) {
