@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by sasaki on 2014/08/04.
  */
-public class ResultsSqliteOpenHelper extends SQLiteOpenHelper{
+public class ResultsSqliteOpenHelper extends SQLiteOpenHelper {
     static final int DATABASE_VERSION = 6;
     static final String DATABASE_FILE_NAME = "Results.sqlite";
 
@@ -26,16 +26,16 @@ public class ResultsSqliteOpenHelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < 2){
+        if (oldVersion < 2) {
             db.execSQL("ALTER TABLE ResultsTable ADD COLUMN care;");
             db.execSQL("ALTER TABLE ResultsTable ADD COLUMN careEx;");
         }//if
 
-        if(oldVersion < 3){
+        if (oldVersion < 3) {
             db.execSQL("ALTER TABLE ResultsTable ADD COLUMN address;");
         }
 
-        if(oldVersion < 6) {
+        if (oldVersion < 6) {
             db.execSQL("ALTER TABLE ResultsTable ADD COLUMN fatigueEx;");
         }
     }//onUpgrade
