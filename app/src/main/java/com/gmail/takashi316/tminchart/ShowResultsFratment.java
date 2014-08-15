@@ -77,12 +77,22 @@ public class ShowResultsFratment extends Fragment {
 
         ResultsSqliteOpenHelper open_hehlper = new ResultsSqliteOpenHelper(getActivity());
         SQLiteDatabase database = open_hehlper.getReadableDatabase();
-        Cursor cursor = database.query("ResultsTable", new String[]{"_id", "date", "name", "tcon_chart_results", "tmin_chart_results", "device", "dpi"}, null, null, null, null, "_id DESC", null);
+        Cursor cursor = database.query("ResultsTable", new String[]{
+                        "_id", "date", "name", "tcon_chart_results", "tmin_chart_results",
+                        "device", "dpi", "age", "sex", "affiliation",
+                        "correction", "care", "careEx", "address", "fatigue",
+                        "fatigueEx"},
+                null, null, null, null, "_id DESC", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             Map<String, String> map = new HashMap<String, String>();
             map.put("name_and_datetime", cursor.getString(2) + " at " + cursor.getString(1));
-            map.put("summary_results", "_id=" + Integer.toString(cursor.getInt(0)) + " tcon_chart_results=" + cursor.getString(3) + " tmin_chart_results=" + cursor.getString(4) + " device=" + cursor.getString(5) + " dpi=" + cursor.getString(6));
+            map.put("summary_results", "_id=" + Integer.toString(cursor.getInt(0)) + " tcon_chart_results=" + cursor.getString(3) +
+                    " tmin_chart_results=" + cursor.getString(4) + " device=" + cursor.getString(5) + " dpi=" + cursor.getString(6) +
+                            ", age=" + cursor.getInt(7) + ", sex=" +cursor.getString(8) + ", affiliation=" + cursor.getString(9) + ", correction=" + cursor.getString(10)+
+                            ", care=" + cursor.getString(11) + ", careEx=" + cursor.getString(12) + ", address=" + cursor.getString(13) + ", fatigue=" +cursor.getString(14)+
+                            ", fatigueEx="  + cursor.getString(15)
+            );
             results.add(map);
             cursor.moveToNext();
         }//while
