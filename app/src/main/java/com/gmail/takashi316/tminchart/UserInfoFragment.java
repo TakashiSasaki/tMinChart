@@ -63,6 +63,8 @@ public class UserInfoFragment extends Fragment {
     private String correction;
     private String fatigue;
 
+    LocationThread locationThread;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -228,6 +230,9 @@ public class UserInfoFragment extends Fragment {
                 ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(1);
             }//onClick
         });
+
+        this.locationThread = new LocationThread(getActivity(), (EditText)view.findViewById(R.id.editTextAddress));
+        this.locationThread.start();
         return view;
     }
 
