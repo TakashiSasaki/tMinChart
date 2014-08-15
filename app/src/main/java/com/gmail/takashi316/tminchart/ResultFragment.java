@@ -109,31 +109,38 @@ public class ResultFragment extends Fragment {
             public void onClick(View v) {
                 OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
 
-                editTextName.setText(l.getName());
-                editTextAge.setText(Integer.toString(l.getAge()));
-                editTextSex.setText(l.getSex());
-                editTextAffiliation.setText(l.getAffiliation());
-                editTextCorrection.setText(l.getCorrection());
-                editTextFatigue.setText(l.getFatigue());
-                editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
-                editTextAccelerometer.setText(l.getAccelerometerString());
-                editTextDevice.setText(Build.DEVICE);
-                editTextDpi .setText("("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
-                editTextTconChartResult.setText(l.getTconChartResultString());
-                editTextTminChartRresult.setText(l.getTminChartResultString());
-
+//                editTextName.setText(l.getUsersTable().textName);
+//                editTextAge.setText(l.getUsersTable().integerAge);
+//                editTextSex.setText(l.getUsersTable().textSex);
+//                editTextAffiliation.setText(l.getUsersTable().textAffiliation);
+//                editTextCorrection.setText(l.getUsersTable().textCorrection);
+//                editTextFatigue.setText(l.getUsersTable().textFatigue);
+//                editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
+//                editTextAccelerometer.setText(l.getAccelerometerString());
+//                editTextDevice.setText(Build.DEVICE);
+//                editTextDpi .setText("("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
+//                editTextTconChartResult.setText(l.getTconChartResultString());
+//                editTextTminChartRresult.setText(l.getTminChartResultString());
+//
                 ContentValues content_values = new ContentValues();
                 {
-                    Date date = l.getDateTime();
-                    if(date == null) date = Calendar.getInstance().getTime();
-                    content_values.put("date", date.toString());
+                    Long millisecond = l.getUsersTable().integerLastUsed;
+                    if(millisecond == null) {
+                        content_values.put("date", Calendar.getInstance().getTime().getTime());
+                    } else {
+                        content_values.put("date", millisecond);
+                    }//if
                 }
-                content_values.put("name", l.getName());
-                content_values.put("age", l.getAge());
-                content_values.put("sex", l.getSex());
-                content_values.put("affiliation", l.getAffiliation());
-                content_values.put("correction", l.getCorrection());
-                content_values.put("fatigue", l.getFatigue());
+                content_values.put("name", l.getUsersTable().textName);
+                content_values.put("age", l.getUsersTable().integerAge);
+                content_values.put("sex", l.getUsersTable().textSex);
+                content_values.put("affiliation", l.getUsersTable().textAffiliation);
+                content_values.put("correction", l.getUsersTable().textCorrection);
+                content_values.put("fatigue", l.getUsersTable().textFatigue);
+                content_values.put("fatigueEx", l.getUsersTable().textFatigueEx);
+                content_values.put("care", l.getUsersTable().textCare);
+                content_values.put("careEx", l.getUsersTable().textCareEx);
+                content_values.put("address", l.getUsersTable().textAddress);
                 content_values.put("light_sensor_value", l.getLightSensorValue());
                 content_values.put("accelerometer", l.getAccelerometerString());
                 content_values.put("device", Build.DEVICE);
@@ -142,8 +149,12 @@ public class ResultFragment extends Fragment {
                 content_values.put("tmin_chart_results",l.getTminChartResultString());
                 ResultsSqliteOpenHelper results_sqlite_open_helper = new ResultsSqliteOpenHelper(getActivity());
                 SQLiteDatabase sqlite_database = results_sqlite_open_helper.getWritableDatabase();
-                sqlite_database.insert("ResultsTable", null, content_values);
-                buttonSaveResults.setText("保存しました \n" + Calendar.getInstance().getTime().toString());
+                final long insert_result = sqlite_database.insert("ResultsTable", null, content_values);
+                if(insert_result >= 0) {
+                    buttonSaveResults.setText("保存しました \n" + Calendar.getInstance().getTime().toString());
+                } else {
+                    buttonSaveResults.setText("保存できませんでした \n入力項目に不備がないか確認してください");
+                }
                 buttonSaveResults.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -160,17 +171,17 @@ public class ResultFragment extends Fragment {
     public void onResume() {
         super.onResume();
         OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
-        if(l.getDateTime() != null) {
-            editTextDateTime.setText(l.getDateTime().toString());
+        if(l.getUsersTable().integerLastUsed != null) {
+            editTextDateTime.setText(l.getUsersTable().integerLastUsed.toString());
         } else {
             editTextDateTime.setText("未設定");
         }
-        editTextName.setText(l.getName());
-        editTextAge.setText(Integer.toString(l.getAge()));
-        editTextSex.setText(l.getSex());
-        editTextAffiliation.setText(l.getAffiliation());
-        editTextCorrection.setText(l.getCorrection());
-        editTextFatigue.setText(l.getFatigue());
+        editTextName.setText(l.getUsersTable().textName != null ? l.getUsersTable().textName.toString() : "未入力（必須）");
+        editTextAge.setText(l.getUsersTable().integerAge != null ? l.getUsersTable().integerAge.toString() : "未入力" );
+        editTextSex.setText(l.getUsersTable().textSex != null ? l.getUsersTable().textSex.toString(): "未入力");
+        editTextAffiliation.setText(l.getUsersTable().textAffiliation != null ? l.getUsersTable().textAffiliation.toString():"未入力");
+        editTextCorrection.setText(l.getUsersTable().textAffiliation != null ? l.getUsersTable().textAffiliation.toString():"未入力");
+        editTextFatigue.setText(l.getUsersTable().textFatigue != null ? l.getUsersTable().textFatigue.toString():"未入力");
         editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
         editTextAccelerometer.setText(l.getAccelerometerString());
         editTextDevice.setText(Build.DEVICE);
@@ -219,13 +230,7 @@ public class ResultFragment extends Fragment {
 
         public String getTconChartResultString();
         public String getTminChartResultString();
-        public Date getDateTime();
-        public String getName();
-        public int getAge();
-        public String getSex();
-        public String getAffiliation();
-        public String getCorrection();
-        public String getFatigue();
+        public UsersTable getUsersTable();
         public float getLightSensorValue();
         public String getAccelerometerString();
         public DisplayMetrics getDisplayMetrics();
