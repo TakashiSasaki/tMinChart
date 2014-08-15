@@ -190,37 +190,39 @@ public class TminChart extends Activity
 
     @Override
     public Date getDateTime() {
-       return userInfoFragment.getDateTime();
+        final long milliseconds =  userInfoFragment.usersTable.integerLastUsed;
+        final Date date = new Date(milliseconds);
+        return date;
     }
 
     @Override
     public String getName() {
-        return userInfoFragment.getName();
+        return userInfoFragment.usersTable.textName;
     }
 
     @Override
     public int getAge() {
-        return userInfoFragment.getAge();
+        return userInfoFragment.usersTable.integerAge;
     }
 
     @Override
     public String getSex() {
-        return userInfoFragment.getSex();
+        return userInfoFragment.usersTable.textSex;
     }
 
     @Override
     public String getAffiliation() {
-        return userInfoFragment.getAffiliation();
+        return userInfoFragment.usersTable.textAffiliation;
     }
 
     @Override
     public String getCorrection() {
-        return userInfoFragment.getCorrection();
+        return userInfoFragment.usersTable.textCorrection;
     }
 
     @Override
     public String getFatigue() {
-        return userInfoFragment.getFatigue();
+        return userInfoFragment.usersTable.textFatigue;
     }
 
     @Override

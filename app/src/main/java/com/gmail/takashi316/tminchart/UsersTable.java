@@ -21,7 +21,7 @@ public class UsersTable {
     public String textFatigueEx;
     public String textCare;
     public String textCareEx;
-    public Integer integerLastUsed;
+    public Long integerLastUsed;
     public Double realLongitude;
     public Double realLatitude;
     public String textAddress;
@@ -94,7 +94,7 @@ public class UsersTable {
         this.textFatigueEx = content_values.getAsString("fatigueEx");
         this.textCare = content_values.getAsString("care");
         this.textCareEx = content_values.getAsString("careEx");
-        this.integerLastUsed = content_values.getAsInteger("lastUsed");
+        this.integerLastUsed = content_values.getAsLong("lastUsed");
         this.realLatitude = content_values.getAsDouble("latitude");
         this.realLongitude = content_values.getAsDouble("longitude");
         this.textAddress = content_values.getAsString("address");

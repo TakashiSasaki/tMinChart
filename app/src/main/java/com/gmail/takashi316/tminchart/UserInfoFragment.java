@@ -57,13 +57,7 @@ public class UserInfoFragment extends Fragment {
     private RadioButton radioButtonAfterTwilightShift;
     private RadioButton radioButtonBeforeNightShift;
     private RadioButton radioButtonAfterNightShift;
-    private Date dateTime;
-    private String name;
-    private int age;
-    private String sex;
-    private String affiliation;
-    private String correction;
-    private String fatigue;
+    public UsersTable usersTable = new UsersTable();
 
     /**
      * Use this factory method to create a new instance of
@@ -130,11 +124,11 @@ public class UserInfoFragment extends Fragment {
                                         if (cursor.getCount() == 0) return;
                                         cursor.moveToFirst();
                                         try {
-                                            age = cursor.getInt(1);
-                                            final String age_string = (new Integer(age)).toString();
+                                            usersTable.integerAge = cursor.getInt(1);
+                                            final String age_string = (usersTable.integerAge).toString();
                                             editTextAge.setText(age_string);
                                         } catch (Exception e) {
-                                            age = -1;
+                                            usersTable.integerAge = -1;
                                         }//try
                                         if (radioButtonMale.getText().toString().equals(cursor.getString(2)))
                                             radioButtonMale.setChecked(true);
@@ -190,21 +184,21 @@ public class UserInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(editTextName.getText().toString().isEmpty()) return;
-                name = editTextName.getText().toString();
+                usersTable.textName = editTextName.getText().toString();
                 {
                     final CharSequence cs = editTextAge.getText();
                     final String s = cs.toString();
-                    if(s != null && !s.isEmpty()) age = Integer.parseInt(s);
+                    if(s != null && !s.isEmpty()) usersTable.integerAge = Integer.parseInt(s);
                 }
-                sex = radioButtonMale.isChecked() ? "男性" : radioButtonFemale.isChecked() ? "女性" : "未回答";
-                affiliation = editTextAffiliation.getText().toString();
-                fatigue = radioButtonAfterDayShift.isChecked() ? radioButtonAfterDayShift.getText().toString():
+                usersTable.textSex = radioButtonMale.isChecked() ? "男性" : radioButtonFemale.isChecked() ? "女性" : "未回答";
+                usersTable.textAffiliation = editTextAffiliation.getText().toString();
+                usersTable.textFatigue = radioButtonAfterDayShift.isChecked() ? radioButtonAfterDayShift.getText().toString():
                         radioButtonAfterNightShift.isChecked()? radioButtonAfterNightShift.getText().toString():
                                 radioButtonAfterTwilightShift.isChecked() ? radioButtonAfterTwilightShift.getText().toString():
                                         radioButtonBeforeDayShift.isChecked()? radioButtonBeforeDayShift.getText().toString():
                                                 radioButtonBeforeNightShift.isChecked()?radioButtonBeforeNightShift.getText().toString():
                                                         radioButtonBeforeTwilgihtShift.isChecked()?radioButtonBeforeTwilgihtShift.getText().toString() : null;
-                correction = radioButtonNoCorrection.isChecked()? radioButtonNoCorrection.getText().toString():
+                usersTable.textCorrection = radioButtonNoCorrection.isChecked()? radioButtonNoCorrection.getText().toString():
                         radioButtonOtherCorrection.isChecked()?radioButtonOtherCorrection.getText().toString():
                                 radioButtonContactLens.isChecked()?radioButtonContactLens.getText().toString():
                                         radioButtonGlasses.isChecked()?radioButtonGlasses.getText().toString() : null;
@@ -215,26 +209,26 @@ public class UserInfoFragment extends Fragment {
                         UsersTable.ALL_COLUMN_NAMES_UsersTable,
                         null, null, null, null, null, null);
                 if(cursor.getCount() > 0){
-                    writable_database.delete("UsersTable", "name = ?", new String[]{name});
+                    writable_database.delete("UsersTable", "name = ?", new String[]{usersTable.textName});
                 }//if
                 cursor.close();
                 final UsersTable users_table = new UsersTable();
-                users_table.textName = name;
-                users_table.integerAge = age;
-                users_table.textSex = sex;
-                users_table.textAffiliation = affiliation;
-                users_table.textCorrection = correction;
-                users_table.textFatigue = fatigue;
+                users_table.textName = usersTable.textName;
+                users_table.integerAge = usersTable.integerAge;
+                users_table.textSex = usersTable.textSex;
+                users_table.textAffiliation = usersTable.textAffiliation;
+                users_table.textCorrection = usersTable.textCorrection;
+                users_table.textFatigue = usersTable.textFatigue;
                 try {
                     users_table.writeUsersTable(writable_database);
                 } catch (SQLException e){
                     Log.e(UserInfoFragment.class.getSimpleName(), e.getMessage());
                 }//try
                 if(Debug.isDebuggerConnected()){
-                    assert(UsersTable.hasUniqueName(writable_database, name));
+                    assert(UsersTable.hasUniqueName(writable_database, usersTable.textName));
                 }//if
                 writable_database.close();
-                dateTime = Calendar.getInstance().getTime();
+                usersTable.integerLastUsed = Calendar.getInstance().getTime().getTime();
                 ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(1);
             }//onClick
         });
@@ -280,32 +274,8 @@ public class UserInfoFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    public Date getDateTime(){
-        return dateTime;
-    }
 
     public String getName(){
         return editTextName.getText().toString();
     }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getSex(){
-        return sex;
-    }
-
-    public String getAffiliation(){
-        return affiliation;
-    }
-
-    public String getCorrection(){
-        return correction;
-    }
-
-    public String getFatigue(){
-        return fatigue;
-    }
-
 }
