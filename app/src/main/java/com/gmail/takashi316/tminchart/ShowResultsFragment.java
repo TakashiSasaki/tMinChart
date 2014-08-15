@@ -13,24 +13,21 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ShowResultsFratment.OnFragmentInteractionListener} interface
+ * {@link ShowResultsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ShowResultsFratment#newInstance} factory method to
+ * Use the {@link ShowResultsFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class ShowResultsFratment extends Fragment {
+public class ShowResultsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -53,15 +50,15 @@ public class ShowResultsFratment extends Fragment {
      * @return A new instance of fragment ShowResults.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShowResultsFratment newInstance(String param1, String param2) {
-        ShowResultsFratment fragment = new ShowResultsFratment();
+    public static ShowResultsFragment newInstance(String param1, String param2) {
+        ShowResultsFragment fragment = new ShowResultsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public ShowResultsFratment() {
+    public ShowResultsFragment() {
         // Required empty public constructor
     }
 

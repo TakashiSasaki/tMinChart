@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -35,7 +34,7 @@ public class TminChart extends Activity
         DisplayPropertyFragment.OnFragmentInteractionListener,
         UserInfoFragment.OnFragmentInteractionListener,
         ResultFragment.OnFragmentInteractionListener,
-        ShowResultsFratment.OnFragmentInteractionListener,
+        ShowResultsFragment.OnFragmentInteractionListener,
         SensorEventListener {
 
     private static final boolean USE_ACTION_BAR = false;
@@ -296,7 +295,7 @@ public class TminChart extends Activity
                 this.startActivity(intent);
                 return null;
             case 6:
-                return new ShowResultsFratment();
+                return new ShowResultsFragment();
             default:
                 return null;
         }//switch
