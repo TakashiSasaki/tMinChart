@@ -5,13 +5,13 @@
     <EditTextPreference
         android:defaultValue="0.5"
         android:inputType="numberDecimal"
-        android:key="tcon_chart_max_inch"
+        android:key="tcon_chart_max_gap_inch"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:maxLines="1"
         android:title="tConChart最大サイズ（インチ）" />
     <EditTextPreference
-        android:defaultValue="0.9"
+        android:defaultValue="0.79432823472"
         android:inputType="numberDecimal"
         android:key="tcon_chart_size_ratio"
         android:selectAllOnFocus="false"
@@ -25,14 +25,14 @@
         android:singleLine="true"
         android:title="tConChart縮小回数" />
     <EditTextPreference
-        android:defaultValue="0.9"
+        android:defaultValue="0.79432823472"
         android:inputType="numberDecimal"
         android:key="tcon_chart_contrast_ratio"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tConChart減衰率" />
     <EditTextPreference
-        android:defaultValue="20"
+        android:defaultValue="30"
         android:inputType="numberDecimal"
         android:key="tcon_chart_columns"
         android:selectAllOnFocus="false"
@@ -46,14 +46,14 @@
         android:singleLine="true"
         android:title="tMinChart最大ギャップ（インチ）" />
     <EditTextPreference
-        android:defaultValue="0.99"
+        android:defaultValue="0.97723722095"
         android:inputType="numberDecimal"
         android:key="tmin_chart_ratio"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tMinChart縮小率" />
     <EditTextPreference
-        android:defaultValue="0.99"
+        android:defaultValue="200"
         android:inputType="numberDecimal"
         android:key="tmin_chart_count"
         android:selectAllOnFocus="false"
