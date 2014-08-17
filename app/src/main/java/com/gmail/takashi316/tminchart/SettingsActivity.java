@@ -9,7 +9,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -17,14 +16,12 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
-import android.view.View;
 import android.widget.Button;
-
 
 import java.util.List;
 
@@ -63,17 +60,12 @@ public class SettingsActivity extends PreferenceActivity {
                 new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        final SharedPreferences shared_preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        final SharedPreferences.Editor editor = shared_preferences.edit();
-                        editor.putString("tcon_chart_max_inch", Double.toString(ConstantValues.TCON_CHART_MAX_INCH));
-                        editor.putString("tcon_chart_size_ratio", Double.toString(ConstantValues.TCON_CHART_SIZE_RATIO));
-                        editor.putString("tcon_chart_rows", Integer.toString(ConstantValues.TCON_CHART_ROWS));
-                        editor.putString("tcon_chart_contrast_ratio", Double.toString(ConstantValues.TCON_CHART_CONTRAST_RATIO));
-                        editor.putString("tcon_chart_columns", Integer.toString(ConstantValues.TCON_CHART_COLUMNS));
-                        editor.putString("tmin_chart_max_gap_inch", Double.toString(ConstantValues.TMIN_CHART_MAX_GAP_INCH));
-                        editor.putString("tmin_chart_ratio", Double.toString(ConstantValues.TMIN_CHART_RATIO));
-                        editor.putString("tmin_chart_count", Integer.toString(ConstantValues.TMIN_CHART_COUNT));
-                        editor.commit();
+                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
+                        PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.pref_tmin_chart, true);
+                        finish();
+                        overridePendingTransition(0,0);
+                        startActivity(getIntent());
+                        overridePendingTransition(0,0);
                         return true;
                     }//onMenuItemClick
                 }
@@ -126,17 +118,17 @@ public class SettingsActivity extends PreferenceActivity {
     private void setupSimplePreferencesScreen() {
         if (!isSimplePreferences(this)) {
             return;
-        }
+        }//if
 
         addPreferencesFromResource(R.xml.pref_tmin_chart);
-        bindPreferenceSummaryToValue(findPreference("tcon_chart_max_gap_inch"));
-        bindPreferenceSummaryToValue(findPreference("tcon_chart_size_ratio"));
-        bindPreferenceSummaryToValue(findPreference("tcon_chart_rows"));
-        bindPreferenceSummaryToValue(findPreference("tcon_chart_contrast_ratio"));
-        bindPreferenceSummaryToValue(findPreference("tcon_chart_columns"));
-        bindPreferenceSummaryToValue(findPreference("tmin_chart_max_gap_inch"));
-        bindPreferenceSummaryToValue(findPreference("tmin_chart_ratio"));
-        bindPreferenceSummaryToValue(findPreference("tmin_chart_count"));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TCON_CHART_MAX_INCH)));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TCON_CHART_SIZE_RATIO)));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TCON_CHART_ROWS)));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TCON_CHART_CONTRAST_RATIO)));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TCON_CHART_COLUMNS)));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TMIN_CHART_MAX_GAP_INCH)));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TMIN_CHART_RATIO)));
+        bindPreferenceSummaryToValue(findPreference(getResources().getResourceName(R.string.TMIN_CHART_COUNT)));
         // In the simplified UI, fragments are not used at all and we instead
         // use the older PreferenceActivity APIs.
 
@@ -280,14 +272,6 @@ public class SettingsActivity extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_tmin_chart);
-            bindPreferenceSummaryToValue(findPreference("tcon_chart_max_gap_inch"));
-            bindPreferenceSummaryToValue(findPreference("tcon_chart_size_ratio"));
-            bindPreferenceSummaryToValue(findPreference("tcon_chart_rows"));
-            bindPreferenceSummaryToValue(findPreference("tcon_chart_contrast_ratio"));
-            bindPreferenceSummaryToValue(findPreference("tcon_chart_columns"));
-            bindPreferenceSummaryToValue(findPreference("tmin_chart_max_gap_inch"));
-            bindPreferenceSummaryToValue(findPreference("tmin_chart_ratio"));
-            bindPreferenceSummaryToValue(findPreference("tmin_chart_count"));
         }
     }//TminChartPreferenceFragment
 

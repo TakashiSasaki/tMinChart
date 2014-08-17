@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="TCON_CHART_MAX_INCH">0.5</string>
+    <string name="TCON_CHART_SIZE_RATIO">0.79432823472</string>
+    <string name="TCON_CHART_ROWS">20</string>
+    <string name="TCON_CHART_COLUMNS">30</string>
+    <string name="TCON_CHART_CONTRAST_RATIO">0.79432823472</string>
+    <string name="TMIN_CHART_MAX_GAP_INCH">0.3</string>
+    <string name="TMIN_CHART_RATIO">0.97723722095</string>
+    <string name="TMIN_CHART_COUNT">200</string>
+</resources>
