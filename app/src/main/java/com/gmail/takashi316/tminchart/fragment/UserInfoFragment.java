@@ -19,7 +19,7 @@ import android.widget.RadioButton;
 
 import com.gmail.takashi316.tminchart.R;
 import com.gmail.takashi316.tminchart.db.UserInfoSqliteOpenHelper;
-import com.gmail.takashi316.tminchart.UsersTable;
+import com.gmail.takashi316.tminchart.db.UsersTable;
 
 import java.sql.SQLException;
 import java.util.Calendar;

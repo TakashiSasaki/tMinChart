@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.gmail.takashi316.tminchart.db.UsersTable;
 import com.gmail.takashi316.tminchart.fragment.DisplayPropertyFragment;
 import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 import com.gmail.takashi316.tminchart.fragment.ResultFragment;

@@ -16,7 +16,7 @@ import android.widget.EditText;
 
 import com.gmail.takashi316.tminchart.R;
 import com.gmail.takashi316.tminchart.db.ResultsSqliteOpenHelper;
-import com.gmail.takashi316.tminchart.UsersTable;
+import com.gmail.takashi316.tminchart.db.UsersTable;
 
 import java.util.Calendar;
 

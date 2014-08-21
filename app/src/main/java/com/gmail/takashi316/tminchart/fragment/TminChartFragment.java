@@ -15,7 +15,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.gmail.takashi316.tminchart.ConstantValues;
+import com.gmail.takashi316.tminchart.db.ConstantValues;
 import com.gmail.takashi316.tminchart.view.Konoji;
 import com.gmail.takashi316.tminchart.R;
 
