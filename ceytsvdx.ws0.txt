@@ -1,0 +1,18 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   app/src/main/AndroidManifest.xml
+#	renamed:    app/src/main/java/com/gmail/takashi316/tminchart/TminChart.java -> app/src/main/java/com/gmail/takashi316/tminchart/MainActivity.java
+#	modified:   app/src/main/java/com/gmail/takashi316/tminchart/NavigationDrawerFragment.java
+#	new file:   app/src/main/java/com/gmail/takashi316/tminchart/UploadFragment.java
+#	new file:   app/src/main/java/com/gmail/takashi316/tminchart/UploadSqliteOpenHelper.java
+#	new file:   app/src/main/java/com/gmail/takashi316/tminchart/UploadStatus.java
+#	deleted:    app/src/main/res/layout/fragment_tmin_chart.xml
+#	new file:   app/src/main/res/layout/fragment_upload.xml
+#	modified:   app/src/main/res/values/strings.xml
+#
+
