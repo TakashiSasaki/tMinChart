@@ -18,7 +18,7 @@ public class UploadSqliteOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE UploadTable (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "id INTEGER, recordedDateTime INTEGER, finishedDateTime INTEGER, posted TEXT)" );
+                "id INTEGER, recordedDateTime INTEGER, finishedDateTime INTEGER)" );
     }
 
     @Override
