@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.gmail.takashi316.tminchart.ConstantValues;
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.Seventeen;
+import com.gmail.takashi316.tminchart.view.Seventeen;
 
 import java.io.StringWriter;
 import java.util.ArrayList;

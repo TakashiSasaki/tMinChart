@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.UserInfoSqliteOpenHelper;
+import com.gmail.takashi316.tminchart.db.UserInfoSqliteOpenHelper;
 import com.gmail.takashi316.tminchart.UsersTable;
 
 import java.sql.SQLException;
