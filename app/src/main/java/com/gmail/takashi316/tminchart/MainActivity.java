@@ -36,6 +36,7 @@ public class MainActivity extends Activity
         UserInfoFragment.OnFragmentInteractionListener,
         ResultFragment.OnFragmentInteractionListener,
         ShowResultsFragment.OnFragmentInteractionListener,
+        UploadFragment.OnFragmentInteractionListener,
         SensorEventListener {
 
     private static Class[] fragmentClasses = {UserInfoFragment.class, TminChartFragment.class,
