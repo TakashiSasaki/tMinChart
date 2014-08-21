@@ -1,0 +1,254 @@
+package com.gmail.takashi316.tminchart.fragment;
+
+import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.app.Fragment;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.ResultsSqliteOpenHelper;
+import com.gmail.takashi316.tminchart.UsersTable;
+
+import java.util.Calendar;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link ResultFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link ResultFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ *
+ */
+public class ResultFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    private OnFragmentInteractionListener mListener;
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment ResultFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static ResultFragment newInstance(String param1, String param2) {
+        ResultFragment fragment = new ResultFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+    public ResultFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    EditText editTextDateTime;
+    EditText editTextName;
+    EditText editTextAge;
+    EditText editTextSex;
+    EditText editTextAffiliation;
+    EditText editTextCorrection;
+    EditText editTextFatigue;
+    EditText editTextFatigueEx;
+    EditText editTextCare;
+    EditText editTextCareEx;
+    EditText editTextAddress;
+    EditText editTextLightSensorValue;
+    EditText editTextAccelerometer;
+    EditText editTextDevice;
+    EditText editTextDpi;
+    EditText editTextTconChartResult;
+    EditText editTextTminChartRresult;
+    Button buttonSaveResults;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_result, container, false);
+        editTextDateTime = (EditText) view.findViewById(R.id.editTextDateTime);
+        editTextName = (EditText) view.findViewById(R.id.editTextName);
+        editTextAge = (EditText)view.findViewById(R.id.editTextAge);
+        editTextSex =(EditText)view.findViewById(R.id.editTextSex);
+        editTextAffiliation=(EditText)view.findViewById(R.id.editTextAffiliation);
+        editTextCorrection = (EditText)view.findViewById(R.id.editTextCorrection);
+        editTextFatigue = (EditText)view.findViewById(R.id.editTextFatigue);
+        editTextFatigueEx =(EditText)view.findViewById(R.id.editTextFatigueEx);
+        editTextCare = (EditText)view.findViewById(R.id.editTextCare);
+        editTextCareEx = (EditText)view.findViewById(R.id.editTextCareEx);
+        editTextAddress = (EditText)view.findViewById(R.id.editTextAddress);
+        editTextLightSensorValue = (EditText)view.findViewById(R.id.editTextLightSensorValue);
+        editTextAccelerometer = (EditText)view.findViewById(R.id.editTextAccelerometer);
+        editTextDevice = (EditText)view.findViewById(R.id.editTextDevice);
+        editTextDpi = (EditText)view.findViewById(R.id.editTextDpi);
+        editTextTconChartResult = (EditText) view.findViewById(R.id.editTextTconChartResult);
+        editTextTminChartRresult = (EditText) view.findViewById(R.id.editTextTminChartResult);
+
+        buttonSaveResults = (Button) view.findViewById(R.id.buttonSaveResults);
+        buttonSaveResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
+
+//                editTextName.setText(l.getUsersTable().textName);
+//                editTextAge.setText(l.getUsersTable().integerAge);
+//                editTextSex.setText(l.getUsersTable().textSex);
+//                editTextAffiliation.setText(l.getUsersTable().textAffiliation);
+//                editTextCorrection.setText(l.getUsersTable().textCorrection);
+//                editTextFatigue.setText(l.getUsersTable().textFatigue);
+//                editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
+//                editTextAccelerometer.setText(l.getAccelerometerString());
+//                editTextDevice.setText(Build.DEVICE);
+//                editTextDpi .setText("("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
+//                editTextTconChartResult.setText(l.getTconChartResultString());
+//                editTextTminChartRresult.setText(l.getTminChartResultString());
+//
+                ContentValues content_values = new ContentValues();
+                {
+                    Long millisecond = l.getUsersTable().integerLastUsed;
+                    if(millisecond == null) {
+                        content_values.put("date", Calendar.getInstance().getTime().getTime());
+                    } else {
+                        content_values.put("date", millisecond);
+                    }//if
+                }
+                content_values.put("name", l.getUsersTable().textName);
+                content_values.put("age", l.getUsersTable().integerAge);
+                content_values.put("sex", l.getUsersTable().textSex);
+                content_values.put("affiliation", l.getUsersTable().textAffiliation);
+                content_values.put("correction", l.getUsersTable().textCorrection);
+                content_values.put("fatigue", l.getUsersTable().textFatigue);
+                content_values.put("fatigueEx", l.getUsersTable().textFatigueEx);
+                content_values.put("care", l.getUsersTable().textCare);
+                content_values.put("careEx", l.getUsersTable().textCareEx);
+                content_values.put("address", l.getUsersTable().textAddress);
+                content_values.put("light_sensor_value", l.getLightSensorValue());
+                content_values.put("accelerometer", l.getAccelerometerString());
+                content_values.put("device", Build.DEVICE);
+                content_values.put("dpi", "("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
+                content_values.put("tcon_chart_results", l.getTconChartResultString());
+                content_values.put("tmin_chart_results",l.getTminChartResultString());
+                ResultsSqliteOpenHelper results_sqlite_open_helper = new ResultsSqliteOpenHelper(getActivity());
+                SQLiteDatabase sqlite_database = results_sqlite_open_helper.getWritableDatabase();
+                final long insert_result = sqlite_database.insert("ResultsTable", null, content_values);
+                if(insert_result >= 0) {
+                    buttonSaveResults.setText("保存しました \n" + Calendar.getInstance().getTime().toString());
+                } else {
+                    buttonSaveResults.setText("保存できませんでした \n入力項目に不備がないか確認してください");
+                }
+                buttonSaveResults.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((NavigationDrawerFragment.NavigationDrawerCallbacks)getActivity()).onNavigationDrawerItemSelected(0);
+                    }//onClick
+                });
+            }//onClick
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        OnFragmentInteractionListener l = (OnFragmentInteractionListener)getActivity();
+        if(l.getUsersTable().integerLastUsed != null) {
+            editTextDateTime.setText(l.getUsersTable().integerLastUsed.toString());
+        } else {
+            editTextDateTime.setText("未設定");
+        }
+        editTextName.setText(l.getUsersTable().textName != null ? l.getUsersTable().textName.toString() : "未入力（必須）");
+        editTextAge.setText(l.getUsersTable().integerAge != null ? l.getUsersTable().integerAge.toString() : "未入力" );
+        editTextSex.setText(l.getUsersTable().textSex != null ? l.getUsersTable().textSex.toString(): "未入力");
+        editTextAffiliation.setText(l.getUsersTable().textAffiliation != null ? l.getUsersTable().textAffiliation.toString():"未入力");
+        editTextCorrection.setText(l.getUsersTable().textCorrection != null ? l.getUsersTable().textCorrection.toString():"未入力");
+        editTextFatigue.setText(l.getUsersTable().textFatigue != null ? l.getUsersTable().textFatigue.toString():"未入力");
+        editTextFatigueEx.setText(l.getUsersTable().textFatigueEx != null ? l.getUsersTable().textFatigueEx.toString():"未入力");
+        editTextCare.setText(l.getUsersTable().textCare != null ? l.getUsersTable().textCare.toString():"未入力");
+        editTextCareEx.setText(l.getUsersTable().textCareEx != null ? l.getUsersTable().textCareEx.toString():"未入力");
+        editTextAddress.setText(l.getUsersTable().textAddress != null ? l.getUsersTable().textAddress.toString():"未入力");
+        editTextLightSensorValue.setText(Float.toString(l.getLightSensorValue()));
+        editTextAccelerometer.setText(l.getAccelerometerString());
+        editTextDevice.setText(Build.DEVICE);
+        editTextDpi .setText("("+l.getDisplayMetrics().xdpi+","+l.getDisplayMetrics().ydpi+")");
+        editTextTconChartResult.setText(l.getTconChartResultString());
+        editTextTminChartRresult.setText(l.getTminChartResultString());
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }//onDetach
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onFragmentInteraction(Uri uri);
+
+        public String getTconChartResultString();
+        public String getTminChartResultString();
+        public UsersTable getUsersTable();
+        public float getLightSensorValue();
+        public String getAccelerometerString();
+        public DisplayMetrics getDisplayMetrics();
+    }//OnFragmentInteractionListener
+
+}

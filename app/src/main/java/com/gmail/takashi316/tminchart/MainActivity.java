@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +23,15 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+import com.gmail.takashi316.tminchart.fragment.DisplayPropertyFragment;
+import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
+import com.gmail.takashi316.tminchart.fragment.ResultFragment;
+import com.gmail.takashi316.tminchart.fragment.ShowResultsFragment;
+import com.gmail.takashi316.tminchart.fragment.TconChartFragment;
+import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
+import com.gmail.takashi316.tminchart.fragment.UploadFragment;
+import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
+
 import java.util.List;
 
 
