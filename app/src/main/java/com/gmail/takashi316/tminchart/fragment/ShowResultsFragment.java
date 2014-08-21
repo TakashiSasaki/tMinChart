@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart;
+package com.gmail.takashi316.tminchart.fragment;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.ResultsSqliteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart;
+package com.gmail.takashi316.tminchart.fragment;
 
 
 import android.app.Activity;
@@ -21,6 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.gmail.takashi316.tminchart.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -88,7 +90,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,15 +103,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                        getString(R.string.title_section_result),
-                        getString(R.string.title_section4),
-                        "計測方法に関する設定",
-                        "計測結果の確認"
-                }));
+                mCallbacks.getNavigationDrawerTitles()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }//onCreateView
@@ -282,5 +276,6 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+        String[] getNavigationDrawerTitles();
     }
 }

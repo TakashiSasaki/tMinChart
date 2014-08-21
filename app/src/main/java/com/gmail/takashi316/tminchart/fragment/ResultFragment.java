@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart;
+package com.gmail.takashi316.tminchart.fragment;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -14,8 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.ResultsSqliteOpenHelper;
+import com.gmail.takashi316.tminchart.UsersTable;
+
 import java.util.Calendar;
-import java.util.Date;
 
 
 /**

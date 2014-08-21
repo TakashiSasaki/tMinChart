@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart;
+package com.gmail.takashi316.tminchart.fragment;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -11,12 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.graphics.Point;
 
 import java.lang.reflect.Method;
-import java.nio.DoubleBuffer;
 
 import com.gmail.takashi316.tminchart.R;
 

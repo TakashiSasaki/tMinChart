@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart;
+package com.gmail.takashi316.tminchart.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,9 +17,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.UserInfoSqliteOpenHelper;
+import com.gmail.takashi316.tminchart.UsersTable;
+
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Date;
 
 
 /**

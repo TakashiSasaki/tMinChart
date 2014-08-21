@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +23,19 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.gmail.takashi316.tminchart.fragment.DisplayPropertyFragment;
+import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
+import com.gmail.takashi316.tminchart.fragment.ResultFragment;
+import com.gmail.takashi316.tminchart.fragment.ShowResultsFragment;
+import com.gmail.takashi316.tminchart.fragment.TconChartFragment;
+import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
+import com.gmail.takashi316.tminchart.fragment.UploadFragment;
+import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
+
 import java.util.List;
 
 
-public class TminChart extends Activity
+public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         TminChartFragment.OnFragmentInteractionListener,
         TconChartFragment.OnFragmentInteractionListener,
@@ -35,7 +43,11 @@ public class TminChart extends Activity
         UserInfoFragment.OnFragmentInteractionListener,
         ResultFragment.OnFragmentInteractionListener,
         ShowResultsFragment.OnFragmentInteractionListener,
+        UploadFragment.OnFragmentInteractionListener,
         SensorEventListener {
+
+    private static Class[] fragmentClasses = {UserInfoFragment.class, TminChartFragment.class,
+    TconChartFragment.class, DisplayPropertyFragment.class, ResultFragment.class, ShowResultsFragment.class};
 
     private static final boolean USE_ACTION_BAR = false;
     /**
@@ -95,39 +107,56 @@ public class TminChart extends Activity
     }
 
     @Override
+    public String[] getNavigationDrawerTitles() {
+        return new String[] {
+                getString(R.string.UserInfoFragment),
+                getString(R.string.TconChartFragment),
+                getString(R.string.TminChartFragment),
+                getString(R.string.ResultFragment),
+                getString(R.string.ShowResultsFragment),
+                getString(R.string.UploadFragment),
+                getString(R.string.DisplayPropertyFragment),
+                getString(R.string.SettingsActivity)
+        };
+    }//getNavigationDrawerTitles
+
+    @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        if(position == 5){
-            Intent intent = new Intent(this, SettingsActivity.class);
-            this.startActivity(intent);
-            return;
-        }//if
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, getFragment(position))
-                .commit();
-    }//onNavigationDrawerItemSelected
-
-    public void onSectionAttached(int number) {
-        switch (number) {
+        mTitle = getNavigationDrawerTitles()[position];
+        Fragment fragment = null;
+        switch(position){
             case 1:
-                mTitle = getString(R.string.title_section1);
+                fragment =  tconChartFragment != null ? tconChartFragment : (tconChartFragment = new TconChartFragment());
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                fragment =  tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                fragment =  new ResultFragment();
                 break;
             case 4:
-                mTitle = getString(R.string.title_section_result);
+                fragment =  new ShowResultsFragment();
                 break;
             case 5:
-                mTitle = getString(R.string.title_section4);
+                fragment = new UploadFragment();
                 break;
             case 6:
+                fragment =  new DisplayPropertyFragment();
+                break;
+            case 7:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                this.startActivity(intent);
+                return;
+            case 0:
+                fragment = userInfoFragment != null ? userInfoFragment : (userInfoFragment = new UserInfoFragment());
         }//switch
-    }//onSectionAttached
+        if(fragment == null) return;
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }//onNavigationDrawerItemSelected
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
@@ -277,88 +306,6 @@ public class TminChart extends Activity
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-
-    private Fragment getFragment(int section){
-        switch(section){
-            case 0:
-                return userInfoFragment != null ? userInfoFragment : (userInfoFragment = new UserInfoFragment());
-            case 1:
-                return tconChartFragment != null ? tconChartFragment : (tconChartFragment = new TconChartFragment());
-            case 2:
-                return tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());
-            case 3:
-                return new ResultFragment();
-            case 4:
-                return new DisplayPropertyFragment();
-            case 5:
-                Intent intent = new Intent(this, SettingsActivity.class);
-                this.startActivity(intent);
-                return null;
-            case 6:
-                return new ShowResultsFragment();
-            default:
-                return null;
-        }//switch
-    }//getFragment
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static Fragment newInstance(int sectionNumber) {
-            Fragment fragment;
-            switch (sectionNumber) {
-                case 1:
-                    fragment = new UserInfoFragment();
-                    break;
-                case 2:
-                    fragment = new TconChartFragment();
-                    break;
-                case 3:
-                    fragment = new TminChartFragment();
-                    break;
-                case 4:
-                    fragment = new ResultFragment();
-                    break;
-                case 5:
-                    fragment = new DisplayPropertyFragment();
-                    break;
-                default:
-                    fragment = new PlaceholderFragment();
-                    break;
-            }
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tmin_chart, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((TminChart) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-    }//PlaceHolderFragment
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
