@@ -115,7 +115,7 @@ public class UserInfoFragment extends Fragment {
                         for (int i = 0; i < cursor.getCount(); ++i) {
                             cursor.moveToPosition(i);
                             UsersTable users_table = new UsersTable();
-                            users_table.readUsersTable(cursor);
+                            users_table.readRow(cursor);
                             names[i] = users_table.textName;
                         }//for
                         cursor.close();
@@ -132,7 +132,7 @@ public class UserInfoFragment extends Fragment {
                                         final Cursor cursor = UsersTable.getCursor(database, name);
                                         cursor.moveToFirst();
                                         final UsersTable selected_user = new UsersTable();
-                                        selected_user.readUsersTable(cursor);
+                                        selected_user.readRow(cursor);
                                         editTextName.setText(name);
                                         if (cursor.getCount() == 0) return;
                                         try {

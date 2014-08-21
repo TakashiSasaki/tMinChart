@@ -81,7 +81,7 @@ public class UsersTable {
         this.textFatigue = cursor.isNull(5) ? null : cursor.getString(5);
     }//readUserInfo
 
-    public void readUsersTable(Cursor cursor){
+    public void readRow(Cursor cursor){
         ContentValues content_values = new ContentValues();
         DatabaseUtils.cursorRowToContentValues(cursor, content_values);
         this.textName = content_values.getAsString("name");
@@ -124,7 +124,7 @@ public class UsersTable {
         final Cursor cursor = UsersTable.getCursor(database, name);
         cursor.moveToFirst();
         final UsersTable users_table = new UsersTable();
-        users_table.readUsersTable(cursor);
+        users_table.readRow(cursor);
         if(!name.equals(users_table.textName)) return false;
         if(cursor.getCount() != 1) return false;
         return true;
