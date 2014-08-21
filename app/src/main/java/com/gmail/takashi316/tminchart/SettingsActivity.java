@@ -167,9 +167,10 @@ public class SettingsActivity extends PreferenceActivity {
      * example, 10" tablets are extra-large.
      */
     private static boolean isXLargeTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-        & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-    }
+        final int screen_layout_size = context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
+        final boolean xlarge = screen_layout_size >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
+        return xlarge;
+    } // isXLargeTablet
 
     /**
      * Determines whether the simplified settings UI should be shown. This is
@@ -182,7 +183,7 @@ public class SettingsActivity extends PreferenceActivity {
         return ALWAYS_SIMPLE_PREFS
                 || Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
                 || !isXLargeTablet(context);
-    }
+    }//isSimplePreferences
 
     /** {@inheritDoc} */
     @Override
