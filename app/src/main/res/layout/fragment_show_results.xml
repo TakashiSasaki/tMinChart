@@ -10,4 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listViewResults" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SDカードにデータベースをコピーする"
+        android:id="@+id/buttonCopyDatabaseToSdCard"
+        android:layout_gravity="right|bottom" />
 </FrameLayout>

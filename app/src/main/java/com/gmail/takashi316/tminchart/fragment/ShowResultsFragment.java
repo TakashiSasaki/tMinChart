@@ -6,15 +6,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.db.UserInfoSqliteOpenHelper;
+import com.gmail.takashi316.tminchart.storage.DatabaseFile;
 import com.gmail.takashi316.tminchart.db.ResultsSqliteOpenHelper;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +49,8 @@ public class ShowResultsFragment extends Fragment {
     private SimpleAdapter simpleAdapter;
 
     private OnFragmentInteractionListener mListener;
+
+    private Button buttonCopyDatabaseToSdCard;
 
     /**
      * Use this factory method to create a new instance of
@@ -100,6 +108,7 @@ public class ShowResultsFragment extends Fragment {
 
         simpleAdapter = new SimpleAdapter(getActivity(), results,
                 android.R.layout.simple_list_item_2, new String[]{"name_and_datetime", "summary_results"}, new int[]{android.R.id.text1, android.R.id.text2 });
+
     }//onCreate
 
     @Override
@@ -109,6 +118,22 @@ public class ShowResultsFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_show_results, container, false);
         final ListView list_view = (ListView)view.findViewById(R.id.listViewResults);
         list_view.setAdapter(simpleAdapter);
+
+        this.buttonCopyDatabaseToSdCard = (Button)view.findViewById(R.id.buttonCopyDatabaseToSdCard);
+        this.buttonCopyDatabaseToSdCard.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DatabaseFile database_file = new DatabaseFile(getActivity(), UserInfoSqliteOpenHelper.DATABASE_FILE_NAME);
+                        try {
+                            database_file.copyToPublicExternal();
+                        } catch (IOException e){
+                            Log.e(this.getClass().getSimpleName(),e.getMessage());
+                        }
+                    }//onClick
+                }//OnClickListener
+        );
+
         return view;
     }//onCreateView
 
