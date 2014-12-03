@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class ResultsSqliteOpenHelper extends SQLiteOpenHelper {
     static final int DATABASE_VERSION = 6;
-    static final String DATABASE_FILE_NAME = "Results.sqlite";
+    public static final String DATABASE_FILE_NAME = "Results.sqlite";
 
     public ResultsSqliteOpenHelper(Context context) {
         super(context, DATABASE_FILE_NAME, null, DATABASE_VERSION);

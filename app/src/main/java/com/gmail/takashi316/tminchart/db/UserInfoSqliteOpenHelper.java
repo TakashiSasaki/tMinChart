@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class UserInfoSqliteOpenHelper extends SQLiteOpenHelper{
     static final int DATABASE_VERSION = 5;
-    static final String DATABASE_FILE_NAME = "UserInfo.sqlite";
+    public static final String DATABASE_FILE_NAME = "UserInfo.sqlite";
 
     public UserInfoSqliteOpenHelper(Context context) {
         super(context, DATABASE_FILE_NAME, null, DATABASE_VERSION);
