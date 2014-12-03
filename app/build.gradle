@@ -8,8 +8,8 @@ android {
         applicationId "com.gmail.takashi316.tminchart"
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 123
-        versionName "1.2.3.20140822"
+        versionCode 130
+        versionName "1.3.0.20141125"
     }
     buildTypes {
         release {
