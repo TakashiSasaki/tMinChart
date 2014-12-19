@@ -1,6 +1,7 @@
 package com.gmail.takashi316.tminchart.storage;
 
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 
@@ -20,7 +21,18 @@ public class PublicExternalDirectories {
     public final File podcasts;
 
     PublicExternalDirectories(){
-        this.documents = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        // getExternalStoragePublicDirectory is supported on Android API level 8 and above.
+        File documents;
+        try {
+            documents = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        } catch (NoSuchFieldError e ){
+            Log.e(getClass().getSimpleName(), e.getMessage());
+            documents = null;
+        }
+        this.documents = documents;
+        if(!this.documents.exists()){
+            this.documents.mkdirs();
+        }
         this.alarms = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS);
         this.dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
         this.downloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
