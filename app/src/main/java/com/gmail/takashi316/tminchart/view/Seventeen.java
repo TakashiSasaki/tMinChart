@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Display;
 import android.view.View;
@@ -97,8 +98,13 @@ public class Seventeen extends View {
                         for(Seventeen seventeen: seventeens){
                             seventeen.invalidate();
                         }//for
-                        ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
-                        tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                        try {
+                            ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
+                            tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                        } catch (Exception e){
+                            // failed on emulator devices
+                            Log.e(getClass().getSimpleName(), e.getMessage());
+                        }
                     }//run
                 });//post
             }//onClick
