@@ -15,6 +15,7 @@ import android.os.Vibrator;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -139,8 +140,13 @@ public class Konoji extends View {
                         } else {
                             vibrator.vibrate(new long[]{0, 100}, -1);
                         }//if
-                        ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
-                        tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                        try {
+                            ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
+                            tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
+                        } catch (Exception e){
+                            // ToneGenerator is unavailable on some emulator devices.
+                            Log.e(getClass().getSimpleName(), e.getMessage());
+                        }//try
                     }//run
                 });
             }//onClick
