@@ -315,7 +315,8 @@ public class MainActivity extends Activity
         final View decor_view = this.getWindow().getDecorView();
         final ViewGroup view_group = (ViewGroup) decor_view;
         try {
-            final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
+            // Top view group is ActionBarOverlayLayout on some devices
+            //final LinearLayout linear_layout = (LinearLayout) view_group.getChildAt(0);
             this.decorViewHeight = decor_view.getHeight();
             this.decorViewWidth = decor_view.getWidth();
         } catch (Exception e) {
