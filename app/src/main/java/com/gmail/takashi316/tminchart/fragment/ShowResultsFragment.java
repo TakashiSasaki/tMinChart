@@ -19,6 +19,10 @@ import com.gmail.takashi316.tminchart.db.UserInfoSqliteOpenHelper;
 import com.gmail.takashi316.tminchart.storage.DatabaseFile;
 import com.gmail.takashi316.tminchart.db.ResultsSqliteOpenHelper;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -124,11 +128,22 @@ public class ShowResultsFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DatabaseFile database_file = new DatabaseFile(getActivity(), UserInfoSqliteOpenHelper.DATABASE_FILE_NAME);
                         try {
-                            database_file.copyToPublicExternal();
+                            File f = new File("/storage/sdcard/hogehoge/a.txt");
+                            FileOutputStream fos = new FileOutputStream(f);
+                            fos.write("hello".getBytes());
+                        } catch (Exception e){
+                            Log.d(getClass().getSimpleName(), e.getMessage());
+                        }
+
+                        try {
+                            DatabaseFile database_file = new DatabaseFile(getActivity(), UserInfoSqliteOpenHelper.DATABASE_FILE_NAME);
+                            database_file.copyToExternalStorage();
+                        } catch(FileNotFoundException e) {
+                            Log.d(getClass().getSimpleName(), e.getMessage());
+                            return;
                         } catch (IOException e){
-                            Log.e(this.getClass().getSimpleName(),e.getMessage());
+                            Log.e(this.getClass().getSimpleName(), e.getMessage());
                         }
                     }//onClick
                 }//OnClickListener
