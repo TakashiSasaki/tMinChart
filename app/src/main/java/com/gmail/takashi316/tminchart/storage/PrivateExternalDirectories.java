@@ -2,8 +2,10 @@ package com.gmail.takashi316.tminchart.storage;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by sasaki on 2014/12/03.
@@ -21,8 +23,12 @@ public class PrivateExternalDirectories {
     public final File podcasts;
     public final File ringtones;
 
-    public PrivateExternalDirectories(Context context){
+    public PrivateExternalDirectories(Context context) throws IOException {
+        // getExternalFilesDir is available on Android API Level 8 and above.
         this.parent = context.getExternalFilesDir(null);
+        if(this.parent == null) {
+            throw new IOException("Can't get private external directory.");
+        }
         this.documents = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         this.alarms = context.getExternalFilesDir(Environment.DIRECTORY_ALARMS);
         this.dcim = context.getExternalFilesDir(Environment.DIRECTORY_DCIM);
