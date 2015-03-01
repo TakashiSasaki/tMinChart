@@ -29,7 +29,7 @@ import java.util.List;
  * handset devices, settings are presented as a single list. On tablets,
  * settings are split by category, with category headers shown to the left of
  * the list of settings.
- * <p>
+ * <p/>
  * See <a href="http://developer.android.com/design/patterns/settings.html">
  * Android Design: Settings</a> for design guidelines and the <a
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
@@ -62,9 +62,9 @@ public class SettingsActivity extends PreferenceActivity {
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
                         PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.pref_tmin_chart, true);
                         finish();
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         startActivity(getIntent());
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     }//onMenuItemClick
                 }
@@ -153,9 +153,11 @@ public class SettingsActivity extends PreferenceActivity {
         bindPreferenceSummaryToValue(findPreference("example_list"));
         bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
         bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-    }
+    }//setupSimplePreferencesScreen
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean onIsMultiPane() {
         return isXLargeTablet(this) && !isSimplePreferences(this);
@@ -184,7 +186,9 @@ public class SettingsActivity extends PreferenceActivity {
                 || !isXLargeTablet(context);
     }//isSimplePreferences
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
@@ -267,7 +271,7 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class TminChartPreferenceFragment extends PreferenceFragment{
+    public static class TminChartPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -333,7 +337,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
-    protected boolean isValidFragment(String fragmentName){
+    protected boolean isValidFragment(String fragmentName) {
         Log.v("isValidFragment", fragmentName);
         return true;
     }//isValidFragment
