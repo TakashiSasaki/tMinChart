@@ -58,4 +58,10 @@
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tMinChart縮小回数" />
+    <EditTextPreference
+        key="TCON_CHART_N_STROKES"
+        android:defaultValue="19"
+        android:inputType="numberDecimal"
+        android:selectable="true"
+        android:title="画数"></EditTextPreference>
 </PreferenceScreen>
