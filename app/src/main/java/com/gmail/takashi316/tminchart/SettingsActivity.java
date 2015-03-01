@@ -81,7 +81,7 @@ public class SettingsActivity extends PreferenceActivity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
+    }//setupActionBar
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -100,14 +100,14 @@ public class SettingsActivity extends PreferenceActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }//onOptionsItemSelected
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
         setupSimplePreferencesScreen();
-    }
+    }//onPostCreate
 
     /**
      * Shows the simplified settings UI if the device configuration if the

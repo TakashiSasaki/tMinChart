@@ -46,7 +46,7 @@ public class TconChartFragment extends Fragment {
     private TableLayout tableLayout;
 
     private OnFragmentInteractionListener mListener;
-    ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new     ArrayList<ArrayList<Seventeen>>();
+    ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new ArrayList<ArrayList<Seventeen>>();
 
     /**
      * Use this factory method to create a new instance of
@@ -81,6 +81,7 @@ public class TconChartFragment extends Fragment {
     }
 
     Button buttonStartTminChartFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class TconChartFragment extends Fragment {
         buttonStartTminChartFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationDrawerFragment.NavigationDrawerCallbacks)getActivity()).onNavigationDrawerItemSelected(2);
+                ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(2);
             }//onClick
         });
 
@@ -102,7 +103,7 @@ public class TconChartFragment extends Fragment {
             seventeenArrayLists.add(seventeens);
             double width_inch = tconChartMaxInch * Math.pow(tconChartSizeRatio, y);
             Seventeen leftmost = new Seventeen(getActivity(), tconChartMaxInch, -1.0, seventeens, "×");
-            leftmost.setMinimumHeight((int)((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
+            leftmost.setMinimumHeight((int) ((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
             leftmost.setMinimumWidth((int) ((tconChartMaxInch + MARGIN_INCH) * l.getXdpi()));
             TableRow table_row = new TableRow(getActivity());
             table_row.addView(leftmost);
@@ -194,11 +195,11 @@ public class TconChartFragment extends Fragment {
     }//readSharedPreferences
 
     @Override
-    public String toString(){
+    public String toString() {
         StringWriter string_writer = new StringWriter();
-        for(ArrayList<Seventeen> seventeens : seventeenArrayLists){
-            for(Seventeen seventeen: seventeens) {
-                if (seventeen.isTouched()){
+        for (ArrayList<Seventeen> seventeens : seventeenArrayLists) {
+            for (Seventeen seventeen : seventeens) {
+                if (seventeen.isTouched()) {
                     string_writer.write(seventeen.toString());
                     string_writer.write(" ");
                 }//if
