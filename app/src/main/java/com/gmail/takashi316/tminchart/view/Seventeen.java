@@ -58,7 +58,7 @@ public class Seventeen extends View {
     public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string) {
         super(context);
         init(null, 0);
-        if(displayMetrics == null) {
+        if (displayMetrics == null) {
             final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             final Display display = window_manager.getDefaultDisplay();
             displayMetrics = new DisplayMetrics();
@@ -72,10 +72,10 @@ public class Seventeen extends View {
         this.ypixels = (float) (this.ydpi * this.widthInch);
         this.pixels = Math.max(xpixels, ypixels);
         this.mExampleString = "a";
-        this.color = Color.rgb((int) Math.max(intensity, 0),  (int) Math.max(intensity,0), (int) Math.max(intensity,0));
+        this.color = Color.rgb((int) Math.max(intensity, 0), (int) Math.max(intensity, 0), (int) Math.max(intensity, 0));
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
-        if(string == null) {
+        if (string == null) {
             this.tconString = getTconString();
         } else {
             this.tconString = string;
@@ -85,8 +85,8 @@ public class Seventeen extends View {
             @Override
             public void onClick(View v) {
                 boolean previously_touched = touched;
-                if(seventeens != null){
-                    for(Seventeen seventeen: seventeens){
+                if (seventeens != null) {
+                    for (Seventeen seventeen : seventeens) {
                         seventeen.touched = false;
                     }//for
                 }//if
@@ -95,13 +95,13 @@ public class Seventeen extends View {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        for(Seventeen seventeen: seventeens){
+                        for (Seventeen seventeen : seventeens) {
                             seventeen.invalidate();
                         }//for
                         try {
                             ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
                             tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             // failed on emulator devices
                             Log.e(getClass().getSimpleName(), e.getMessage());
                         }
@@ -181,7 +181,7 @@ public class Seventeen extends View {
         final float width_margin = (canvas_width - pixels) / 2;
         final float height_margin = (canvas_height - pixels) / 2;
         canvas.drawText(this.tconString, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
-        if(touched){
+        if (touched) {
             //this.setBackgroundColor(Color.RED);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                 final Drawable frame = getResources().getDrawable(R.drawable.frame);
@@ -318,16 +318,16 @@ public class Seventeen extends View {
         return TCON_STRINGS[r];
     }//getTconString
 
-    public Pair<Float, Integer> getResult(){
-        return new Pair<Float, Integer>(pixels, (int)intensity);
+    public Pair<Float, Integer> getResult() {
+        return new Pair<Float, Integer>(pixels, (int) intensity);
     }//getResult
 
-    public boolean isTouched(){
+    public boolean isTouched() {
         return touched;
     }
 
     @Override
     public String toString() {
-        return "(" + Float.toString(pixels) + "," + Integer.toString((int)intensity) + ")";
+        return "(" + Float.toString(pixels) + "," + Integer.toString((int) intensity) + ")";
     }//toString
 }//Seventeen
