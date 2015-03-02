@@ -7,9 +7,17 @@ import java.util.Random;
  */
 public class DailyChineseCharacter {
 
-    Random random = new Random();
+    public static DailyChineseCharacter getInstance() {
+        if (dailyChineseCharacter == null) {
+            dailyChineseCharacter = new DailyChineseCharacter();
+        }//if
+        return dailyChineseCharacter;
+    }//getInstance
 
-    public final static String[] strings = new String[]
+    private Random random = new Random();
+    private static DailyChineseCharacter dailyChineseCharacter;
+
+    private final static String[] strings = new String[]
             {
                     "一乙",
                     "九七十人丁刀二入八又了力",

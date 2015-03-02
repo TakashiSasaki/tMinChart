@@ -19,6 +19,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.gmail.takashi316.tminchart.DailyChineseCharacter;
 import com.gmail.takashi316.tminchart.R;
 
 import java.util.ArrayList;
@@ -314,8 +315,10 @@ public class Seventeen extends View {
     }//onMeasure
 
     private String getTconString() {
-        final int r = random.nextInt(TCON_STRINGS.length);
-        return TCON_STRINGS[r];
+        String s = (new Character(DailyChineseCharacter.getInstance().getRandomCharOfNStrokes(17))).toString();
+        return s;
+        //final int r = random.nextInt(TCON_STRINGS.length);
+        //return TCON_STRINGS[r];
     }//getTconString
 
     public Pair<Float, Integer> getResult() {
