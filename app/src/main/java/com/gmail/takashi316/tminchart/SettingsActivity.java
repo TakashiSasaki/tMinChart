@@ -50,7 +50,7 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.preference_with_button);
         setupActionBar();
-    }
+    }//onCreate
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
