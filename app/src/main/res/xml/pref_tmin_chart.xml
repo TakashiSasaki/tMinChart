@@ -4,7 +4,7 @@
     <EditTextPreference
         android:defaultValue="@string/TCON_CHART_MAX_INCH"
         android:inputType="numberDecimal"
-        android:key="TCON_CHART_MAX_INCH"
+        android:key="maxInch"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -12,28 +12,30 @@
     <EditTextPreference
         android:defaultValue="@string/TCON_CHART_SIZE_RATIO"
         android:inputType="numberDecimal"
-        android:key="TCON_CHART_SIZE_RATIO"
+        android:key="sizeRatio"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tConChart縮小率" />
     <EditTextPreference
         android:defaultValue="@string/TCON_CHART_ROWS"
         android:inputType="numberDecimal"
-        android:key="TCON_CHART_ROWS"
+        android:key="nRows"
+        android:numeric="integer"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tConChart縮小回数" />
     <EditTextPreference
         android:defaultValue="@string/TCON_CHART_CONTRAST_RATIO"
         android:inputType="numberDecimal"
-        android:key="TCON_CHART_CONTRAST_RATIO"
+        android:key="contrastRatio"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tConChart減衰率" />
     <EditTextPreference
         android:defaultValue="@string/TCON_CHART_COLUMNS"
         android:inputType="numberDecimal"
-        android:key="tcon_chart_columns"
+        android:key="nColumns"
+        android:numeric="integer"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tConChart減衰回数" />
@@ -55,13 +57,15 @@
         android:defaultValue="@string/TMIN_CHART_COUNT"
         android:inputType="numberDecimal"
         android:key="TMIN_CHART_COUNT"
+        android:numeric="integer"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         android:title="tMinChart縮小回数" />
     <EditTextPreference
-        key="TCON_CHART_N_STROKES"
-        android:defaultValue="19"
+        android:defaultValue="17"
         android:inputType="numberDecimal"
+        android:key="nStrokes"
+        android:numeric="integer"
         android:selectable="true"
         android:title="画数"></EditTextPreference>
 </PreferenceScreen>

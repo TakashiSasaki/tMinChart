@@ -56,7 +56,7 @@ public class Seventeen extends View {
     static final private Random random = new Random();
     static DisplayMetrics displayMetrics;
 
-    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string) {
+    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string, int n_stroke) {
         super(context);
         init(null, 0);
         if (displayMetrics == null) {
@@ -77,7 +77,7 @@ public class Seventeen extends View {
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
         if (string == null) {
-            this.tconString = getTconString();
+            this.tconString = getTconString(n_stroke);
         } else {
             this.tconString = string;
         }//if
@@ -314,8 +314,8 @@ public class Seventeen extends View {
                 MeasureSpec.makeMeasureSpec(getSuggestedMinimumHeight(), height_mode));
     }//onMeasure
 
-    private String getTconString() {
-        String s = (new Character(DailyChineseCharacter.getInstance().getRandomCharOfNStrokes(17))).toString();
+    private String getTconString(int n_stroke) {
+        String s = (new Character(DailyChineseCharacter.getInstance().getRandomCharOfNStrokes(n_stroke))).toString();
         return s;
         //final int r = random.nextInt(TCON_STRINGS.length);
         //return TCON_STRINGS[r];

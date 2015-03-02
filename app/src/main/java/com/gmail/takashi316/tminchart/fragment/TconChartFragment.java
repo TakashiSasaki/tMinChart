@@ -106,7 +106,7 @@ public class TconChartFragment extends Fragment {
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
             seventeenArrayLists.add(seventeens);
             double width_inch = this.maxInch * Math.pow(this.sizeRatio, y);
-            Seventeen leftmost = new Seventeen(getActivity(), this.maxInch, -1.0, seventeens, "×");
+            Seventeen leftmost = new Seventeen(getActivity(), this.maxInch, -1.0, seventeens, "×", this.nStrokes);
             leftmost.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
             leftmost.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
             TableRow table_row = new TableRow(getActivity());
@@ -121,7 +121,7 @@ public class TconChartFragment extends Fragment {
                     }
                 });
                 final double intention = 255.0 - (255.0 * Math.pow(this.contrastRatio, x));
-                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null);
+                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null, this.nStrokes);
                 seventeen.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
                 seventeen.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
                 table_row.addView(seventeen);

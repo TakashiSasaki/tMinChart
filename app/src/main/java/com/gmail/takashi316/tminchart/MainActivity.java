@@ -134,12 +134,12 @@ public class MainActivity extends Activity
         Fragment fragment = null;
         switch (position) {
             case 1:
-                fragment = TconChartFragment.newInstance(preferences.getInt("nStrokes", 17),
-                        preferences.getInt("nRows", 20),
-                        preferences.getInt("nColumns", 30),
-                        preferences.getFloat("maxInch", 0.5f),
-                        preferences.getFloat("sizeRatio", (float) Math.pow(0.1, 0.1)),
-                        preferences.getFloat("contrastRatio", (float) Math.pow(0.1, 0.1)));
+                fragment = TconChartFragment.newInstance(Integer.parseInt(preferences.getString("nStrokes", "17")),
+                        Integer.parseInt(preferences.getString("nRows", "20")),
+                        Integer.parseInt(preferences.getString("nColumns", "30")),
+                        Float.parseFloat(preferences.getString("maxInch", "0.5")),
+                        Float.parseFloat(preferences.getString("sizeRatio", "" + (float) Math.pow(0.1, 0.1))),
+                        Float.parseFloat(preferences.getString("contrastRatio", "" + (float) Math.pow(0.1, 0.1))));
                 break;
             case 2:
                 fragment = tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());
