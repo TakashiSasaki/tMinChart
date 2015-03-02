@@ -2,11 +2,9 @@ package com.gmail.takashi316.tminchart.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,17 +20,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TconChartFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TconChartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TconChartFragment extends Fragment {
     final static double MARGIN_INCH = 0.1;
-    private SharedPreferences preferences;
     private TableLayout tableLayout;
     private int nStrokes;
     private int nRows, nColumns;
@@ -40,11 +29,6 @@ public class TconChartFragment extends Fragment {
     private double sizeRatio;
     private double contrastRatio;
     Button buttonStartTminChartFragment;
-    //private int tconChartRows = ConstantValues.TCON_CHART_ROWS;
-    //private double tconChartMaxInch = ConstantValues.TCON_CHART_MAX_INCH;
-    //private double tconChartSizeRatio = ConstantValues.TCON_CHART_SIZE_RATIO;
-    //private double tconCharContrastRatio = ConstantValues.TCON_CHART_CONTRAST_RATIO;
-    //private int tconChartColumns = ConstantValues.TCON_CHART_COLUMNS;
 
     private OnFragmentInteractionListener mListener;
     ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new ArrayList<ArrayList<Seventeen>>();
@@ -64,7 +48,6 @@ public class TconChartFragment extends Fragment {
     }//newInstance
 
     public TconChartFragment() {
-        // Required empty public constructor
     }//TconChartFragment
 
     @Override
@@ -81,7 +64,6 @@ public class TconChartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        readSharedPreferences();
     }//onCreate
 
 
@@ -151,7 +133,6 @@ public class TconChartFragment extends Fragment {
     }//onDetach
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
 
         public float getXdpi();
@@ -160,21 +141,6 @@ public class TconChartFragment extends Fragment {
 
         public int getWidthPixels();
     }//OnFragmentInteractionListener
-
-    // will be overridden by shared preferences
-
-    private void readSharedPreferences() {
-        try {
-            final SharedPreferences shared_preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            //tconChartMaxInch = Double.parseDouble(shared_preferences.getString("tcon_chart_max_inch", Double.toString(tconChartMaxInch)));
-            //tconChartSizeRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_size_ratio", Double.toString(tconChartSizeRatio)));
-            //tconChartRows = Integer.parseInt(shared_preferences.getString("tcon_chart_rows", Integer.toString(tconChartRows)));
-            //tconCharContrastRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_contrast_ratio", Double.toString(tconCharContrastRatio)));
-            //tconChartColumns = Integer.parseInt(shared_preferences.getString("tcon_chart_columns", Integer.toString(tconChartColumns)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }//try
-    }//readSharedPreferences
 
     @Override
     public String toString() {
@@ -190,4 +156,3 @@ public class TconChartFragment extends Fragment {
         return string_writer.getBuffer().toString();
     }//toString
 }//TconChartFragment
-
