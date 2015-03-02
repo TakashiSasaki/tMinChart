@@ -26,14 +26,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-/**
- * TODO: document your custom view class.
- */
 public class Seventeen extends View {
-    static final String[] TCON_STRINGS = {"講", "謝", "績", "厳", "縮", "優", "覧", "曖", "臆", "嚇",
-            "轄", "環", "擬", "犠", "矯", "謹", "謙", "鍵", "購", "懇",
-            "擦", "爵", "醜", "償", "礁", "繊", "鮮", "燥", "霜", "戴",
-            "濯", "鍛", "聴", "謄", "瞳", "謎", "鍋", "頻", "闇", "翼", "療", "瞭", "齢"};
 
     private String mExampleString = ""; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...

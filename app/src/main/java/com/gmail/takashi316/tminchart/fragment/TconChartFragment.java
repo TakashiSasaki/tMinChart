@@ -132,6 +132,11 @@ public class TconChartFragment extends Fragment {
         mListener = null;
     }//onDetach
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }///onSaveInstanceState
+
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
 
