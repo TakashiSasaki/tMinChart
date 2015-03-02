@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -13,6 +14,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -27,6 +29,7 @@ import com.gmail.takashi316.tminchart.db.UsersTable;
 import com.gmail.takashi316.tminchart.fragment.DisplayPropertyFragment;
 import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 import com.gmail.takashi316.tminchart.fragment.ResultFragment;
+import com.gmail.takashi316.tminchart.fragment.SettingsFragment;
 import com.gmail.takashi316.tminchart.fragment.ShowResultsFragment;
 import com.gmail.takashi316.tminchart.fragment.TconChartFragment;
 import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
@@ -45,10 +48,11 @@ public class MainActivity extends Activity
         ResultFragment.OnFragmentInteractionListener,
         ShowResultsFragment.OnFragmentInteractionListener,
         UploadFragment.OnFragmentInteractionListener,
+        SettingsFragment.OnFragmentInteractionListener,
         SensorEventListener {
 
     private static Class[] fragmentClasses = {UserInfoFragment.class, TminChartFragment.class,
-    TconChartFragment.class, DisplayPropertyFragment.class, ResultFragment.class, ShowResultsFragment.class};
+            TconChartFragment.class, DisplayPropertyFragment.class, ResultFragment.class, ShowResultsFragment.class};
 
     private static final boolean USE_ACTION_BAR = false;
     /**
@@ -72,17 +76,19 @@ public class MainActivity extends Activity
     private UserInfoFragment userInfoFragment;
     private TconChartFragment tconChartFragment;
     private TminChartFragment tminChartFragment;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(this);
         setContentView(R.layout.activity_tmin_chart);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         this.mTitle = getTitle();
         try {
-            PackageInfo package_info = getPackageManager().getPackageInfo("com.gmail.takashi316.tminchart", PackageManager.GET_META_DATA);
+            PackageInfo package_info = getPackageManager().getPackageInfo("com.gmail.takashi316.tminchart_beta", PackageManager.GET_META_DATA);
             final int versionCode = package_info.versionCode;
             final String versionName = package_info.versionName;
             this.mTitle = mTitle + " " + versionName;
@@ -109,7 +115,7 @@ public class MainActivity extends Activity
 
     @Override
     public String[] getNavigationDrawerTitles() {
-        return new String[] {
+        return new String[]{
                 getString(R.string.UserInfoFragment),
                 getString(R.string.TconChartFragment),
                 getString(R.string.TminChartFragment),
@@ -117,7 +123,7 @@ public class MainActivity extends Activity
                 getString(R.string.ShowResultsFragment),
                 getString(R.string.UploadFragment),
                 getString(R.string.DisplayPropertyFragment),
-                getString(R.string.SettingsActivity)
+                getString(R.string.SettingsFragment)
         };
     }//getNavigationDrawerTitles
 
@@ -126,33 +132,44 @@ public class MainActivity extends Activity
         // update the main content by replacing fragments
         mTitle = getNavigationDrawerTitles()[position];
         Fragment fragment = null;
-        switch(position){
+        switch (position) {
             case 1:
-                fragment =  tconChartFragment != null ? tconChartFragment : (tconChartFragment = new TconChartFragment());
+                fragment = TconChartFragment.newInstance(preferences.getInt("nStrokes", 17),
+                        preferences.getInt("nRows", 20),
+                        preferences.getInt("nColumns", 30),
+                        preferences.getFloat("maxInch", 0.5f),
+                        preferences.getFloat("sizeRatio", (float) Math.pow(0.1, 0.1)),
+                        preferences.getFloat("contrastRatio", (float) Math.pow(0.1, 0.1)));
                 break;
             case 2:
-                fragment =  tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());
+                fragment = tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());
                 break;
             case 3:
-                fragment =  new ResultFragment();
+                fragment = new ResultFragment();
                 break;
             case 4:
-                fragment =  new ShowResultsFragment();
+                fragment = new ShowResultsFragment();
                 break;
             case 5:
                 fragment = new UploadFragment();
                 break;
             case 6:
-                fragment =  new DisplayPropertyFragment();
+                fragment = new DisplayPropertyFragment();
                 break;
             case 7:
-                Intent intent = new Intent(this, SettingsActivity.class);
-                this.startActivity(intent);
+                fragment = SettingsFragment.newInstance();
+                break;
+            case 8:
+                this.preferences.edit().clear().commit();
+                //PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.pref_tmin_chart, true);
                 return;
+            //Intent intent = new Intent(this, SettingsActivity.class);
+            //this.startActivity(intent);
+            //return;
             case 0:
                 fragment = userInfoFragment != null ? userInfoFragment : (userInfoFragment = new UserInfoFragment());
         }//switch
-        if(fragment == null) return;
+        if (fragment == null) return;
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
@@ -182,35 +199,25 @@ public class MainActivity extends Activity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent i = new Intent(this, SettingsActivity.class);
-            startActivity(i);
-            return true;
-        }
         return super.onOptionsItemSelected(item);
-    }
+    }//onOptionsItemSelected
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
-    }
+    }//onFragmentInteraction
 
     @Override
     public String getTconChartResultString() {
-        if(tconChartFragment != null){
+        if (tconChartFragment != null) {
             return tconChartFragment.toString();
-        }else {
+        } else {
             return "tConChartは未測定です";
         }//if
     }//getTconChartResultString
 
     @Override
     public String getTminChartResultString() {
-        if(tminChartFragment != null){
+        if (tminChartFragment != null) {
             return tminChartFragment.toString();
         } else {
             return "tMinChartは未測定です";
@@ -224,7 +231,7 @@ public class MainActivity extends Activity
 
     @Override
     public String getAccelerometerString() {
-        return "("+getAccelerometerX()+","+getAccelerometerY()+","+getAccelerometerZ()+")";
+        return "(" + getAccelerometerX() + "," + getAccelerometerY() + "," + getAccelerometerZ() + ")";
     }
 
     @Override
@@ -273,9 +280,10 @@ public class MainActivity extends Activity
     }
 
     DisplayMetrics displayMetrics;
+
     @Override
     public DisplayMetrics getDisplayMetrics() {
-        if(displayMetrics == null){
+        if (displayMetrics == null) {
             displayMetrics = new DisplayMetrics();
             getDisplay().getMetrics(displayMetrics);
         }//if
@@ -283,9 +291,10 @@ public class MainActivity extends Activity
     }
 
     private Display display;
+
     @Override
     public Display getDisplay() {
-        if(display == null){
+        if (display == null) {
             display = getWindowManager().getDefaultDisplay();
         }//if
         return display;

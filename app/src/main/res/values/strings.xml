@@ -9,10 +9,12 @@
     <string name="ResultFragment">計測結果の確認</string>
     <string name="ShowResultsFragment">計測結果の一覧</string>
     <string name="UploadFragment">計測結果のアップロード</string>
-    <string name="SettingsActivity">計測に関する設定</string>
+    <string name="SettingsFragment">計測に関する設定</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
     <string name="UploadButton">未送信レコードを送信し、クラウドにおける保存状態を更新する</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

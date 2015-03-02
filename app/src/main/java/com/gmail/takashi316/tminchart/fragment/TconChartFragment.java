@@ -33,82 +33,87 @@ import java.util.ArrayList;
  */
 public class TconChartFragment extends Fragment {
     final static double MARGIN_INCH = 0.1;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private SharedPreferences preferences;
     private TableLayout tableLayout;
+    private int nStrokes;
+    private int nRows, nColumns;
+    private double maxInch;
+    private double sizeRatio;
+    private double contrastRatio;
+    Button buttonStartTminChartFragment;
+    //private int tconChartRows = ConstantValues.TCON_CHART_ROWS;
+    //private double tconChartMaxInch = ConstantValues.TCON_CHART_MAX_INCH;
+    //private double tconChartSizeRatio = ConstantValues.TCON_CHART_SIZE_RATIO;
+    //private double tconCharContrastRatio = ConstantValues.TCON_CHART_CONTRAST_RATIO;
+    //private int tconChartColumns = ConstantValues.TCON_CHART_COLUMNS;
 
     private OnFragmentInteractionListener mListener;
     ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new ArrayList<ArrayList<Seventeen>>();
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TconChartFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TconChartFragment newInstance(String param1, String param2) {
+    public static TconChartFragment newInstance(int n_strokes, int n_rows, int n_columns, double max_inch,
+                                                double size_ratio, double contrast_ratio) {
         TconChartFragment fragment = new TconChartFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt("nStrokes", n_strokes);
+        args.putInt("nRows", n_rows);
+        args.putInt("nColumns", n_columns);
+        args.putDouble("maxInch", max_inch);
+        args.putDouble("sizeRatio", size_ratio);
+        args.putDouble("contrastRatio", contrast_ratio);
         fragment.setArguments(args);
         return fragment;
-    }
+    }//newInstance
 
     public TconChartFragment() {
         // Required empty public constructor
-    }
+    }//TconChartFragment
+
+    @Override
+    public void setArguments(Bundle args) {
+        super.setArguments(args);
+        this.nStrokes = args.getInt("nStrokes");
+        this.nRows = args.getInt("nRows");
+        this.nColumns = args.getInt("nColumns");
+        this.maxInch = args.getDouble("maxInch");
+        this.sizeRatio = args.getDouble("sizeRatio");
+        this.contrastRatio = args.getDouble("contrastRatio");
+    }//setArguments
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         readSharedPreferences();
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    }//onCreate
 
-    Button buttonStartTminChartFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
         View view = inflater.inflate(R.layout.fragment_tcon_chart, container, false);
-        buttonStartTminChartFragment = (Button) view.findViewById(R.id.buttonStartTminChartFragment);
-        buttonStartTminChartFragment.setOnClickListener(new View.OnClickListener() {
+        this.buttonStartTminChartFragment = (Button) view.findViewById(R.id.buttonStartTminChartFragment);
+        this.buttonStartTminChartFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(2);
             }//onClick
         });
 
-        tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
-        seventeenArrayLists.clear();
-        for (int y = 0; y < tconChartRows; ++y) {
+        this.tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
+        this.seventeenArrayLists.clear();
+        for (int y = 0; y < this.nRows; ++y) {
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
             seventeenArrayLists.add(seventeens);
-            double width_inch = tconChartMaxInch * Math.pow(tconChartSizeRatio, y);
-            Seventeen leftmost = new Seventeen(getActivity(), tconChartMaxInch, -1.0, seventeens, "×");
-            leftmost.setMinimumHeight((int) ((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
-            leftmost.setMinimumWidth((int) ((tconChartMaxInch + MARGIN_INCH) * l.getXdpi()));
+            double width_inch = this.maxInch * Math.pow(this.sizeRatio, y);
+            Seventeen leftmost = new Seventeen(getActivity(), this.maxInch, -1.0, seventeens, "×");
+            leftmost.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
+            leftmost.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
             TableRow table_row = new TableRow(getActivity());
             table_row.addView(leftmost);
             seventeens.add(leftmost);
-            for (int x = 0; x < tconChartColumns; ++x) {
+            for (int x = 0; x < this.nColumns; ++x) {
                 TextView text_view = new TextView(getActivity());
                 text_view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -116,10 +121,10 @@ public class TconChartFragment extends Fragment {
                         v.setBackgroundColor(Color.RED);
                     }
                 });
-                final double intention = 255.0 - (255.0 * Math.pow(tconCharContrastRatio, x));
+                final double intention = 255.0 - (255.0 * Math.pow(this.contrastRatio, x));
                 Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null);
-                seventeen.setMinimumHeight((int) ((tconChartMaxInch + MARGIN_INCH) * l.getYdpi()));
-                seventeen.setMinimumWidth((int) ((tconChartMaxInch + MARGIN_INCH) * l.getXdpi()));
+                seventeen.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
+                seventeen.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
                 table_row.addView(seventeen);
                 seventeens.add(seventeen);
             }//for y
@@ -129,13 +134,6 @@ public class TconChartFragment extends Fragment {
         return view;
     }//onCreateView
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -144,25 +142,15 @@ public class TconChartFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
-    }
+        }//try
+    }//onAttach
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }//onDetach
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
@@ -175,20 +163,15 @@ public class TconChartFragment extends Fragment {
     }//OnFragmentInteractionListener
 
     // will be overridden by shared preferences
-    private double tconChartMaxInch = ConstantValues.TCON_CHART_MAX_INCH;
-    private double tconChartSizeRatio = ConstantValues.TCON_CHART_SIZE_RATIO;
-    private int tconChartRows = ConstantValues.TCON_CHART_ROWS;
-    private double tconCharContrastRatio = ConstantValues.TCON_CHART_CONTRAST_RATIO;
-    private int tconChartColumns = ConstantValues.TCON_CHART_COLUMNS;
 
     private void readSharedPreferences() {
         try {
             final SharedPreferences shared_preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            tconChartMaxInch = Double.parseDouble(shared_preferences.getString("tcon_chart_max_inch", Double.toString(tconChartMaxInch)));
-            tconChartSizeRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_size_ratio", Double.toString(tconChartSizeRatio)));
-            tconChartRows = Integer.parseInt(shared_preferences.getString("tcon_chart_rows", Integer.toString(tconChartRows)));
-            tconCharContrastRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_contrast_ratio", Double.toString(tconCharContrastRatio)));
-            tconChartColumns = Integer.parseInt(shared_preferences.getString("tcon_chart_columns", Integer.toString(tconChartColumns)));
+            //tconChartMaxInch = Double.parseDouble(shared_preferences.getString("tcon_chart_max_inch", Double.toString(tconChartMaxInch)));
+            //tconChartSizeRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_size_ratio", Double.toString(tconChartSizeRatio)));
+            //tconChartRows = Integer.parseInt(shared_preferences.getString("tcon_chart_rows", Integer.toString(tconChartRows)));
+            //tconCharContrastRatio = Double.parseDouble(shared_preferences.getString("tcon_chart_contrast_ratio", Double.toString(tconCharContrastRatio)));
+            //tconChartColumns = Integer.parseInt(shared_preferences.getString("tcon_chart_columns", Integer.toString(tconChartColumns)));
         } catch (Exception e) {
             e.printStackTrace();
         }//try

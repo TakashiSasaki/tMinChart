@@ -277,5 +277,5 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
         String[] getNavigationDrawerTitles();
-    }
+    }//NavigationDrawerCallbacks
 }
