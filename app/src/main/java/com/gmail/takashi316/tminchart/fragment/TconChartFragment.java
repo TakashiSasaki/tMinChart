@@ -3,6 +3,7 @@ package com.gmail.takashi316.tminchart.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,12 +30,13 @@ public class TconChartFragment extends Fragment {
     private double sizeRatio;
     private double contrastRatio;
     Button buttonStartTminChartFragment;
+    private Typeface typeface;
 
     private OnFragmentInteractionListener mListener;
     ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new ArrayList<ArrayList<Seventeen>>();
 
     public static TconChartFragment newInstance(int n_strokes, int n_rows, int n_columns, double max_inch,
-                                                double size_ratio, double contrast_ratio) {
+                                                double size_ratio, double contrast_ratio, Typeface typeface) {
         TconChartFragment fragment = new TconChartFragment();
         Bundle args = new Bundle();
         args.putInt("nStrokes", n_strokes);
@@ -43,6 +45,8 @@ public class TconChartFragment extends Fragment {
         args.putDouble("maxInch", max_inch);
         args.putDouble("sizeRatio", size_ratio);
         args.putDouble("contrastRatio", contrast_ratio);
+        args.putInt("fontStyle", typeface.getStyle());
+        args.putString("fontFamily", typeface.toString());
         fragment.setArguments(args);
         return fragment;
     }//newInstance
@@ -59,6 +63,7 @@ public class TconChartFragment extends Fragment {
         this.maxInch = args.getDouble("maxInch");
         this.sizeRatio = args.getDouble("sizeRatio");
         this.contrastRatio = args.getDouble("contrastRatio");
+        this.typeface = Typeface.create(args.getString("fontFamily"), args.getInt("fontStyle"));
     }//setArguments
 
     @Override
@@ -88,7 +93,7 @@ public class TconChartFragment extends Fragment {
             ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
             seventeenArrayLists.add(seventeens);
             double width_inch = this.maxInch * Math.pow(this.sizeRatio, y);
-            Seventeen leftmost = new Seventeen(getActivity(), this.maxInch, -1.0, seventeens, "×", this.nStrokes);
+            Seventeen leftmost = new Seventeen(getActivity(), this.maxInch, -1.0, seventeens, "×", this.nStrokes, this.typeface);
             leftmost.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
             leftmost.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
             TableRow table_row = new TableRow(getActivity());
@@ -103,7 +108,7 @@ public class TconChartFragment extends Fragment {
                     }
                 });
                 final double intention = 255.0 - (255.0 * Math.pow(this.contrastRatio, x));
-                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null, this.nStrokes);
+                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null, this.nStrokes, this.typeface);
                 seventeen.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
                 seventeen.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
                 table_row.addView(seventeen);

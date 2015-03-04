@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -134,12 +135,30 @@ public class MainActivity extends Activity
         Fragment fragment = null;
         switch (position) {
             case 1:
+                Typeface font_family = Typeface.DEFAULT;
+                String font_family_string = preferences.getString("fontFamily", "DEFAULT");
+                if (font_family_string.equals("DEFAULT")) font_family = Typeface.DEFAULT;
+                else if (font_family_string.equals("DEFAULT_BOLD"))
+                    font_family = Typeface.DEFAULT_BOLD;
+                else if (font_family_string.equals("MONOSPACE"))
+                    font_family = Typeface.MONOSPACE;
+                else if (font_family_string.equals("SANS_SERIF"))
+                    font_family = Typeface.SANS_SERIF;
+                else if (font_family_string.equals("SERIF"))
+                    font_family = Typeface.SERIF;
+                int font_style = 0;
+                String font_style_string = preferences.getString("fontStyle", "NORMAL");
+                if (font_style_string.equals("NORMAL")) font_style = 0;
+                else if (font_style_string.equals("BOLD")) font_style = 1;
+                else if (font_style_string.equals("ITALIC")) font_style = 2;
+                else if (font_style_string.equals("BOLD_ITALIC")) font_style = 3;
                 fragment = TconChartFragment.newInstance(Integer.parseInt(preferences.getString("nStrokes", "17")),
                         Integer.parseInt(preferences.getString("nRows", "20")),
                         Integer.parseInt(preferences.getString("nColumns", "30")),
                         Float.parseFloat(preferences.getString("maxInch", "0.5")),
                         Float.parseFloat(preferences.getString("sizeRatio", "" + (float) Math.pow(0.1, 0.1))),
-                        Float.parseFloat(preferences.getString("contrastRatio", "" + (float) Math.pow(0.1, 0.1))));
+                        Float.parseFloat(preferences.getString("contrastRatio", "" + (float) Math.pow(0.1, 0.1))),
+                        Typeface.create(font_family, font_style));
                 break;
             case 2:
                 fragment = tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());

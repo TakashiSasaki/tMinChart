@@ -20,4 +20,18 @@
             <enum name="SERIF" value="4" />
         </attr>
     </declare-styleable>
+    <string-array name="fontStyle">
+        <item>NORMAL</item>
+        <item>BOLD</item>
+        <item>ITALIC</item>
+        <item>BOLD_ITALIC</item>
+    </string-array>
+    <string-array name="fontFamily">
+        <item>DEFAULT</item>
+        <item>DEFAULT_BOLD</item>
+        <item>MONOSPACE</item>
+        <item>SANS_SERIF</item>
+        <item>SERIF</item>
+    </string-array>
+
 </resources>

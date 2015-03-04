@@ -68,4 +68,16 @@
         android:numeric="integer"
         android:selectable="true"
         android:title="画数"></EditTextPreference>
+    <ListPreference
+        android:defaultValue="DEFAULT"
+        android:entries="@array/fontFamily"
+        android:entryValues="@array/fontFamily"
+        android:key="fontFamily"
+        android:title="フォントファミリー"></ListPreference>
+    <ListPreference
+        android:defaultValue="NORMAL"
+        android:entries="@array/fontStyle"
+        android:entryValues="@array/fontStyle"
+        android:key="fontStyle"
+        android:title="フォントスタイル"></ListPreference>
 </PreferenceScreen>

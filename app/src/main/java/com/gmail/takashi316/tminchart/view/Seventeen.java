@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -40,12 +41,14 @@ public class Seventeen extends View {
     private int color;
     private boolean touched = false;
     private String string;
+    private Typeface typeface;
 
     static final private Random random = new Random();
     static DisplayMetrics displayMetrics;
 
-    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string, int n_stroke) {
+    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string, int n_stroke, Typeface typeface) {
         super(context);
+        this.typeface = typeface;
 
         mTextPaint = new TextPaint();
         mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -70,6 +73,7 @@ public class Seventeen extends View {
         this.color = Color.rgb((int) Math.max(intensity, 0), (int) Math.max(intensity, 0), (int) Math.max(intensity, 0));
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
+        this.mTextPaint.setTypeface(this.typeface);
         if (string == null) {
             this.string = getTconString(n_stroke);
         } else {
@@ -119,7 +123,7 @@ public class Seventeen extends View {
                 context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getFloat(R.styleable.Seventeen_intensity, 1),
                 null,
                 context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getString(R.styleable.Seventeen_string),
-                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getInt(R.styleable.Seventeen_nStroke, 17));
+                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getInt(R.styleable.Seventeen_nStroke, 17), Typeface.MONOSPACE);
     }//Seventeen
 
     private void invalidateTextPaintAndMeasurements() {
