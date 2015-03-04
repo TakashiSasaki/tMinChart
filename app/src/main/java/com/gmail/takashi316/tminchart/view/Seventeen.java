@@ -29,7 +29,6 @@ import java.util.Random;
 public class Seventeen extends View {
 
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
-    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
 
     private TextPaint mTextPaint;
@@ -119,18 +118,12 @@ public class Seventeen extends View {
     }//Seventeen
 
     private void init(AttributeSet attrs, int defStyle) {
-        // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.Konoji, defStyle, 0);
+        final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0);
+        this.string = a.getString(R.styleable.Seventeen_string);
 
         mExampleColor = a.getColor(
                 R.styleable.Konoji_exampleColor,
                 mExampleColor);
-        // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
-        // values that should fall on pixel boundaries.
-        mExampleDimension = a.getDimension(
-                R.styleable.Konoji_exampleDimension,
-                mExampleDimension);
 
         if (a.hasValue(R.styleable.Konoji_exampleDrawable)) {
             mExampleDrawable = a.getDrawable(
@@ -151,7 +144,6 @@ public class Seventeen extends View {
 
     private void invalidateTextPaintAndMeasurements() {
         try {
-            mTextPaint.setTextSize(mExampleDimension);
             mTextPaint.setColor(mExampleColor);
             mTextWidth = mTextPaint.measureText(this.string);
 
@@ -229,26 +221,6 @@ public class Seventeen extends View {
      */
     public void setExampleColor(int exampleColor) {
         mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
-    }
-
-    /**
-     * Gets the example dimension attribute value.
-     *
-     * @return The example dimension attribute value.
-     */
-    public float getExampleDimension() {
-        return mExampleDimension;
-    }
-
-    /**
-     * Sets the view's example dimension attribute value. In the example view, this dimension
-     * is the font size.
-     *
-     * @param exampleDimension The example dimension attribute value to use.
-     */
-    public void setExampleDimension(float exampleDimension) {
-        mExampleDimension = exampleDimension;
         invalidateTextPaintAndMeasurements();
     }
 
