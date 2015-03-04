@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <declare-styleable name="Seventeen">
+        <attr name="widthInch" format="float" />
+        <attr name="intensity" format="float" />
+        <attr name="string" format="string" />
+        <attr name="nStroke" format="integer" />
+        <attr name="fontStyle" format="string">
+            <enum name="NORMAL" value="NORMAL" />
+            <enum name="BOLD" value="BOLD" />
+            <enum name="ITALIC" value="ITALIC" />
+            <enum name="BOLD_ITALIC" value="BOLD_ITALIC" />
+        </attr>
+        <attr name="fontFamily" format="string">
+            <enum name="DEFAULT" value="DEFAULT" />
+            <enum name="DEFAULT_BOLD" value="DEFAULT_BOLD" />
+            <enum name="MONOSPACE" value="MONOSPACE" />
+            <enum name="SANS_SERIF" value="SANS_SERIF" />
+            <enum name="SERIF" value="SERIF" />
+        </attr>
+    </declare-styleable>
+</resources>

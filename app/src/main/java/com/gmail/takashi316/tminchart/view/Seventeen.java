@@ -108,17 +108,17 @@ public class Seventeen extends View {
     public Seventeen(Context context) {
         super(context);
         init(null, 0);
-    }
+    }//Seventeen
 
     public Seventeen(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, 0);
-    }
+    }//Seventeen
 
     public Seventeen(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
-    }
+    }//Seventeen
 
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
