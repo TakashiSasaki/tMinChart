@@ -28,7 +28,6 @@ import java.util.Random;
 
 public class Seventeen extends View {
 
-    private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private Drawable mExampleDrawable;
 
     private TextPaint mTextPaint;
@@ -121,10 +120,6 @@ public class Seventeen extends View {
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0);
         this.string = a.getString(R.styleable.Seventeen_string);
 
-        mExampleColor = a.getColor(
-                R.styleable.Konoji_exampleColor,
-                mExampleColor);
-
         if (a.hasValue(R.styleable.Konoji_exampleDrawable)) {
             mExampleDrawable = a.getDrawable(
                     R.styleable.Konoji_exampleDrawable);
@@ -144,7 +139,7 @@ public class Seventeen extends View {
 
     private void invalidateTextPaintAndMeasurements() {
         try {
-            mTextPaint.setColor(mExampleColor);
+            mTextPaint.setColor(this.color);
             mTextWidth = mTextPaint.measureText(this.string);
 
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
@@ -203,26 +198,6 @@ public class Seventeen extends View {
             mExampleDrawable.draw(canvas);
         }//if
     }//onDraw_
-
-    /**
-     * Gets the example color attribute value.
-     *
-     * @return The example color attribute value.
-     */
-    public int getExampleColor() {
-        return mExampleColor;
-    }
-
-    /**
-     * Sets the view's example color attribute value. In the example view, this color
-     * is the font color.
-     *
-     * @param exampleColor The example color attribute value to use.
-     */
-    public void setExampleColor(int exampleColor) {
-        mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
-    }
 
     /**
      * Gets the example drawable attribute value.
