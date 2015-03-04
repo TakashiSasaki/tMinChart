@@ -48,7 +48,14 @@ public class Seventeen extends View {
 
     public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string, int n_stroke) {
         super(context);
-        init(null, 0);
+
+        mTextPaint = new TextPaint();
+        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setTextAlign(Paint.Align.LEFT);
+
+        // Update TextPaint and text measurements from attributes
+        invalidateTextPaintAndMeasurements();
+
         if (displayMetrics == null) {
             final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             final Display display = window_manager.getDefaultDisplay();
@@ -102,40 +109,20 @@ public class Seventeen extends View {
     }// custom constructor
 
     public Seventeen(Context context) {
-        super(context);
-        init(null, 0);
+        this(context, null);
     }//Seventeen
 
     public Seventeen(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(attrs, 0);
+        this(context, attrs, 0);
     }//Seventeen
 
     public Seventeen(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        this(context, context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getInt(R.styleable.Seventeen_widthInch, 1),
+                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getFloat(R.styleable.Seventeen_intensity, 1),
+                null,
+                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getString(R.styleable.Seventeen_string),
+                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getInt(R.styleable.Seventeen_nStroke, 17));
     }//Seventeen
-
-    private void init(AttributeSet attrs, int defStyle) {
-        final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0);
-        this.string = a.getString(R.styleable.Seventeen_string);
-
-        if (a.hasValue(R.styleable.Konoji_exampleDrawable)) {
-            mExampleDrawable = a.getDrawable(
-                    R.styleable.Konoji_exampleDrawable);
-            mExampleDrawable.setCallback(this);
-        }
-
-        a.recycle();
-
-        // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
-
-        // Update TextPaint and text measurements from attributes
-        invalidateTextPaintAndMeasurements();
-    }
 
     private void invalidateTextPaintAndMeasurements() {
         try {
