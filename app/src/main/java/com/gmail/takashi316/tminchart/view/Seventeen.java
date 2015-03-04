@@ -28,7 +28,6 @@ import java.util.Random;
 
 public class Seventeen extends View {
 
-    private String mExampleString = ""; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
@@ -44,7 +43,7 @@ public class Seventeen extends View {
     private int textSize;
     private int color;
     private boolean touched = false;
-    private String tconString;
+    private String string;
 
     static final private Random random = new Random();
     static DisplayMetrics displayMetrics;
@@ -65,14 +64,13 @@ public class Seventeen extends View {
         this.xpixels = (float) (this.xdpi * this.widthInch);
         this.ypixels = (float) (this.ydpi * this.widthInch);
         this.pixels = Math.max(xpixels, ypixels);
-        this.mExampleString = "a";
         this.color = Color.rgb((int) Math.max(intensity, 0), (int) Math.max(intensity, 0), (int) Math.max(intensity, 0));
         this.mTextPaint.setColor(color);
         this.mTextPaint.setTextSize(pixels);
         if (string == null) {
-            this.tconString = getTconString(n_stroke);
+            this.string = getTconString(n_stroke);
         } else {
-            this.tconString = string;
+            this.string = string;
         }//if
 
         setOnClickListener(new OnClickListener() {
@@ -125,8 +123,6 @@ public class Seventeen extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.Konoji, defStyle, 0);
 
-        mExampleString = a.getString(
-                R.styleable.Konoji_exampleString);
         mExampleColor = a.getColor(
                 R.styleable.Konoji_exampleColor,
                 mExampleColor);
@@ -157,7 +153,7 @@ public class Seventeen extends View {
         try {
             mTextPaint.setTextSize(mExampleDimension);
             mTextPaint.setColor(mExampleColor);
-            mTextWidth = mTextPaint.measureText(mExampleString);
+            mTextWidth = mTextPaint.measureText(this.string);
 
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
             mTextHeight = fontMetrics.bottom;
@@ -174,7 +170,7 @@ public class Seventeen extends View {
         final Paint.FontMetrics font_metrics = mTextPaint.getFontMetrics();
         final float width_margin = (canvas_width - pixels) / 2;
         final float height_margin = (canvas_height - pixels) / 2;
-        canvas.drawText(this.tconString, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
+        canvas.drawText(this.string, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
         if (touched) {
             //this.setBackgroundColor(Color.RED);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
@@ -203,7 +199,7 @@ public class Seventeen extends View {
         int contentHeight = getHeight() - paddingTop - paddingBottom;
 
         // Draw the text.
-        canvas.drawText(mExampleString,
+        canvas.drawText(string,
                 paddingLeft + (contentWidth - mTextWidth) / 2,
                 paddingTop + (contentHeight + mTextHeight) / 2,
                 mTextPaint);
@@ -215,26 +211,6 @@ public class Seventeen extends View {
             mExampleDrawable.draw(canvas);
         }//if
     }//onDraw_
-
-    /**
-     * Gets the example string attribute value.
-     *
-     * @return The example string attribute value.
-     */
-    public String getExampleString() {
-        return mExampleString;
-    }
-
-    /**
-     * Sets the view's example string attribute value. In the example view, this string
-     * is the text to draw.
-     *
-     * @param exampleString The example string attribute value to use.
-     */
-    public void setExampleString(String exampleString) {
-        mExampleString = exampleString;
-        invalidateTextPaintAndMeasurements();
-    }
 
     /**
      * Gets the example color attribute value.

@@ -6,18 +6,18 @@
         <attr name="intensity" format="float" />
         <attr name="string" format="string" />
         <attr name="nStroke" format="integer" />
-        <attr name="fontStyle" format="string">
-            <enum name="NORMAL" value="NORMAL" />
-            <enum name="BOLD" value="BOLD" />
-            <enum name="ITALIC" value="ITALIC" />
-            <enum name="BOLD_ITALIC" value="BOLD_ITALIC" />
+        <attr name="fontStyle">
+            <enum name="NORMAL" value="0" />
+            <enum name="BOLD" value="1" />
+            <enum name="ITALIC" value="2" />
+            <enum name="BOLD_ITALIC" value="3" />
         </attr>
         <attr name="fontFamily" format="string">
-            <enum name="DEFAULT" value="DEFAULT" />
-            <enum name="DEFAULT_BOLD" value="DEFAULT_BOLD" />
-            <enum name="MONOSPACE" value="MONOSPACE" />
-            <enum name="SANS_SERIF" value="SANS_SERIF" />
-            <enum name="SERIF" value="SERIF" />
+            <enum name="DEFAULT" value="0" />
+            <enum name="DEFAULT_BOLD" value="1" />
+            <enum name="MONOSPACE" value="2" />
+            <enum name="SANS_SERIF" value="3" />
+            <enum name="SERIF" value="4" />
         </attr>
     </declare-styleable>
 </resources>
