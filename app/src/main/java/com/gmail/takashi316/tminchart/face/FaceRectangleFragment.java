@@ -17,6 +17,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gmail.takashi316.tminchart.R;
+
 
 /**
  * A simple {@link android.app.Fragment} subclass.

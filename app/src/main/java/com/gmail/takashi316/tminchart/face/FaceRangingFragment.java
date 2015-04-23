@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.gmail.takashi316.tminchart.R;
 
 /**
  * A simple {@link android.app.Fragment} subclass.
