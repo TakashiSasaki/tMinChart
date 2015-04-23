@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Random;
 import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 
 
 /**
@@ -33,6 +35,7 @@ public class AmidaFragment extends Fragment {
 
     LinearLayout linearLayoutAmidaStrips;
     Random random = new Random();
+    Button buttonCloseAmida;
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,8 +60,7 @@ public class AmidaFragment extends Fragment {
         if (getArguments() != null) {
             //mParam1 = getArguments().getString(ARG_PARAM1);
             //mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        }    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +68,14 @@ public class AmidaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_amida, container, false);
         this.linearLayoutAmidaStrips = (LinearLayout) view.findViewById(R.id.linearLayoutAmidaStrips);
+        this.buttonCloseAmida = (Button)view.findViewById(R.id.buttonCloseAmida);
+        this.buttonCloseAmida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(4);
+            }
+        });
+
         ArrayList<AmidaStripLayout> amida_strip_layouts = new ArrayList<AmidaStripLayout>();
         int[] left_ladders;
         int[] right_ladders = new int[3];
@@ -82,7 +92,7 @@ public class AmidaFragment extends Fragment {
         amida_strip_layouts.add(amida_strip_layout);
         amida_strip_layout.setOnEndPointClicked(l);
         this.linearLayoutAmidaStrips.addView(amida_strip_layout);
-        for (int i = 2; i <= 8; ++i) {
+        for (int i = 2; i <= 10; ++i) {
             left_ladders = right_ladders;
             right_ladders = new int[3];
             for (int j = 0; j < 3; ++j) {
