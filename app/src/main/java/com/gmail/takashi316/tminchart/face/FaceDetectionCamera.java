@@ -37,7 +37,7 @@ public class FaceDetectionCamera extends FrontCamera {
         return theInstance;
     }
 
-    public FaceDetectionCamera() {
+    private FaceDetectionCamera() {
         super();
         final int max_faces = this.getCamera().getParameters().getMaxNumDetectedFaces();
         Log.d(null, "max_faces = " + max_faces);
