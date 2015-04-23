@@ -1,6 +1,7 @@
 package com.gmail.takashi316.tminchart.amida;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ import com.gmail.takashi316.tminchart.R;
  * Use the {@link AmidaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AmidaFragment extends android.support.v4.app.Fragment {
+public class AmidaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,7 +82,7 @@ public class AmidaFragment extends android.support.v4.app.Fragment {
         amida_strip_layouts.add(amida_strip_layout);
         amida_strip_layout.setOnEndPointClicked(l);
         this.linearLayoutAmidaStrips.addView(amida_strip_layout);
-        for (int i = 2; i <= 5; ++i) {
+        for (int i = 2; i <= 8; ++i) {
             left_ladders = right_ladders;
             right_ladders = new int[3];
             for (int j = 0; j < 3; ++j) {
