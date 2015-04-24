@@ -110,10 +110,12 @@ public class StripeView extends View {
                     public void run() {
                         try {
                             for (StripeView stripe_view : exclusiveStripeViews) {
-                                stripe_view.invalidate();
-                            }
+                                if (stripe_view != this_stripe_view) {
+                                    stripe_view.invalidate();
+                                }//if
+                            }//for
                         } catch (NullPointerException e) {
-                        }//try
+                        }//try*/
                         Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                         if (touched) {
                             vibrator.vibrate(new long[]{0, 60, 60, 60}, -1);

@@ -87,7 +87,7 @@ public class StripeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 onFragmentInteractionListener.onStripeFinished();
-            }
+            }//onClick
         });
 
         final int TEXT_SIZE = 50;
