@@ -202,10 +202,17 @@ public class StripeView extends View {
 
         final Paint paint = new Paint();
         paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStrokeWidth(1);
         if (this.horizontal) {
             for (int i = 0; i < horizontal_gaps; ++i) {
                 if (i % 2 == 1) {
-                    canvas.drawRect(xgap * i, 1, xgap * (i + 1) - 1, canvas.getHeight() - 1, paint);
+                    int left = xgap * i;
+                    int top = 1;
+                    int right = xgap * (i + 1) - 1;
+                    int bottom = canvas.getHeight() - 1;
+                    Log.d(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
+                    canvas.drawRect(left, top, right, bottom, paint);
                 }//if
             }//for
         }//if
