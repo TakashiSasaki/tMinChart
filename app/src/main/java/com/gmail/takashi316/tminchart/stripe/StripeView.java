@@ -98,9 +98,10 @@ public class StripeView extends View {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                final View this_stripe_view = v;
                 if (exclusiveStripeViews != null) {
-                    for (StripeView stripe_view : exclusiveStripeViews) {
-                        stripe_view.touched = false;
+                    for (StripeView other_stripe_view : exclusiveStripeViews) {
+                        other_stripe_view.touched = false;
                     }//for
                 }//if
                 touched = true;
@@ -126,6 +127,7 @@ public class StripeView extends View {
                             // ToneGenerator is unavailable on some emulator devices.
                             Log.e(getClass().getSimpleName(), e.getMessage());
                         }//try
+                        this_stripe_view.invalidate();
                     }//run
                 });
             }//onClick
