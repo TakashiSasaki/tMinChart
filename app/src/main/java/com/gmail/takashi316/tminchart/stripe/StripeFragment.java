@@ -123,7 +123,8 @@ public class StripeFragment extends Fragment {
             for (int column = 1; column < COLUMNS; ++column) {
                 StripeView stripe_view = new StripeView(context, 0.1f, 1.0f, stripe_views);
                 stripe_views.add(stripe_view);
-            }
+                table_row.addView(stripe_view);
+            }//for
             this.tableLayoutStripe.addView(table_row);
         }//for
         return view;
@@ -133,8 +134,8 @@ public class StripeFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
+        }//if
+    }//onButtonPressed
 
     @Override
     public void onAttach(Activity activity) {

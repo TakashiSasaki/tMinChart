@@ -150,7 +150,8 @@ public class StripeView extends View {
         if (width_mode == MeasureSpec.UNSPECIFIED) {
             // it corresponds to setting length to  1000000px on layout designer
             Log.d(this.getClass().getSimpleName(), "width_mode = MeasureSpec.UNSPECIFIED");
-            width_size = 100;
+            //width_size = 100;
+            width_size = (int) (getResources().getDisplayMetrics().xdpi * this.width_inch);
         } else if (width_mode == MeasureSpec.EXACTLY) {
             //it corresponds to setting length to 10px or match_parent on layout designer
             Log.d(this.getClass().getSimpleName(), "width_mode = MeasureSpec.EXACTLY");
@@ -167,7 +168,8 @@ public class StripeView extends View {
 
         if (height_mode == MeasureSpec.UNSPECIFIED) {
             Log.d(this.getClass().getSimpleName(), "height_mode = MeasureSpec.UNSPECIFIED");
-            height_size = 100;
+            //height_size = 100;
+            height_size = (int) (getResources().getDisplayMetrics().ydpi * this.width_inch);
         } else if (height_mode == MeasureSpec.EXACTLY) {
             Log.d(this.getClass().getSimpleName(), "height_mode = MeasureSpec.EXACTLY");
         } else if (height_mode == MeasureSpec.AT_MOST) {
@@ -177,7 +179,7 @@ public class StripeView extends View {
             Log.d(this.getClass().getSimpleName(), "height_mode is unknown");
             height_size = 400;
         }//if
-
+        Log.d(this.getClass().getSimpleName(), "width_size=" + width_size + " height_size=" + height_size);
         setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }//onMeasure
