@@ -16,5 +16,8 @@
     <string name="action_settings">Settings</string>
     <string name="UploadButton">未送信レコードを送信し、クラウドにおける保存状態を更新する</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_stripe_view_test">StripeViewTestActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

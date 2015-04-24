@@ -88,8 +88,8 @@ public class Konoji extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.Konoji, defStyle, 0);
 
-        this.gapInch = a.getInt(R.styleable.Konoji_gap, 30);
-        this.orientation = a.getInt(R.styleable.Konoji_gap, 0);
+        this.gapInch = a.getInt(R.styleable.Konoji_gapInch, 30);
+        this.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
         mExampleString = a.getString(
@@ -143,7 +143,7 @@ public class Konoji extends View {
                         try {
                             ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
                             tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             // ToneGenerator is unavailable on some emulator devices.
                             Log.e(getClass().getSimpleName(), e.getMessage());
                         }//try

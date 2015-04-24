@@ -5,7 +5,7 @@
         <attr name="exampleColor" format="color" />
         <attr name="exampleDrawable" format="color|reference" />
         <attr name="contrast" format="float"/>
-        <attr name="gap" format="integer"/>
+        <attr name="gapInch" format="float"/>
         <attr name="orientation" format="integer"/>
         <attr name="touched" format="boolean"/>
     </declare-styleable>
