@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gmail.takashi316.tminchart.stripe.StripeFragment">
+
+    <ScrollView
+        android:id="@+id/scrollViewStripe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:id="@+id/tableLayoutStripe"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|top"></TableLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttonFinishStripe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:text="計測「Stripe」を終了"
+        android:textSize="30dp" />
+
+
+</FrameLayout>
