@@ -107,9 +107,12 @@ public class StripeView extends View {
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     public void run() {
-                        for (StripeView stripe_view : exclusiveStripeViews) {
-                            stripe_view.invalidate();
-                        }
+                        try {
+                            for (StripeView stripe_view : exclusiveStripeViews) {
+                                stripe_view.invalidate();
+                            }
+                        } catch (NullPointerException e) {
+                        }//try
                         Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                         if (touched) {
                             vibrator.vibrate(new long[]{0, 60, 60, 60}, -1);
