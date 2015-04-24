@@ -1,13 +1,15 @@
 package com.gmail.takashi316.tminchart.stripe;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gmail.takashi316.tminchart.R;
 
-public class StripeViewTestActivity extends Activity {
+public class StripeViewTestActivity extends Activity
+        implements StripeFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +39,15 @@ public class StripeViewTestActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onStripeFinished() {
+
     }
 }

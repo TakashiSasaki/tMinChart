@@ -86,7 +86,7 @@ public class StripeFragment extends Fragment {
         this.buttonFinishStripe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFragmentInteractionListener.finishStripe();
+                onFragmentInteractionListener.onStripeFinished();
             }
         });
 
@@ -167,7 +167,7 @@ public class StripeFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
 
-        public void finishStripe();
+        public void onStripeFinished();
     }
 
 }
