@@ -189,17 +189,6 @@ public class StripeView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (touched) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
-                this.setBackgroundDrawable(frame);
-            } else {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
-                this.setBackground(frame);
-            }//if
-        } else {
-            this.setBackgroundColor(Color.BLACK);
-        }//if
 
         final int xgap = (int) (xdpi * gapInch);
         final int ygap = (int) (ydpi * gapInch);
@@ -217,19 +206,19 @@ public class StripeView extends View {
         white_paint.setStrokeWidth(1);
 
         if (this.horizontal) {
-            for (int i = 0; i < horizontal_gaps; ++i) {
+            for (int i = 1; i < horizontal_gaps; ++i) {
                 if (i % 2 == 0) {
                     int left = xgap * i;
-                    int top = xgap / 2;
+                    int top = xgap;
                     int right = xgap * (i + 1) - 1;
-                    int bottom = canvas.getHeight() - xgap / 2;
+                    int bottom = canvas.getHeight() - 50;
                     Log.d(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, black_paint);
                 } else {
                     int left = xgap * i;
-                    int top = xgap / 2;
+                    int top = xgap;
                     int right = xgap * (i + 1) - 1;
-                    int bottom = canvas.getHeight() - xgap / 2;
+                    int bottom = canvas.getHeight() - 50;
                     Log.d(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, white_paint);
                 }
@@ -237,14 +226,35 @@ public class StripeView extends View {
         }//if
 
         if (this.vertical) {
-            for (int i = 0; i < vertical_gaps; ++i) {
+            for (int i = 1; i < vertical_gaps; ++i) {
                 if (i % 2 == 0) {
-                    canvas.drawRect(1, ygap * i, canvas.getWidth() - 1, ygap * (i + 1) - 1, white_paint);
+                    final int left = 1;
+                    final int right = ygap * i;
+                    final int top = canvas.getWidth() - 1;
+                    final int bottom = ygap * (i + 1) - 1;
+                    canvas.drawRect(left, top, right, bottom, black_paint);
                 } else {
-                    canvas.drawRect(1, ygap * i, canvas.getWidth() - 1, ygap * (i + 1) - 1, white_paint);
+                    final int left = 1;
+                    final int right = ygap * i;
+                    final int top = canvas.getWidth() - 1;
+                    final int bottom = ygap * (i + 1) - 1;
+                    canvas.drawRect(left, top, right, bottom, white_paint);
                 }//if
             }//for
         }//if
+
+        if (touched) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                this.setBackgroundDrawable(frame);
+            } else {
+                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                this.setBackground(frame);
+            }//if
+        } else {
+            this.setBackgroundColor(Color.BLACK);
+        }//if
+
     }//onDraw
 
     @Override
