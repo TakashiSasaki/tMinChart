@@ -105,14 +105,15 @@ public class StripeView extends View {
                     }//for
                 }//if
                 touched = true;
+                //v.invalidate();
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     public void run() {
                         try {
                             for (StripeView stripe_view : exclusiveStripeViews) {
-                                if (stripe_view != this_stripe_view) {
-                                    stripe_view.invalidate();
-                                }//if
+                                //if (stripe_view != this_stripe_view) {
+                                stripe_view.invalidate();
+                                //}//if
                             }//for
                         } catch (NullPointerException e) {
                         }//try*/
@@ -129,7 +130,7 @@ public class StripeView extends View {
                             // ToneGenerator is unavailable on some emulator devices.
                             Log.e(getClass().getSimpleName(), e.getMessage());
                         }//try
-                        this_stripe_view.invalidate();
+                        //this_stripe_view.invalidate();
                     }//run
                 });
             }//onClick
@@ -197,8 +198,7 @@ public class StripeView extends View {
                 this.setBackground(frame);
             }//if
         } else {
-            this.setBackgroundColor(Color.WHITE);
-            //konoji_paint.setColor(Color.BLACK);
+            this.setBackgroundColor(Color.BLACK);
         }//if
 
         final int xgap = (int) (xdpi * gapInch);
@@ -206,27 +206,42 @@ public class StripeView extends View {
         final int horizontal_gaps = canvas.getWidth() / xgap;
         final int vertical_gaps = canvas.getHeight() / ygap;
 
-        final Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setStrokeWidth(1);
+        final Paint black_paint = new Paint();
+        black_paint.setColor(Color.BLACK);
+        black_paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        black_paint.setStrokeWidth(1);
+
+        final Paint white_paint = new Paint();
+        white_paint.setColor(Color.WHITE);
+        white_paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        white_paint.setStrokeWidth(1);
+
         if (this.horizontal) {
             for (int i = 0; i < horizontal_gaps; ++i) {
-                if (i % 2 == 1) {
+                if (i % 2 == 0) {
                     int left = xgap * i;
-                    int top = 1;
+                    int top = xgap / 2;
                     int right = xgap * (i + 1) - 1;
-                    int bottom = canvas.getHeight() - 1;
+                    int bottom = canvas.getHeight() - xgap / 2;
                     Log.d(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
-                    canvas.drawRect(left, top, right, bottom, paint);
-                }//if
+                    canvas.drawRect(left, top, right, bottom, black_paint);
+                } else {
+                    int left = xgap * i;
+                    int top = xgap / 2;
+                    int right = xgap * (i + 1) - 1;
+                    int bottom = canvas.getHeight() - xgap / 2;
+                    Log.d(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
+                    canvas.drawRect(left, top, right, bottom, white_paint);
+                }
             }//for
         }//if
 
         if (this.vertical) {
             for (int i = 0; i < vertical_gaps; ++i) {
-                if (i % 2 == 1) {
-                    canvas.drawRect(1, ygap * i, canvas.getWidth() - 1, ygap * (i + 1) - 1, paint);
+                if (i % 2 == 0) {
+                    canvas.drawRect(1, ygap * i, canvas.getWidth() - 1, ygap * (i + 1) - 1, white_paint);
+                } else {
+                    canvas.drawRect(1, ygap * i, canvas.getWidth() - 1, ygap * (i + 1) - 1, white_paint);
                 }//if
             }//for
         }//if

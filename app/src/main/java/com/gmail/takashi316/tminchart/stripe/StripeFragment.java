@@ -91,8 +91,8 @@ public class StripeFragment extends Fragment {
         });
 
         final int TEXT_SIZE = 50;
-        final int COLUMNS = 10;
-        final int ROWS = 10;
+        final int COLUMNS = 9;
+        final int ROWS = 8;
         final Context context = this.getActivity();
 
         TextView text_view_left_top = new TextView(context);
