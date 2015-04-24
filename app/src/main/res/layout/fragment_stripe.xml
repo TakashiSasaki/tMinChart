@@ -9,11 +9,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TableLayout
-            android:id="@+id/tableLayoutStripe"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="left|top"></TableLayout>
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tableLayoutStripe"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="left|top"></TableLayout>
+        </HorizontalScrollView>
     </ScrollView>
 
     <Button
