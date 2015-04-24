@@ -13,13 +13,24 @@
         android:id="@+id/linearLayoutStripeViewTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
 
-    <view
-        android:id="@+id/view2"
-        class="com.gmail.takashi316.tminchart.stripe.StripeView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:background="#0000FF" />
+        <view
+            android:id="@+id/view2"
+            class="com.gmail.takashi316.tminchart.stripe.StripeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:background="#0000FF"
+            app:gapInch="0.1"
+            app:horizontal="false" />
 
+        <view
+            android:id="@+id/view2"
+            class="com.gmail.takashi316.tminchart.stripe.StripeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:background="#00FF00"
+            app:gapInch="0.2"
+            app:vertical="false" />
+    </LinearLayout>
 </RelativeLayout>

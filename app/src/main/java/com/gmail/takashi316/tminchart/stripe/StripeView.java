@@ -226,6 +226,11 @@ public class StripeView extends View {
         }//if
     }//onDraw
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+    }//onLayout
+
     private void fillCanvas(Canvas canvas, Paint paint) {
         canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
     }//fillCanvas
