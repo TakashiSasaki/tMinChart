@@ -91,8 +91,8 @@ public class StripeFragment extends Fragment {
         });
 
         final int TEXT_SIZE = 50;
-        final int COLUMNS = 9;
-        final int ROWS = 8;
+        final int COLUMNS = 20;
+        final int ROWS = 12;
         final Context context = this.getActivity();
 
         TextView text_view_left_top = new TextView(context);
@@ -121,7 +121,7 @@ public class StripeFragment extends Fragment {
             table_row.addView(text_view_row_index);
             ArrayList<StripeView> stripe_views = new ArrayList<StripeView>();
             for (int column = 1; column < COLUMNS; ++column) {
-                StripeView stripe_view = new StripeView(context, 0.1f, 1.0f, stripe_views);
+                StripeView stripe_view = new StripeView(context, 0.01f*(ROWS-r), 1.5f, stripe_views,  255.0 * Math.pow(0.80, column-1));
                 stripe_views.add(stripe_view);
                 table_row.addView(stripe_view);
             }//for
