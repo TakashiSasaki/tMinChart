@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -21,19 +23,14 @@ import com.gmail.takashi316.tminchart.R;
 import java.util.ArrayList;
 
 
-/**
- * TODO: document your custom view class.
- */
 public class StripeView extends View {
 
-    private int backgroundColor;
     private float gapInch;
     private float width_inch;
     private float xdpi;
     private float ydpi;
     private boolean horizontal = false;
     private boolean vertical = true;
-    private int contrast;
     private boolean touched = false;
     private ArrayList<StripeView> stripeViews;
     private DisplayDpi displayDpi;
@@ -72,9 +69,7 @@ public class StripeView extends View {
         final TypedArray typed_array = getContext().obtainStyledAttributes(
                 attrs, R.styleable.StripeView, defStyle, 0);
 
-        this.backgroundColor = typed_array.getColor(R.styleable.StripeView_background, Color.BLUE);
-        this.contrast = typed_array.getInt(R.styleable.StripeView_contrast, 255);
-        this.gapInch = typed_array.getFloat(R.styleable.StripeView_gapInch, 0.1f);
+        this.setGapInch(typed_array.getFloat(R.styleable.StripeView_gapInch, 0.1f));
         this.horizontal = typed_array.getBoolean(R.styleable.StripeView_horizontal, true);
         this.vertical = typed_array.getBoolean(R.styleable.StripeView_vertical, true);
         this.touched = typed_array.getBoolean(R.styleable.StripeView_touched, false);
@@ -90,14 +85,14 @@ public class StripeView extends View {
                     }//for
                 }//if
                 touched = true;
-                //v.invalidate();
+                v.invalidate();
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     public void run() {
                         try {
                             for (StripeView stripe_view : stripeViews) {
                                 //if (stripe_view != this_stripe_view) {
-                                stripe_view.invalidate();
+                                //stripe_view.invalidate();
                                 //}//if
                             }//for
                         } catch (NullPointerException e) {
@@ -150,37 +145,37 @@ public class StripeView extends View {
 
         if (width_mode == MeasureSpec.UNSPECIFIED) {
             // it corresponds to setting length to  1000000px on layout designer
-            Log.d(this.getClass().getSimpleName(), "width_mode = MeasureSpec.UNSPECIFIED");
+            Log.v(this.getClass().getSimpleName(), "width_mode = MeasureSpec.UNSPECIFIED");
             //width_size = 100;
             width_size = (int) (getResources().getDisplayMetrics().xdpi * this.width_inch);
         } else if (width_mode == MeasureSpec.EXACTLY) {
             //it corresponds to setting length to 10px or match_parent on layout designer
-            Log.d(this.getClass().getSimpleName(), "width_mode = MeasureSpec.EXACTLY");
+            Log.v(this.getClass().getSimpleName(), "width_mode = MeasureSpec.EXACTLY");
             //width_size = 200;
         } else if (width_mode == MeasureSpec.AT_MOST) {
             //it corresponds to setting length to wrap_content on layout designer
-            Log.d(this.getClass().getSimpleName(), "width_mode = MeasureSpec.AT_MOST");
+            Log.v(this.getClass().getSimpleName(), "width_mode = MeasureSpec.AT_MOST");
             //width_size = 300;
             width_size = (int) (getResources().getDisplayMetrics().xdpi);
         } else {
-            Log.d(this.getClass().getSimpleName(), "width_mode is unknown");
+            Log.v(this.getClass().getSimpleName(), "width_mode is unknown");
             width_size = 400;
         }//if
 
         if (height_mode == MeasureSpec.UNSPECIFIED) {
-            Log.d(this.getClass().getSimpleName(), "height_mode = MeasureSpec.UNSPECIFIED");
+            Log.v(this.getClass().getSimpleName(), "height_mode = MeasureSpec.UNSPECIFIED");
             //height_size = 100;
             height_size = (int) (getResources().getDisplayMetrics().ydpi * this.width_inch);
         } else if (height_mode == MeasureSpec.EXACTLY) {
-            Log.d(this.getClass().getSimpleName(), "height_mode = MeasureSpec.EXACTLY");
+            Log.v(this.getClass().getSimpleName(), "height_mode = MeasureSpec.EXACTLY");
         } else if (height_mode == MeasureSpec.AT_MOST) {
-            Log.d(this.getClass().getSimpleName(), "height_mode = MeasureSpec.AT_MOST");
+            Log.v(this.getClass().getSimpleName(), "height_mode = MeasureSpec.AT_MOST");
             height_size = (int) (getResources().getDisplayMetrics().ydpi);
         } else {
-            Log.d(this.getClass().getSimpleName(), "height_mode is unknown");
+            Log.v(this.getClass().getSimpleName(), "height_mode is unknown");
             height_size = 400;
         }//if
-        Log.d(this.getClass().getSimpleName(), "width_size=" + width_size + " height_size=" + height_size);
+        Log.v(this.getClass().getSimpleName(), "width_size=" + width_size + " height_size=" + height_size);
         setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }//onMeasure
@@ -212,14 +207,14 @@ public class StripeView extends View {
                     int left = xgap;
                     int bottom = xgap * (i + 1) - 1;
                     int right = canvas.getWidth() - 50;
-                    Log.d(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
+                    Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, black_paint);
                 } else {
                     int top = xgap * i;
                     int left = xgap;
                     int bottom = xgap * (i + 1) - 1;
                     int right = canvas.getWidth() - 50;
-                    Log.d(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
+                    Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, white_paint);
                 }
             }//for
@@ -246,16 +241,39 @@ public class StripeView extends View {
         if (touched) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                 final Drawable frame = getResources().getDrawable(R.drawable.frame);
-                this.setBackgroundDrawable(frame);
+                this.drawFrame(canvas, Color.RED);
+                //this.setBackgroundDrawable(frame);
             } else {
                 final Drawable frame = getResources().getDrawable(R.drawable.frame);
-                this.setBackground(frame);
+                this.drawFrame(canvas, Color.RED);
+                //this.setBackground(frame);
             }//if
         } else {
             this.setBackgroundColor(Color.BLACK);
+            this.eraseFrame(canvas);
         }//if
 
     }//onDraw
+
+    private void drawFrame(Canvas canvas, int color) {
+        Paint paint = new Paint();
+        paint.setColor(color);
+        this.drawFrame(canvas, paint);
+    }//drawFrame
+
+    private void drawFrame(Canvas canvas, Paint paint) {
+        canvas.drawRect(0, 0, this.getPaddingLeft(), this.getHeight() - 1, paint);
+        canvas.drawRect(0, 0, this.getWidth() - 1, this.getPaddingTop(), paint);
+        canvas.drawRect(this.getWidth() - this.getPaddingRight(), 0, this.getWidth() - 1, this.getHeight() - 1, paint);
+        canvas.drawRect(0, this.getHeight() - this.getPaddingBottom(), this.getWidth() - 1, this.getHeight() - 1, paint);
+    }//drawFrame
+
+    private void eraseFrame(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setColor(Color.TRANSPARENT);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        drawFrame(canvas, paint);
+    }//drawFrame
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {

@@ -118,6 +118,7 @@ public class StripeFragment extends Fragment {
                 stripe_view.setGapInch(0.01f * (ROWS - r));
                 stripe_view.setWidthInch(1.5f);
                 stripe_view.setIntensty(255.0 * Math.pow(0.80, column - 1));
+                stripe_view.setPadding(10, 10, 10, 10);
                 stripe_views.add(stripe_view);
                 table_row.addView(stripe_view);
             }//for
