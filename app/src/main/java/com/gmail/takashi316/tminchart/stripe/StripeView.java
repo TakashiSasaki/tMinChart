@@ -92,24 +92,18 @@ public class StripeView extends FrameView {
                         try {
                             for (StripeView stripe_view : stripeViews) {
                                 //if (stripe_view != this_stripe_view) {
-                                //stripe_view.invalidate();
+                                stripe_view.invalidate();
                                 //}//if
                             }//for
                         } catch (NullPointerException e) {
                         }//try*/
-                        Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+
                         if (touched) {
-                            vibrator.vibrate(new long[]{0, 60, 60, 60}, -1);
+                            vibrateTwice();
                         } else {
-                            vibrator.vibrate(new long[]{0, 100}, -1);
+                            vibrateOnce();
                         }//if
-                        try {
-                            ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
-                            tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
-                        } catch (Exception e) {
-                            // ToneGenerator is unavailable on some emulator devices.
-                            Log.e(getClass().getSimpleName(), e.getMessage());
-                        }//try
+                        beep();
                         //this_stripe_view.invalidate();
                     }//run
                 });
