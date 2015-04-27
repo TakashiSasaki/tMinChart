@@ -1,6 +1,5 @@
 package com.gmail.takashi316.tminchart.stripe;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -13,18 +12,13 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.gmail.takashi316.tminchart.DisplayDpi;
 import com.gmail.takashi316.tminchart.R;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Logger;
 
 
 /**
@@ -37,14 +31,12 @@ public class StripeView extends View {
     private float width_inch;
     private float xdpi;
     private float ydpi;
-    private boolean horizontal;
-    private boolean vertical;
+    private boolean horizontal = false;
+    private boolean vertical = true;
     private int contrast;
     private boolean touched = false;
-    static Random random = new Random();
-    private ArrayList<StripeView> exclusiveStripeViews;
+    private ArrayList<StripeView> stripeViews;
     private DisplayDpi displayDpi;
-    private double intensity;
     private int foregroundColor;
 
     public boolean isTouched() {
@@ -55,19 +47,6 @@ public class StripeView extends View {
         super(context);
         init(context, null, 0);
     }//StripeViewConstructor
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public StripeView(Context context, float gap_inch, float width_inch, ArrayList<StripeView> exclusive_stripe_views, double intensity) {
-        super(context);
-        init(context, null, 0);
-        this.gapInch = gap_inch;
-        this.width_inch = width_inch;
-        this.exclusiveStripeViews = exclusive_stripe_views;
-        this.horizontal = false;
-        this.vertical = true;
-        this.intensity = intensity;
-        this.foregroundColor = Color.rgb((int) Math.max(intensity, 0), (int) Math.max(intensity, 0), (int) Math.max(intensity, 0));
-    }//StripeView constructor
 
     public StripeView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -105,8 +84,8 @@ public class StripeView extends View {
             @Override
             public void onClick(View v) {
                 final View this_stripe_view = v;
-                if (exclusiveStripeViews != null) {
-                    for (StripeView other_stripe_view : exclusiveStripeViews) {
+                if (stripeViews != null) {
+                    for (StripeView other_stripe_view : stripeViews) {
                         other_stripe_view.touched = false;
                     }//for
                 }//if
@@ -116,7 +95,7 @@ public class StripeView extends View {
                 handler.post(new Runnable() {
                     public void run() {
                         try {
-                            for (StripeView stripe_view : exclusiveStripeViews) {
+                            for (StripeView stripe_view : stripeViews) {
                                 //if (stripe_view != this_stripe_view) {
                                 stripe_view.invalidate();
                                 //}//if
@@ -143,6 +122,21 @@ public class StripeView extends View {
         });
     }//init
 
+    public void setStripeViews(ArrayList<StripeView> stripe_views) {
+        this.stripeViews = stripe_views;
+    }//setStripeViews
+
+    public void setIntensty(double intensity) {
+        this.foregroundColor = Color.rgb((int) Math.max(intensity, 0), (int) Math.max(intensity, 0), (int) Math.max(intensity, 0));
+    }//setIntensity
+
+    public void setWidthInch(float width_inch) {
+        this.width_inch = width_inch;
+    }//setWidthInch
+
+    public void setGapInch(float gap_inch) {
+        this.gapInch = gap_inch;
+    }//setGapInch
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

@@ -37,6 +37,7 @@ import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
 import com.gmail.takashi316.tminchart.fragment.UploadFragment;
 import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
 import com.gmail.takashi316.tminchart.amida.AmidaFragment;
+import com.gmail.takashi316.tminchart.stripe.StripeFragment;
 
 import java.util.List;
 
@@ -52,6 +53,7 @@ public class MainActivity extends Activity
         UploadFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener,
         AmidaFragment.OnFragmentInteractionListener,
+        StripeFragment.OnFragmentInteractionListener,
         SensorEventListener {
 
     private static Class[] fragmentClasses = {UserInfoFragment.class, TminChartFragment.class,
@@ -124,6 +126,7 @@ public class MainActivity extends Activity
                 getString(R.string.TconChartFragment),
                 getString(R.string.TminChartFragment),
                 "Amida",
+                "Stripe",
                 getString(R.string.ResultFragment),
                 getString(R.string.ShowResultsFragment),
                 getString(R.string.UploadFragment),
@@ -171,21 +174,24 @@ public class MainActivity extends Activity
                 fragment = AmidaFragment.newInstance(30, 255);
                 break;
             case 4:
-                fragment = new ResultFragment();
+                fragment = StripeFragment.newInstance("abc", "def");
                 break;
             case 5:
-                fragment = new ShowResultsFragment();
+                fragment = new ResultFragment();
                 break;
             case 6:
-                fragment = new UploadFragment();
+                fragment = new ShowResultsFragment();
                 break;
             case 7:
-                fragment = new DisplayPropertyFragment();
+                fragment = new UploadFragment();
                 break;
             case 8:
-                fragment = SettingsFragment.newInstance();
+                fragment = new DisplayPropertyFragment();
                 break;
             case 9:
+                fragment = SettingsFragment.newInstance();
+                break;
+            case 10:
                 this.preferences.edit().clear().commit();
                 //PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.pref_tmin_chart, true);
                 return;
@@ -231,6 +237,11 @@ public class MainActivity extends Activity
     @Override
     public void onFragmentInteraction(Uri uri) {
     }//onFragmentInteraction
+
+    @Override
+    public void onStripeFinished() {
+        this.onNavigationDrawerItemSelected(5);
+    }
 
     @Override
     public void onEndPointClicked() {
