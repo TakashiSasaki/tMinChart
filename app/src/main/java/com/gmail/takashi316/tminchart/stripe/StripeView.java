@@ -23,7 +23,7 @@ import com.gmail.takashi316.tminchart.R;
 import java.util.ArrayList;
 
 
-public class StripeView extends View {
+public class StripeView extends FrameView {
 
     private float gapInch;
     private float width_inch;
@@ -254,26 +254,6 @@ public class StripeView extends View {
         }//if
 
     }//onDraw
-
-    private void drawFrame(Canvas canvas, int color) {
-        Paint paint = new Paint();
-        paint.setColor(color);
-        this.drawFrame(canvas, paint);
-    }//drawFrame
-
-    private void drawFrame(Canvas canvas, Paint paint) {
-        canvas.drawRect(0, 0, this.getPaddingLeft(), this.getHeight() - 1, paint);
-        canvas.drawRect(0, 0, this.getWidth() - 1, this.getPaddingTop(), paint);
-        canvas.drawRect(this.getWidth() - this.getPaddingRight(), 0, this.getWidth() - 1, this.getHeight() - 1, paint);
-        canvas.drawRect(0, this.getHeight() - this.getPaddingBottom(), this.getWidth() - 1, this.getHeight() - 1, paint);
-    }//drawFrame
-
-    private void eraseFrame(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setColor(Color.TRANSPARENT);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        drawFrame(canvas, paint);
-    }//drawFrame
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
