@@ -9,6 +9,7 @@ import android.graphics.PorterDuffXfermode;
 import android.media.ToneGenerator;
 import android.os.Vibrator;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class FrameView extends View {
@@ -32,10 +33,10 @@ public class FrameView extends View {
     }//drawFrame
 
     protected void drawFrame(Canvas canvas, Paint paint) {
-        canvas.drawRect(0, 0, this.getPaddingLeft(), this.getHeight() - 1, paint);
-        canvas.drawRect(0, 0, this.getWidth() - 1, this.getPaddingTop(), paint);
-        canvas.drawRect(this.getWidth() - this.getPaddingRight(), 0, this.getWidth() - 1, this.getHeight() - 1, paint);
-        canvas.drawRect(0, this.getHeight() - this.getPaddingBottom(), this.getWidth() - 1, this.getHeight() - 1, paint);
+        canvas.drawRect(0, 0, this.getPaddingLeft(), this.getHeight(), paint);
+        canvas.drawRect(this.getPaddingLeft(), 0, this.getWidth(), this.getPaddingTop(), paint);
+        canvas.drawRect(this.getWidth() - this.getPaddingRight(), 0, this.getWidth(), this.getHeight(), paint);
+        canvas.drawRect(this.getPaddingLeft(), this.getHeight() - this.getPaddingBottom(), this.getWidth(), this.getHeight(), paint);
     }//drawFrame
 
     protected void eraseFrame(Canvas canvas) {

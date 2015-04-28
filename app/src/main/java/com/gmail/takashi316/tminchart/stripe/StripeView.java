@@ -5,9 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -180,19 +177,19 @@ public class StripeView extends FrameView {
     }//onMeasure
 
     private Paint getBackgroundPaint() {
-        final Paint white_paint = new Paint();
-        white_paint.setColor(this.backgroundColor);
-        white_paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        white_paint.setStrokeWidth(1);
-        return white_paint;
+        final Paint paint = new Paint();
+        paint.setColor(this.backgroundColor);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStrokeWidth(1);
+        return paint;
     }//getBackgroundPaint
 
     private Paint getForegroundPaint() {
-        final Paint black_paint = new Paint();
-        black_paint.setColor(this.foregroundColor);
-        black_paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        black_paint.setStrokeWidth(1);
-        return black_paint;
+        final Paint paint = new Paint();
+        paint.setColor(this.foregroundColor);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStrokeWidth(1);
+        return paint;
     }//getForegroundPaint
 
     private Paint getFramePaint() {
@@ -229,15 +226,15 @@ public class StripeView extends FrameView {
                 if (i % 2 == 0) {
                     int top = xgap * i + getPaddingTop();
                     int left = getPaddingLeft();
-                    int bottom = top + xgap - 1;
-                    int right = canvas.getWidth() - getPaddingRight() - 1;
+                    int bottom = top + xgap;
+                    int right = canvas.getWidth() - getPaddingRight();
                     Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, getBackgroundPaint());
                 } else {
                     int top = xgap * i + getPaddingTop();
                     int left = getPaddingLeft();
-                    int bottom = top + xgap - 1;
-                    int right = canvas.getWidth() - getPaddingRight() - 1;
+                    int bottom = top + xgap;
+                    int right = canvas.getWidth() - getPaddingRight();
                     Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, getForegroundPaint());
                 }
@@ -249,14 +246,14 @@ public class StripeView extends FrameView {
                 if (i % 2 == 0) {
                     final int top = getPaddingTop();
                     final int left = ygap * i + getPaddingLeft();
-                    final int bottom = canvas.getHeight() - getPaddingBottom() - 1;
-                    final int right = left + ygap - 1;
+                    final int bottom = canvas.getHeight() - getPaddingBottom();
+                    final int right = left + ygap;
                     canvas.drawRect(left, top, right, bottom, getBackgroundPaint());
                 } else {
                     final int top = getPaddingTop();
                     final int left = ygap * i + getPaddingLeft();
-                    final int bottom = canvas.getHeight() - getPaddingBottom() - 1;
-                    final int right = left + ygap - 1;
+                    final int bottom = canvas.getHeight() - getPaddingBottom();
+                    final int right = left + ygap;
                     canvas.drawRect(left, top, right, bottom, getForegroundPaint());
                 }//if
             }//for
