@@ -6,11 +6,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Vibrator;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class FrameView extends View {

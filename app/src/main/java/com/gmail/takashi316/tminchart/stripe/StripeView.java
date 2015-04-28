@@ -25,7 +25,7 @@ public class StripeView extends FrameView {
     private float xdpi;
     private float ydpi;
     private boolean horizontal = false;
-    private boolean vertical = true;
+    private boolean vertical = false;
     private boolean touched = false;
     private ArrayList<StripeView> stripeViews;
     private DisplayDpi displayDpi;
@@ -66,14 +66,15 @@ public class StripeView extends FrameView {
                 attrs, R.styleable.StripeView, defStyle, 0);
 
         this.setGapInch(typed_array.getFloat(R.styleable.StripeView_gapInch, 0.1f));
-        this.horizontal = typed_array.getBoolean(R.styleable.StripeView_horizontal, true);
-        this.vertical = typed_array.getBoolean(R.styleable.StripeView_vertical, true);
+        this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, true));
+        this.setVertical(typed_array.getBoolean(R.styleable.StripeView_vertical, true));
         this.touched = typed_array.getBoolean(R.styleable.StripeView_touched, false);
         typed_array.recycle();
 
         this.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+            //@Override
+            public void onClick_(View v) {
                 final View this_stripe_view = v;
                 if (stripeViews != null) {
                     for (StripeView other_stripe_view : stripeViews) {
@@ -81,14 +82,14 @@ public class StripeView extends FrameView {
                     }//for
                 }//if
                 touched = true;
-                v.invalidate();
+                //v.invalidate();
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     public void run() {
                         try {
                             for (StripeView stripe_view : stripeViews) {
                                 //if (stripe_view != this_stripe_view) {
-                                stripe_view.invalidate();
+                                //stripe_view.invalidate();
                                 //}//if
                             }//for
                         } catch (NullPointerException e) {
@@ -104,6 +105,11 @@ public class StripeView extends FrameView {
                     }//run
                 });
             }//onClick
+
+            @Override
+            public void onClick(View view) {
+
+            }
         });
     }//init
 
@@ -122,6 +128,14 @@ public class StripeView extends FrameView {
     public void setGapInch(float gap_inch) {
         this.gapInch = gap_inch;
     }//setGapInch
+
+    public void setVertical(boolean vertical_enabled) {
+        this.vertical = vertical_enabled;
+    }
+
+    public void setHorizontal(boolean horizontal_enabled) {
+        this.horizontal = horizontal_enabled;
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -198,17 +212,17 @@ public class StripeView extends FrameView {
         if (this.horizontal) {
             for (int i = 1; i < horizontal_gaps; ++i) {
                 if (i % 2 == 0) {
-                    int top = xgap * i;
-                    int left = xgap;
-                    int bottom = xgap * (i + 1) - 1;
-                    int right = canvas.getWidth() - 50;
+                    int top = xgap * i + getPaddingTop();
+                    int left = getPaddingLeft();
+                    int bottom = top + xgap - 1;
+                    int right = canvas.getWidth() - getPaddingRight() - 1;
                     Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, getBackgroundPaint());
                 } else {
-                    int top = xgap * i;
-                    int left = xgap;
-                    int bottom = xgap * (i + 1) - 1;
-                    int right = canvas.getWidth() - 50;
+                    int top = xgap * i + getPaddingTop();
+                    int left = getPaddingLeft();
+                    int bottom = top + xgap - 1;
+                    int right = canvas.getWidth() - getPaddingRight() - 1;
                     Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + bottom);
                     canvas.drawRect(left, top, right, bottom, getForegroundPaint());
                 }
@@ -218,16 +232,16 @@ public class StripeView extends FrameView {
         if (this.vertical) {
             for (int i = 1; i < vertical_gaps; ++i) {
                 if (i % 2 == 0) {
-                    final int top = 1;
-                    final int left = ygap * i;
-                    final int bottom = canvas.getHeight() - 1;
-                    final int right = ygap * (i + 1) - 1;
+                    final int top = getPaddingTop();
+                    final int left = ygap * i + getPaddingLeft();
+                    final int bottom = canvas.getHeight() - getPaddingBottom() - 1;
+                    final int right = left + ygap - 1;
                     canvas.drawRect(left, top, right, bottom, getBackgroundPaint());
                 } else {
-                    final int top = 1;
-                    final int left = ygap * i;
-                    final int bottom = canvas.getHeight() - 1;
-                    final int right = ygap * (i + 1) - 1;
+                    final int top = getPaddingTop();
+                    final int left = ygap * i + getPaddingLeft();
+                    final int bottom = canvas.getHeight() - getPaddingBottom() - 1;
+                    final int right = left + ygap - 1;
                     canvas.drawRect(left, top, right, bottom, getForegroundPaint());
                 }//if
             }//for
