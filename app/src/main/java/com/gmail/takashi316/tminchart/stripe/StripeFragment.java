@@ -116,7 +116,7 @@ public class StripeFragment extends Fragment {
             for (int column = 1; column < COLUMNS; ++column) {
                 StripeView stripe_view = new StripeView(context);
                 stripe_view.setStripeViews(stripe_views);
-                stripe_view.setGapInch(0.01f * (ROWS - r));
+                stripe_view.setGapInch(0.1f * (ROWS - r));
                 stripe_view.setWidthInch(1.5f);
                 stripe_view.setIntensty(255.0 * Math.pow(0.80, column - 1));
                 stripe_view.setVertical(true);

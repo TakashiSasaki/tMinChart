@@ -24,7 +24,9 @@
             app:foregroundColor="#FF0000"
             app:frameColor="#ff41ff00"
             app:gapInch="0.1"
-            app:horizontal="false" />
+            app:horizontal="false"
+            android:padding="15dp"
+            app:vertical="true" />
 
 
         <view
@@ -36,6 +38,8 @@
             app:foregroundColor="#ffff2700"
             app:frameColor="#ffbb00ff"
             app:gapInch="0.2"
+            app:horizontal="true"
+            android:padding="20dp"
             app:vertical="false" />
     </LinearLayout>
 

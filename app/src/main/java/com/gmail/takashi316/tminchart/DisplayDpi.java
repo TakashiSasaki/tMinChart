@@ -16,10 +16,20 @@ public class DisplayDpi {
     }//DisplayDpi
 
     public float getXdpi() {
-        return this.displayMetrics.xdpi;
+        final float xdpi = this.displayMetrics.xdpi;
+        if (xdpi == 0.0f) {
+            return 160;
+        } else {
+            return xdpi;
+        }
     }//getXdpi
 
     public float getYdpi() {
-        return this.displayMetrics.ydpi;
+        final float ydpi = this.displayMetrics.ydpi;
+        if (ydpi == 0.0f) {
+            return 160;
+        } else {
+            return ydpi;
+        }
     }//getYdpi
 }//DisplayDpi
