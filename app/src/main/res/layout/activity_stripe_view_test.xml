@@ -24,6 +24,7 @@
             app:gapInch="0.1"
             app:horizontal="false" />
 
+
         <view
             android:id="@+id/view2"
             class="com.gmail.takashi316.tminchart.stripe.StripeView"
@@ -35,17 +36,17 @@
     </LinearLayout>
 
     <fragment
+        android:id="@+id/fragment"
+        android:name="com.gmail.takashi316.tminchart.stripe.StripeFragment"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:name="com.gmail.takashi316.tminchart.stripe.StripeFragment"
-        android:id="@+id/fragment"
-        tools:layout="@layout/fragment_stripe"
-        android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/linearLayoutStripeViewTest" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayoutStripeViewTest"
+        android:layout_gravity="bottom"
+        tools:layout="@layout/fragment_stripe" />
 
 </RelativeLayout>

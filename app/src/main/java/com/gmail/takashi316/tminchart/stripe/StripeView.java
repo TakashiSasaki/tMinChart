@@ -258,7 +258,7 @@ public class StripeView extends FrameView {
                 //this.setBackground(frame);
             }//if
         } else {
-            this.setBackgroundColor(Color.BLACK);
+            //this.setBackgroundColor(Color.BLACK);
             this.eraseFrame(canvas);
         }//if
 
