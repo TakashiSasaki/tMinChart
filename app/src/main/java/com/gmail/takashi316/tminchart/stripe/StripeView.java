@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class StripeView extends FrameView {
 
-    private float gapInch;
+    private float gapInch = 0.1f;
     private float width_inch;
     private float xdpi;
     private float ydpi;
@@ -31,6 +31,7 @@ public class StripeView extends FrameView {
     private DisplayDpi displayDpi;
     private int foregroundColor = Color.BLACK;
     private int backgroundColor = Color.WHITE;
+    private int frameColor = Color.RED;
 
     public boolean isTouched() {
         return touched;
@@ -65,51 +66,33 @@ public class StripeView extends FrameView {
         final TypedArray typed_array = getContext().obtainStyledAttributes(
                 attrs, R.styleable.StripeView, defStyle, 0);
 
-        this.setGapInch(typed_array.getFloat(R.styleable.StripeView_gapInch, 0.1f));
-        this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, true));
-        this.setVertical(typed_array.getBoolean(R.styleable.StripeView_vertical, true));
-        this.touched = typed_array.getBoolean(R.styleable.StripeView_touched, false);
+        this.setGapInch(typed_array.getFloat(R.styleable.StripeView_gapInch, this.gapInch));
+        this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, this.horizontal));
+        this.setVertical(typed_array.getBoolean(R.styleable.StripeView_vertical, this.vertical));
+        this.setForegroundColor(typed_array.getColor(R.styleable.StripeView_foregroundColor, this.foregroundColor));
+        this.setBackgroundColor(typed_array.getColor(R.styleable.StripeView_backgroundColor, this.backgroundColor));
+        this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.frameColor));
+        this.touched = typed_array.getBoolean(R.styleable.StripeView_touched, this.touched);
         typed_array.recycle();
 
         this.setOnClickListener(new OnClickListener() {
 
             //@Override
-            public void onClick_(View v) {
-                final View this_stripe_view = v;
-                if (stripeViews != null) {
-                    for (StripeView other_stripe_view : stripeViews) {
-                        other_stripe_view.touched = false;
-                    }//for
-                }//if
-                touched = true;
-                //v.invalidate();
-                Handler handler = new Handler();
-                handler.post(new Runnable() {
-                    public void run() {
-                        try {
-                            for (StripeView stripe_view : stripeViews) {
-                                //if (stripe_view != this_stripe_view) {
-                                //stripe_view.invalidate();
-                                //}//if
-                            }//for
-                        } catch (NullPointerException e) {
-                        }//try*/
-
-                        if (touched) {
-                            vibrateTwice();
-                        } else {
-                            vibrateOnce();
+            public void onClick(View v) {
+                StripeView touched_stripe_view = (StripeView) v;
+                try {
+                    for (StripeView stripe_view : stripeViews) {
+                        if (stripe_view != touched_stripe_view) {
+                            stripe_view.setTouched(false);
+                            stripe_view.postInvalidate();
                         }//if
-                        beep();
-                        //this_stripe_view.invalidate();
-                    }//run
-                });
+                    }//for
+                } catch (NullPointerException e) {
+                }//try
+                touched_stripe_view.toggleTouched();
+                touched_stripe_view.postInvalidate();
             }//onClick
 
-            @Override
-            public void onClick(View view) {
-
-            }
         });
     }//init
 
@@ -135,6 +118,18 @@ public class StripeView extends FrameView {
 
     public void setHorizontal(boolean horizontal_enabled) {
         this.horizontal = horizontal_enabled;
+    }
+
+    public void setForegroundColor(int foreground_color) {
+        this.foregroundColor = foreground_color;
+    }
+
+    public void setBackgroundColor(int background_color) {
+        this.backgroundColor = background_color;
+    }
+
+    public void setFrameColor(int frame_color) {
+        this.frameColor = frame_color;
     }
 
     @Override
@@ -200,6 +195,26 @@ public class StripeView extends FrameView {
         return black_paint;
     }//getForegroundPaint
 
+    private Paint getFramePaint() {
+        final Paint paint = new Paint();
+        paint.setColor(this.frameColor);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStrokeWidth(1);
+        return paint;
+    }//getFramePaint
+
+    private void toggleTouched() {
+        if (this.touched) {
+            this.touched = false;
+        } else {
+            this.touched = true;
+        }
+    }//toggleTouched
+
+    private void setTouched(boolean touched) {
+        this.touched = touched;
+    }//setTouched
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -247,22 +262,16 @@ public class StripeView extends FrameView {
             }//for
         }//if
 
-        if (touched) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
-                this.drawFrame(canvas, Color.RED);
-                //this.setBackgroundDrawable(frame);
-            } else {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
-                this.drawFrame(canvas, Color.RED);
-                //this.setBackground(frame);
-            }//if
-        } else {
-            //this.setBackgroundColor(Color.BLACK);
-            this.eraseFrame(canvas);
-        }//if
-
+        this.updateFrame(canvas);
     }//onDraw
+
+    void updateFrame(Canvas canvas) {
+        if (this.touched) {
+            this.drawFrame(canvas, this.frameColor);
+        } else {
+            this.drawFrame(canvas, this.backgroundColor);
+        }
+    }//updateFrame
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {

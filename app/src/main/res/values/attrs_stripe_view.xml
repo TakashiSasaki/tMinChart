@@ -1,10 +1,12 @@
 <resources>
     <declare-styleable name="StripeView">
-        <attr name="contrast" />
+        <!--<attr name="contrast" />-->
         <attr name="gapInch" />
         <attr name="horizontal" format="boolean" />
         <attr name="vertical" format="boolean" />
         <attr name="touched" />
-        <attr name="background" format="color" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="foregroundColor" format="color" />
+        <attr name="frameColor" format="color" />
     </declare-styleable>
 </resources>

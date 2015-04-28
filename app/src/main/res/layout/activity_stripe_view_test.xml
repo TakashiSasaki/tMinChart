@@ -20,7 +20,9 @@
             class="com.gmail.takashi316.tminchart.stripe.StripeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:background="#0000FF"
+            app:backgroundColor="#0000FF"
+            app:foregroundColor="#FF0000"
+            app:frameColor="#ff41ff00"
             app:gapInch="0.1"
             app:horizontal="false" />
 
@@ -30,7 +32,9 @@
             class="com.gmail.takashi316.tminchart.stripe.StripeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:background="#00FF00"
+            app:backgroundColor="#00FF00"
+            app:foregroundColor="#ffff2700"
+            app:frameColor="#ffbb00ff"
             app:gapInch="0.2"
             app:vertical="false" />
     </LinearLayout>

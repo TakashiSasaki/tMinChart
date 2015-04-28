@@ -40,7 +40,7 @@ public class FrameView extends View {
 
     protected void eraseFrame(Canvas canvas) {
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.TRANSPARENT);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         drawFrame(canvas, paint);
     }//drawFrame
