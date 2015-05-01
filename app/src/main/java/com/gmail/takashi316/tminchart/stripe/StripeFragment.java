@@ -73,10 +73,10 @@ public class StripeFragment extends Fragment {
         TableRow table_row_column_index = new TableRow(context);
         table_row_column_index.addView(text_view_left_top);
 
-        for (int i = 0; i <= this.nTableColumns; ++i) {
+        for (int i = 0; i < this.nTableColumns; ++i) {
             TextView text_view_column_index = new TextView(context);
             text_view_column_index.setTextSize(TEXT_SIZE);
-            text_view_column_index.setText(new String(new byte[]{(byte) (i + 64)}));
+            text_view_column_index.setText(new String(new byte[]{(byte) (i + 65)}));
             text_view_column_index.setGravity(Gravity.CENTER);
             table_row_column_index.addView(text_view_column_index);
         }//for
@@ -139,6 +139,6 @@ public class StripeFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
 
         public void onStripeFinished();
-    }
+    }//OnFragmentInteractionListener
 
-}
+}//StripeFragment
