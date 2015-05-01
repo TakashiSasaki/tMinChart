@@ -140,6 +140,7 @@ public class MainActivity extends Activity
         // update the main content by replacing fragments
         mTitle = getNavigationDrawerTitles()[position];
         Fragment fragment = null;
+        Bundle bundle = null;
         switch (position) {
             case 1:
                 Typeface font_family = Typeface.DEFAULT;
@@ -174,7 +175,11 @@ public class MainActivity extends Activity
                 fragment = AmidaFragment.newInstance(30, 255);
                 break;
             case 4:
-                fragment = StripeFragment.newInstance("abc", "def");
+                fragment = new StripeFragment();
+                bundle = new Bundle();
+                bundle.putInt("nTableRows", 15);
+                bundle.putInt("nTableColumns", 10);
+                fragment.setArguments(bundle);
                 break;
             case 5:
                 fragment = new ResultFragment();

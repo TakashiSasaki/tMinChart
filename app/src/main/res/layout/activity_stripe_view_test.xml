@@ -43,8 +43,8 @@
             app:vertical="false" />
     </LinearLayout>
 
-    <fragment
-        android:id="@+id/fragment"
+    <!--<fragment
+        android:id="@+id/container"
         android:name="com.gmail.takashi316.tminchart.stripe.StripeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,6 +55,10 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayoutStripeViewTest"
         android:layout_gravity="bottom"
-        tools:layout="@layout/fragment_stripe" />
+        tools:layout="@layout/fragment_stripe" />-->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></FrameLayout>
 
 </RelativeLayout>

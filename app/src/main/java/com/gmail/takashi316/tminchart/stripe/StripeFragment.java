@@ -1,12 +1,11 @@
 package com.gmail.takashi316.tminchart.stripe;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
-import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,60 +16,21 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.face.FaceRectangleFragment;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link StripeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link StripeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StripeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private int rows;
-    private int columns;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     private Button buttonFinishStripe;
     private TableLayout tableLayoutStripe;
     private OnFragmentInteractionListener onFragmentInteractionListener;
-
-    @Override
-    public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
-        super.onInflate(activity, attrs, savedInstanceState);
-        final TypedArray typed_array = activity.obtainStyledAttributes(attrs, R.styleable.StripeFragment);
-        this.setColumns(typed_array.getInt(R.styleable.StripeFragment_nTableColumns, this.columns));
-        this.setRows(typed_array.getInt(R.styleable.StripeFragment_nTableRows, this.rows));
-    }//onInflate
-
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
-    public void setColumns(int columns) {
-        this.columns = columns;
-    }
-
-    public static StripeFragment newInstance(String param1, String param2) {
-        StripeFragment fragment = new StripeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private int nTableRows;
+    private int nTableColumns;
+    private int[] backgroundColorSequence;
+    private int[] foregroundColorSequence;
+    private int[] backgroundStripeWidthSequence;
+    private int[] foregroundStripeWidthSequence;
 
     public StripeFragment() {
         // Required empty public constructor
@@ -79,16 +39,20 @@ public class StripeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        this.nTableRows = getArguments().getInt("nTableRows");
+        this.nTableColumns = getArguments().getInt("nTableColumns");
+        this.backgroundColorSequence = getArguments().getIntArray("backgroundColorSequence");
+        this.foregroundColorSequence = getArguments().getIntArray("foregroundColorSequence");
+        this.backgroundStripeWidthSequence = getArguments().getIntArray("backgroundStripeWidthSequence");
+        this.foregroundStripeWidthSequence = getArguments().getIntArray("foregroundStripeWidthSequence");
+
         this.onFragmentInteractionListener = (OnFragmentInteractionListener) getActivity();
     }//onCreate
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stripe, container, false);
         this.buttonFinishStripe = (Button) view.findViewById(R.id.buttonFinishStripe);
@@ -111,7 +75,7 @@ public class StripeFragment extends Fragment {
         TableRow table_row_column_index = new TableRow(context);
         table_row_column_index.addView(text_view_left_top);
 
-        for (int i = 1; i <= this.columns; ++i) {
+        for (int i = 1; i <= this.nTableColumns; ++i) {
             TextView text_view_column_index = new TextView(context);
             text_view_column_index.setTextSize(TEXT_SIZE);
             text_view_column_index.setText(new String(new byte[]{(byte) (i + 64)}));
@@ -121,7 +85,7 @@ public class StripeFragment extends Fragment {
 
         tableLayoutStripe.addView(table_row_column_index);
 
-        for (int r = 0; r < this.rows; ++r) {
+        for (int r = 0; r < this.nTableRows; ++r) {
             TableRow table_row = new TableRow(context);
             TextView text_view_row_index = new TextView(context);
             text_view_row_index.setTextSize(TEXT_SIZE);
@@ -129,10 +93,10 @@ public class StripeFragment extends Fragment {
             text_view_row_index.setGravity(Gravity.CENTER);
             table_row.addView(text_view_row_index);
             ArrayList<StripeView> stripe_views = new ArrayList<StripeView>();
-            for (int column = 1; column < this.columns; ++column) {
+            for (int column = 1; column < this.nTableColumns; ++column) {
                 StripeView stripe_view = new StripeView(context);
                 stripe_view.setStripeViews(stripe_views);
-                stripe_view.setGapInch(0.1f * (this.rows - r));
+                stripe_view.setGapInch(0.1f * (this.nTableRows - r));
                 stripe_view.setWidthInch(1.5f);
                 stripe_view.setIntensty(255.0 * Math.pow(0.80, column - 1));
                 stripe_view.setVertical(true);
@@ -162,26 +126,15 @@ public class StripeFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
+    }//onAttach
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }//onDetach
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
 
         public void onStripeFinished();
