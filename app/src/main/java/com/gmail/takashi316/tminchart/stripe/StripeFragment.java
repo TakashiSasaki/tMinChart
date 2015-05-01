@@ -3,7 +3,6 @@ package com.gmail.takashi316.tminchart.stripe;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -25,12 +24,9 @@ public class StripeFragment extends Fragment {
     private Button buttonFinishStripe;
     private TableLayout tableLayoutStripe;
     private OnFragmentInteractionListener onFragmentInteractionListener;
-    private int nTableRows;
-    private int nTableColumns;
-    private ArrayList<Integer> backgroundColorSequence;
-    private ArrayList<Integer> foregroundColorSequence;
-    private ArrayList<Integer> backgroundWidthSequence;
-    private ArrayList<Integer> foregroundWidthSequence;
+    private int nTableRows, nTableColumns;
+    private ArrayList<Integer> backgroundColorSequence, foregroundColorSequence, backgroundWidthSequence, foregroundWidthSequence;
+    private int frameWidth, viewMargin;
 
     public StripeFragment() {
         // Required empty public constructor
@@ -45,6 +41,8 @@ public class StripeFragment extends Fragment {
         this.foregroundColorSequence = getArguments().getIntegerArrayList("foregroundColorSequence");
         this.backgroundWidthSequence = getArguments().getIntegerArrayList("backgroundWidthSequence");
         this.foregroundWidthSequence = getArguments().getIntegerArrayList("foregroundWidthSequence");
+        this.frameWidth = getArguments().getInt("frameWidth");
+        this.viewMargin = getArguments().getInt("viewMargin");
 
         this.onFragmentInteractionListener = (OnFragmentInteractionListener) getActivity();
     }//onCreate
@@ -101,7 +99,10 @@ public class StripeFragment extends Fragment {
                 stripe_view.setForegroundColor(this.foregroundColorSequence.get(column));
                 stripe_view.setForegroundWidth(this.foregroundWidthSequence.get(row));
                 stripe_view.setHorizontal(false);
-                stripe_view.setPadding(30, 30, 30, 30);
+                stripe_view.setPadding(this.frameWidth, this.frameWidth, this.frameWidth, this.frameWidth);
+                final TableRow.LayoutParams layout_params = new TableRow.LayoutParams();
+                layout_params.setMargins(this.viewMargin, this.viewMargin, this.viewMargin, this.viewMargin);
+                stripe_view.setLayoutParams(layout_params);
                 stripe_views.add(stripe_view);
                 table_row.addView(stripe_view);
             }//for

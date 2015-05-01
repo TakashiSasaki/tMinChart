@@ -33,6 +33,8 @@ public class StripeViewTestActivity extends Activity
         bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.WHITE, Color.BLACK, COLUMNS - 1, false));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, false));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, false));
+        bundle.putInt("frameWidth", 10);
+        bundle.putInt("viewMargin", 10);
         fragment.setArguments(bundle);
 
         this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
