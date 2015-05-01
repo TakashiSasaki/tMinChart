@@ -9,4 +9,5 @@
         <attr name="foregroundColor" format="color" />
         <attr name="frameColor" format="color" />
     </declare-styleable>
+
 </resources>

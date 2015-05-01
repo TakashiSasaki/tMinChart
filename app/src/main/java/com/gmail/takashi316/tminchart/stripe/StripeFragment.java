@@ -2,9 +2,11 @@ package com.gmail.takashi316.tminchart.stripe;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +47,22 @@ public class StripeFragment extends Fragment {
     private TableLayout tableLayoutStripe;
     private OnFragmentInteractionListener onFragmentInteractionListener;
 
+    @Override
+    public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
+        super.onInflate(activity, attrs, savedInstanceState);
+        final TypedArray typed_array = activity.obtainStyledAttributes(attrs, R.styleable.StripeFragment);
+        this.setColumns(typed_array.getInt(R.styleable.StripeFragment_nTableColumns, this.columns));
+        this.setRows(typed_array.getInt(R.styleable.StripeFragment_nTableRows, this.rows));
+    }//onInflate
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
     public static StripeFragment newInstance(String param1, String param2) {
         StripeFragment fragment = new StripeFragment();
         Bundle args = new Bundle();
@@ -84,8 +102,6 @@ public class StripeFragment extends Fragment {
         });
 
         final int TEXT_SIZE = 50;
-        final int COLUMNS = 2;
-        final int ROWS = 1;
         final Context context = this.getActivity();
 
         TextView text_view_left_top = new TextView(context);
@@ -95,7 +111,7 @@ public class StripeFragment extends Fragment {
         TableRow table_row_column_index = new TableRow(context);
         table_row_column_index.addView(text_view_left_top);
 
-        for (int i = 1; i <= COLUMNS; ++i) {
+        for (int i = 1; i <= this.columns; ++i) {
             TextView text_view_column_index = new TextView(context);
             text_view_column_index.setTextSize(TEXT_SIZE);
             text_view_column_index.setText(new String(new byte[]{(byte) (i + 64)}));
@@ -105,7 +121,7 @@ public class StripeFragment extends Fragment {
 
         tableLayoutStripe.addView(table_row_column_index);
 
-        for (int r = 0; r < ROWS; ++r) {
+        for (int r = 0; r < this.rows; ++r) {
             TableRow table_row = new TableRow(context);
             TextView text_view_row_index = new TextView(context);
             text_view_row_index.setTextSize(TEXT_SIZE);
@@ -113,10 +129,10 @@ public class StripeFragment extends Fragment {
             text_view_row_index.setGravity(Gravity.CENTER);
             table_row.addView(text_view_row_index);
             ArrayList<StripeView> stripe_views = new ArrayList<StripeView>();
-            for (int column = 1; column < COLUMNS; ++column) {
+            for (int column = 1; column < this.columns; ++column) {
                 StripeView stripe_view = new StripeView(context);
                 stripe_view.setStripeViews(stripe_views);
-                stripe_view.setGapInch(0.1f * (ROWS - r));
+                stripe_view.setGapInch(0.1f * (this.rows - r));
                 stripe_view.setWidthInch(1.5f);
                 stripe_view.setIntensty(255.0 * Math.pow(0.80, column - 1));
                 stripe_view.setVertical(true);
