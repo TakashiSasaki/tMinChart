@@ -14,8 +14,8 @@ import com.gmail.takashi316.tminchart.R;
 public class StripeViewTestActivity extends Activity
         implements StripeFragment.OnFragmentInteractionListener {
 
-    final int COLUMNS = 4;
-    final int ROWS = 2;
+    final int COLUMNS = 26;
+    final int ROWS = 15;
     ViewGroup viewGroup;
 
     @Override
@@ -29,11 +29,11 @@ public class StripeViewTestActivity extends Activity
         bundle.putInt("nTableRows", ROWS);
         bundle.putInt("nTableColumns", COLUMNS);
         bundle.putInt("nSteps", COLUMNS - 1);
-        bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.BLACK, Color.WHITE, COLUMNS - 1, false));
-        bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.WHITE, Color.BLACK, COLUMNS - 1, false));
-        bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, false));
-        bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, false));
-        bundle.putInt("frameWidth", 10);
+        bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.WHITE, Color.BLACK, COLUMNS - 1, false));
+        bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.WHITE, Color.WHITE, COLUMNS - 1, false));
+        bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+        bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+        bundle.putInt("frameWidth", 0);
         bundle.putInt("viewMargin", 10);
         fragment.setArguments(bundle);
 

@@ -26,7 +26,7 @@ public class PixelSequence extends ArrayList<Integer> {
     private void initGeometricSequence() {
         final double common_ratio = Math.exp(Math.log(this.end / this.start) / this.steps);
         for (int i = 0; i <= this.steps; ++i) {
-            final double n_pixels = Math.pow(common_ratio, i);
+            final double n_pixels = Math.pow(common_ratio, i) * this.start;
             this.add((int) Math.round(n_pixels));
         }//for
     }//initGeometricSequence
