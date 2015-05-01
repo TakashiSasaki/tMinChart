@@ -27,10 +27,10 @@ public class StripeFragment extends Fragment {
     private OnFragmentInteractionListener onFragmentInteractionListener;
     private int nTableRows;
     private int nTableColumns;
-    private int[] backgroundColorSequence;
-    private int[] foregroundColorSequence;
-    private int[] backgroundStripeWidthSequence;
-    private int[] foregroundStripeWidthSequence;
+    private ArrayList<Integer> backgroundColorSequence;
+    private ArrayList<Integer> foregroundColorSequence;
+    private ArrayList<Integer> backgroundWidthSequence;
+    private ArrayList<Integer> foregroundWidthSequence;
 
     public StripeFragment() {
         // Required empty public constructor
@@ -41,10 +41,10 @@ public class StripeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.nTableRows = getArguments().getInt("nTableRows");
         this.nTableColumns = getArguments().getInt("nTableColumns");
-        this.backgroundColorSequence = getArguments().getIntArray("backgroundColorSequence");
-        this.foregroundColorSequence = getArguments().getIntArray("foregroundColorSequence");
-        this.backgroundStripeWidthSequence = getArguments().getIntArray("backgroundStripeWidthSequence");
-        this.foregroundStripeWidthSequence = getArguments().getIntArray("foregroundStripeWidthSequence");
+        this.backgroundColorSequence = getArguments().getIntegerArrayList("backgroundColorSequence");
+        this.foregroundColorSequence = getArguments().getIntegerArrayList("foregroundColorSequence");
+        this.backgroundWidthSequence = getArguments().getIntegerArrayList("backgroundWidthSequence");
+        this.foregroundWidthSequence = getArguments().getIntegerArrayList("foregroundWidthSequence");
 
         this.onFragmentInteractionListener = (OnFragmentInteractionListener) getActivity();
     }//onCreate
@@ -75,7 +75,7 @@ public class StripeFragment extends Fragment {
         TableRow table_row_column_index = new TableRow(context);
         table_row_column_index.addView(text_view_left_top);
 
-        for (int i = 1; i <= this.nTableColumns; ++i) {
+        for (int i = 0; i <= this.nTableColumns; ++i) {
             TextView text_view_column_index = new TextView(context);
             text_view_column_index.setTextSize(TEXT_SIZE);
             text_view_column_index.setText(new String(new byte[]{(byte) (i + 64)}));
@@ -85,21 +85,21 @@ public class StripeFragment extends Fragment {
 
         tableLayoutStripe.addView(table_row_column_index);
 
-        for (int r = 0; r < this.nTableRows; ++r) {
+        for (int row = 0; row < this.nTableRows; ++row) {
             TableRow table_row = new TableRow(context);
             TextView text_view_row_index = new TextView(context);
             text_view_row_index.setTextSize(TEXT_SIZE);
-            text_view_row_index.setText(Integer.toString(r));
+            text_view_row_index.setText(Integer.toString(row));
             text_view_row_index.setGravity(Gravity.CENTER);
             table_row.addView(text_view_row_index);
             ArrayList<StripeView> stripe_views = new ArrayList<StripeView>();
-            for (int column = 1; column < this.nTableColumns; ++column) {
+            for (int column = 0; column < this.nTableColumns; ++column) {
                 StripeView stripe_view = new StripeView(context);
                 stripe_view.setStripeViews(stripe_views);
-                stripe_view.setGapInch(0.1f * (this.nTableRows - r));
-                stripe_view.setWidthInch(1.5f);
-                stripe_view.setIntensty(255.0 * Math.pow(0.80, column - 1));
-                stripe_view.setVertical(true);
+                stripe_view.setBackgroundColor(this.backgroundColorSequence.get(column));
+                stripe_view.setBackgroundWidth(this.backgroundWidthSequence.get(row));
+                stripe_view.setForegroundColor(this.foregroundColorSequence.get(column));
+                stripe_view.setForegroundWidth(this.foregroundWidthSequence.get(row));
                 stripe_view.setHorizontal(false);
                 stripe_view.setPadding(30, 30, 30, 30);
                 stripe_views.add(stripe_view);

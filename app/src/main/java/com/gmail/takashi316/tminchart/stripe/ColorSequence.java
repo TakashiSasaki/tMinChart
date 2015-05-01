@@ -1,7 +1,6 @@
 package com.gmail.takashi316.tminchart.stripe;
 
 import android.graphics.Color;
-import android.os.Bundle;
 
 import java.util.ArrayList;
 
@@ -10,6 +9,7 @@ public class ColorSequence extends ArrayList<Integer> {
     private int n_steps;
 
     public ColorSequence(int start_color, int end_color, int n_steps, boolean exponential) {
+        this.n_steps = n_steps;
         this.start_red = Color.red(start_color);
         this.start_green = Color.green(start_color);
         this.start_blue = Color.blue(start_color);
@@ -20,8 +20,8 @@ public class ColorSequence extends ArrayList<Integer> {
             this.initGeometricSequence();
         } else {
             this.initArithmeticSequence();
-        }
-    }
+        }//if
+    }//ColorSequence
 
     private void initGeometricSequence() {
         final double common_ratio_green = Math.exp(Math.log(this.end_green / this.start_green) / this.n_steps);
@@ -40,12 +40,12 @@ public class ColorSequence extends ArrayList<Integer> {
         final double common_difference_green = (this.end_green - this.start_green) / n_steps;
         final double common_difference_red = (this.end_red - this.start_red) / n_steps;
         final double common_difference_blue = (this.end_blue - this.start_blue) / n_steps;
-        for (int i = 0; i < this.n_steps; ++i) {
+        for (int i = 0; i <= this.n_steps; ++i) {
             final double g = this.start_green + common_difference_green * i;
             final double r = this.start_green + common_difference_red * i;
             final double b = this.start_green + common_difference_blue * i;
-            final int c = Color.argb(0, (int) Math.round(r), (int) Math.round(g), (int) Math.round(b));
-            this.add(c);
+            final int color = Color.argb(255, (int) Math.round(r), (int) Math.round(g), (int) Math.round(b));
+            this.add(color);
         }//for
     }//initArithmeticSequence
 }//ColorSequence

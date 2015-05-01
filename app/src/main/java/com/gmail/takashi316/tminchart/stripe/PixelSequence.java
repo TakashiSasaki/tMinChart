@@ -1,7 +1,5 @@
 package com.gmail.takashi316.tminchart.stripe;
 
-import android.os.Bundle;
-
 import java.util.ArrayList;
 
 public class PixelSequence extends ArrayList<Integer> {
@@ -12,7 +10,18 @@ public class PixelSequence extends ArrayList<Integer> {
         this.start = start;
         this.end = end;
         this.steps = n_steps;
-    }
+        if (exponential) {
+            initGeometricSequence();
+        } else {
+            initArithmeticSequence();
+        }//if
+    }//PixelSequence
+
+    public PixelSequence(int pixels, int n_size) {
+        for (int i = 0; i < n_size; ++i) {
+            this.add(pixels);
+        }
+    }//PixelSequence
 
     private void initGeometricSequence() {
         final double common_ratio = Math.exp(Math.log(this.end / this.start) / this.steps);
