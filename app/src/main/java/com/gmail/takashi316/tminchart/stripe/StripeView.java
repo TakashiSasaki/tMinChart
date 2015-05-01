@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-//import com.gmail.takashi316.tminchart.DisplayDpi;
 import com.gmail.takashi316.tminchart.R;
 
 import java.util.ArrayList;
@@ -17,13 +16,9 @@ import java.util.ArrayList;
 
 public class StripeView extends FrameView {
 
-    //private float gapInch = 0.1f;
-    //private float width_inch;
     private boolean horizontal = false;
-    //private boolean vertical = false;
     private boolean touched = false;
     private ArrayList<StripeView> stripeViews;
-    //private DisplayDpi displayDpi;
     private int foregroundColor = Color.BLACK;
     private int backgroundColor = Color.WHITE;
     private int frameColor = Color.RED;
@@ -55,9 +50,7 @@ public class StripeView extends FrameView {
         final TypedArray typed_array = getContext().obtainStyledAttributes(
                 attrs, R.styleable.StripeView, defStyle, 0);
 
-        //this.setGapInch(typed_array.getFloat(R.styleable.StripeView_gapInch, this.gapInch));
         this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, this.horizontal));
-        //this.setVertical(typed_array.getBoolean(R.styleable.StripeView_vertical, this.vertical));
         this.setForegroundColor(typed_array.getColor(R.styleable.StripeView_foregroundColor, this.foregroundColor));
         this.setBackgroundColor(typed_array.getColor(R.styleable.StripeView_backgroundColor, this.backgroundColor));
         this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.frameColor));
@@ -203,7 +196,6 @@ public class StripeView extends FrameView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         if (this.horizontal) {
             int top = getPaddingTop();
             int left = getPaddingLeft();
@@ -229,7 +221,7 @@ public class StripeView extends FrameView {
                 left += foregroundWidth;
             }//while
         }//if
-        updateFrame(canvas);
+        this.updateFrame(canvas);
     }//onDraw
 
     void updateFrame(Canvas canvas) {
@@ -244,10 +236,6 @@ public class StripeView extends FrameView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
     }//onLayout
-
-    private void fillCanvas(Canvas canvas, Paint paint) {
-        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
-    }//fillCanvas
 
 }//class StripeView
 

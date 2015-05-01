@@ -8,14 +8,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.gmail.takashi316.tminchart.R;
 
 public class StripeViewTestActivity extends Activity
         implements StripeFragment.OnFragmentInteractionListener {
 
-    final int COLUMNS = 2;
+    final int COLUMNS = 4;
     final int ROWS = 2;
     ViewGroup viewGroup;
 
