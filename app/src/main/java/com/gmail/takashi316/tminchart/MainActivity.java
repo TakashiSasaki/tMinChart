@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -37,6 +38,8 @@ import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
 import com.gmail.takashi316.tminchart.fragment.UploadFragment;
 import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
 import com.gmail.takashi316.tminchart.amida.AmidaFragment;
+import com.gmail.takashi316.tminchart.stripe.ColorSequence;
+import com.gmail.takashi316.tminchart.stripe.PixelSequence;
 import com.gmail.takashi316.tminchart.stripe.StripeFragment;
 
 import java.util.List;
@@ -126,7 +129,11 @@ public class MainActivity extends Activity
                 getString(R.string.TconChartFragment),
                 getString(R.string.TminChartFragment),
                 "Amida",
-                "Stripe",
+                "Stripe (白地に黒、コントラスト低→高)",
+                "Stripe (白地に黒、コントラスト高→低)",
+                "Stripe (黒地に白、コントラスト低→高)",
+                "Stripe (黒地に白、コントラスト高→低)",
+                "Stripe (黒地に赤、コントラスト高→低)",
                 getString(R.string.ResultFragment),
                 getString(R.string.ShowResultsFragment),
                 getString(R.string.UploadFragment),
@@ -140,7 +147,9 @@ public class MainActivity extends Activity
         // update the main content by replacing fragments
         mTitle = getNavigationDrawerTitles()[position];
         Fragment fragment = null;
-        Bundle bundle = null;
+        Bundle bundle = new Bundle();
+        final int ROWS = 15;
+        final int COLUMNS = 26;
         switch (position) {
             case 1:
                 Typeface font_family = Typeface.DEFAULT;
@@ -176,27 +185,85 @@ public class MainActivity extends Activity
                 break;
             case 4:
                 fragment = new StripeFragment();
-                bundle = new Bundle();
-                bundle.putInt("nTableRows", 15);
-                bundle.putInt("nTableColumns", 10);
+                bundle.putInt("nTableRows", ROWS);
+                bundle.putInt("nTableColumns", COLUMNS);
+                bundle.putInt("nSteps", COLUMNS - 1);
+                bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.WHITE, Color.rgb(1, 1, 1), COLUMNS - 1, false));
+                bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.WHITE, Color.WHITE, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putInt("frameWidth", 10);
+                bundle.putInt("viewMargin", 10);
                 fragment.setArguments(bundle);
                 break;
             case 5:
-                fragment = new ResultFragment();
+                fragment = new StripeFragment();
+                bundle.putInt("nTableRows", ROWS);
+                bundle.putInt("nTableColumns", COLUMNS);
+                bundle.putInt("nSteps", COLUMNS - 1);
+                bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.rgb(1, 1, 1), Color.WHITE, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.WHITE, Color.WHITE, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putInt("frameWidth", 10);
+                bundle.putInt("viewMargin", 10);
+                fragment.setArguments(bundle);
                 break;
             case 6:
-                fragment = new ShowResultsFragment();
+                fragment = new StripeFragment();
+                bundle.putInt("nTableRows", ROWS);
+                bundle.putInt("nTableColumns", COLUMNS);
+                bundle.putInt("nSteps", COLUMNS - 1);
+                bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.WHITE, Color.rgb(1, 1, 1), COLUMNS - 1, false));
+                bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.BLACK, Color.BLACK, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putInt("frameWidth", 10);
+                bundle.putInt("viewMargin", 10);
+                fragment.setArguments(bundle);
                 break;
             case 7:
-                fragment = new UploadFragment();
+                fragment = new StripeFragment();
+                bundle.putInt("nTableRows", ROWS);
+                bundle.putInt("nTableColumns", COLUMNS);
+                bundle.putInt("nSteps", COLUMNS - 1);
+                bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.rgb(1, 1, 1), Color.WHITE, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.BLACK, Color.BLACK, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putInt("frameWidth", 10);
+                bundle.putInt("viewMargin", 10);
+                fragment.setArguments(bundle);
                 break;
             case 8:
-                fragment = new DisplayPropertyFragment();
+                fragment = new StripeFragment();
+                bundle.putInt("nTableRows", ROWS);
+                bundle.putInt("nTableColumns", COLUMNS);
+                bundle.putInt("nSteps", COLUMNS - 1);
+                bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.BLACK, Color.RED, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("backgroundColorSequence", new ColorSequence(Color.RED, Color.RED, COLUMNS - 1, false));
+                bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+                bundle.putInt("frameWidth", 10);
+                bundle.putInt("viewMargin", 10);
+                fragment.setArguments(bundle);
                 break;
             case 9:
-                fragment = SettingsFragment.newInstance();
+                fragment = new ResultFragment();
                 break;
             case 10:
+                fragment = new ShowResultsFragment();
+                break;
+            case 11:
+                fragment = new UploadFragment();
+                break;
+            case 12:
+                fragment = new DisplayPropertyFragment();
+                break;
+            case 13:
+                fragment = SettingsFragment.newInstance();
+                break;
+            case 14:
                 this.preferences.edit().clear().commit();
                 //PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.pref_tmin_chart, true);
                 return;

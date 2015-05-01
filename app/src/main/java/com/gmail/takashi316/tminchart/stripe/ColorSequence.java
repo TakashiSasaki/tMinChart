@@ -31,7 +31,7 @@ public class ColorSequence extends ArrayList<Integer> {
             final double current_green = this.start_green * Math.pow(common_ratio_green, i);
             final double current_blue = this.start_green * Math.pow(common_ratio_blue, i);
             final double current_red = this.start_green * Math.pow(common_ratio_red, i);
-            final int color = Color.argb(0, (int) Math.round(current_red), (int) Math.round(current_green), (int) Math.round(current_blue));
+            final int color = Color.rgb((int) Math.round(current_red), (int) Math.round(current_green), (int) Math.round(current_blue));
             this.add(color);
         }//for
     }//initGeometricSequence
@@ -44,7 +44,7 @@ public class ColorSequence extends ArrayList<Integer> {
             final double g = this.start_green + common_difference_green * i;
             final double r = this.start_green + common_difference_red * i;
             final double b = this.start_green + common_difference_blue * i;
-            final int color = Color.argb(255, (int) Math.round(r), (int) Math.round(g), (int) Math.round(b));
+            final int color = Color.rgb((int) Math.round(r), (int) Math.round(g), (int) Math.round(b));
             this.add(color);
         }//for
     }//initArithmeticSequence
