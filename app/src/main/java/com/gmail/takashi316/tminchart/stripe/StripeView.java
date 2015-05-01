@@ -65,8 +65,10 @@ public class StripeView extends FrameView {
                 try {
                     for (StripeView stripe_view : stripeViews) {
                         if (stripe_view != touched_stripe_view) {
-                            stripe_view.setTouched(false);
-                            stripe_view.postInvalidate();
+                            if (stripe_view.isTouched()) {
+                                stripe_view.setTouched(false);
+                                stripe_view.postInvalidate();
+                            }//if
                         }//if
                     }//for
                 } catch (NullPointerException e) {
@@ -125,16 +127,13 @@ public class StripeView extends FrameView {
         if (width_mode == MeasureSpec.UNSPECIFIED) {
             // it corresponds to setting length to  1000000px on layout designer
             Log.v(this.getClass().getSimpleName(), "width_mode = MeasureSpec.UNSPECIFIED");
-            //width_size = 100;
             width_size = (int) (getResources().getDisplayMetrics().xdpi);
         } else if (width_mode == MeasureSpec.EXACTLY) {
             //it corresponds to setting length to 10px or match_parent on layout designer
             Log.v(this.getClass().getSimpleName(), "width_mode = MeasureSpec.EXACTLY");
-            //width_size = 200;
         } else if (width_mode == MeasureSpec.AT_MOST) {
             //it corresponds to setting length to wrap_content on layout designer
             Log.v(this.getClass().getSimpleName(), "width_mode = MeasureSpec.AT_MOST");
-            //width_size = 300;
             width_size = (int) (getResources().getDisplayMetrics().xdpi);
         } else {
             Log.v(this.getClass().getSimpleName(), "width_mode is unknown");
@@ -143,7 +142,6 @@ public class StripeView extends FrameView {
 
         if (height_mode == MeasureSpec.UNSPECIFIED) {
             Log.v(this.getClass().getSimpleName(), "height_mode = MeasureSpec.UNSPECIFIED");
-            //height_size = 100;
             height_size = (int) (getResources().getDisplayMetrics().ydpi);
         } else if (height_mode == MeasureSpec.EXACTLY) {
             Log.v(this.getClass().getSimpleName(), "height_mode = MeasureSpec.EXACTLY");
