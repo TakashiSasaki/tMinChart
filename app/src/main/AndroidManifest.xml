@@ -23,9 +23,9 @@
         <activity
             android:name=".stripe.StripeViewTestActivity"
             android:label="@string/title_activity_stripe_view_test"
-            android:theme="@style/BlueBackground">
             android:launchMode="singleInstance"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/BlueBackground">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gmail.takashi316.tminchart.MainActivity" />
