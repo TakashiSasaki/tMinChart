@@ -7,7 +7,6 @@ import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -36,9 +35,8 @@ import com.gmail.takashi316.tminchart.fragment.TconChartFragment;
 import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
 import com.gmail.takashi316.tminchart.fragment.UploadFragment;
 import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
-import com.gmail.takashi316.tminchart.stripe.ColorSequence;
-import com.gmail.takashi316.tminchart.stripe.PixelSequence;
 import com.gmail.takashi316.tminchart.stripe.StripeFragment;
+import com.gmail.takashi316.tminchart.stripe.StripeFragmentFactory;
 
 import java.util.List;
 
@@ -182,29 +180,19 @@ public class MainActivity extends Activity
                 fragment = AmidaFragment.newInstance(30, 255);
                 break;
             case 4:
-                fragment = StripeFragment.createWhiteBackgroundToBlackStripe(this);
+                fragment = StripeFragmentFactory.createWhiteBackgroundToBlackStripe(this);
                 break;
             case 5:
-                fragment = StripeFragment.createWhiteBackground(this);
+                fragment = StripeFragmentFactory.createWhiteBackground(this);
                 break;
             case 6:
-                fragment = StripeFragment.createGrayBackgroundToBlack(this);
+                fragment = StripeFragmentFactory.grayBackgroundToBlack(this);
                 break;
             case 7:
-                fragment = StripeFragment.createGrayBackgroundToWhite(this);
+                fragment = StripeFragmentFactory.grayBackgroundToWhite(this);
                 break;
             case 8:
-                fragment = new StripeFragment();
-                bundle.putInt("nTableRows", ROWS);
-                bundle.putInt("nTableColumns", COLUMNS);
-                bundle.putInt("nSteps", COLUMNS - 1);
-                bundle.putIntArray("foregroundColorSequence", (new ColorSequence(getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS))).arithmetic(Color.BLACK, Color.RED));
-                bundle.putIntArray("backgroundColorSequence", (new ColorSequence(getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS))).color(Color.RED));
-                bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
-                bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
-                bundle.putInt("frameWidth", 10);
-                bundle.putInt("viewMargin", 10);
-                fragment.setArguments(bundle);
+                fragment = StripeFragmentFactory.redBackgroundFromBlack(this);
                 break;
             case 9:
                 fragment = new ResultFragment();

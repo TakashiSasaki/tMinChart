@@ -116,7 +116,7 @@ public class StripeFragmentFactory {
         return stripeFragment;
     }//createBlackBackground
 
-    public static StripeFragment createGrayBackgroundToBlack(Context context) {
+    public static StripeFragment grayBackgroundToBlack(Context context) {
         final int rows = context.getResources().getInteger(R.integer.STRIPE_FRAGMENT_ROWS);
         final int columns = context.getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS);
         Bundle bundle = new Bundle();
@@ -134,7 +134,7 @@ public class StripeFragmentFactory {
         return stripeFragment;
     }//createBlackBackground
 
-    public static StripeFragment createGrayBackgroundToWhite(Context context) {
+    public static StripeFragment grayBackgroundToWhite(Context context) {
         final int rows = context.getResources().getInteger(R.integer.STRIPE_FRAGMENT_ROWS);
         final int columns = context.getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS);
         Bundle bundle = new Bundle();
@@ -151,5 +151,22 @@ public class StripeFragmentFactory {
         stripeFragment.setArguments(bundle);
         return stripeFragment;
     }//createBlackBackground
-    
+
+    public static StripeFragment redBackgroundFromBlack(Context context) {
+        final int rows = context.getResources().getInteger(R.integer.STRIPE_FRAGMENT_ROWS);
+        final int columns = context.getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS);
+        Bundle bundle = new Bundle();
+        bundle.putInt("nTableRows", rows);
+        bundle.putInt("nTableColumns", columns);
+        bundle.putInt("nSteps", columns - 1);
+        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).arithmetic(Color.BLACK, Color.RED));
+        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).color(Color.RED));
+        bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
+        bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
+        bundle.putInt("frameWidth", 10);
+        bundle.putInt("viewMargin", 10);
+        StripeFragment fragment = new StripeFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }//redBackgroundFromBlack
 }//StripeFragmentFactory
