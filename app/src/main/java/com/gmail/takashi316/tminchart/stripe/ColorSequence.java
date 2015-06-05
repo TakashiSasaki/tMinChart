@@ -1,11 +1,6 @@
 package com.gmail.takashi316.tminchart.stripe;
 
-import android.content.Context;
 import android.graphics.Color;
-
-import com.gmail.takashi316.tminchart.R;
-
-import java.util.ArrayList;
 
 public class ColorSequence {
     //private double start_red, start_green, start_blue, end_red, end_green, end_blue;
@@ -19,10 +14,6 @@ public class ColorSequence {
 
     private int size() {
         return array.length;
-    }
-
-    public ColorSequence(Context context) {
-        this.array = new int[context.getResources().getInteger(R.integer.DEFAULT_COLUMNS)];
     }
 
     public int[] geometric(final int start_color, final int end_color) {
@@ -81,5 +72,40 @@ public class ColorSequence {
         }//for
         return array;
     }//color
+
+    public int[] increment(final int start_color, final int diff_color) {
+        final double start_red = Color.red(start_color);
+        final double start_green = Color.green(start_color);
+        final double start_blue = Color.blue(start_color);
+        final double diff_red = Color.red(diff_color);
+        final double diff_green = Color.green(diff_color);
+        final double diff_blue = Color.blue(diff_color);
+        for (int i = 0; i < this.size(); ++i) {
+            final double red = start_red + diff_red * i;
+            final double green = start_green + diff_green * i;
+            final double blue = start_blue + diff_blue * i;
+            final int color = Color.rgb((int) Math.round(red), (int) Math.round(green), (int) Math.round(blue));
+            array[i] = color;
+        }//for
+        return array;
+    }//increment
+
+    public int[] decrement(final int start_color, final int diff_color) {
+        final double start_red = Color.red(start_color);
+        final double start_green = Color.green(start_color);
+        final double start_blue = Color.blue(start_color);
+        final double diff_red = Color.red(diff_color);
+        final double diff_green = Color.green(diff_color);
+        final double diff_blue = Color.blue(diff_color);
+        for (int i = 0; i < this.size(); ++i) {
+            final double red = start_red - diff_red * i;
+            final double green = start_green - diff_green * i;
+            final double blue = start_blue - diff_blue * i;
+            final int color = Color.rgb((int) Math.round(red), (int) Math.round(green), (int) Math.round(blue));
+            array[i] = color;
+        }//for
+        return array;
+    }//decrement
+
 }//ColorSequence
 

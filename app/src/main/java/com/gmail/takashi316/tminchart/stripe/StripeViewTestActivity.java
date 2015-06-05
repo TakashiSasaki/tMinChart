@@ -29,8 +29,8 @@ public class StripeViewTestActivity extends Activity
         bundle.putInt("nTableRows", ROWS);
         bundle.putInt("nTableColumns", COLUMNS);
         bundle.putInt("nSteps", COLUMNS - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(this)).arithmetic(Color.WHITE, Color.BLACK));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(this)).white());
+        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS))).arithmetic(Color.WHITE, Color.BLACK));
+        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS))).white());
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
         bundle.putInt("frameWidth", 10);
