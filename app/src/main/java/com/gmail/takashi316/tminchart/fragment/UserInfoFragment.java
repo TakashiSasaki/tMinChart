@@ -24,7 +24,7 @@ import com.gmail.takashi316.tminchart.db.UsersTable;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import com.gmail.takashi316.tminchart.location.LocationThread;
+import com.gmail.takashi316.tminchart.location.Location;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +69,7 @@ public class UserInfoFragment extends Fragment {
 
     public UsersTable usersTable = new UsersTable();
 
-    LocationThread locationThread;
+    Location location;
 
     /**
      * Use this factory method to create a new instance of
@@ -262,12 +262,11 @@ public class UserInfoFragment extends Fragment {
             }//onClick
         });
 
-        this.locationThread.start();
-        this.locationThread = new LocationThread(getActivity());
-        this.locationThread.setCallback(new Runnable() {
+        this.location = new Location(getActivity());
+        this.location.setCallback(new Runnable() {
             @Override
             public void run() {
-                editTextAddress.setText(locationThread.address);
+                editTextAddress.setText(location.address);
             }
         });
         return view;

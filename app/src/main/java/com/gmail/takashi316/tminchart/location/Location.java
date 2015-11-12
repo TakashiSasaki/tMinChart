@@ -4,7 +4,6 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * Created by sasaki on 2014/08/08.
  */
-public class LocationThread extends Thread implements LocationListener {
+public class Location implements LocationListener {
     public double longitude;
     public double latitude;
     public String address = null;
@@ -28,30 +27,21 @@ public class LocationThread extends Thread implements LocationListener {
         this.callback = callback;
     }
 
-    public LocationThread(final Context context) {
-        super("LocationThread");
+    public Location(final Context context) {
         this.locationManager =
                 (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         final Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
         criteria.setPowerRequirement(Criteria.POWER_LOW);
         criteria.setAltitudeRequired(false);
         criteria.setCostAllowed(false);
         this.locationProvider = this.locationManager.getBestProvider(criteria, true);
         this.geocoder = new Geocoder(context);
+        this.locationManager.requestLocationUpdates(locationProvider, 0, 0, Location.this);
     }
 
     @Override
-    public void run() {
-        try {
-            this.locationManager.requestLocationUpdates(locationProvider, 0, 0, LocationThread.this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//run
-
-    @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(android.location.Location location) {
         this.locationManager.removeUpdates(this);
         this.longitude = location.getLongitude();
         this.latitude = location.getLatitude();
@@ -60,7 +50,7 @@ public class LocationThread extends Thread implements LocationListener {
             if (addresses.size() >= 1) {
                 final Address address = addresses.get(0);
                 this.address = "";
-                for (int i = 0; i < address.getMaxAddressLineIndex(); ++i) {
+                for (int i = 0; i <= address.getMaxAddressLineIndex(); ++i) {
                     this.address += address.getAddressLine(i);
                 }//for
             }//if
@@ -87,13 +77,11 @@ public class LocationThread extends Thread implements LocationListener {
 
     }
 
-    public void stopRequestLocationUpdates() {
-        this.locationManager.removeUpdates(this);
-    }
-
     @Override
     protected void finalize() throws Throwable {
-        this.locationManager.removeUpdates(this);
+        if (this.locationManager != null) {
+            this.locationManager.removeUpdates(this);
+        }
         super.finalize();
     }
 }
