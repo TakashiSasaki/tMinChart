@@ -24,6 +24,7 @@ import com.gmail.takashi316.tminchart.db.UsersTable;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import com.gmail.takashi316.tminchart.location.LocationThread;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +33,6 @@ import java.util.Calendar;
  * to handle interaction events.
  * Use the {@link UserInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class UserInfoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -88,6 +88,7 @@ public class UserInfoFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public UserInfoFragment() {
         // Required empty public constructor
     }
@@ -170,11 +171,11 @@ public class UserInfoFragment extends Fragment {
                                         if (radioButtonBeforeTwilgihtShift.getText().toString().equals(selected_user.textFatigue))
                                             radioButtonBeforeTwilgihtShift.setChecked(true);
                                         editTextFatigueEx.setText(selected_user.textFatigueEx);
-                                        if(radioButtonNoCare.getText().toString().equals(selected_user.textCare))
+                                        if (radioButtonNoCare.getText().toString().equals(selected_user.textCare))
                                             radioButtonNoCare.setChecked(true);
-                                        if(radioButtonHotMask.getText().toString().equals(selected_user.textCare))
+                                        if (radioButtonHotMask.getText().toString().equals(selected_user.textCare))
                                             radioButtonNoCare.setChecked(true);
-                                        if(radioButtonNormalMask.getText().toString().equals(selected_user.textCare))
+                                        if (radioButtonNormalMask.getText().toString().equals(selected_user.textCare))
                                             radioButtonNormalMask.setChecked(true);
                                         editTextCareEx.setText(selected_user.textCareEx);
                                         editTextAddress.setText(selected_user.textAddress);
@@ -190,70 +191,70 @@ public class UserInfoFragment extends Fragment {
         editTextName = (EditText) view.findViewById(R.id.editTextName);
         editTextAge = (EditText) view.findViewById(R.id.editTextAge);
         editTextAffiliation = (EditText) view.findViewById(R.id.editTextAffiliation);
-        radioButtonAfterDayShift = (RadioButton)view.findViewById(R.id.radioButtonAfterDayShift);
-        radioButtonAfterNightShift = (RadioButton)view.findViewById(R.id.radioButtonAfterNightShift);
-        radioButtonAfterTwilightShift = (RadioButton)view.findViewById(R.id.radioButtonAfterTwilightShift);
-        radioButtonBeforeDayShift = (RadioButton)view.findViewById(R.id.radioButtonBeforeDayShift);
-        radioButtonBeforeNightShift = (RadioButton)view.findViewById(R.id.radioButtonBeforeNightShift);
-        radioButtonBeforeTwilgihtShift= (RadioButton)view.findViewById(R.id.radioButtonBeforeTwilighShift);
-        radioButtonContactLens = (RadioButton)view.findViewById(R.id.radioButtonContactLens);
-        radioButtonFemale = (RadioButton)view.findViewById(R.id.radioButtonFemale);
-        radioButtonMale = (RadioButton)view.findViewById(R.id.radioButtonMale);
-        radioButtonGlasses =(RadioButton)view.findViewById(R.id.radioButtonGlasses);
-        radioButtonNoCorrection = (RadioButton)view.findViewById(R.id.radioButtonNoCorrection);
-        radioButtonOtherCorrection = (RadioButton)view.findViewById(R.id.radioButtonOtherCorrection);
+        radioButtonAfterDayShift = (RadioButton) view.findViewById(R.id.radioButtonAfterDayShift);
+        radioButtonAfterNightShift = (RadioButton) view.findViewById(R.id.radioButtonAfterNightShift);
+        radioButtonAfterTwilightShift = (RadioButton) view.findViewById(R.id.radioButtonAfterTwilightShift);
+        radioButtonBeforeDayShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeDayShift);
+        radioButtonBeforeNightShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeNightShift);
+        radioButtonBeforeTwilgihtShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeTwilighShift);
+        radioButtonContactLens = (RadioButton) view.findViewById(R.id.radioButtonContactLens);
+        radioButtonFemale = (RadioButton) view.findViewById(R.id.radioButtonFemale);
+        radioButtonMale = (RadioButton) view.findViewById(R.id.radioButtonMale);
+        radioButtonGlasses = (RadioButton) view.findViewById(R.id.radioButtonGlasses);
+        radioButtonNoCorrection = (RadioButton) view.findViewById(R.id.radioButtonNoCorrection);
+        radioButtonOtherCorrection = (RadioButton) view.findViewById(R.id.radioButtonOtherCorrection);
         editTextFatigueEx = (EditText) view.findViewById(R.id.editTextFatigueEx);
-        radioButtonNoCare = (RadioButton)view.findViewById(R.id.radioButtonNoCare);
-        radioButtonHotMask = (RadioButton)view.findViewById(R.id.radioButtonHotMask);
-        radioButtonNormalMask = (RadioButton)view.findViewById(R.id.radioButtonNormalMask);
-        editTextCareEx = (EditText)view.findViewById(R.id.editTextCareEx);
-        editTextAddress = (EditText)view.findViewById(R.id.editTextAddress);
+        radioButtonNoCare = (RadioButton) view.findViewById(R.id.radioButtonNoCare);
+        radioButtonHotMask = (RadioButton) view.findViewById(R.id.radioButtonHotMask);
+        radioButtonNormalMask = (RadioButton) view.findViewById(R.id.radioButtonNormalMask);
+        editTextCareEx = (EditText) view.findViewById(R.id.editTextCareEx);
+        editTextAddress = (EditText) view.findViewById(R.id.editTextAddress);
 
         view.findViewById(R.id.buttonSetUserInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextName.getText().toString().isEmpty()) return;
+                if (editTextName.getText().toString().isEmpty()) return;
                 usersTable.textName = editTextName.getText().toString();
                 {
                     final CharSequence cs = editTextAge.getText();
                     final String s = cs.toString();
-                    if(s != null && !s.isEmpty()) usersTable.integerAge = Integer.parseInt(s);
+                    if (s != null && !s.isEmpty()) usersTable.integerAge = Integer.parseInt(s);
                 }
                 usersTable.textSex = radioButtonMale.isChecked() ? "男性" : radioButtonFemale.isChecked() ? "女性" : "未回答";
                 usersTable.textAffiliation = editTextAffiliation.getText().toString();
-                usersTable.textFatigue = radioButtonAfterDayShift.isChecked() ? radioButtonAfterDayShift.getText().toString():
-                        radioButtonAfterNightShift.isChecked()? radioButtonAfterNightShift.getText().toString():
-                                radioButtonAfterTwilightShift.isChecked() ? radioButtonAfterTwilightShift.getText().toString():
-                                        radioButtonBeforeDayShift.isChecked()? radioButtonBeforeDayShift.getText().toString():
-                                                radioButtonBeforeNightShift.isChecked()?radioButtonBeforeNightShift.getText().toString():
-                                                        radioButtonBeforeTwilgihtShift.isChecked()?radioButtonBeforeTwilgihtShift.getText().toString() : null;
-                usersTable.textCorrection = radioButtonNoCorrection.isChecked()? radioButtonNoCorrection.getText().toString():
-                        radioButtonOtherCorrection.isChecked()?radioButtonOtherCorrection.getText().toString():
-                                radioButtonContactLens.isChecked()?radioButtonContactLens.getText().toString():
-                                        radioButtonGlasses.isChecked()?radioButtonGlasses.getText().toString() : null;
+                usersTable.textFatigue = radioButtonAfterDayShift.isChecked() ? radioButtonAfterDayShift.getText().toString() :
+                        radioButtonAfterNightShift.isChecked() ? radioButtonAfterNightShift.getText().toString() :
+                                radioButtonAfterTwilightShift.isChecked() ? radioButtonAfterTwilightShift.getText().toString() :
+                                        radioButtonBeforeDayShift.isChecked() ? radioButtonBeforeDayShift.getText().toString() :
+                                                radioButtonBeforeNightShift.isChecked() ? radioButtonBeforeNightShift.getText().toString() :
+                                                        radioButtonBeforeTwilgihtShift.isChecked() ? radioButtonBeforeTwilgihtShift.getText().toString() : null;
+                usersTable.textCorrection = radioButtonNoCorrection.isChecked() ? radioButtonNoCorrection.getText().toString() :
+                        radioButtonOtherCorrection.isChecked() ? radioButtonOtherCorrection.getText().toString() :
+                                radioButtonContactLens.isChecked() ? radioButtonContactLens.getText().toString() :
+                                        radioButtonGlasses.isChecked() ? radioButtonGlasses.getText().toString() : null;
                 usersTable.textFatigueEx = editTextFatigueEx.getText().toString();
                 usersTable.textCare = radioButtonNoCare.isChecked() ? radioButtonNoCare.getText().toString() :
-                        radioButtonHotMask.isChecked() ? radioButtonHotMask.getText().toString():
+                        radioButtonHotMask.isChecked() ? radioButtonHotMask.getText().toString() :
                                 radioButtonNormalMask.isChecked() ? radioButtonNormalMask.getText().toString() : null;
                 usersTable.textCareEx = editTextCareEx.getText().toString();
                 usersTable.textAddress = editTextAddress.getText().toString();
 
-                        SQLiteOpenHelper  sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
+                SQLiteOpenHelper sqlite_open_helper = new UserInfoSqliteOpenHelper(getActivity());
                 SQLiteDatabase writable_database = sqlite_open_helper.getWritableDatabase();
                 Cursor cursor = writable_database.query("UsersTable",
                         UsersTable.ALL_COLUMN_NAMES_UsersTable,
                         null, null, null, null, null, null);
-                if(cursor.getCount() > 0){
+                if (cursor.getCount() > 0) {
                     writable_database.delete("UsersTable", "name = ?", new String[]{usersTable.textName});
                 }//if
                 cursor.close();
                 try {
                     usersTable.writeUsersTable(writable_database);
-                } catch (SQLException e){
+                } catch (SQLException e) {
                     Log.e(UserInfoFragment.class.getSimpleName(), e.getMessage());
                 }//try
-                if(Debug.isDebuggerConnected()){
-                    assert(UsersTable.hasUniqueName(writable_database, usersTable.textName));
+                if (Debug.isDebuggerConnected()) {
+                    assert (UsersTable.hasUniqueName(writable_database, usersTable.textName));
                 }//if
                 writable_database.close();
                 usersTable.integerLastUsed = Calendar.getInstance().getTime().getTime();
@@ -261,8 +262,9 @@ public class UserInfoFragment extends Fragment {
             }//onClick
         });
 
-        this.locationThread = new LocationThread(getActivity(), (EditText)view.findViewById(R.id.editTextAddress));
         this.locationThread.start();
+        this.locationThread = new LocationThread(getActivity(), 5000, 100);
+        this.locationThread.setEditTextAddress((EditText) view.findViewById(R.id.editTextAddress));
         return view;
     }
 
@@ -295,7 +297,7 @@ public class UserInfoFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
@@ -306,7 +308,7 @@ public class UserInfoFragment extends Fragment {
     }
 
 
-    public String getName(){
+    public String getName() {
         return editTextName.getText().toString();
     }
 }

@@ -19,5 +19,6 @@
     <string name="title_activity_stripe_view_test">StripeViewTestActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_loation_thread_test">LoationThreadTestActivity</string>
 
 </resources>
