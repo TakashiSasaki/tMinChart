@@ -8,16 +8,23 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.util.List;
 
 /**
  * Created by sasaki on 2014/08/08.
  */
-public class Location implements LocationListener {
+
+class LocationResults {
     public double longitude;
     public double latitude;
     public String address = null;
+}
+
+public class Location extends LocationResults implements LocationListener {
+
     private LocationManager locationManager;
     private String locationProvider;
     private Geocoder geocoder;
@@ -83,5 +90,20 @@ public class Location implements LocationListener {
             this.locationManager.removeUpdates(this);
         }
         super.finalize();
+    }
+
+    public String getJson() {
+        class Hoge {
+            public int foo;
+            public String bar;
+        }
+        ObjectMapper object_mapper = new ObjectMapper();
+        try {
+            String json_string = object_mapper.writeValueAsString(new Hoge());
+            return json_string;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

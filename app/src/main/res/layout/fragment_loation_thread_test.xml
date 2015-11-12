@@ -98,6 +98,18 @@
                 android:inputType="time" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JSON representation" />
+
+        <EditText
+            android:id="@+id/editTextJson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minLines="3"
+            android:minWidth="100dp" />
+
     </LinearLayout>
 
 </RelativeLayout>

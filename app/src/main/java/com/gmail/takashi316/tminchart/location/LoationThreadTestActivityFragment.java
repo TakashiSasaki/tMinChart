@@ -21,6 +21,7 @@ public class LoationThreadTestActivityFragment extends Fragment {
     private EditText editTextAddress;
     private EditText editTextDate;
     private EditText editTextTime;
+    private EditText editTextJson;
 
     public LoationThreadTestActivityFragment() {
     }
@@ -34,6 +35,7 @@ public class LoationThreadTestActivityFragment extends Fragment {
         this.editTextLongitude = (EditText) view.findViewById(R.id.editTextLongitude);
         this.editTextDate = (EditText) view.findViewById(R.id.editTextDate);
         this.editTextTime = (EditText) view.findViewById(R.id.editTextTime);
+        this.editTextJson = (EditText) view.findViewById(R.id.editTextJson);
 
         this.location = new Location(getActivity().getApplicationContext());
         this.location.setCallback(new Runnable() {
@@ -47,6 +49,7 @@ public class LoationThreadTestActivityFragment extends Fragment {
                 Date date = new Date();
                 editTextDate.setText(date.toString());
                 editTextTime.setText(date.toString());
+                editTextJson.setText(location.getJson());
             }
         });
 
