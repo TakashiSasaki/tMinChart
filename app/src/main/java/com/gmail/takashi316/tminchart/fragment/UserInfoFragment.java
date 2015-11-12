@@ -107,6 +107,28 @@ public class UserInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_info, container, false);
+        editTextName = (EditText) view.findViewById(R.id.editTextName);
+        editTextAge = (EditText) view.findViewById(R.id.editTextAge);
+        editTextAffiliation = (EditText) view.findViewById(R.id.editTextAffiliation);
+        radioButtonAfterDayShift = (RadioButton) view.findViewById(R.id.radioButtonAfterDayShift);
+        radioButtonAfterNightShift = (RadioButton) view.findViewById(R.id.radioButtonAfterNightShift);
+        radioButtonAfterTwilightShift = (RadioButton) view.findViewById(R.id.radioButtonAfterTwilightShift);
+        radioButtonBeforeDayShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeDayShift);
+        radioButtonBeforeNightShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeNightShift);
+        radioButtonBeforeTwilgihtShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeTwilighShift);
+        radioButtonContactLens = (RadioButton) view.findViewById(R.id.radioButtonContactLens);
+        radioButtonFemale = (RadioButton) view.findViewById(R.id.radioButtonFemale);
+        radioButtonMale = (RadioButton) view.findViewById(R.id.radioButtonMale);
+        radioButtonGlasses = (RadioButton) view.findViewById(R.id.radioButtonGlasses);
+        radioButtonNoCorrection = (RadioButton) view.findViewById(R.id.radioButtonNoCorrection);
+        radioButtonOtherCorrection = (RadioButton) view.findViewById(R.id.radioButtonOtherCorrection);
+        editTextFatigueEx = (EditText) view.findViewById(R.id.editTextFatigueEx);
+        radioButtonNoCare = (RadioButton) view.findViewById(R.id.radioButtonNoCare);
+        radioButtonHotMask = (RadioButton) view.findViewById(R.id.radioButtonHotMask);
+        radioButtonNormalMask = (RadioButton) view.findViewById(R.id.radioButtonNormalMask);
+        editTextCareEx = (EditText) view.findViewById(R.id.editTextCareEx);
+        editTextAddress = (EditText) view.findViewById(R.id.editTextAddress);
+
         view.findViewById(R.id.buttonUserList).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -188,28 +210,6 @@ public class UserInfoFragment extends Fragment {
                 }//OnClickListener
         );
 
-        editTextName = (EditText) view.findViewById(R.id.editTextName);
-        editTextAge = (EditText) view.findViewById(R.id.editTextAge);
-        editTextAffiliation = (EditText) view.findViewById(R.id.editTextAffiliation);
-        radioButtonAfterDayShift = (RadioButton) view.findViewById(R.id.radioButtonAfterDayShift);
-        radioButtonAfterNightShift = (RadioButton) view.findViewById(R.id.radioButtonAfterNightShift);
-        radioButtonAfterTwilightShift = (RadioButton) view.findViewById(R.id.radioButtonAfterTwilightShift);
-        radioButtonBeforeDayShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeDayShift);
-        radioButtonBeforeNightShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeNightShift);
-        radioButtonBeforeTwilgihtShift = (RadioButton) view.findViewById(R.id.radioButtonBeforeTwilighShift);
-        radioButtonContactLens = (RadioButton) view.findViewById(R.id.radioButtonContactLens);
-        radioButtonFemale = (RadioButton) view.findViewById(R.id.radioButtonFemale);
-        radioButtonMale = (RadioButton) view.findViewById(R.id.radioButtonMale);
-        radioButtonGlasses = (RadioButton) view.findViewById(R.id.radioButtonGlasses);
-        radioButtonNoCorrection = (RadioButton) view.findViewById(R.id.radioButtonNoCorrection);
-        radioButtonOtherCorrection = (RadioButton) view.findViewById(R.id.radioButtonOtherCorrection);
-        editTextFatigueEx = (EditText) view.findViewById(R.id.editTextFatigueEx);
-        radioButtonNoCare = (RadioButton) view.findViewById(R.id.radioButtonNoCare);
-        radioButtonHotMask = (RadioButton) view.findViewById(R.id.radioButtonHotMask);
-        radioButtonNormalMask = (RadioButton) view.findViewById(R.id.radioButtonNormalMask);
-        editTextCareEx = (EditText) view.findViewById(R.id.editTextCareEx);
-        editTextAddress = (EditText) view.findViewById(R.id.editTextAddress);
-
         view.findViewById(R.id.buttonSetUserInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,8 +263,13 @@ public class UserInfoFragment extends Fragment {
         });
 
         this.locationThread.start();
-        this.locationThread = new LocationThread(getActivity(), 5000, 100);
-        this.locationThread.setEditTextAddress((EditText) view.findViewById(R.id.editTextAddress));
+        this.locationThread = new LocationThread(getActivity());
+        this.locationThread.setCallback(new Runnable() {
+            @Override
+            public void run() {
+                editTextAddress.setText(locationThread.address);
+            }
+        });
         return view;
     }
 

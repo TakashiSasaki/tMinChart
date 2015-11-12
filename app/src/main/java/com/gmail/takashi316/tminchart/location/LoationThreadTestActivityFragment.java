@@ -2,6 +2,7 @@ package com.gmail.takashi316.tminchart.location;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,10 @@ import com.gmail.takashi316.tminchart.R;
  * A placeholder fragment containing a simple view.
  */
 public class LoationThreadTestActivityFragment extends Fragment {
-    final int INTERVAL_MILLIS = 5000;
-    final int COUNT = 10;
-
-    LocationThread locationThread;
+    private LocationThread locationThread;
+    private EditText editTextLatitude;
+    private EditText editTextLongitude;
+    private EditText editTextAddress;
 
     public LoationThreadTestActivityFragment() {
     }
@@ -25,6 +26,9 @@ public class LoationThreadTestActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_loation_thread_test, container, false);
+        this.editTextAddress = (EditText) view.findViewById(R.id.editTextAddress);
+        this.editTextLatitude = (EditText) view.findViewById(R.id.editTextLatitude);
+        this.editTextLongitude = (EditText) view.findViewById(R.id.editTextLongitude);
 
         view.findViewById(R.id.buttonStop).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,11 +45,15 @@ public class LoationThreadTestActivityFragment extends Fragment {
                 if (locationThread != null) {
                     locationThread.stopRequestLocationUpdates();
                 }//if
-                locationThread = new LocationThread(getActivity().getApplicationContext(), INTERVAL_MILLIS, COUNT);
-                locationThread.setEditTextAddress((EditText) view.findViewById(R.id.editTextAddress));
-                locationThread.setEditTextLatitude((EditText) view.findViewById(R.id.editTextLatitude));
-                locationThread.setEditTextLongitude((EditText) view.findViewById(R.id.editTextLongitude));
-                locationThread.setEditTextCount((EditText) view.findViewById(R.id.editTextCount));
+                locationThread = new LocationThread(getActivity().getApplicationContext());
+                locationThread.setCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        editTextAddress.setText(locationThread.address);
+                        editTextLongitude.setText(Double.toString(locationThread.longitude));
+                        editTextLatitude.setText(Double.toString(locationThread.latitude));
+                    }//run
+                });
                 locationThread.start();
             }//onClick
         });
