@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart.fragment;
+package com.gmail.takashi316.tminchart.conchart;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -15,6 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 import com.gmail.takashi316.tminchart.view.Seventeen;
 
 import java.io.StringWriter;

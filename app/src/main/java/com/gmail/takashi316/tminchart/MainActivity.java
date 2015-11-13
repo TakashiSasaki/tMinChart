@@ -31,7 +31,7 @@ import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 import com.gmail.takashi316.tminchart.fragment.ResultFragment;
 import com.gmail.takashi316.tminchart.fragment.SettingsFragment;
 import com.gmail.takashi316.tminchart.fragment.ShowResultsFragment;
-import com.gmail.takashi316.tminchart.fragment.ConChartFragment;
+import com.gmail.takashi316.tminchart.conchart.ConChartFragment;
 import com.gmail.takashi316.tminchart.minchart.MinChartFragment;
 import com.gmail.takashi316.tminchart.fragment.UploadFragment;
 import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
