@@ -9,9 +9,9 @@ import android.os.Bundle;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gmail.takashi316.tminchart.DisplayDpi;
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
+import com.gmail.takashi316.tminchart.fragment.MinChartFragment;
 
-public class MinChartActivity extends Activity implements TminChartFragment.OnFragmentInteractionListener {
+public class MinChartActivity extends Activity implements MinChartFragment.OnFragmentInteractionListener {
 
     DisplayDpi display;
 
@@ -23,7 +23,7 @@ public class MinChartActivity extends Activity implements TminChartFragment.OnFr
 
         Fragment fragment = null;
         try {
-            fragment = TminChartFragment.newInstance(new MinChartParams());
+            fragment = MinChartFragment.newInstance(new MinChartParams());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

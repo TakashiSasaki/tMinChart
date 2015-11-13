@@ -23,25 +23,24 @@ import com.gmail.takashi316.tminchart.view.Konoji;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TminChartFragment extends Fragment {
+public class MinChartFragment extends Fragment {
     private MinChartParams params;
     private TableLayout tableLayout;
-    //private Random random = new Random();
     static private ObjectMapper objectMapper = new ObjectMapper();
 
     private OnFragmentInteractionListener mListener;
     private ArrayList<Konoji> konojiViews = new ArrayList<Konoji>();
     private DisplayDpi display;
 
-    public static TminChartFragment newInstance(MinChartParams params) throws JsonProcessingException {
-        TminChartFragment fragment = new TminChartFragment();
+    public static MinChartFragment newInstance(MinChartParams params) throws JsonProcessingException {
+        MinChartFragment fragment = new MinChartFragment();
         Bundle bundle = new Bundle();
         bundle.putString("params", objectMapper.writeValueAsString(params));
         fragment.setArguments(bundle);
         return fragment;
     }//newInstance
 
-    public TminChartFragment() {
+    public MinChartFragment() {
         // Required empty public constructor
     }
 
@@ -62,7 +61,7 @@ public class TminChartFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    Button buttonStartResultFragment;
+    private Button buttonStartResultFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

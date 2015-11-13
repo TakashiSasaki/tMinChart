@@ -32,7 +32,7 @@ import com.gmail.takashi316.tminchart.fragment.ResultFragment;
 import com.gmail.takashi316.tminchart.fragment.SettingsFragment;
 import com.gmail.takashi316.tminchart.fragment.ShowResultsFragment;
 import com.gmail.takashi316.tminchart.fragment.TconChartFragment;
-import com.gmail.takashi316.tminchart.fragment.TminChartFragment;
+import com.gmail.takashi316.tminchart.fragment.MinChartFragment;
 import com.gmail.takashi316.tminchart.fragment.UploadFragment;
 import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
 import com.gmail.takashi316.tminchart.stripe.StripeFragment;
@@ -43,7 +43,7 @@ import java.util.List;
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-        TminChartFragment.OnFragmentInteractionListener,
+        MinChartFragment.OnFragmentInteractionListener,
         TconChartFragment.OnFragmentInteractionListener,
         DisplayPropertyFragment.OnFragmentInteractionListener,
         UserInfoFragment.OnFragmentInteractionListener,
@@ -55,7 +55,7 @@ public class MainActivity extends Activity
         StripeFragment.OnFragmentInteractionListener,
         SensorEventListener {
 
-    private static Class[] fragmentClasses = {UserInfoFragment.class, TminChartFragment.class,
+    private static Class[] fragmentClasses = {UserInfoFragment.class, MinChartFragment.class,
             TconChartFragment.class, DisplayPropertyFragment.class, ResultFragment.class, ShowResultsFragment.class};
 
     private static final boolean USE_ACTION_BAR = false;
@@ -79,7 +79,7 @@ public class MainActivity extends Activity
 
     private UserInfoFragment userInfoFragment;
     private TconChartFragment tconChartFragment;
-    private TminChartFragment tminChartFragment;
+    private MinChartFragment minChartFragment;
     private SharedPreferences preferences;
 
     @Override
@@ -174,7 +174,7 @@ public class MainActivity extends Activity
                         Typeface.create(font_family, font_style));
                 break;
             case 2:
-                fragment = tminChartFragment != null ? tminChartFragment : (tminChartFragment = new TminChartFragment());
+                fragment = minChartFragment != null ? minChartFragment : (minChartFragment = new MinChartFragment());
                 break;
             case 3:
                 fragment = AmidaFragment.newInstance(30, 255);
@@ -277,8 +277,8 @@ public class MainActivity extends Activity
 
     @Override
     public String getTminChartResultString() {
-        if (tminChartFragment != null) {
-            return tminChartFragment.toString();
+        if (minChartFragment != null) {
+            return minChartFragment.toString();
         } else {
             return "tMinChartは未測定です";
         }//if
