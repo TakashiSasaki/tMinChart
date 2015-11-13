@@ -22,23 +22,11 @@ import com.gmail.takashi316.tminchart.view.Konoji;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
-
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TminChartFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TminChartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-
 
 public class TminChartFragment extends Fragment {
     private MinChartParams params;
     private TableLayout tableLayout;
-    private Random random = new Random();
+    //private Random random = new Random();
     static private ObjectMapper objectMapper = new ObjectMapper();
 
     private OnFragmentInteractionListener mListener;
@@ -63,6 +51,8 @@ public class TminChartFragment extends Fragment {
         try {
             this.params = objectMapper.readValue(getArguments().getString("params"), MinChartParams.class);
         } catch (IOException e) {
+            this.params = new MinChartParams();
+        } catch (NullPointerException e) {
             this.params = new MinChartParams();
         }
     }//onCreate
@@ -150,24 +140,8 @@ public class TminChartFragment extends Fragment {
         mListener = null;
     }//onDetach
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
-
-        //public float getXdpi();
-
-        //public float getYdpi();
-
-        //public int getWidthPixels();
     }//OnFragmentInteractionListener
 
 
@@ -181,4 +155,3 @@ public class TminChartFragment extends Fragment {
         return "未測定";
     }//toString
 }//TminChartFragment
-
