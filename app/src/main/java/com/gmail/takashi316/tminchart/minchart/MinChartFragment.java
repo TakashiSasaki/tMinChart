@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart.fragment;
+package com.gmail.takashi316.tminchart.minchart;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gmail.takashi316.tminchart.DisplayDpi;
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.minchart.MinChartParams;
+import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 import com.gmail.takashi316.tminchart.view.Konoji;
 
 import java.io.IOException;

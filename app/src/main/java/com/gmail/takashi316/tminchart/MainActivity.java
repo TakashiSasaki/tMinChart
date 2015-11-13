@@ -32,7 +32,7 @@ import com.gmail.takashi316.tminchart.fragment.ResultFragment;
 import com.gmail.takashi316.tminchart.fragment.SettingsFragment;
 import com.gmail.takashi316.tminchart.fragment.ShowResultsFragment;
 import com.gmail.takashi316.tminchart.fragment.TconChartFragment;
-import com.gmail.takashi316.tminchart.fragment.MinChartFragment;
+import com.gmail.takashi316.tminchart.minchart.MinChartFragment;
 import com.gmail.takashi316.tminchart.fragment.UploadFragment;
 import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
 import com.gmail.takashi316.tminchart.stripe.StripeFragment;
