@@ -7,7 +7,7 @@
     <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        class="com.gmail.takashi316.tminchart.view.Seventeen"
+        class="com.gmail.takashi316.tminchart.conchart.Seventeen"
         android:id="@+id/view"
         android:layout_gravity="center"
         app:string="画"/>

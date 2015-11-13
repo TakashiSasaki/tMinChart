@@ -1,7 +1,6 @@
-package com.gmail.takashi316.tminchart.view;
+package com.gmail.takashi316.tminchart.conchart;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
