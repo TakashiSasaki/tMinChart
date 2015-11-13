@@ -32,7 +32,7 @@ public class ConChartFragment extends Fragment {
     private Typeface typeface;
 
     private OnFragmentInteractionListener mListener;
-    ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new ArrayList<ArrayList<Seventeen>>();
+    ArrayList<ArrayList<ConChartView>> seventeenArrayLists = new ArrayList<ArrayList<ConChartView>>();
 
     public static ConChartFragment newInstance(int n_strokes, int n_rows, int n_columns, double max_inch,
                                                 double size_ratio, double contrast_ratio, Typeface typeface) {
@@ -89,15 +89,15 @@ public class ConChartFragment extends Fragment {
         this.tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTconChart);
         this.seventeenArrayLists.clear();
         for (int y = 0; y < this.nRows; ++y) {
-            ArrayList<Seventeen> seventeens = new ArrayList<Seventeen>();
-            seventeenArrayLists.add(seventeens);
+            ArrayList<ConChartView> conChartViews = new ArrayList<ConChartView>();
+            seventeenArrayLists.add(conChartViews);
             double width_inch = this.maxInch * Math.pow(this.sizeRatio, y);
-            Seventeen leftmost = new Seventeen(getActivity(), this.maxInch, -1.0, seventeens, "×", this.nStrokes, this.typeface);
+            ConChartView leftmost = new ConChartView(getActivity(), this.maxInch, -1.0, conChartViews, "×", this.nStrokes, this.typeface);
             leftmost.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
             leftmost.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
             TableRow table_row = new TableRow(getActivity());
             table_row.addView(leftmost);
-            seventeens.add(leftmost);
+            conChartViews.add(leftmost);
             for (int x = 0; x < this.nColumns; ++x) {
                 TextView text_view = new TextView(getActivity());
                 text_view.setOnClickListener(new View.OnClickListener() {
@@ -107,11 +107,11 @@ public class ConChartFragment extends Fragment {
                     }
                 });
                 final double intention = 255.0 - (255.0 * Math.pow(this.contrastRatio, x));
-                Seventeen seventeen = new Seventeen(getActivity(), width_inch, intention, seventeens, null, this.nStrokes, this.typeface);
-                seventeen.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
-                seventeen.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
-                table_row.addView(seventeen);
-                seventeens.add(seventeen);
+                ConChartView conChartView = new ConChartView(getActivity(), width_inch, intention, conChartViews, null, this.nStrokes, this.typeface);
+                conChartView.setMinimumHeight((int) ((this.maxInch + MARGIN_INCH) * l.getYdpi()));
+                conChartView.setMinimumWidth((int) ((this.maxInch + MARGIN_INCH) * l.getXdpi()));
+                table_row.addView(conChartView);
+                conChartViews.add(conChartView);
             }//for y
             tableLayout.addView(table_row);
         }//for x
@@ -154,10 +154,10 @@ public class ConChartFragment extends Fragment {
     @Override
     public String toString() {
         StringWriter string_writer = new StringWriter();
-        for (ArrayList<Seventeen> seventeens : seventeenArrayLists) {
-            for (Seventeen seventeen : seventeens) {
-                if (seventeen.isTouched()) {
-                    string_writer.write(seventeen.toString());
+        for (ArrayList<ConChartView> conChartViews : seventeenArrayLists) {
+            for (ConChartView conChartView : conChartViews) {
+                if (conChartView.isTouched()) {
+                    string_writer.write(conChartView.toString());
                     string_writer.write(" ");
                 }//if
             }//for

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Seventeen extends View {
+public class ConChartView extends View {
 
     private TextPaint mTextPaint;
     private float mTextWidth;
@@ -45,7 +45,7 @@ public class Seventeen extends View {
     static final private Random random = new Random();
     static DisplayMetrics displayMetrics;
 
-    public Seventeen(Context context, double width_inch, double intensity, final ArrayList<Seventeen> seventeens, String string, int n_stroke, Typeface typeface) {
+    public ConChartView(Context context, double width_inch, double intensity, final ArrayList<ConChartView> conChartViews, String string, int n_stroke, Typeface typeface) {
         super(context);
         this.typeface = typeface;
 
@@ -83,9 +83,9 @@ public class Seventeen extends View {
             @Override
             public void onClick(View v) {
                 boolean previously_touched = touched;
-                if (seventeens != null) {
-                    for (Seventeen seventeen : seventeens) {
-                        seventeen.touched = false;
+                if (conChartViews != null) {
+                    for (ConChartView conChartView : conChartViews) {
+                        conChartView.touched = false;
                     }//for
                 }//if
                 touched = !previously_touched;
@@ -93,8 +93,8 @@ public class Seventeen extends View {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        for (Seventeen seventeen : seventeens) {
-                            seventeen.invalidate();
+                        for (ConChartView conChartView : conChartViews) {
+                            conChartView.invalidate();
                         }//for
                         try {
                             ToneGenerator tone_generator = new ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
@@ -109,20 +109,20 @@ public class Seventeen extends View {
         });//setOnClickListener
     }// custom constructor
 
-    public Seventeen(Context context) {
+    public ConChartView(Context context) {
         this(context, null);
     }//Seventeen
 
-    public Seventeen(Context context, AttributeSet attrs) {
+    public ConChartView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }//Seventeen
 
-    public Seventeen(Context context, AttributeSet attrs, int defStyle) {
-        this(context, context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getInt(R.styleable.Seventeen_widthInch, 1),
-                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getFloat(R.styleable.Seventeen_intensity, 1),
+    public ConChartView(Context context, AttributeSet attrs, int defStyle) {
+        this(context, context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_widthInch, 1),
+                context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getFloat(R.styleable.ConChartView_intensity, 1),
                 null,
-                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getString(R.styleable.Seventeen_string),
-                context.obtainStyledAttributes(attrs, R.styleable.Seventeen, defStyle, 0).getInt(R.styleable.Seventeen_nStroke, 17), Typeface.MONOSPACE);
+                context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getString(R.styleable.ConChartView_string),
+                context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_nStroke, 17), Typeface.MONOSPACE);
     }//Seventeen
 
     private void invalidateTextPaintAndMeasurements() {

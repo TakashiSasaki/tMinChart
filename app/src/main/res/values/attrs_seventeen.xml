@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <declare-styleable name="Seventeen">
+    <declare-styleable name="ConChartView">
         <attr name="widthInch" format="float" />
         <attr name="intensity" format="float" />
         <attr name="string" format="string" />
