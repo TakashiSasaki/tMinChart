@@ -32,4 +32,12 @@ public class DisplayDpi {
             return ydpi;
         }
     }//getYdpi
+
+    public int getWidthPixels() {
+        return this.displayMetrics.widthPixels;
+    }
+
+    public int getHeightPixels() {
+        return this.displayMetrics.heightPixels;
+    }
 }//DisplayDpi

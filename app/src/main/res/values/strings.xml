@@ -20,5 +20,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_loation_thread_test">LoationThreadTestActivity</string>
+    <string name="title_activity_blank">blank</string>
 
 </resources>

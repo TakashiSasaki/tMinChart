@@ -341,6 +341,7 @@ public class MainActivity extends Activity
 
     DisplayMetrics displayMetrics;
 
+    /* TODO: should be replaced with DisplayDpi class */
     @Override
     public DisplayMetrics getDisplayMetrics() {
         if (displayMetrics == null) {
