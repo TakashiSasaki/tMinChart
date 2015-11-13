@@ -23,8 +23,8 @@ class LocationResults {
     public String address = null;
 }
 
-public class Location extends LocationResults implements LocationListener {
-
+public class Location implements LocationListener {
+    public LocationResults locationResults = new LocationResults();
     private LocationManager locationManager;
     private String locationProvider;
     private Geocoder geocoder;
@@ -38,8 +38,8 @@ public class Location extends LocationResults implements LocationListener {
         this.locationManager =
                 (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         final Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
         criteria.setAltitudeRequired(false);
         criteria.setCostAllowed(false);
         this.locationProvider = this.locationManager.getBestProvider(criteria, true);
@@ -50,15 +50,15 @@ public class Location extends LocationResults implements LocationListener {
     @Override
     public void onLocationChanged(android.location.Location location) {
         this.locationManager.removeUpdates(this);
-        this.longitude = location.getLongitude();
-        this.latitude = location.getLatitude();
+        this.locationResults.longitude = location.getLongitude();
+        this.locationResults.latitude = location.getLatitude();
         try {
-            final List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            final List<Address> addresses = geocoder.getFromLocation(locationResults.latitude, locationResults.longitude, 1);
             if (addresses.size() >= 1) {
                 final Address address = addresses.get(0);
-                this.address = "";
+                this.locationResults.address = "";
                 for (int i = 0; i <= address.getMaxAddressLineIndex(); ++i) {
-                    this.address += address.getAddressLine(i);
+                    this.locationResults.address += address.getAddressLine(i);
                 }//for
             }//if
         } catch (IOException e) {
@@ -71,7 +71,6 @@ public class Location extends LocationResults implements LocationListener {
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
     }
 
     @Override
@@ -93,17 +92,25 @@ public class Location extends LocationResults implements LocationListener {
     }
 
     public String getJson() {
-        class Hoge {
-            public int foo;
-            public String bar;
-        }
         ObjectMapper object_mapper = new ObjectMapper();
         try {
-            String json_string = object_mapper.writeValueAsString(new Hoge());
+            String json_string = object_mapper.writeValueAsString(this.locationResults);
             return json_string;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String getAddress() {
+        return locationResults.address;
+    }
+
+    public double getLongitude() {
+        return locationResults.longitude;
+    }
+
+    public double getLatitude() {
+        return locationResults.latitude;
     }
 }

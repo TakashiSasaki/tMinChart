@@ -41,11 +41,11 @@ public class LoationThreadTestActivityFragment extends Fragment {
         this.location.setCallback(new Runnable() {
             @Override
             public void run() {
-                if (location.address != null) {
-                    editTextAddress.setText(location.address);
+                if (location.getAddress() != null) {
+                    editTextAddress.setText(location.getAddress());
                 }
-                editTextLongitude.setText(Double.toString(location.longitude));
-                editTextLatitude.setText(Double.toString(location.latitude));
+                editTextLongitude.setText(Double.toString(location.getLongitude()));
+                editTextLatitude.setText(Double.toString(location.getLatitude()));
                 Date date = new Date();
                 editTextDate.setText(date.toString());
                 editTextTime.setText(date.toString());

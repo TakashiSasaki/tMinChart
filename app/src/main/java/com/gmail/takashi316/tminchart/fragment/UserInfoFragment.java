@@ -266,7 +266,7 @@ public class UserInfoFragment extends Fragment {
         this.location.setCallback(new Runnable() {
             @Override
             public void run() {
-                editTextAddress.setText(location.address);
+                editTextAddress.setText(location.getAddress());
             }
         });
         return view;
