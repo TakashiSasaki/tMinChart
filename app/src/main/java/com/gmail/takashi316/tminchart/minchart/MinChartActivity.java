@@ -37,19 +37,4 @@ public class MinChartActivity extends Activity implements TminChartFragment.OnFr
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-    @Override
-    public float getXdpi() {
-        return display.getXdpi();
-    }
-
-    @Override
-    public float getYdpi() {
-        return display.getYdpi();
-    }
-
-    @Override
-    public int getWidthPixels() {
-        return display.getWidthPixels();
-    }
 }

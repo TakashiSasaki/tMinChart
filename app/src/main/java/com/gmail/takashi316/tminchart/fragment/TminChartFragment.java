@@ -94,9 +94,9 @@ public class TminChartFragment extends Fragment {
         tv_tc.setTextSize(TEXT_SIZE);
         tv_tc.setText(" ");
         tr_index.addView(tv_tc);
-        OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
-        final int width_pixels = (int) (params.tminChartMaxGapInch * 4 * l.getXdpi());
-        final int COLUMNS = l.getWidthPixels() / width_pixels;
+        //OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
+        final int width_pixels = (int) (params.tminChartMaxGapInch * 4 * this.display.getXdpi());
+        final int COLUMNS = this.display.getWidthPixels() / width_pixels;
         final int ROWS = params.tminChartCount / COLUMNS;
         for (int x = 1; x <= COLUMNS; ++x) {
             TextView text_view = new TextView(getActivity());
@@ -163,11 +163,11 @@ public class TminChartFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
 
-        public float getXdpi();
+        //public float getXdpi();
 
-        public float getYdpi();
+        //public float getYdpi();
 
-        public int getWidthPixels();
+        //public int getWidthPixels();
     }//OnFragmentInteractionListener
 
 
