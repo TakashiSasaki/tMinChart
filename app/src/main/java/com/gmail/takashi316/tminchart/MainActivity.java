@@ -31,7 +31,7 @@ import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 import com.gmail.takashi316.tminchart.fragment.ResultFragment;
 import com.gmail.takashi316.tminchart.fragment.SettingsFragment;
 import com.gmail.takashi316.tminchart.fragment.ShowResultsFragment;
-import com.gmail.takashi316.tminchart.fragment.TconChartFragment;
+import com.gmail.takashi316.tminchart.fragment.ConChartFragment;
 import com.gmail.takashi316.tminchart.minchart.MinChartFragment;
 import com.gmail.takashi316.tminchart.fragment.UploadFragment;
 import com.gmail.takashi316.tminchart.fragment.UserInfoFragment;
@@ -44,7 +44,7 @@ import java.util.List;
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         MinChartFragment.OnFragmentInteractionListener,
-        TconChartFragment.OnFragmentInteractionListener,
+        ConChartFragment.OnFragmentInteractionListener,
         DisplayPropertyFragment.OnFragmentInteractionListener,
         UserInfoFragment.OnFragmentInteractionListener,
         ResultFragment.OnFragmentInteractionListener,
@@ -56,7 +56,7 @@ public class MainActivity extends Activity
         SensorEventListener {
 
     private static Class[] fragmentClasses = {UserInfoFragment.class, MinChartFragment.class,
-            TconChartFragment.class, DisplayPropertyFragment.class, ResultFragment.class, ShowResultsFragment.class};
+            ConChartFragment.class, DisplayPropertyFragment.class, ResultFragment.class, ShowResultsFragment.class};
 
     private static final boolean USE_ACTION_BAR = false;
     /**
@@ -78,7 +78,7 @@ public class MainActivity extends Activity
     private float accelerometerValueZ;
 
     private UserInfoFragment userInfoFragment;
-    private TconChartFragment tconChartFragment;
+    private ConChartFragment conChartFragment;
     private MinChartFragment minChartFragment;
     private SharedPreferences preferences;
 
@@ -165,7 +165,7 @@ public class MainActivity extends Activity
                 else if (font_style_string.equals("BOLD")) font_style = 1;
                 else if (font_style_string.equals("ITALIC")) font_style = 2;
                 else if (font_style_string.equals("BOLD_ITALIC")) font_style = 3;
-                fragment = TconChartFragment.newInstance(Integer.parseInt(preferences.getString("nStrokes", "17")),
+                fragment = ConChartFragment.newInstance(Integer.parseInt(preferences.getString("nStrokes", "17")),
                         Integer.parseInt(preferences.getString("nRows", "20")),
                         Integer.parseInt(preferences.getString("nColumns", "30")),
                         Float.parseFloat(preferences.getString("maxInch", "0.5")),
@@ -268,8 +268,8 @@ public class MainActivity extends Activity
 
     @Override
     public String getTconChartResultString() {
-        if (tconChartFragment != null) {
-            return tconChartFragment.toString();
+        if (conChartFragment != null) {
+            return conChartFragment.toString();
         } else {
             return "tConChartは未測定です";
         }//if

@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 
 public class MinChartParams {
     public double tminChartMaxGapInch;
-    //public double tminChartGapInch;
     public double tminChartRatio;
     public int tminChartCount;
 

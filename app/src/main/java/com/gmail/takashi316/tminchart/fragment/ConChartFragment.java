@@ -20,8 +20,7 @@ import com.gmail.takashi316.tminchart.view.Seventeen;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
-
-public class TconChartFragment extends Fragment {
+public class ConChartFragment extends Fragment {
     final static double MARGIN_INCH = 0.1;
     private TableLayout tableLayout;
     private int nStrokes;
@@ -35,9 +34,9 @@ public class TconChartFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     ArrayList<ArrayList<Seventeen>> seventeenArrayLists = new ArrayList<ArrayList<Seventeen>>();
 
-    public static TconChartFragment newInstance(int n_strokes, int n_rows, int n_columns, double max_inch,
+    public static ConChartFragment newInstance(int n_strokes, int n_rows, int n_columns, double max_inch,
                                                 double size_ratio, double contrast_ratio, Typeface typeface) {
-        TconChartFragment fragment = new TconChartFragment();
+        ConChartFragment fragment = new ConChartFragment();
         Bundle args = new Bundle();
         args.putInt("nStrokes", n_strokes);
         args.putInt("nRows", n_rows);
@@ -51,7 +50,7 @@ public class TconChartFragment extends Fragment {
         return fragment;
     }//newInstance
 
-    public TconChartFragment() {
+    public ConChartFragment() {
     }//TconChartFragment
 
     @Override
