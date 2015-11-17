@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart.view;
+package com.gmail.takashi316.tminchart.minchart;
 
 import android.annotation.TargetApi;
 import android.content.Context;

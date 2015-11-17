@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gmail.takashi316.tminchart.DisplayDpi;
 import com.gmail.takashi316.tminchart.R;
 import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
-import com.gmail.takashi316.tminchart.view.Konoji;
 
 import java.io.IOException;
 import java.util.ArrayList;
