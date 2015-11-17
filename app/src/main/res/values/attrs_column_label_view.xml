@@ -1,5 +1,7 @@
 <resources>
     <declare-styleable name="ColumnLabelView">
+        <attr name="origin" format="integer" />
+        <attr name="index" format="integer" />
         <attr name="exampleString" format="string" />
         <attr name="exampleDimension" format="dimension" />
         <attr name="exampleColor" format="color" />

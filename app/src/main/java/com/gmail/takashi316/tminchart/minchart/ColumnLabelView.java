@@ -16,6 +16,8 @@ import com.gmail.takashi316.tminchart.R;
  * TODO: document your custom view class.
  */
 public class ColumnLabelView extends View {
+    private int origin = 0;
+    private int index = 1;
     private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
@@ -45,6 +47,8 @@ public class ColumnLabelView extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.ColumnLabelView, defStyle, 0);
 
+        this.origin = a.getInt(R.styleable.ColumnLabelView_origin, this.origin);
+        this.index = a.getInt(R.styleable.ColumnLabelView_index, this.index);
         mExampleString = a.getString(
                 R.styleable.ColumnLabelView_exampleString);
         mExampleColor = a.getColor(
