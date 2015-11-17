@@ -67,8 +67,8 @@ public class MinChartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tmin_chart2, container, false);
-        buttonStartResultFragment = (Button) view.findViewById(R.id.buttonStartResultFragment);
-        buttonStartResultFragment.setOnClickListener(new View.OnClickListener() {
+        this.buttonStartResultFragment = (Button) view.findViewById(R.id.buttonStartResultFragment);
+        this.buttonStartResultFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(3);
