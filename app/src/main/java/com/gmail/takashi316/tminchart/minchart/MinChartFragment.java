@@ -141,15 +141,4 @@ public class MinChartFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
     }//OnFragmentInteractionListener
-
-
-    @Override
-    public String toString() {
-        for (Konoji konoji : konojiViews) {
-            if (konoji.isTouched()) {
-                return Float.toString(konoji.getGapInch());
-            }//if
-        }//for
-        return "未測定";
-    }//toString
 }//TminChartFragment
