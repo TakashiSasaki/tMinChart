@@ -43,8 +43,12 @@ public class Location implements LocationListener {
         criteria.setAltitudeRequired(false);
         criteria.setCostAllowed(false);
         this.locationProvider = this.locationManager.getBestProvider(criteria, true);
+        if (this.locationProvider == null) {
+            this.locationManager = null;
+        } else {
+            this.locationManager.requestLocationUpdates(locationProvider, 0, 0, Location.this);
+        }
         this.geocoder = new Geocoder(context);
-        this.locationManager.requestLocationUpdates(locationProvider, 0, 0, Location.this);
     }
 
     @Override
