@@ -10,9 +10,9 @@
         android:layout_height="300dp"
         android:paddingLeft="20dp"
         android:paddingBottom="40dp"
-        app:exampleDimension="24sp"
-        app:exampleColor="#33b5e5"
+        app:textDimension="24sp"
+        app:textColor="#33b5e5"
         app:exampleString="Hello, Konoji"
-        app:exampleDrawable="@android:drawable/ic_menu_add" />
+        app:backgroundDrawable="@android:drawable/ic_menu_add" />
 
 </FrameLayout>

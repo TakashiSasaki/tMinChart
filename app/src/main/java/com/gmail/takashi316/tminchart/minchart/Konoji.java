@@ -95,17 +95,17 @@ public class Konoji extends View {
         mExampleString = a.getString(
                 R.styleable.Konoji_exampleString);
         mExampleColor = a.getColor(
-                R.styleable.Konoji_exampleColor,
+                R.styleable.Konoji_textColor,
                 mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
         mExampleDimension = a.getDimension(
-                R.styleable.Konoji_exampleDimension,
+                R.styleable.Konoji_textDimension,
                 mExampleDimension);
 
-        if (a.hasValue(R.styleable.Konoji_exampleDrawable)) {
+        if (a.hasValue(R.styleable.Konoji_backgroundDrawable)) {
             mExampleDrawable = a.getDrawable(
-                    R.styleable.Konoji_exampleDrawable);
+                    R.styleable.Konoji_backgroundDrawable);
             mExampleDrawable.setCallback(this);
         }
 

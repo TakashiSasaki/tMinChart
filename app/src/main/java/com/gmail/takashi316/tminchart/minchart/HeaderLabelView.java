@@ -22,7 +22,7 @@ public class HeaderLabelView extends View {
     private String text = "";
     private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
-    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
+    private float textDimension = 0; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
 
     private TextPaint mTextPaint;
@@ -61,17 +61,17 @@ public class HeaderLabelView extends View {
         mExampleString = a.getString(
                 R.styleable.HeaderLabelView_exampleString);
         mExampleColor = a.getColor(
-                R.styleable.HeaderLabelView_exampleColor,
+                R.styleable.HeaderLabelView_textColor,
                 mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
-        mExampleDimension = a.getDimension(
-                R.styleable.HeaderLabelView_exampleDimension,
-                mExampleDimension);
+        textDimension = a.getDimension(
+                R.styleable.HeaderLabelView_textDimension,
+                textDimension);
 
-        if (a.hasValue(R.styleable.HeaderLabelView_exampleDrawable)) {
+        if (a.hasValue(R.styleable.HeaderLabelView_backgroundDrawable)) {
             mExampleDrawable = a.getDrawable(
-                    R.styleable.HeaderLabelView_exampleDrawable);
+                    R.styleable.HeaderLabelView_backgroundDrawable);
             mExampleDrawable.setCallback(this);
         }
 
@@ -87,7 +87,7 @@ public class HeaderLabelView extends View {
     }
 
     private void invalidateTextPaintAndMeasurements() {
-        mTextPaint.setTextSize(mExampleDimension);
+        mTextPaint.setTextSize(textDimension);
         mTextPaint.setColor(mExampleColor);
         mTextWidth = mTextPaint.measureText(mExampleString);
 
@@ -169,7 +169,7 @@ public class HeaderLabelView extends View {
      * @return The example dimension attribute value.
      */
     public float getExampleDimension() {
-        return mExampleDimension;
+        return textDimension;
     }
 
     /**
@@ -179,7 +179,7 @@ public class HeaderLabelView extends View {
      * @param exampleDimension The example dimension attribute value to use.
      */
     public void setExampleDimension(float exampleDimension) {
-        mExampleDimension = exampleDimension;
+        textDimension = exampleDimension;
         invalidateTextPaintAndMeasurements();
     }
 

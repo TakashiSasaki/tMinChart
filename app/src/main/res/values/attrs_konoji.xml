@@ -1,9 +1,9 @@
 <resources>
     <declare-styleable name="Konoji">
         <attr name="exampleString" />
-        <attr name="exampleDimension" />
-        <attr name="exampleColor" />
-        <attr name="exampleDrawable" />
+        <attr name="textDimension" />
+        <attr name="textColor" />
+        <attr name="backgroundDrawable" />
         <attr name="contrast" format="float" />
         <attr name="gapInch" format="float" />
         <attr name="orientation" format="integer" />
