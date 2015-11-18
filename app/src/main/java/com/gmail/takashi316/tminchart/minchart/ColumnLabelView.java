@@ -12,12 +12,14 @@ import android.view.View;
 
 import com.gmail.takashi316.tminchart.R;
 
-/**
- * TODO: document your custom view class.
- */
 public class ColumnLabelView extends View {
-    private int origin = 0;
-    private int index = 1;
+    private int indexOrigin;
+    private final int DEFAULT_INDEX_ORIGIN = 0;
+    private int indexOffset = 1;
+    private final int DEFAULT_INDEX_OFFSET = 0;
+    private boolean isAlphabetical = false;
+    private final boolean DEFAULT_IS_ALPHABETICAL = false;
+    private String text = "";
     private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
@@ -47,8 +49,15 @@ public class ColumnLabelView extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.ColumnLabelView, defStyle, 0);
 
-        this.origin = a.getInt(R.styleable.ColumnLabelView_origin, this.origin);
-        this.index = a.getInt(R.styleable.ColumnLabelView_index, this.index);
+        this.indexOffset = a.getInt(R.styleable.ColumnLabelView_indexOffset, DEFAULT_INDEX_OFFSET);
+        this.indexOrigin = a.getInt(R.styleable.ColumnLabelView_indexOrigin, DEFAULT_INDEX_ORIGIN);
+        this.isAlphabetical = a.getBoolean(R.styleable.ColumnLabelView_isAlphabetical, DEFAULT_IS_ALPHABETICAL);
+        if (this.isAlphabetical) {
+            this.text = new String(new byte[]{(byte) (this.indexOrigin + this.indexOffset + 64)});
+        } else {
+            this.text = Integer.toString(this.indexOrigin + this.indexOffset);
+        }//if
+
         mExampleString = a.getString(
                 R.styleable.ColumnLabelView_exampleString);
         mExampleColor = a.getColor(
