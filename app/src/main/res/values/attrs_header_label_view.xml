@@ -1,5 +1,5 @@
 <resources>
-    <declare-styleable name="ColumnLabelView">
+    <declare-styleable name="HeaderLabelView">
         <attr name="indexOrigin" format="integer" />
         <attr name="isAlphabetical" format="boolean" />
         <attr name="indexOffset" format="integer" />

@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.gmail.takashi316.tminchart.R;
 
-public class ColumnLabelView extends View {
+public class HeaderLabelView extends View {
     private int indexOrigin;
     private final int DEFAULT_INDEX_ORIGIN = 0;
     private int indexOffset = 1;
@@ -29,17 +29,17 @@ public class ColumnLabelView extends View {
     private float mTextWidth;
     private float mTextHeight;
 
-    public ColumnLabelView(Context context) {
+    public HeaderLabelView(Context context) {
         super(context);
         init(null, 0);
     }
 
-    public ColumnLabelView(Context context, AttributeSet attrs) {
+    public HeaderLabelView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public ColumnLabelView(Context context, AttributeSet attrs, int defStyle) {
+    public HeaderLabelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
     }
@@ -47,11 +47,11 @@ public class ColumnLabelView extends View {
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.ColumnLabelView, defStyle, 0);
+                attrs, R.styleable.HeaderLabelView, defStyle, 0);
 
-        this.indexOffset = a.getInt(R.styleable.ColumnLabelView_indexOffset, DEFAULT_INDEX_OFFSET);
-        this.indexOrigin = a.getInt(R.styleable.ColumnLabelView_indexOrigin, DEFAULT_INDEX_ORIGIN);
-        this.isAlphabetical = a.getBoolean(R.styleable.ColumnLabelView_isAlphabetical, DEFAULT_IS_ALPHABETICAL);
+        this.indexOffset = a.getInt(R.styleable.HeaderLabelView_indexOffset, DEFAULT_INDEX_OFFSET);
+        this.indexOrigin = a.getInt(R.styleable.HeaderLabelView_indexOrigin, DEFAULT_INDEX_ORIGIN);
+        this.isAlphabetical = a.getBoolean(R.styleable.HeaderLabelView_isAlphabetical, DEFAULT_IS_ALPHABETICAL);
         if (this.isAlphabetical) {
             this.text = new String(new byte[]{(byte) (this.indexOrigin + this.indexOffset + 64)});
         } else {
@@ -59,19 +59,19 @@ public class ColumnLabelView extends View {
         }//if
 
         mExampleString = a.getString(
-                R.styleable.ColumnLabelView_exampleString);
+                R.styleable.HeaderLabelView_exampleString);
         mExampleColor = a.getColor(
-                R.styleable.ColumnLabelView_exampleColor,
+                R.styleable.HeaderLabelView_exampleColor,
                 mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
         mExampleDimension = a.getDimension(
-                R.styleable.ColumnLabelView_exampleDimension,
+                R.styleable.HeaderLabelView_exampleDimension,
                 mExampleDimension);
 
-        if (a.hasValue(R.styleable.ColumnLabelView_exampleDrawable)) {
+        if (a.hasValue(R.styleable.HeaderLabelView_exampleDrawable)) {
             mExampleDrawable = a.getDrawable(
-                    R.styleable.ColumnLabelView_exampleDrawable);
+                    R.styleable.HeaderLabelView_exampleDrawable);
             mExampleDrawable.setCallback(this);
         }
 
