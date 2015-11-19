@@ -1,0 +1,12 @@
+<resources>
+    <declare-styleable name="HeaderLabelView">
+        <attr name="indexOrigin" format="integer" />
+        <attr name="isAlphabetical" format="boolean" />
+        <attr name="indexOffset" format="integer" />
+        <attr name="exampleString" format="string" />
+        <attr name="textDimension" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="backgroundDrawable" format="color|reference" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+</resources>
