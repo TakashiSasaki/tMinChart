@@ -47,7 +47,7 @@ public class MinChartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            this.params = objectMapper.readValue(getArguments().getString("params"), MinChartParams.class);
+            this.params = objectMapper.readValue(this.getArguments().getString("params"), MinChartParams.class);
         } catch (IOException e) {
             this.params = new MinChartParams();
         } catch (NullPointerException e) {
@@ -71,51 +71,51 @@ public class MinChartFragment extends Fragment {
         this.buttonStartResultFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(3);
+                ((NavigationDrawerFragment.NavigationDrawerCallbacks) MinChartFragment.this.getActivity()).onNavigationDrawerItemSelected(3);
             }//onClick
         });
 
-        tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTminChart);
-        TableRow tr_index = new TableRow(getActivity());
+        this.tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTminChart);
+        TableRow tr_index = new TableRow(this.getActivity());
         final int TEXT_SIZE = 50;
-        TextView tv_tc = new TextView(getActivity());
+        TextView tv_tc = new TextView(this.getActivity());
         tv_tc.setTextSize(TEXT_SIZE);
         tv_tc.setText(" ");
         tr_index.addView(tv_tc);
         //OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
-        final int width_pixels = (int) (params.tminChartMaxGapInch * 4 * this.display.getXdpi());
+        final int width_pixels = (int) (this.params.tminChartMaxGapInch * 4 * this.display.getXdpi());
         final int COLUMNS = this.display.getWidthPixels() / width_pixels;
-        final int ROWS = params.tminChartCount / COLUMNS;
+        final int ROWS = this.params.tminChartCount / COLUMNS;
         for (int x = 1; x <= COLUMNS; ++x) {
-            TextView text_view = new TextView(getActivity());
+            TextView text_view = new TextView(this.getActivity());
             text_view.setTextSize(TEXT_SIZE);
             text_view.setText(new String(new byte[]{(byte) (x + 64)}));
             text_view.setGravity(Gravity.CENTER);
             tr_index.addView(text_view);
         }//for
-        tableLayout.addView(tr_index);
+        this.tableLayout.addView(tr_index);
         for (int y = 0; y < ROWS; ++y) {
-            TableRow table_row = new TableRow(getActivity());
-            TextView tv_index = new TextView(getActivity());
+            TableRow table_row = new TableRow(this.getActivity());
+            TextView tv_index = new TextView(this.getActivity());
             tv_index.setTextSize(TEXT_SIZE);
             tv_index.setText(Integer.toString(y));
             tv_index.setGravity(Gravity.CENTER);
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
-                final double gap_inch = params.tminChartMaxGapInch * Math.pow(params.tminChartRatio, x + y * COLUMNS);
-                Konoji konoji = new Konoji(getActivity(), (float) gap_inch, (float) params.tminChartMaxGapInch * 4, konojiViews);
-                konojiViews.add(konoji);
+                final double gap_inch = this.params.tminChartMaxGapInch * Math.pow(this.params.tminChartRatio, x + y * COLUMNS);
+                Konoji konoji = new Konoji(this.getActivity(), (float) gap_inch, (float) this.params.tminChartMaxGapInch * 4, this.konojiViews);
+                this.konojiViews.add(konoji);
                 table_row.addView(konoji);
             }//for y
-            tableLayout.addView(table_row);
+            this.tableLayout.addView(table_row);
         }//for x
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        if (this.mListener != null) {
+            this.mListener.onFragmentInteraction(uri);
         }//if
     }//onButtonPressed
 
@@ -125,7 +125,7 @@ public class MinChartFragment extends Fragment {
         this.display = new DisplayDpi(activity);
 
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            this.mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -135,10 +135,10 @@ public class MinChartFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        this.mListener = null;
     }//onDetach
 
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri);
     }//OnFragmentInteractionListener
 }//TminChartFragment
