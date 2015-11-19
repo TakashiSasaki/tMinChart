@@ -26,7 +26,7 @@ public class HeaderLabelView extends View {
     private static final int DEFAULT_TEXT_DIMENSION = 100;
     private Drawable mExampleDrawable;
 
-    private TextPaint mTextPaint;
+    private TextPaint paint;
     private float mTextWidth;
     private float mTextHeight;
     private float textAscent;
@@ -72,9 +72,9 @@ public class HeaderLabelView extends View {
         a.recycle();
 
         // Set up a default TextPaint object
-        this.mTextPaint = new TextPaint();
-        this.mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        this.mTextPaint.setTextAlign(Paint.Align.LEFT);
+        this.paint = new TextPaint();
+        this.paint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        this.paint.setTextAlign(Paint.Align.LEFT);
 
         // Update TextPaint and text measurements from attributes
         this.invalidateTextPaintAndMeasurements();
@@ -88,11 +88,11 @@ public class HeaderLabelView extends View {
                 this.text = Integer.toString(this.indexOrigin + this.indexOffset);
             }//if
         }//if
-        this.mTextPaint.setTextSize(this.textDimension);
-        this.mTextPaint.setColor(this.mExampleColor);
-        this.mTextWidth = this.mTextPaint.measureText(this.text);
-        this.mTextHeight = this.mTextPaint.descent() - this.mTextPaint.ascent();
-        this.textAscent = this.mTextPaint.ascent();
+        this.paint.setTextSize(this.textDimension);
+        this.paint.setColor(this.mExampleColor);
+        this.mTextWidth = this.paint.measureText(this.text);
+        this.mTextHeight = this.paint.descent() - this.paint.ascent();
+        this.textAscent = this.paint.ascent();
     }//invalidateTextPaintAndMeasurements
 
     @Override
@@ -113,7 +113,7 @@ public class HeaderLabelView extends View {
         canvas.drawText(this.text,
                 paddingLeft + (contentWidth - this.mTextWidth) / 2,
                 paddingTop + (contentHeight - this.mTextHeight) / 2 - this.textAscent,
-                this.mTextPaint);
+                this.paint);
 
         // Draw the example drawable on top of the text.
         if (this.mExampleDrawable != null) {
