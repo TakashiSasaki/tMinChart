@@ -33,19 +33,19 @@ public class HeaderLabelView extends View {
 
     public HeaderLabelView(Context context) {
         super(context);
-        this.invalidateTextPaintAndMeasurements();
+        this.init();
     }
 
     public HeaderLabelView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.applyAttributeSet(attrs, 0);
-        this.invalidateTextPaintAndMeasurements();
+        this.init();
     }
 
     public HeaderLabelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.applyAttributeSet(attrs, defStyle);
-        this.invalidateTextPaintAndMeasurements();
+        this.init();
     }
 
     private void applyAttributeSet(AttributeSet attrs, int defStyle) {
@@ -64,10 +64,10 @@ public class HeaderLabelView extends View {
             this.mExampleDrawable.setCallback(this);
         }//if
         a.recycle();
-        //this.invalidateTextPaintAndMeasurements();
+        //this.init();
     }//applyAttributeSet
 
-    private void invalidateTextPaintAndMeasurements() {
+    private void init() {
         this.paint = new TextPaint();
         this.paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         this.paint.setTextAlign(Paint.Align.LEFT);
@@ -84,7 +84,7 @@ public class HeaderLabelView extends View {
         this.textWidth = this.paint.measureText(this.text);
         this.textHeight = this.paint.descent() - this.paint.ascent();
         this.textAscent = this.paint.ascent();
-    }//invalidateTextPaintAndMeasurements
+    }//init
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -116,12 +116,12 @@ public class HeaderLabelView extends View {
 
     public void setText(String text) {
         this.text = text;
-        this.invalidateTextPaintAndMeasurements();
+        this.init();
     }
 
     public void setExampleString(String text) {
         this.text = text;
-        this.invalidateTextPaintAndMeasurements();
+        this.init();
     }
 
     /**
@@ -141,7 +141,7 @@ public class HeaderLabelView extends View {
      */
     public void setExampleColor(int exampleColor) {
         this.color = exampleColor;
-        this.invalidateTextPaintAndMeasurements();
+        this.init();
     }
 
     /**
@@ -161,7 +161,7 @@ public class HeaderLabelView extends View {
      */
     public void setExampleDimension(float exampleDimension) {
         this.textDimension = exampleDimension;
-        this.invalidateTextPaintAndMeasurements();
+        this.init();
     }
 
     /**
