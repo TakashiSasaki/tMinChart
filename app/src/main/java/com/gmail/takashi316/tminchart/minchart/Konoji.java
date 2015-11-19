@@ -48,19 +48,19 @@ public class Konoji extends View {
     private ArrayList<Konoji> konojis;
 
     public boolean isTouched() {
-        return touched;
+        return this.touched;
     }//isTouched
 
     public Konoji(Context context) {
         super(context);
-        init(null, 0);
+        this.init(null, 0);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public Konoji(Context context, float gap_inch, float width_inch, ArrayList<Konoji> konojis) {
         super(context);
-        init(null, 0);
-        gapInch = gap_inch;
+        this.init(null, 0);
+        this.gapInch = gap_inch;
         final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         final Display display = window_manager.getDefaultDisplay();
         final DisplayMetrics display_metrics = new DisplayMetrics();
@@ -75,67 +75,67 @@ public class Konoji extends View {
 
     public Konoji(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        this.init(attrs, 0);
     }
 
     public Konoji(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        this.init(attrs, defStyle);
     }
 
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(
+        final TypedArray a = this.getContext().obtainStyledAttributes(
                 attrs, R.styleable.Konoji, defStyle, 0);
 
         this.gapInch = a.getInt(R.styleable.Konoji_gapInch, 30);
         this.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
-        mExampleString = a.getString(
+        this.mExampleString = a.getString(
                 R.styleable.Konoji_exampleString);
-        mExampleColor = a.getColor(
+        this.mExampleColor = a.getColor(
                 R.styleable.Konoji_textColor,
-                mExampleColor);
+                this.mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
-        mExampleDimension = a.getDimension(
+        this.mExampleDimension = a.getDimension(
                 R.styleable.Konoji_textDimension,
-                mExampleDimension);
+                this.mExampleDimension);
 
         if (a.hasValue(R.styleable.Konoji_backgroundDrawable)) {
-            mExampleDrawable = a.getDrawable(
+            this.mExampleDrawable = a.getDrawable(
                     R.styleable.Konoji_backgroundDrawable);
-            mExampleDrawable.setCallback(this);
+            this.mExampleDrawable.setCallback(this);
         }
 
         a.recycle();
 
         // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
+        this.mTextPaint = new TextPaint();
+        this.mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        this.mTextPaint.setTextAlign(Paint.Align.LEFT);
 
         // Update TextPaint and text measurements from attributes
-        invalidateTextPaintAndMeasurements();
+        this.invalidateTextPaintAndMeasurements();
 
-        setOnClickListener(new OnClickListener() {
+        this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (konojis != null) {
-                    for (Konoji konoji : konojis) {
+                if (Konoji.this.konojis != null) {
+                    for (Konoji konoji : Konoji.this.konojis) {
                         konoji.touched = false;
                     }//for
                 }//if
-                touched = true;
+                Konoji.this.touched = true;
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     public void run() {
-                        for (Konoji konoji : konojis) {
+                        for (Konoji konoji : Konoji.this.konojis) {
                             konoji.invalidate();
                         }
-                        Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                        if (touched) {
+                        Vibrator vibrator = (Vibrator) Konoji.this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                        if (Konoji.this.touched) {
                             vibrator.vibrate(new long[]{0, 60, 60, 60}, -1);
                         } else {
                             vibrator.vibrate(new long[]{0, 100}, -1);
@@ -145,7 +145,7 @@ public class Konoji extends View {
                             tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
                         } catch (Exception e) {
                             // ToneGenerator is unavailable on some emulator devices.
-                            Log.e(getClass().getSimpleName(), e.getMessage());
+                            Log.e(this.getClass().getSimpleName(), e.getMessage());
                         }//try
                     }//run
                 });
@@ -155,12 +155,12 @@ public class Konoji extends View {
 
     private void invalidateTextPaintAndMeasurements() {
         try {
-            mTextPaint.setTextSize(mExampleDimension);
-            mTextPaint.setColor(mExampleColor);
-            mTextWidth = mTextPaint.measureText(mExampleString);
+            this.mTextPaint.setTextSize(this.mExampleDimension);
+            this.mTextPaint.setColor(this.mExampleColor);
+            this.mTextWidth = this.mTextPaint.measureText(this.mExampleString);
 
-            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-            mTextHeight = fontMetrics.bottom;
+            Paint.FontMetrics fontMetrics = this.mTextPaint.getFontMetrics();
+            this.mTextHeight = fontMetrics.bottom;
         } catch (Exception e) {
             e.printStackTrace();
         }//try
@@ -173,9 +173,9 @@ public class Konoji extends View {
         int width_size = MeasureSpec.getSize(widthMeasureSpec);
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
-        height_size = (int) (width_inch * xdpi);
-        width_size = (int) (width_inch * ydpi);
-        setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
+        height_size = (int) (this.width_inch * this.xdpi);
+        width_size = (int) (this.width_inch * this.ydpi);
+        this.setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }
 
@@ -183,29 +183,29 @@ public class Konoji extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (touched) {
+        if (this.touched) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                final Drawable frame = this.getResources().getDrawable(R.drawable.frame);
                 this.setBackgroundDrawable(frame);
             } else {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                final Drawable frame = this.getResources().getDrawable(R.drawable.frame);
                 this.setBackground(frame);
             }//if
         } else {
-            setBackgroundColor(Color.WHITE);
+            this.setBackgroundColor(Color.WHITE);
             //konoji_paint.setColor(Color.BLACK);
         }//if
-        final int xgap = (int) (xdpi * gapInch);
-        final int ygap = (int) (ydpi * gapInch);
-        final int view_width = (int) (width_inch * xdpi);
-        final int view_height = (int) (width_inch * ydpi);
+        final int xgap = (int) (this.xdpi * this.gapInch);
+        final int ygap = (int) (this.ydpi * this.gapInch);
+        final int view_width = (int) (this.width_inch * this.xdpi);
+        final int view_height = (int) (this.width_inch * this.ydpi);
         final int top_margin = (view_width - xgap * 3) / 2;
         final int left_margin = (view_width - ygap * 3) / 2;
         final Paint konoji_paint = new Paint();
         canvas.drawRect(left_margin, top_margin, xgap * 3 - 1 + left_margin, ygap * 3 - 1 + top_margin, konoji_paint);
         final Paint gap_paint = new Paint();
         gap_paint.setColor(Color.WHITE);
-        switch (orientation) {
+        switch (this.orientation) {
             case 0:
                 canvas.drawRect(left_margin + xgap, top_margin, xgap * 2 - 1 + left_margin, ygap * 2 - 1 + top_margin, gap_paint);
                 break;
@@ -234,34 +234,34 @@ public class Konoji extends View {
 
         // TODO: consider storing these as member variables to reduce
         // allocations per draw cycle.
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
+        int paddingLeft = this.getPaddingLeft();
+        int paddingTop = this.getPaddingTop();
+        int paddingRight = this.getPaddingRight();
+        int paddingBottom = this.getPaddingBottom();
 
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
+        int contentWidth = this.getWidth() - paddingLeft - paddingRight;
+        int contentHeight = this.getHeight() - paddingTop - paddingBottom;
 
         // Draw the text.
-        mTextPaint = new TextPaint();
-        canvas.drawText(mExampleString,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
-                mTextPaint);
+        this.mTextPaint = new TextPaint();
+        canvas.drawText(this.mExampleString,
+                paddingLeft + (contentWidth - this.mTextWidth) / 2,
+                paddingTop + (contentHeight + this.mTextHeight) / 2,
+                this.mTextPaint);
 
         // Draw the example drawable on top of the text.
-        if (mExampleDrawable != null) {
-            mExampleDrawable.setBounds(paddingLeft, paddingTop,
+        if (this.mExampleDrawable != null) {
+            this.mExampleDrawable.setBounds(paddingLeft, paddingTop,
                     paddingLeft + contentWidth, paddingTop + contentHeight);
-            mExampleDrawable.draw(canvas);
+            this.mExampleDrawable.draw(canvas);
         }
 
         // Draw the text again.
-        mTextPaint = new TextPaint();
-        canvas.drawText(mExampleString,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
-                mTextPaint);
+        this.mTextPaint = new TextPaint();
+        canvas.drawText(this.mExampleString,
+                paddingLeft + (contentWidth - this.mTextWidth) / 2,
+                paddingTop + (contentHeight + this.mTextHeight) / 2,
+                this.mTextPaint);
     }
 
     /**
@@ -270,7 +270,7 @@ public class Konoji extends View {
      * @return The example string attribute value.
      */
     public String getExampleString() {
-        return mExampleString;
+        return this.mExampleString;
     }
 
     /**
@@ -280,8 +280,8 @@ public class Konoji extends View {
      * @param exampleString The example string attribute value to use.
      */
     public void setExampleString(String exampleString) {
-        mExampleString = exampleString;
-        invalidateTextPaintAndMeasurements();
+        this.mExampleString = exampleString;
+        this.invalidateTextPaintAndMeasurements();
     }
 
     /**
@@ -290,7 +290,7 @@ public class Konoji extends View {
      * @return The example color attribute value.
      */
     public int getExampleColor() {
-        return mExampleColor;
+        return this.mExampleColor;
     }
 
     /**
@@ -300,8 +300,8 @@ public class Konoji extends View {
      * @param exampleColor The example color attribute value to use.
      */
     public void setExampleColor(int exampleColor) {
-        mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
+        this.mExampleColor = exampleColor;
+        this.invalidateTextPaintAndMeasurements();
     }
 
     /**
@@ -310,7 +310,7 @@ public class Konoji extends View {
      * @return The example dimension attribute value.
      */
     public float getExampleDimension() {
-        return mExampleDimension;
+        return this.mExampleDimension;
     }
 
     /**
@@ -320,8 +320,8 @@ public class Konoji extends View {
      * @param exampleDimension The example dimension attribute value to use.
      */
     public void setExampleDimension(float exampleDimension) {
-        mExampleDimension = exampleDimension;
-        invalidateTextPaintAndMeasurements();
+        this.mExampleDimension = exampleDimension;
+        this.invalidateTextPaintAndMeasurements();
     }
 
     /**
@@ -330,7 +330,7 @@ public class Konoji extends View {
      * @return The example drawable attribute value.
      */
     public Drawable getExampleDrawable() {
-        return mExampleDrawable;
+        return this.mExampleDrawable;
     }
 
     /**
@@ -340,7 +340,7 @@ public class Konoji extends View {
      * @param exampleDrawable The example drawable attribute value to use.
      */
     public void setExampleDrawable(Drawable exampleDrawable) {
-        mExampleDrawable = exampleDrawable;
+        this.mExampleDrawable = exampleDrawable;
     }
 
     public float getGapInch() {

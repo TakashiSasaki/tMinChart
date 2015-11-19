@@ -17,8 +17,8 @@ public class MinChartActivity extends Activity implements MinChartFragment.OnFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_minchart);
-        display = new DisplayDpi(this);
+        this.setContentView(R.layout.activity_minchart);
+        this.display = new DisplayDpi(this);
 
         Fragment fragment = null;
         try {
@@ -26,7 +26,7 @@ public class MinChartActivity extends Activity implements MinChartFragment.OnFra
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = this.getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
