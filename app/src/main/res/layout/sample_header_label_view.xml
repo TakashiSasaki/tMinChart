@@ -15,6 +15,7 @@
         app:exampleString="Hello, ColumnLabelView"
         app:indexOffset="3"
         app:isAlphabetical="true"
+        app:text="あ"
         app:textColor="#33b5e5"
         app:textDimension="50dp" />
 

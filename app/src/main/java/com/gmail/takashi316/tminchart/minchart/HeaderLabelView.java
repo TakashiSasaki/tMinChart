@@ -19,7 +19,7 @@ public class HeaderLabelView extends View {
     private final int DEFAULT_INDEX_OFFSET = 0;
     private boolean isAlphabetical = false;
     private final boolean DEFAULT_IS_ALPHABETICAL = false;
-    private String text = "???";
+    private String text;
     //private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float textDimension; // TODO: use a default from R.dimen...
@@ -54,12 +54,14 @@ public class HeaderLabelView extends View {
         this.indexOffset = a.getInt(R.styleable.HeaderLabelView_indexOffset, DEFAULT_INDEX_OFFSET);
         this.indexOrigin = a.getInt(R.styleable.HeaderLabelView_indexOrigin, DEFAULT_INDEX_ORIGIN);
         this.isAlphabetical = a.getBoolean(R.styleable.HeaderLabelView_isAlphabetical, DEFAULT_IS_ALPHABETICAL);
-        if (this.isAlphabetical) {
-            this.text = new String(new byte[]{(byte) (this.indexOrigin + this.indexOffset + 64)});
-        } else {
-            this.text = Integer.toString(this.indexOrigin + this.indexOffset);
+        this.text = a.getString(R.styleable.HeaderLabelView_text);
+        if (this.text == null) {
+            if (this.isAlphabetical) {
+                this.text = new String(new byte[]{(byte) (this.indexOrigin + this.indexOffset + 64)});
+            } else {
+                this.text = Integer.toString(this.indexOrigin + this.indexOffset);
+            }//if
         }//if
-
         mExampleColor = a.getColor(
                 R.styleable.HeaderLabelView_textColor,
                 mExampleColor);
