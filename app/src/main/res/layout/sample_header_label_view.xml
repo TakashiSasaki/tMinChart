@@ -7,13 +7,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#ccc"
-        android:paddingBottom="40dp"
-        android:paddingLeft="20dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
         app:backgroundDrawable="@android:drawable/ic_menu_add"
         app:exampleString="Hello, ColumnLabelView"
         app:indexOffset="3"
         app:isAlphabetical="true"
         app:textColor="#33b5e5"
-        app:textDimension="24sp" />
+        app:textDimension="50dp" />
 
 </FrameLayout>

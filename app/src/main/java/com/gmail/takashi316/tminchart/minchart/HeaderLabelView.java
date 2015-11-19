@@ -19,15 +19,17 @@ public class HeaderLabelView extends View {
     private final int DEFAULT_INDEX_OFFSET = 0;
     private boolean isAlphabetical = false;
     private final boolean DEFAULT_IS_ALPHABETICAL = false;
-    private String text = "";
-    private String mExampleString; // TODO: use a default from R.string...
+    private String text = "???";
+    //private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
-    private float textDimension = 0; // TODO: use a default from R.dimen...
+    private float textDimension; // TODO: use a default from R.dimen...
+    private final int DEFAULT_TEXT_DIMENSION = 100;
     private Drawable mExampleDrawable;
 
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
+    private float textAscent;
 
     public HeaderLabelView(Context context) {
         super(context);
@@ -58,16 +60,13 @@ public class HeaderLabelView extends View {
             this.text = Integer.toString(this.indexOrigin + this.indexOffset);
         }//if
 
-        mExampleString = a.getString(
-                R.styleable.HeaderLabelView_exampleString);
         mExampleColor = a.getColor(
                 R.styleable.HeaderLabelView_textColor,
                 mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
-        textDimension = a.getDimension(
-                R.styleable.HeaderLabelView_textDimension,
-                textDimension);
+        this.textDimension = a.getDimension(
+                R.styleable.HeaderLabelView_textDimension, DEFAULT_TEXT_DIMENSION);
 
         if (a.hasValue(R.styleable.HeaderLabelView_backgroundDrawable)) {
             mExampleDrawable = a.getDrawable(
@@ -78,21 +77,22 @@ public class HeaderLabelView extends View {
         a.recycle();
 
         // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
+        this.mTextPaint = new TextPaint();
+        this.mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        this.mTextPaint.setTextAlign(Paint.Align.LEFT);
 
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements();
     }
 
     private void invalidateTextPaintAndMeasurements() {
-        mTextPaint.setTextSize(textDimension);
-        mTextPaint.setColor(mExampleColor);
-        mTextWidth = mTextPaint.measureText(mExampleString);
+        this.mTextPaint.setTextSize(this.textDimension);
+        this.mTextPaint.setColor(this.mExampleColor);
+        this.mTextWidth = this.mTextPaint.measureText(this.text);
 
-        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        mTextHeight = fontMetrics.bottom;
+        Paint.FontMetrics fontMetrics = this.mTextPaint.getFontMetrics();
+        this.mTextHeight = fontMetrics.descent - fontMetrics.ascent;
+        this.textAscent = fontMetrics.ascent;
     }
 
     @Override
@@ -101,18 +101,18 @@ public class HeaderLabelView extends View {
 
         // TODO: consider storing these as member variables to reduce
         // allocations per draw cycle.
-        final int paddingLeft = getPaddingLeft();
-        final int paddingTop = getPaddingTop();
-        final int paddingRight = getPaddingRight();
-        final int paddingBottom = getPaddingBottom();
+        final int paddingLeft = this.getPaddingLeft();
+        final int paddingTop = this.getPaddingTop();
+        final int paddingRight = this.getPaddingRight();
+        final int paddingBottom = this.getPaddingBottom();
 
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
+        final int contentWidth = getWidth() - paddingLeft - paddingRight;
+        final int contentHeight = getHeight() - paddingTop - paddingBottom;
 
         // Draw the text.
         canvas.drawText(this.text,
                 paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
+                paddingTop + (contentHeight - mTextHeight) / 2 - this.textAscent,
                 mTextPaint);
 
         // Draw the example drawable on top of the text.
@@ -123,23 +123,12 @@ public class HeaderLabelView extends View {
         }
     }
 
-    /**
-     * Gets the example string attribute value.
-     *
-     * @return The example string attribute value.
-     */
-    public String getExampleString() {
-        return mExampleString;
+    public String getText() {
+        return this.text;
     }
 
-    /**
-     * Sets the view's example string attribute value. In the example view, this string
-     * is the text to draw.
-     *
-     * @param exampleString The example string attribute value to use.
-     */
-    public void setExampleString(String exampleString) {
-        mExampleString = exampleString;
+    public void setExampleString(String text) {
+        this.text = text;
         invalidateTextPaintAndMeasurements();
     }
 
@@ -205,7 +194,7 @@ public class HeaderLabelView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        this.setMeasuredDimension(100, 100);
+        this.setMeasuredDimension((int) mTextWidth + this.getPaddingLeft() + this.getPaddingRight(), (int) mTextHeight + this.getPaddingBottom() + this.getPaddingTop());
     }
 
     @Override
