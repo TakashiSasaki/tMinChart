@@ -92,9 +92,11 @@ public class HeaderLabelView extends View {
         this.mTextPaint.setColor(this.mExampleColor);
         this.mTextWidth = this.mTextPaint.measureText(this.text);
 
-        Paint.FontMetrics fontMetrics = this.mTextPaint.getFontMetrics();
-        this.mTextHeight = fontMetrics.descent - fontMetrics.ascent;
-        this.textAscent = fontMetrics.ascent;
+        //Paint.FontMetrics fontMetrics = this.mTextPaint.getFontMetrics();
+        //this.mTextHeight = fontMetrics.descent - fontMetrics.ascent;
+        this.mTextHeight = this.mTextPaint.descent() - this.mTextPaint.ascent();
+        //this.textAscent = fontMetrics.ascent;
+        this.textAscent = this.mTextPaint.ascent();
     }
 
     @Override
@@ -125,8 +127,9 @@ public class HeaderLabelView extends View {
         }
     }
 
-    public String getText() {
-        return this.text;
+    public void setText(String text) {
+        this.text = text;
+        this.invalidateTextPaintAndMeasurements();
     }
 
     public void setExampleString(String text) {
