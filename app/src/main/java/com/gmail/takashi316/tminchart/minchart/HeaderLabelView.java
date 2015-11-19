@@ -55,13 +55,6 @@ public class HeaderLabelView extends View {
         this.indexOrigin = a.getInt(R.styleable.HeaderLabelView_indexOrigin, this.DEFAULT_INDEX_ORIGIN);
         this.isAlphabetical = a.getBoolean(R.styleable.HeaderLabelView_isAlphabetical, this.DEFAULT_IS_ALPHABETICAL);
         this.text = a.getString(R.styleable.HeaderLabelView_text);
-        if (this.text == null) {
-            if (this.isAlphabetical) {
-                this.text = new String(new byte[]{(byte) (this.indexOrigin + this.indexOffset + 64)});
-            } else {
-                this.text = Integer.toString(this.indexOrigin + this.indexOffset);
-            }//if
-        }//if
         this.mExampleColor = a.getColor(
                 R.styleable.HeaderLabelView_textColor,
                 this.mExampleColor);
@@ -88,6 +81,13 @@ public class HeaderLabelView extends View {
     }
 
     private void invalidateTextPaintAndMeasurements() {
+        if (this.text == null) {
+            if (this.isAlphabetical) {
+                this.text = new String(new byte[]{(byte) (this.indexOrigin + this.indexOffset + 64)});
+            } else {
+                this.text = Integer.toString(this.indexOrigin + this.indexOffset);
+            }//if
+        }//if
         this.mTextPaint.setTextSize(this.textDimension);
         this.mTextPaint.setColor(this.mExampleColor);
         this.mTextWidth = this.mTextPaint.measureText(this.text);
