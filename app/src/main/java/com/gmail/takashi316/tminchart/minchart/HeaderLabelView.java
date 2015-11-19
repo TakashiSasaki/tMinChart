@@ -14,16 +14,16 @@ import com.gmail.takashi316.tminchart.R;
 
 public class HeaderLabelView extends View {
     private int indexOrigin;
-    private final int DEFAULT_INDEX_ORIGIN = 0;
+    private static final int DEFAULT_INDEX_ORIGIN = 0;
     private int indexOffset = 1;
-    private final int DEFAULT_INDEX_OFFSET = 0;
+    private static final int DEFAULT_INDEX_OFFSET = 0;
     private boolean isAlphabetical = false;
-    private final boolean DEFAULT_IS_ALPHABETICAL = false;
+    private static final boolean DEFAULT_IS_ALPHABETICAL = false;
     private String text;
     //private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float textDimension; // TODO: use a default from R.dimen...
-    private final int DEFAULT_TEXT_DIMENSION = 100;
+    private static final int DEFAULT_TEXT_DIMENSION = 100;
     private Drawable mExampleDrawable;
 
     private TextPaint mTextPaint;
@@ -33,27 +33,27 @@ public class HeaderLabelView extends View {
 
     public HeaderLabelView(Context context) {
         super(context);
-        init(null, 0);
+        this.init(null, 0);
     }
 
     public HeaderLabelView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        this.init(attrs, 0);
     }
 
     public HeaderLabelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        this.init(attrs, defStyle);
     }
 
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(
+        final TypedArray a = this.getContext().obtainStyledAttributes(
                 attrs, R.styleable.HeaderLabelView, defStyle, 0);
 
-        this.indexOffset = a.getInt(R.styleable.HeaderLabelView_indexOffset, DEFAULT_INDEX_OFFSET);
-        this.indexOrigin = a.getInt(R.styleable.HeaderLabelView_indexOrigin, DEFAULT_INDEX_ORIGIN);
-        this.isAlphabetical = a.getBoolean(R.styleable.HeaderLabelView_isAlphabetical, DEFAULT_IS_ALPHABETICAL);
+        this.indexOffset = a.getInt(R.styleable.HeaderLabelView_indexOffset, this.DEFAULT_INDEX_OFFSET);
+        this.indexOrigin = a.getInt(R.styleable.HeaderLabelView_indexOrigin, this.DEFAULT_INDEX_ORIGIN);
+        this.isAlphabetical = a.getBoolean(R.styleable.HeaderLabelView_isAlphabetical, this.DEFAULT_IS_ALPHABETICAL);
         this.text = a.getString(R.styleable.HeaderLabelView_text);
         if (this.text == null) {
             if (this.isAlphabetical) {
@@ -62,18 +62,18 @@ public class HeaderLabelView extends View {
                 this.text = Integer.toString(this.indexOrigin + this.indexOffset);
             }//if
         }//if
-        mExampleColor = a.getColor(
+        this.mExampleColor = a.getColor(
                 R.styleable.HeaderLabelView_textColor,
-                mExampleColor);
+                this.mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
         this.textDimension = a.getDimension(
-                R.styleable.HeaderLabelView_textDimension, DEFAULT_TEXT_DIMENSION);
+                R.styleable.HeaderLabelView_textDimension, this.DEFAULT_TEXT_DIMENSION);
 
         if (a.hasValue(R.styleable.HeaderLabelView_backgroundDrawable)) {
-            mExampleDrawable = a.getDrawable(
+            this.mExampleDrawable = a.getDrawable(
                     R.styleable.HeaderLabelView_backgroundDrawable);
-            mExampleDrawable.setCallback(this);
+            this.mExampleDrawable.setCallback(this);
         }
 
         a.recycle();
@@ -84,20 +84,16 @@ public class HeaderLabelView extends View {
         this.mTextPaint.setTextAlign(Paint.Align.LEFT);
 
         // Update TextPaint and text measurements from attributes
-        invalidateTextPaintAndMeasurements();
+        this.invalidateTextPaintAndMeasurements();
     }
 
     private void invalidateTextPaintAndMeasurements() {
         this.mTextPaint.setTextSize(this.textDimension);
         this.mTextPaint.setColor(this.mExampleColor);
         this.mTextWidth = this.mTextPaint.measureText(this.text);
-
-        //Paint.FontMetrics fontMetrics = this.mTextPaint.getFontMetrics();
-        //this.mTextHeight = fontMetrics.descent - fontMetrics.ascent;
         this.mTextHeight = this.mTextPaint.descent() - this.mTextPaint.ascent();
-        //this.textAscent = fontMetrics.ascent;
         this.textAscent = this.mTextPaint.ascent();
-    }
+    }//invalidateTextPaintAndMeasurements
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -110,20 +106,20 @@ public class HeaderLabelView extends View {
         final int paddingRight = this.getPaddingRight();
         final int paddingBottom = this.getPaddingBottom();
 
-        final int contentWidth = getWidth() - paddingLeft - paddingRight;
-        final int contentHeight = getHeight() - paddingTop - paddingBottom;
+        final int contentWidth = this.getWidth() - paddingLeft - paddingRight;
+        final int contentHeight = this.getHeight() - paddingTop - paddingBottom;
 
         // Draw the text.
         canvas.drawText(this.text,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight - mTextHeight) / 2 - this.textAscent,
-                mTextPaint);
+                paddingLeft + (contentWidth - this.mTextWidth) / 2,
+                paddingTop + (contentHeight - this.mTextHeight) / 2 - this.textAscent,
+                this.mTextPaint);
 
         // Draw the example drawable on top of the text.
-        if (mExampleDrawable != null) {
-            mExampleDrawable.setBounds(paddingLeft, paddingTop,
+        if (this.mExampleDrawable != null) {
+            this.mExampleDrawable.setBounds(paddingLeft, paddingTop,
                     paddingLeft + contentWidth, paddingTop + contentHeight);
-            mExampleDrawable.draw(canvas);
+            this.mExampleDrawable.draw(canvas);
         }
     }
 
@@ -134,7 +130,7 @@ public class HeaderLabelView extends View {
 
     public void setExampleString(String text) {
         this.text = text;
-        invalidateTextPaintAndMeasurements();
+        this.invalidateTextPaintAndMeasurements();
     }
 
     /**
@@ -143,7 +139,7 @@ public class HeaderLabelView extends View {
      * @return The example color attribute value.
      */
     public int getExampleColor() {
-        return mExampleColor;
+        return this.mExampleColor;
     }
 
     /**
@@ -153,8 +149,8 @@ public class HeaderLabelView extends View {
      * @param exampleColor The example color attribute value to use.
      */
     public void setExampleColor(int exampleColor) {
-        mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
+        this.mExampleColor = exampleColor;
+        this.invalidateTextPaintAndMeasurements();
     }
 
     /**
@@ -163,7 +159,7 @@ public class HeaderLabelView extends View {
      * @return The example dimension attribute value.
      */
     public float getExampleDimension() {
-        return textDimension;
+        return this.textDimension;
     }
 
     /**
@@ -173,8 +169,8 @@ public class HeaderLabelView extends View {
      * @param exampleDimension The example dimension attribute value to use.
      */
     public void setExampleDimension(float exampleDimension) {
-        textDimension = exampleDimension;
-        invalidateTextPaintAndMeasurements();
+        this.textDimension = exampleDimension;
+        this.invalidateTextPaintAndMeasurements();
     }
 
     /**
@@ -183,7 +179,7 @@ public class HeaderLabelView extends View {
      * @return The example drawable attribute value.
      */
     public Drawable getExampleDrawable() {
-        return mExampleDrawable;
+        return this.mExampleDrawable;
     }
 
     /**
@@ -193,13 +189,13 @@ public class HeaderLabelView extends View {
      * @param exampleDrawable The example drawable attribute value to use.
      */
     public void setExampleDrawable(Drawable exampleDrawable) {
-        mExampleDrawable = exampleDrawable;
+        this.mExampleDrawable = exampleDrawable;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        this.setMeasuredDimension((int) mTextWidth + this.getPaddingLeft() + this.getPaddingRight(), (int) mTextHeight + this.getPaddingBottom() + this.getPaddingTop());
+        this.setMeasuredDimension((int) this.mTextWidth + this.getPaddingLeft() + this.getPaddingRight(), (int) this.mTextHeight + this.getPaddingBottom() + this.getPaddingTop());
     }
 
     @Override
