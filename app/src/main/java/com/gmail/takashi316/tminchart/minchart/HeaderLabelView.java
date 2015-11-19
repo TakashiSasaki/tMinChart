@@ -33,54 +33,45 @@ public class HeaderLabelView extends View {
 
     public HeaderLabelView(Context context) {
         super(context);
-        this.init(null, 0);
+        this.invalidateTextPaintAndMeasurements();
     }
 
     public HeaderLabelView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.init(attrs, 0);
+        this.applyAttributeSet(attrs, 0);
+        this.invalidateTextPaintAndMeasurements();
     }
 
     public HeaderLabelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        this.init(attrs, defStyle);
+        this.applyAttributeSet(attrs, defStyle);
+        this.invalidateTextPaintAndMeasurements();
     }
 
-    private void init(AttributeSet attrs, int defStyle) {
-        // Load attributes
+    private void applyAttributeSet(AttributeSet attrs, int defStyle) {
         final TypedArray a = this.getContext().obtainStyledAttributes(
                 attrs, R.styleable.HeaderLabelView, defStyle, 0);
-
         this.indexOffset = a.getInt(R.styleable.HeaderLabelView_indexOffset, this.DEFAULT_INDEX_OFFSET);
         this.indexOrigin = a.getInt(R.styleable.HeaderLabelView_indexOrigin, this.DEFAULT_INDEX_ORIGIN);
         this.isAlphabetical = a.getBoolean(R.styleable.HeaderLabelView_isAlphabetical, this.DEFAULT_IS_ALPHABETICAL);
         this.text = a.getString(R.styleable.HeaderLabelView_text);
-        this.color = a.getColor(
-                R.styleable.HeaderLabelView_textColor,
-                this.color);
-        // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
-        // values that should fall on pixel boundaries.
-        this.textDimension = a.getDimension(
-                R.styleable.HeaderLabelView_textDimension, this.DEFAULT_TEXT_DIMENSION);
+        this.color = a.getColor(R.styleable.HeaderLabelView_textColor, this.color);
+        this.textDimension = a.getDimension(R.styleable.HeaderLabelView_textDimension, this.DEFAULT_TEXT_DIMENSION);
 
         if (a.hasValue(R.styleable.HeaderLabelView_backgroundDrawable)) {
             this.mExampleDrawable = a.getDrawable(
                     R.styleable.HeaderLabelView_backgroundDrawable);
             this.mExampleDrawable.setCallback(this);
-        }
-
+        }//if
         a.recycle();
+        //this.invalidateTextPaintAndMeasurements();
+    }//applyAttributeSet
 
-        // Set up a default TextPaint object
+    private void invalidateTextPaintAndMeasurements() {
         this.paint = new TextPaint();
         this.paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         this.paint.setTextAlign(Paint.Align.LEFT);
 
-        // Update TextPaint and text measurements from attributes
-        this.invalidateTextPaintAndMeasurements();
-    }
-
-    private void invalidateTextPaintAndMeasurements() {
         if (this.text == null) {
             if (this.isAlphabetical) {
                 this.text = new String(new byte[]{(byte) (this.indexOrigin + this.indexOffset + 64)});
