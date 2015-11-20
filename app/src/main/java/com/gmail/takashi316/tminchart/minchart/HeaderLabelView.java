@@ -20,8 +20,8 @@ public class HeaderLabelView extends View {
     private boolean isAlphabetical = false;
     private static final boolean DEFAULT_IS_ALPHABETICAL = false;
     private String text;
-    //private String mExampleString; // TODO: use a default from R.string...
-    private int color = Color.RED; // TODO: use a default from R.color...
+    private static final int DEFAULT_COLOR = Color.RED;
+    private int color = DEFAULT_COLOR; // TODO: use a default from R.color...
     private float textDimension; // TODO: use a default from R.dimen...
     private static final int DEFAULT_TEXT_DIMENSION = 100;
     private Drawable mExampleDrawable;
@@ -46,6 +46,13 @@ public class HeaderLabelView extends View {
         super(context, attrs, defStyle);
         this.applyAttributeSet(attrs, defStyle);
         this.init();
+    }
+
+    public HeaderLabelView(Context context, String text) {
+        super(context);
+        this.text = text;
+        this.init();
+        this.setWillNotDraw(false);
     }
 
     private void applyAttributeSet(AttributeSet attrs, int defStyle) {
