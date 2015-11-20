@@ -52,7 +52,14 @@ public class HeaderLabelView extends View {
         super(context);
         this.text = text;
         this.init();
-        this.setWillNotDraw(false);
+    }
+
+    public HeaderLabelView(Context context, int origin, int offset, boolean alphabetical) {
+        super(context);
+        this.indexOrigin = origin;
+        this.indexOffset = offset;
+        this.isAlphabetical = alphabetical;
+        this.init();
     }
 
     private void applyAttributeSet(AttributeSet attrs, int defStyle) {

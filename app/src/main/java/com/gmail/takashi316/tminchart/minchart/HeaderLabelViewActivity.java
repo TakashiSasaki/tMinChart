@@ -10,6 +10,7 @@ public class HeaderLabelViewActivity extends Activity {
 
     private LinearLayout linearLayout;
     private HeaderLabelView headerLabelView;
+    private HeaderLabelView headerLabelView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
