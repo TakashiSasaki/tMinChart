@@ -20,7 +20,7 @@ public class HeaderLabelView extends View {
     private boolean isAlphabetical = false;
     private static final boolean DEFAULT_IS_ALPHABETICAL = false;
     private String text;
-    private static final int DEFAULT_COLOR = Color.RED;
+    private static final int DEFAULT_COLOR = Color.BLACK;
     private int color = DEFAULT_COLOR; // TODO: use a default from R.color...
     private static final int DEFAULT_TEXT_DIMENSION = 100;
     private float textDimension = DEFAULT_TEXT_DIMENSION; // TODO: use a default from R.dimen...
