@@ -78,10 +78,7 @@ public class MinChartFragment extends Fragment {
         this.tableLayout = (TableLayout) view.findViewById(R.id.tableLayoutTminChart);
         TableRow tr_index = new TableRow(this.getActivity());
         final int TEXT_SIZE = 50;
-        TextView tv_tc = new TextView(this.getActivity());
-        tv_tc.setTextSize(TEXT_SIZE);
-        tv_tc.setText(" ");
-        tr_index.addView(tv_tc);
+        tr_index.addView(new HeaderLabelView(this.getActivity(), "m"));
         //OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
         final int width_pixels = (int) (this.params.tminChartMaxGapInch * 4 * this.display.getXdpi());
         final int COLUMNS = this.display.getWidthPixels() / width_pixels;
