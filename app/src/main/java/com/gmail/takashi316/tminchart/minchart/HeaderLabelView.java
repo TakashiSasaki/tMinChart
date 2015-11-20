@@ -22,8 +22,8 @@ public class HeaderLabelView extends View {
     private String text;
     private static final int DEFAULT_COLOR = Color.RED;
     private int color = DEFAULT_COLOR; // TODO: use a default from R.color...
-    private float textDimension; // TODO: use a default from R.dimen...
     private static final int DEFAULT_TEXT_DIMENSION = 100;
+    private float textDimension = DEFAULT_TEXT_DIMENSION; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
 
     private TextPaint paint;
