@@ -12,7 +12,6 @@ import android.media.ToneGenerator;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -30,7 +29,6 @@ import java.util.Random;
  * TODO: document your custom view class.
  */
 public class Konoji extends View {
-    private TextPaint mTextPaint;
     private float gapInch;
     private float width_inch;
     private float xdpi;
@@ -85,11 +83,6 @@ public class Konoji extends View {
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
         a.recycle();
-
-        // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
 
         setOnClickListener(new OnClickListener() {
             @Override
@@ -201,11 +194,6 @@ public class Konoji extends View {
         int contentWidth = getWidth() - paddingLeft - paddingRight;
         int contentHeight = getHeight() - paddingTop - paddingBottom;
 
-        // Draw the text.
-        mTextPaint = new TextPaint();
-
-        // Draw the text again.
-        mTextPaint = new TextPaint();
     }
 
     public float getGapInch() {
