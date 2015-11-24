@@ -30,7 +30,6 @@ import java.util.Random;
  * TODO: document your custom view class.
  */
 public class Konoji extends View {
-    private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
@@ -70,7 +69,6 @@ public class Konoji extends View {
         this.orientation = random.nextInt(3) * 3;
         this.width_inch = width_inch;
         this.konojis = konojis;
-        this.mExampleString = "a";
     }
 
     public Konoji(Context context, AttributeSet attrs) {
@@ -92,8 +90,6 @@ public class Konoji extends View {
         this.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
-        mExampleString = a.getString(
-                R.styleable.Konoji_exampleString);
         mExampleColor = a.getColor(
                 R.styleable.Konoji_textColor,
                 mExampleColor);
@@ -157,7 +153,6 @@ public class Konoji extends View {
         try {
             mTextPaint.setTextSize(mExampleDimension);
             mTextPaint.setColor(mExampleColor);
-            mTextWidth = mTextPaint.measureText(mExampleString);
 
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
             mTextHeight = fontMetrics.bottom;
@@ -244,10 +239,6 @@ public class Konoji extends View {
 
         // Draw the text.
         mTextPaint = new TextPaint();
-        canvas.drawText(mExampleString,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
-                mTextPaint);
 
         // Draw the example drawable on top of the text.
         if (mExampleDrawable != null) {
@@ -258,30 +249,6 @@ public class Konoji extends View {
 
         // Draw the text again.
         mTextPaint = new TextPaint();
-        canvas.drawText(mExampleString,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
-                mTextPaint);
-    }
-
-    /**
-     * Gets the example string attribute value.
-     *
-     * @return The example string attribute value.
-     */
-    public String getExampleString() {
-        return mExampleString;
-    }
-
-    /**
-     * Sets the view's example string attribute value. In the example view, this string
-     * is the text to draw.
-     *
-     * @param exampleString The example string attribute value to use.
-     */
-    public void setExampleString(String exampleString) {
-        mExampleString = exampleString;
-        invalidateTextPaintAndMeasurements();
     }
 
     /**
