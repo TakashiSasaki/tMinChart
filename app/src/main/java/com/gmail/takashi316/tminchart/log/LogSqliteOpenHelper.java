@@ -1,6 +1,7 @@
 package com.gmail.takashi316.tminchart.log;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -9,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class LogSqliteOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_FILE_NAME = "log.sqlite";
 
     public LogSqliteOpenHelper(Context context) {
@@ -19,11 +20,15 @@ public class LogSqliteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE Log (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nanoTime LONG, json TEXT)");
+                "currentTimeMills INT, nanoTime LONG, json TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        try {
+            db.execSQL("DROP TABLE Log");
+        } catch (SQLException sql_exception) {
+        }
+        this.onCreate(db);
     }
 }

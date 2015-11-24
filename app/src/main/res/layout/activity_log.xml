@@ -14,18 +14,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonCreateDatabase"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="データベース作成" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonWriteDatabase"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="書き込む" />
+            <Button
+                android:id="@+id/buttonCreateDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="データベース作成" />
 
+            <Button
+                android:id="@+id/buttonWriteDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="書き込む" />
 
+            <Button
+                android:id="@+id/buttonReadDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="読み込む" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"></TableLayout>
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>
