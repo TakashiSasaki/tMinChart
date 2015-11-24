@@ -1,4 +1,4 @@
-package com.gmail.takashi316.tminchart.db;
+package com.gmail.takashi316.tminchart.log;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,7 +12,7 @@ public class LogSqliteOpenHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_FILE_NAME = "log.sqlite";
 
-    public LogSqliteOpenHelper(Context context, SQLiteDatabase.CursorFactory factory, int version) {
+    public LogSqliteOpenHelper(Context context) {
         super(context, DATABASE_FILE_NAME, null, DATABASE_VERSION);
     }
 

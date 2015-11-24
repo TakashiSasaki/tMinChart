@@ -22,5 +22,6 @@
     <string name="title_activity_loation_thread_test">LoationThreadTestActivity</string>
     <string name="title_activity_blank">blank</string>
     <string name="title_activity_header_label_view">HeaderLabelViewActivity</string>
+    <string name="title_activity_log">LogActivity</string>
 
 </resources>
