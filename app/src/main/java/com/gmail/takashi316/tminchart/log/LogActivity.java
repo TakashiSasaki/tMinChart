@@ -30,10 +30,10 @@ public class LogActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_log);
         this.tableLayout = (TableLayout) this.findViewById(R.id.tableLayout);
+        this.getActionBar().hide();
         this.buttonCreateDatabase = (Button) this.findViewById(R.id.buttonCreateDatabase);
         this.buttonWriteDatabase = (Button) this.findViewById(R.id.buttonWriteDatabase);
         this.buttonReadDatabase = (Button) this.findViewById(R.id.buttonReadDatabase);
-
         this.buttonCreateDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

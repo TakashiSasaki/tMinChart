@@ -18,6 +18,7 @@ public class MinChartActivity extends Activity implements MinChartFragment.OnFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_minchart);
+        this.getActionBar().hide();
         this.display = new DisplayDpi(this);
 
         Fragment fragment = null;
