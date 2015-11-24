@@ -15,9 +15,18 @@ import android.widget.TextView;
 
 import com.gmail.takashi316.tminchart.R;
 
+
+class DummyData {
+    public int age = 41;
+    public String name = "Takashi";
+    public Boolean male = true;
+    public Object spouse = null;
+}
+
 public class LogActivity extends Activity {
     Button buttonCreateDatabase;
     Button buttonWriteDatabase;
+    Button buttonWriteJson;
     Button buttonReadDatabase;
     TextView textView;
     TableLayout tableLayout;
@@ -33,6 +42,7 @@ public class LogActivity extends Activity {
         this.getActionBar().hide();
         this.buttonCreateDatabase = (Button) this.findViewById(R.id.buttonCreateDatabase);
         this.buttonWriteDatabase = (Button) this.findViewById(R.id.buttonWriteDatabase);
+        this.buttonWriteJson = (Button) this.findViewById(R.id.buttonWriteJson);
         this.buttonReadDatabase = (Button) this.findViewById(R.id.buttonReadDatabase);
         this.buttonCreateDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +65,16 @@ public class LogActivity extends Activity {
                 LogActivity.this.writableDatabase.insert("Log", null, content_values);
             }//onClick
         });
+
+        this.buttonWriteJson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Log log = new Log(getApplicationContext());
+                final DummyData dummy_data = new DummyData();
+                log.log(dummy_data);
+            }
+        });
+
 
         this.buttonReadDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +106,7 @@ public class LogActivity extends Activity {
                     table_row.addView(text_view_id);
                     final TextView text_view_current_time_mills = new TextView(LogActivity.this.getApplicationContext());
                     text_view_current_time_mills.setTextColor(Color.BLACK);
-                    text_view_current_time_mills.setText(Integer.toString(cursor.getInt(1)));
+                    text_view_current_time_mills.setText(Long.toString(cursor.getLong(1)));
                     table_row.addView(text_view_current_time_mills);
                     final TextView text_view_nano_time = new TextView(LogActivity.this.getApplicationContext());
                     text_view_nano_time.setText(Long.toString(cursor.getLong(2)));
