@@ -26,8 +26,8 @@ import java.util.Random;
 
 public class Konoji extends View {
     private KonojiParams konojiParams;
-    private float gapInch;
-    private float widthInch;
+    //private float gapInch;
+    //private float widthInch;
     private float xDpi;
     private float yDpi;
     private int orientation;
@@ -47,6 +47,7 @@ public class Konoji extends View {
     public Konoji(Context context) {
         super(context);
         this.context = context;
+        this.konojiParams = new KonojiParams();
         this.init();
     }
 
@@ -54,8 +55,7 @@ public class Konoji extends View {
     public Konoji(Context context, float gap_inch, float width_inch, ArrayList<Konoji> konojis) {
         super(context);
         this.context = context;
-        this.gapInch = gap_inch;
-        this.widthInch = width_inch;
+        this.konojiParams = new KonojiParams(gap_inch, width_inch);
         this.konojis = konojis;
         this.init();
     }
@@ -63,6 +63,7 @@ public class Konoji extends View {
     public Konoji(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        this.konojiParams = new KonojiParams();
         this.applyAttributeSet(attrs, 0);
         this.init();
     }
@@ -70,6 +71,7 @@ public class Konoji extends View {
     public Konoji(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
+        this.konojiParams = new KonojiParams();
         this.applyAttributeSet(attrs, defStyle);
         this.init();
     }
@@ -77,7 +79,7 @@ public class Konoji extends View {
     private void applyAttributeSet(AttributeSet attribute_set, int defStyle) {
         final TypedArray a = this.getContext().obtainStyledAttributes(
                 attribute_set, R.styleable.Konoji, defStyle, 0);
-        this.gapInch = a.getInt(R.styleable.Konoji_gapInch, 30);
+        this.konojiParams.gapInch = a.getInt(R.styleable.Konoji_gapInch, 30);
         this.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
         a.recycle();
@@ -91,10 +93,10 @@ public class Konoji extends View {
         this.xDpi = display_metrics.xdpi;
         this.yDpi = display_metrics.ydpi;
         this.orientation = random.nextInt(3) * 3;
-        this.xGap = (int) (this.xDpi * this.gapInch);
-        this.yGap = (int) (this.yDpi * this.gapInch);
-        this.viewWidth = (int) (this.widthInch * this.xDpi);
-        this.viewHeight = (int) (this.widthInch * this.yDpi);
+        this.xGap = (int) (this.xDpi * this.konojiParams.gapInch);
+        this.yGap = (int) (this.yDpi * this.konojiParams.gapInch);
+        this.viewWidth = (int) (this.konojiParams.widthInch * this.xDpi);
+        this.viewHeight = (int) (this.konojiParams.widthInch * this.yDpi);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -142,8 +144,8 @@ public class Konoji extends View {
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
 
-        height_size = (int) (this.widthInch * this.xDpi);
-        width_size = (int) (this.widthInch * this.yDpi);
+        height_size = (int) (this.konojiParams.widthInch * this.xDpi);
+        width_size = (int) (this.konojiParams.widthInch * this.yDpi);
         this.setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }
@@ -191,7 +193,7 @@ public class Konoji extends View {
     }
 
     public float getGapInch() {
-        return this.gapInch;
+        return this.konojiParams.gapInch;
     }
 }//Konoji
 

@@ -13,6 +13,14 @@ public class KonojiParams {
     public int viewWidth;
     public int viewHeight;
 
+    public KonojiParams() {
+    }
+
+    public KonojiParams(float gap_inch, float width_inch) {
+        this.gapInch = gap_inch;
+        this.widthInch = width_inch;
+    }
+
     static public String toJson(KonojiParams konoji_params) {
         ObjectMapper object_mapper = new ObjectMapper();
         try {
