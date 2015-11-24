@@ -177,10 +177,6 @@ public class Konoji extends View {
         }//switch
     }
 
-    private void fillCanvas(Canvas canvas, Paint paint) {
-        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
-    }//fillCanvas
-
     public float getGapInch() {
         return this.gapInch;
     }
