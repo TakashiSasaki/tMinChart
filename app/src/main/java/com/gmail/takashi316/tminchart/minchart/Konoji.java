@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Konoji extends View {
+    private KonojiParams konojiParams;
     private float gapInch;
     private float widthInch;
     private float xDpi;
@@ -98,6 +99,9 @@ public class Konoji extends View {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                final KonojiParams konoji_params = new KonojiParams();
+                final String string = KonojiParams.toJson(konoji_params);
+
                 if (Konoji.this.konojis != null) {
                     for (Konoji konoji : Konoji.this.konojis) {
                         konoji.touched = false;
