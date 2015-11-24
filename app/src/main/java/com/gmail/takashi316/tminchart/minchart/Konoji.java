@@ -30,7 +30,6 @@ import java.util.Random;
  * TODO: document your custom view class.
  */
 public class Konoji extends View {
-    private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
 
@@ -90,9 +89,6 @@ public class Konoji extends View {
         this.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
-        mExampleColor = a.getColor(
-                R.styleable.Konoji_textColor,
-                mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
         mExampleDimension = a.getDimension(
@@ -152,7 +148,6 @@ public class Konoji extends View {
     private void invalidateTextPaintAndMeasurements() {
         try {
             mTextPaint.setTextSize(mExampleDimension);
-            mTextPaint.setColor(mExampleColor);
 
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
             mTextHeight = fontMetrics.bottom;
@@ -249,26 +244,6 @@ public class Konoji extends View {
 
         // Draw the text again.
         mTextPaint = new TextPaint();
-    }
-
-    /**
-     * Gets the example color attribute value.
-     *
-     * @return The example color attribute value.
-     */
-    public int getExampleColor() {
-        return mExampleColor;
-    }
-
-    /**
-     * Sets the view's example color attribute value. In the example view, this color
-     * is the font color.
-     *
-     * @param exampleColor The example color attribute value to use.
-     */
-    public void setExampleColor(int exampleColor) {
-        mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
     }
 
     /**
