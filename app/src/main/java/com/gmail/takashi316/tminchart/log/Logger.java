@@ -9,10 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Created by sasaki on 2015/11/25.
  */
-public class Log {
+public class Logger {
     private static SQLiteDatabase sqliteDatabase;
 
-    public Log(Context context) {
+    public Logger(Context context) {
         if (sqliteDatabase == null) {
             LogSqliteOpenHelper log_sqlite_open_helper = new LogSqliteOpenHelper(context);
             this.sqliteDatabase = log_sqlite_open_helper.getWritableDatabase();

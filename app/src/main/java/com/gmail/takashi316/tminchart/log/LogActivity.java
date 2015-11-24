@@ -69,9 +69,9 @@ public class LogActivity extends Activity {
         this.buttonWriteJson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Log log = new Log(getApplicationContext());
+                final Logger logger = new Logger(getApplicationContext());
                 final DummyData dummy_data = new DummyData();
-                log.log(dummy_data);
+                logger.log(dummy_data);
             }
         });
 
