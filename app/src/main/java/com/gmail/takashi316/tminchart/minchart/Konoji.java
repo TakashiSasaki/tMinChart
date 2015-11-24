@@ -181,21 +181,6 @@ public class Konoji extends View {
         canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
     }//fillCanvas
 
-    protected void onDraw_(Canvas canvas) {
-        //super.onDraw(canvas);
-
-        // TODO: consider storing these as member variables to reduce
-        // allocations per draw cycle.
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
-
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
-
-    }
-
     public float getGapInch() {
         return this.gapInch;
     }
