@@ -34,8 +34,6 @@ public class Konoji extends View {
     private Drawable mExampleDrawable;
 
     private TextPaint mTextPaint;
-    private float mTextWidth;
-    private float mTextHeight;
     private float gapInch;
     private float width_inch;
     private float xdpi;
@@ -150,7 +148,6 @@ public class Konoji extends View {
             mTextPaint.setTextSize(mExampleDimension);
 
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-            mTextHeight = fontMetrics.bottom;
         } catch (Exception e) {
             e.printStackTrace();
         }//try
