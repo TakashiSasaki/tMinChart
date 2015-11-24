@@ -83,9 +83,9 @@ public class MinChartFragment extends Fragment {
         tv_tc.setText(" ");
         tr_index.addView(tv_tc);
         //OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
-        final int width_pixels = (int) (this.params.tminChartMaxGapInch * 4 * this.display.getXdpi()) + 20;
+        final int width_pixels = (int) (this.params.minChartMaxGapInch * 4 * this.display.getXdpi()) + 20;
         final int COLUMNS = this.display.getWidthPixels() / width_pixels;
-        final int ROWS = params.tminChartCount / COLUMNS;
+        final int ROWS = params.minChartCount / COLUMNS;
         for (int x = 1; x <= COLUMNS; ++x) {
             TextView text_view = new TextView(getActivity());
             text_view.setTextSize(TEXT_SIZE);
@@ -102,8 +102,8 @@ public class MinChartFragment extends Fragment {
             tv_index.setGravity(Gravity.CENTER);
             table_row.addView(tv_index);
             for (int x = 0; x < COLUMNS; ++x) {
-                final double gap_inch = params.tminChartMaxGapInch * Math.pow(params.tminChartRatio, x + y * COLUMNS);
-                Konoji konoji = new Konoji(getActivity(), (float) gap_inch, (float) params.tminChartMaxGapInch * 4, konojiViews);
+                final double gap_inch = params.minChartMaxGapInch * Math.pow(params.minChartRatio, x + y * COLUMNS);
+                Konoji konoji = new Konoji(getActivity(), (float) gap_inch, (float) params.minChartMaxGapInch * 4, konojiViews);
                 konojiViews.add(konoji);
                 table_row.addView(konoji);
             }//for y
