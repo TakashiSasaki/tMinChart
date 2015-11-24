@@ -83,7 +83,7 @@ public class MinChartFragment extends Fragment {
         tv_tc.setText(" ");
         tr_index.addView(tv_tc);
         //OnFragmentInteractionListener l = (OnFragmentInteractionListener) getActivity();
-        final int width_pixels = (int) (params.tminChartMaxGapInch * 4 * this.display.getXdpi());
+        final int width_pixels = (int) (this.params.tminChartMaxGapInch * 4 * this.display.getXdpi()) + 20;
         final int COLUMNS = this.display.getWidthPixels() / width_pixels;
         final int ROWS = params.tminChartCount / COLUMNS;
         for (int x = 1; x <= COLUMNS; ++x) {
