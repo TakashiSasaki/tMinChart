@@ -34,6 +34,8 @@ public class Konoji extends View {
     static Random random = new Random();
     private ArrayList<Konoji> konojis;
     Context context;
+    private int xGap;
+    private int yGap;
 
     public boolean isTouched() {
         return this.touched;
@@ -79,13 +81,15 @@ public class Konoji extends View {
     }
 
     private void init() {
-        final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        final WindowManager window_manager = (WindowManager) this.context.getSystemService(Context.WINDOW_SERVICE);
         final Display display = window_manager.getDefaultDisplay();
         final DisplayMetrics display_metrics = new DisplayMetrics();
         display.getMetrics(display_metrics);
         this.xDpi = display_metrics.xdpi;
         this.yDpi = display_metrics.ydpi;
         this.orientation = random.nextInt(3) * 3;
+        this.xGap = (int) (this.xDpi * this.gapInch);
+        this.yGap = (int) (this.yDpi * this.gapInch);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -152,32 +156,30 @@ public class Konoji extends View {
             this.setBackgroundColor(Color.WHITE);
             //konoji_paint.setColor(Color.BLACK);
         }//if
-        final int xgap = (int) (this.xDpi * this.gapInch);
-        final int ygap = (int) (this.yDpi * this.gapInch);
         final int view_width = (int) (this.widthInch * this.xDpi);
         final int view_height = (int) (this.widthInch * this.yDpi);
-        final int top_margin = (view_width - xgap * 3) / 2;
-        final int left_margin = (view_width - ygap * 3) / 2;
+        final int top_margin = (view_width - this.xGap * 3) / 2;
+        final int left_margin = (view_width - this.yGap * 3) / 2;
         final Paint konoji_paint = new Paint();
-        canvas.drawRect(left_margin, top_margin, xgap * 3 - 1 + left_margin, ygap * 3 - 1 + top_margin, konoji_paint);
+        canvas.drawRect(left_margin, top_margin, this.xGap * 3 - 1 + left_margin, this.yGap * 3 - 1 + top_margin, konoji_paint);
         final Paint gap_paint = new Paint();
         gap_paint.setColor(Color.WHITE);
         switch (this.orientation) {
             case 0:
-                canvas.drawRect(left_margin + xgap, top_margin, xgap * 2 - 1 + left_margin, ygap * 2 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin + this.xGap, top_margin, this.xGap * 2 - 1 + left_margin, this.yGap * 2 - 1 + top_margin, gap_paint);
                 break;
             case 3:
-                canvas.drawRect(left_margin + xgap, top_margin + ygap, xgap * 3 - 1 + left_margin, ygap * 2 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin + this.xGap, top_margin + this.yGap, this.xGap * 3 - 1 + left_margin, this.yGap * 2 - 1 + top_margin, gap_paint);
                 break;
             case 6:
-                canvas.drawRect(left_margin + xgap, top_margin + ygap, xgap * 2 - 1 + left_margin, ygap * 3 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin + this.xGap, top_margin + this.yGap, this.xGap * 2 - 1 + left_margin, this.yGap * 3 - 1 + top_margin, gap_paint);
                 break;
             case 9:
-                canvas.drawRect(left_margin, top_margin + ygap, xgap * 2 - 1 + left_margin, ygap * 2 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin, top_margin + this.yGap, this.xGap * 2 - 1 + left_margin, this.yGap * 2 - 1 + top_margin, gap_paint);
                 break;
             default:
-                canvas.drawLine(left_margin, top_margin, xgap * 3 - 1 + left_margin, ygap * 3 - 1 + ygap, gap_paint);
-                canvas.drawLine(xgap * 3 - 1 + left_margin, top_margin, left_margin, ygap * 3 - 1 + ygap, gap_paint);
+                canvas.drawLine(left_margin, top_margin, this.xGap * 3 - 1 + left_margin, this.yGap * 3 - 1 + this.yGap, gap_paint);
+                canvas.drawLine(this.xGap * 3 - 1 + left_margin, top_margin, left_margin, this.yGap * 3 - 1 + this.yGap, gap_paint);
                 break;
         }//switch
     }
