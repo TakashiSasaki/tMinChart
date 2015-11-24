@@ -91,9 +91,6 @@ public class Konoji extends View {
         mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setTextAlign(Paint.Align.LEFT);
 
-        // Update TextPaint and text measurements from attributes
-        invalidateTextPaintAndMeasurements();
-
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,14 +124,6 @@ public class Konoji extends View {
             }//onClick
         });
     }
-
-    private void invalidateTextPaintAndMeasurements() {
-        try {
-            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }//try
-    }//invalidateTextPaintAndMeasurements
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
