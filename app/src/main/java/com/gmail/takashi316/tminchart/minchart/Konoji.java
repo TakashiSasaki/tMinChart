@@ -24,13 +24,9 @@ import com.gmail.takashi316.tminchart.R;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-/**
- * TODO: document your custom view class.
- */
 public class Konoji extends View {
     private float gapInch;
-    private float width_inch;
+    private float widthInch;
     private float xdpi;
     private float ydpi;
     private int orientation;
@@ -59,7 +55,7 @@ public class Konoji extends View {
         this.xdpi = display_metrics.xdpi;
         this.ydpi = display_metrics.ydpi;
         this.orientation = random.nextInt(3) * 3;
-        this.width_inch = width_inch;
+        this.widthInch = width_inch;
         this.konojis = konojis;
     }
 
@@ -125,8 +121,8 @@ public class Konoji extends View {
         int width_size = MeasureSpec.getSize(widthMeasureSpec);
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
-        height_size = (int) (width_inch * xdpi);
-        width_size = (int) (width_inch * ydpi);
+        height_size = (int) (widthInch * xdpi);
+        width_size = (int) (widthInch * ydpi);
         setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }
@@ -149,8 +145,8 @@ public class Konoji extends View {
         }//if
         final int xgap = (int) (xdpi * gapInch);
         final int ygap = (int) (ydpi * gapInch);
-        final int view_width = (int) (width_inch * xdpi);
-        final int view_height = (int) (width_inch * ydpi);
+        final int view_width = (int) (widthInch * xdpi);
+        final int view_height = (int) (widthInch * ydpi);
         final int top_margin = (view_width - xgap * 3) / 2;
         final int left_margin = (view_width - ygap * 3) / 2;
         final Paint konoji_paint = new Paint();
