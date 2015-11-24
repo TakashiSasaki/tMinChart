@@ -27,8 +27,8 @@ import java.util.Random;
 public class Konoji extends View {
     private float gapInch;
     private float widthInch;
-    private float xdpi;
-    private float ydpi;
+    private float xDpi;
+    private float yDpi;
     private int orientation;
     private boolean touched = false;
     static Random random = new Random();
@@ -52,8 +52,8 @@ public class Konoji extends View {
         final Display display = window_manager.getDefaultDisplay();
         final DisplayMetrics display_metrics = new DisplayMetrics();
         display.getMetrics(display_metrics);
-        this.xdpi = display_metrics.xdpi;
-        this.ydpi = display_metrics.ydpi;
+        this.xDpi = display_metrics.xdpi;
+        this.yDpi = display_metrics.ydpi;
         this.orientation = random.nextInt(3) * 3;
         this.widthInch = width_inch;
         this.konojis = konojis;
@@ -124,8 +124,8 @@ public class Konoji extends View {
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
 
-        height_size = (int) (this.widthInch * this.xdpi);
-        width_size = (int) (this.widthInch * this.ydpi);
+        height_size = (int) (this.widthInch * this.xDpi);
+        width_size = (int) (this.widthInch * this.yDpi);
         this.setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
 
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
@@ -147,10 +147,10 @@ public class Konoji extends View {
             this.setBackgroundColor(Color.WHITE);
             //konoji_paint.setColor(Color.BLACK);
         }//if
-        final int xgap = (int) (this.xdpi * this.gapInch);
-        final int ygap = (int) (this.ydpi * this.gapInch);
-        final int view_width = (int) (this.widthInch * this.xdpi);
-        final int view_height = (int) (this.widthInch * this.ydpi);
+        final int xgap = (int) (this.xDpi * this.gapInch);
+        final int ygap = (int) (this.yDpi * this.gapInch);
+        final int view_width = (int) (this.widthInch * this.xDpi);
+        final int view_height = (int) (this.widthInch * this.yDpi);
         final int top_margin = (view_width - xgap * 3) / 2;
         final int left_margin = (view_width - ygap * 3) / 2;
         final Paint konoji_paint = new Paint();
