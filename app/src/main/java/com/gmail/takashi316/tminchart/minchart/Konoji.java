@@ -30,9 +30,6 @@ import java.util.Random;
  * TODO: document your custom view class.
  */
 public class Konoji extends View {
-    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
-    private Drawable mExampleDrawable;
-
     private TextPaint mTextPaint;
     private float gapInch;
     private float width_inch;
@@ -87,18 +84,6 @@ public class Konoji extends View {
         this.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
 
-        // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
-        // values that should fall on pixel boundaries.
-        mExampleDimension = a.getDimension(
-                R.styleable.Konoji_textDimension,
-                mExampleDimension);
-
-        if (a.hasValue(R.styleable.Konoji_backgroundDrawable)) {
-            mExampleDrawable = a.getDrawable(
-                    R.styleable.Konoji_backgroundDrawable);
-            mExampleDrawable.setCallback(this);
-        }
-
         a.recycle();
 
         // Set up a default TextPaint object
@@ -145,8 +130,6 @@ public class Konoji extends View {
 
     private void invalidateTextPaintAndMeasurements() {
         try {
-            mTextPaint.setTextSize(mExampleDimension);
-
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
         } catch (Exception e) {
             e.printStackTrace();
@@ -232,54 +215,8 @@ public class Konoji extends View {
         // Draw the text.
         mTextPaint = new TextPaint();
 
-        // Draw the example drawable on top of the text.
-        if (mExampleDrawable != null) {
-            mExampleDrawable.setBounds(paddingLeft, paddingTop,
-                    paddingLeft + contentWidth, paddingTop + contentHeight);
-            mExampleDrawable.draw(canvas);
-        }
-
         // Draw the text again.
         mTextPaint = new TextPaint();
-    }
-
-    /**
-     * Gets the example dimension attribute value.
-     *
-     * @return The example dimension attribute value.
-     */
-    public float getExampleDimension() {
-        return mExampleDimension;
-    }
-
-    /**
-     * Sets the view's example dimension attribute value. In the example view, this dimension
-     * is the font size.
-     *
-     * @param exampleDimension The example dimension attribute value to use.
-     */
-    public void setExampleDimension(float exampleDimension) {
-        mExampleDimension = exampleDimension;
-        invalidateTextPaintAndMeasurements();
-    }
-
-    /**
-     * Gets the example drawable attribute value.
-     *
-     * @return The example drawable attribute value.
-     */
-    public Drawable getExampleDrawable() {
-        return mExampleDrawable;
-    }
-
-    /**
-     * Sets the view's example drawable attribute value. In the example view, this drawable is
-     * drawn above the text.
-     *
-     * @param exampleDrawable The example drawable attribute value to use.
-     */
-    public void setExampleDrawable(Drawable exampleDrawable) {
-        mExampleDrawable = exampleDrawable;
     }
 
     public float getGapInch() {
