@@ -36,6 +36,8 @@ public class Konoji extends View {
     Context context;
     private int xGap;
     private int yGap;
+    private int viewWidth;
+    private int viewHeight;
 
     public boolean isTouched() {
         return this.touched;
@@ -90,6 +92,8 @@ public class Konoji extends View {
         this.orientation = random.nextInt(3) * 3;
         this.xGap = (int) (this.xDpi * this.gapInch);
         this.yGap = (int) (this.yDpi * this.gapInch);
+        this.viewWidth = (int) (this.widthInch * this.xDpi);
+        this.viewHeight = (int) (this.widthInch * this.yDpi);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -156,10 +160,8 @@ public class Konoji extends View {
             this.setBackgroundColor(Color.WHITE);
             //konoji_paint.setColor(Color.BLACK);
         }//if
-        final int view_width = (int) (this.widthInch * this.xDpi);
-        final int view_height = (int) (this.widthInch * this.yDpi);
-        final int top_margin = (view_width - this.xGap * 3) / 2;
-        final int left_margin = (view_width - this.yGap * 3) / 2;
+        final int top_margin = (this.viewHeight - this.xGap * 3) / 2;
+        final int left_margin = (this.viewWidth - this.yGap * 3) / 2;
         final Paint konoji_paint = new Paint();
         canvas.drawRect(left_margin, top_margin, this.xGap * 3 - 1 + left_margin, this.yGap * 3 - 1 + top_margin, konoji_paint);
         final Paint gap_paint = new Paint();
