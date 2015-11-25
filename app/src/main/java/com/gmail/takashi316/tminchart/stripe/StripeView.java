@@ -20,16 +20,16 @@ class StripeViewParams {
     public int foregroundColor;
     public int backgroundColor;
     public int frameColor = Color.RED;
+    public boolean touched = false;
 }
 
 public class StripeView extends FrameView {
     private StripeViewParams stripeViewParams;
-    private boolean touched = false;
     private ArrayList<StripeView> stripeViews;
 
 
     public boolean isTouched() {
-        return this.touched;
+        return this.stripeViewParams.touched;
     }//isTouched
 
     public StripeView(Context context) {
@@ -59,7 +59,7 @@ public class StripeView extends FrameView {
         this.stripeViewParams.foregroundColor = typed_array.getColor(R.styleable.StripeView_foregroundColor, Color.BLACK);
         this.setBackgroundColor(typed_array.getColor(R.styleable.StripeView_backgroundColor, Color.WHITE));
         this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.stripeViewParams.frameColor));
-        this.touched = typed_array.getBoolean(R.styleable.StripeView_touched, this.touched);
+        this.stripeViewParams.touched = typed_array.getBoolean(R.styleable.StripeView_touched, this.stripeViewParams.touched);
         typed_array.recycle();
     }
 
@@ -161,11 +161,11 @@ public class StripeView extends FrameView {
     }//onMeasure
 
     private void toggleTouched() {
-        this.touched = !this.touched;
+        this.stripeViewParams.touched = !this.stripeViewParams.touched;
     }//toggleTouched
 
     private void setTouched(boolean touched) {
-        this.touched = touched;
+        this.stripeViewParams.touched = touched;
     }//setTouched
 
     @Override
@@ -209,7 +209,7 @@ public class StripeView extends FrameView {
     }//onDraw
 
     void updateFrame(Canvas canvas) {
-        if (this.touched) {
+        if (this.stripeViewParams.touched) {
             this.drawFrame(canvas, this.stripeViewParams.frameColor);
         } else {
             final Paint background_paint = new Paint();
