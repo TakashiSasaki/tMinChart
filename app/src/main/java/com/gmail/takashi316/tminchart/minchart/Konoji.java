@@ -20,12 +20,14 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.log.Logger;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Konoji extends View {
     private KonojiParams konojiParams;
+    private Logger logger;
     //private float gapInch;
     //private float widthInch;
     private float xDpi;
@@ -47,6 +49,7 @@ public class Konoji extends View {
     public Konoji(Context context) {
         super(context);
         this.context = context;
+        this.logger = new Logger(context);
         this.konojiParams = new KonojiParams();
         this.init();
     }
@@ -55,6 +58,7 @@ public class Konoji extends View {
     public Konoji(Context context, float gap_inch, float width_inch, ArrayList<Konoji> konojis) {
         super(context);
         this.context = context;
+        this.logger = new Logger(context);
         this.konojiParams = new KonojiParams(gap_inch, width_inch);
         this.konojis = konojis;
         this.init();
@@ -63,6 +67,7 @@ public class Konoji extends View {
     public Konoji(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        this.logger = new Logger(context);
         this.konojiParams = new KonojiParams();
         this.applyAttributeSet(attrs, 0);
         this.init();
@@ -71,6 +76,7 @@ public class Konoji extends View {
     public Konoji(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
+        this.logger = new Logger(context);
         this.konojiParams = new KonojiParams();
         this.applyAttributeSet(attrs, defStyle);
         this.init();
@@ -101,9 +107,8 @@ public class Konoji extends View {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final KonojiParams konoji_params = new KonojiParams();
-                final String string = KonojiParams.toJson(konoji_params);
-
+                logger.log(konojiParams);
+                
                 if (Konoji.this.konojis != null) {
                     for (Konoji konoji : Konoji.this.konojis) {
                         konoji.touched = false;
