@@ -13,10 +13,12 @@ import com.gmail.takashi316.tminchart.R;
 
 import java.util.ArrayList;
 
+class StripeViewParams {
+    public boolean horizontal = false;
+}
 
 public class StripeView extends FrameView {
-
-    private boolean horizontal = false;
+    private StripeViewParams stripeViewParams;
     private boolean touched = false;
     private ArrayList<StripeView> stripeViews;
     private Paint foregroundPaint;
@@ -31,17 +33,20 @@ public class StripeView extends FrameView {
 
     public StripeView(Context context) {
         super(context);
+        stripeViewParams = new StripeViewParams();
         init();
     }//StripeViewConstructor
 
     public StripeView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        stripeViewParams = new StripeViewParams();
         obtainStyledAttributes(attrs, 0);
         init();
     }//StripeView constructor
 
     public StripeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        stripeViewParams = new StripeViewParams();
         obtainStyledAttributes(attrs, defStyle);
         init();
     }//StripeView constructor
@@ -49,7 +54,7 @@ public class StripeView extends FrameView {
     private void obtainStyledAttributes(AttributeSet attrs, int defStyle) {
         final TypedArray typed_array = getContext().obtainStyledAttributes(
                 attrs, R.styleable.StripeView, defStyle, 0);
-        this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, this.horizontal));
+        this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, this.stripeViewParams.horizontal));
         this.setForegroundColor(typed_array.getColor(R.styleable.StripeView_foregroundColor, Color.BLACK));
         this.setBackgroundColor(typed_array.getColor(R.styleable.StripeView_backgroundColor, Color.WHITE));
         this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.frameColor));
@@ -88,7 +93,7 @@ public class StripeView extends FrameView {
     }//setStripeViews
 
     public void setHorizontal(boolean horizontal) {
-        this.horizontal = horizontal;
+        this.stripeViewParams.horizontal = horizontal;
     }
 
     public void setForegroundColor(int foreground_color) {
@@ -175,7 +180,7 @@ public class StripeView extends FrameView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (this.horizontal) {
+        if (this.stripeViewParams.horizontal) {
             int top = getPaddingTop();
             int left = getPaddingLeft();
             int right = canvas.getWidth() - getPaddingRight();
