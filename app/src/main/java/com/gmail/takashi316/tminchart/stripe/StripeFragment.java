@@ -97,13 +97,13 @@ public class StripeFragment extends Fragment {
                         this.foregroundColorSequence[column],
                         this.foregroundWidthSequence.get(row),
                         this.backgroundColorSequence[column],
-                        this.backgroundWidthSequence.get(row));
+                        this.backgroundWidthSequence.get(row), false);
                 stripe_view.setStripeViews(stripe_views);
                 //stripe_view.setBackgroundColor(this.backgroundColorSequence[column]);
                 //stripe_view.setBackgroundWidth(this.backgroundWidthSequence.get(row));
                 //stripe_view.setForegroundColor(this.foregroundColorSequence[column]);
                 //stripe_view.setForegroundWidth(this.foregroundWidthSequence.get(row));
-                stripe_view.setHorizontal(false);
+                //stripe_view.setHorizontal(false);
                 stripe_view.setPadding(this.frameWidth, this.frameWidth, this.frameWidth, this.frameWidth);
                 final TableRow.LayoutParams layout_params = new TableRow.LayoutParams();
                 layout_params.setMargins(this.viewMargin, this.viewMargin, this.viewMargin, this.viewMargin);
