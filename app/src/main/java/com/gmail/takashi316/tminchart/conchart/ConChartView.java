@@ -31,6 +31,7 @@ class ConChartViewParams {
     public double intensity;
     public int color;
     public float pixels;
+    public int stroke;
 }
 
 public class ConChartView extends View {
@@ -40,8 +41,6 @@ public class ConChartView extends View {
     static private float xdpi, ydpi;
     private float xpixels, ypixels;
     private boolean touched = false;
-    //private String string;
-    private int stroke;
     private Typeface typeface;
 
     static final private int DEFAULT_WIDTH_INCH = 1;
@@ -58,7 +57,7 @@ public class ConChartView extends View {
         this.conChartViewParams = new ConChartViewParams();
         this.conChartViewParams.widthInch = width_inch;
         this.typeface = typeface;
-        this.stroke = n_stroke;
+        this.conChartViewParams.stroke = n_stroke;
         this.conChartViewParams.intensity = intensity;
         this.conChartViewParams.string = string;
 
@@ -120,7 +119,7 @@ public class ConChartView extends View {
         this.conChartViewParams.widthInch = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_widthInch, DEFAULT_WIDTH_INCH);
         this.conChartViewParams.intensity = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getFloat(R.styleable.ConChartView_intensity, DEFAULT_INTENSITY);
         this.conChartViewParams.string = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getString(R.styleable.ConChartView_string);
-        this.stroke = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_nStroke, 17);
+        this.conChartViewParams.stroke = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_nStroke, 17);
     }
 
     private void invalidateTextPaintAndMeasurements() {
@@ -141,7 +140,7 @@ public class ConChartView extends View {
         this.mTextPaint.setTextAlign(Paint.Align.LEFT);
         this.mTextPaint.setTypeface(this.typeface);
         if (this.conChartViewParams.string == null) {
-            this.conChartViewParams.string = this.getTconString(this.stroke);
+            this.conChartViewParams.string = this.getTconString(this.conChartViewParams.stroke);
         }
         //mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         //Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
