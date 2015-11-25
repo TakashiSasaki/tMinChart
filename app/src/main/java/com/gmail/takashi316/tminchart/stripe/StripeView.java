@@ -53,6 +53,7 @@ public class StripeView extends FrameView {
         this.stripeViewParams.foregroundWidth = foreground_width;
         this.stripeViewParams.backgroundColor = background_color;
         this.stripeViewParams.backgroundWidth = background_width;
+        this.stripeViewParams.horizontal = horizontal;
         this.init();
     }
 
