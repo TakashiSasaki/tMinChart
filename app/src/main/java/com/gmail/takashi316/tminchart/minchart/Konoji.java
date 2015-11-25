@@ -28,10 +28,8 @@ import java.util.Random;
 public class Konoji extends View {
     private KonojiParams konojiParams;
     private Logger logger;
-    //private float gapInch;
-    //private float widthInch;
-    private float xDpi;
-    private float yDpi;
+    //private float xDpi;
+    //private float yDpi;
     private int orientation;
     private boolean touched = false;
     static Random random = new Random();
@@ -96,19 +94,19 @@ public class Konoji extends View {
         final Display display = window_manager.getDefaultDisplay();
         final DisplayMetrics display_metrics = new DisplayMetrics();
         display.getMetrics(display_metrics);
-        this.xDpi = display_metrics.xdpi;
-        this.yDpi = display_metrics.ydpi;
+        this.konojiParams.xDpi = display_metrics.xdpi;
+        this.konojiParams.yDpi = display_metrics.ydpi;
         this.orientation = random.nextInt(3) * 3;
-        this.xGap = (int) (this.xDpi * this.konojiParams.gapInch);
-        this.yGap = (int) (this.yDpi * this.konojiParams.gapInch);
-        this.viewWidth = (int) (this.konojiParams.widthInch * this.xDpi);
-        this.viewHeight = (int) (this.konojiParams.widthInch * this.yDpi);
+        this.xGap = (int) (this.konojiParams.xDpi * this.konojiParams.gapInch);
+        this.yGap = (int) (this.konojiParams.yDpi * this.konojiParams.gapInch);
+        this.viewWidth = (int) (this.konojiParams.widthInch * this.konojiParams.xDpi);
+        this.viewHeight = (int) (this.konojiParams.widthInch * this.konojiParams.yDpi);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 logger.log(konojiParams);
-                
+
                 if (Konoji.this.konojis != null) {
                     for (Konoji konoji : Konoji.this.konojis) {
                         konoji.touched = false;
@@ -149,8 +147,8 @@ public class Konoji extends View {
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
 
-        height_size = (int) (this.konojiParams.widthInch * this.xDpi);
-        width_size = (int) (this.konojiParams.widthInch * this.yDpi);
+        height_size = (int) (this.konojiParams.widthInch * this.konojiParams.xDpi);
+        width_size = (int) (this.konojiParams.widthInch * this.konojiParams.yDpi);
         this.setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }
