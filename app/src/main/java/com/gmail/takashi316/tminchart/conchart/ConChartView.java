@@ -25,11 +25,14 @@ import com.gmail.takashi316.tminchart.R;
 import java.util.ArrayList;
 import java.util.Random;
 
+class ConChartViewParams {
+    public double widthInch;
+}
 
 public class ConChartView extends View {
     private Context context;
+    private ConChartViewParams conChartViewParams;
     private TextPaint mTextPaint;
-    private double widthInch;
     static private float xdpi, ydpi;
     private float xpixels, ypixels;
     private float pixels;
@@ -51,9 +54,10 @@ public class ConChartView extends View {
     public ConChartView(Context context, double width_inch, double intensity, final ArrayList<ConChartView> conChartViews, String string, int n_stroke, Typeface typeface) {
         super(context);
         this.context = context;
+        this.conChartViewParams = new ConChartViewParams();
+        this.conChartViewParams.widthInch = width_inch;
         this.typeface = typeface;
         this.stroke = n_stroke;
-        this.widthInch = width_inch;
         this.intensity = intensity;
         this.string = string;
 
@@ -112,7 +116,7 @@ public class ConChartView extends View {
     }//Seventeen
 
     private void obtainStyledAttributes(Context context, AttributeSet attrs, int defStyle) {
-        this.widthInch = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_widthInch, DEFAULT_WIDTH_INCH);
+        this.conChartViewParams.widthInch = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_widthInch, DEFAULT_WIDTH_INCH);
         this.intensity = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getFloat(R.styleable.ConChartView_intensity, DEFAULT_INTENSITY);
         this.string = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getString(R.styleable.ConChartView_string);
         this.stroke = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_nStroke, 17);
@@ -127,8 +131,8 @@ public class ConChartView extends View {
         }
         xdpi = displayMetrics.xdpi;
         ydpi = displayMetrics.ydpi;
-        this.xpixels = (float) (xdpi * this.widthInch);
-        this.ypixels = (float) (ydpi * this.widthInch);
+        this.xpixels = (float) (xdpi * this.conChartViewParams.widthInch);
+        this.ypixels = (float) (ydpi * this.conChartViewParams.widthInch);
         this.pixels = Math.max(this.xpixels, this.ypixels);
         this.color = Color.rgb((int) Math.max(this.intensity, 0), (int) Math.max(this.intensity, 0), (int) Math.max(this.intensity, 0));
         this.mTextPaint.setColor(this.color);
