@@ -31,31 +31,34 @@ public class StripeView extends FrameView {
 
     public StripeView(Context context) {
         super(context);
-        init(context, null, 0);
+        init();
     }//StripeViewConstructor
 
     public StripeView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0);
+        obtainStyledAttributes(attrs, 0);
+        init();
     }//StripeView constructor
 
     public StripeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context, attrs, defStyle);
+        obtainStyledAttributes(attrs, defStyle);
+        init();
     }//StripeView constructor
 
-    private void init(Context context, AttributeSet attrs, int defStyle) {
-        //this.displayDpi = new DisplayDpi(context);
-
+    private void obtainStyledAttributes(AttributeSet attrs, int defStyle) {
         final TypedArray typed_array = getContext().obtainStyledAttributes(
                 attrs, R.styleable.StripeView, defStyle, 0);
-
         this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, this.horizontal));
         this.setForegroundColor(typed_array.getColor(R.styleable.StripeView_foregroundColor, Color.BLACK));
         this.setBackgroundColor(typed_array.getColor(R.styleable.StripeView_backgroundColor, Color.WHITE));
         this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.frameColor));
         this.touched = typed_array.getBoolean(R.styleable.StripeView_touched, this.touched);
         typed_array.recycle();
+    }
+
+    private void init() {
+        //this.displayDpi = new DisplayDpi(context);
 
         this.setOnClickListener(new OnClickListener() {
 
