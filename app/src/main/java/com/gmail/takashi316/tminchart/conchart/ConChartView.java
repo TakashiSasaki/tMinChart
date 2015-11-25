@@ -27,6 +27,9 @@ import java.util.Random;
 
 class ConChartViewParams {
     public double widthInch;
+    public String string;
+    public double intensity;
+    public int color;
 }
 
 public class ConChartView extends View {
@@ -36,10 +39,8 @@ public class ConChartView extends View {
     static private float xdpi, ydpi;
     private float xpixels, ypixels;
     private float pixels;
-    private double intensity;
-    private int color;
     private boolean touched = false;
-    private String string;
+    //private String string;
     private int stroke;
     private Typeface typeface;
 
@@ -58,8 +59,8 @@ public class ConChartView extends View {
         this.conChartViewParams.widthInch = width_inch;
         this.typeface = typeface;
         this.stroke = n_stroke;
-        this.intensity = intensity;
-        this.string = string;
+        this.conChartViewParams.intensity = intensity;
+        this.conChartViewParams.string = string;
 
         this.mTextPaint = new TextPaint();
 
@@ -117,8 +118,8 @@ public class ConChartView extends View {
 
     private void obtainStyledAttributes(Context context, AttributeSet attrs, int defStyle) {
         this.conChartViewParams.widthInch = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_widthInch, DEFAULT_WIDTH_INCH);
-        this.intensity = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getFloat(R.styleable.ConChartView_intensity, DEFAULT_INTENSITY);
-        this.string = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getString(R.styleable.ConChartView_string);
+        this.conChartViewParams.intensity = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getFloat(R.styleable.ConChartView_intensity, DEFAULT_INTENSITY);
+        this.conChartViewParams.string = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getString(R.styleable.ConChartView_string);
         this.stroke = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_nStroke, 17);
     }
 
@@ -134,13 +135,13 @@ public class ConChartView extends View {
         this.xpixels = (float) (xdpi * this.conChartViewParams.widthInch);
         this.ypixels = (float) (ydpi * this.conChartViewParams.widthInch);
         this.pixels = Math.max(this.xpixels, this.ypixels);
-        this.color = Color.rgb((int) Math.max(this.intensity, 0), (int) Math.max(this.intensity, 0), (int) Math.max(this.intensity, 0));
-        this.mTextPaint.setColor(this.color);
+        this.conChartViewParams.color = Color.rgb((int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0));
+        this.mTextPaint.setColor(this.conChartViewParams.color);
         this.mTextPaint.setTextSize(this.pixels);
         this.mTextPaint.setTextAlign(Paint.Align.LEFT);
         this.mTextPaint.setTypeface(this.typeface);
-        if (this.string == null) {
-            this.string = this.getTconString(this.stroke);
+        if (this.conChartViewParams.string == null) {
+            this.conChartViewParams.string = this.getTconString(this.stroke);
         }
         //mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         //Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
@@ -154,7 +155,7 @@ public class ConChartView extends View {
         final Paint.FontMetrics font_metrics = this.mTextPaint.getFontMetrics();
         final float width_margin = (canvas_width - this.pixels) / 2;
         final float height_margin = (canvas_height - this.pixels) / 2;
-        canvas.drawText(this.string, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), this.mTextPaint);
+        canvas.drawText(this.conChartViewParams.string, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), this.mTextPaint);
         if (this.touched) {
             //this.setBackgroundColor(Color.RED);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
@@ -190,7 +191,7 @@ public class ConChartView extends View {
     }//getTconString
 
     public Pair<Float, Integer> getResult() {
-        return new Pair<Float, Integer>(this.pixels, (int) this.intensity);
+        return new Pair<Float, Integer>(this.pixels, (int) this.conChartViewParams.intensity);
     }//getResult
 
     public boolean isTouched() {
@@ -199,6 +200,6 @@ public class ConChartView extends View {
 
     @Override
     public String toString() {
-        return "(" + Float.toString(this.pixels) + "," + Integer.toString((int) this.intensity) + ")";
+        return "(" + Float.toString(this.pixels) + "," + Integer.toString((int) this.conChartViewParams.intensity) + ")";
     }//toString
 }//Seventeen
