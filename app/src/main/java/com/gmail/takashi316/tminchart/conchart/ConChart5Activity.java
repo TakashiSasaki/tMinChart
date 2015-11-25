@@ -10,9 +10,9 @@ import android.os.Bundle;
 import com.gmail.takashi316.tminchart.DisplayDpi;
 import com.gmail.takashi316.tminchart.R;
 
-public class ConChart13Activity extends Activity implements ConChartFragment.OnFragmentInteractionListener {
+public class ConChart5Activity extends Activity implements ConChartFragment.OnFragmentInteractionListener {
 
-    private final int DEFAULT_STROKES = 13;
+    private final int DEFAULT_STROKES = 5;
     private final int DEFAULT_ROWS = 35;
     private final int DEFAULT_COLUMNS = 50;
     private final double DEFAULT_MAX_INCH = 30.0 / 72.0;
