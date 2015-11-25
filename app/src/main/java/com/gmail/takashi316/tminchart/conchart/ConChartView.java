@@ -27,66 +27,51 @@ import java.util.Random;
 
 
 public class ConChartView extends View {
-
+    private Context context;
     private TextPaint mTextPaint;
     private double widthInch;
     static private float xdpi, ydpi;
     private float xpixels, ypixels;
     private float pixels;
     private double intensity;
-    private int textSize;
     private int color;
     private boolean touched = false;
     private String string;
+    private int stroke;
     private Typeface typeface;
+
+    static final private int DEFAULT_WIDTH_INCH = 1;
+    static final private float DEFAULT_INTENSITY = 1;
+    static final private Typeface DEFAULT_TYPEFACE = Typeface.MONOSPACE;
+    static final private int DEFAULT_STROKE = 17;
 
     static final private Random random = new Random();
     static DisplayMetrics displayMetrics;
 
     public ConChartView(Context context, double width_inch, double intensity, final ArrayList<ConChartView> conChartViews, String string, int n_stroke, Typeface typeface) {
         super(context);
+        this.context = context;
         this.typeface = typeface;
-
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
-
-        // Update TextPaint and text measurements from attributes
-        invalidateTextPaintAndMeasurements();
-
-        if (displayMetrics == null) {
-            final WindowManager window_manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            final Display display = window_manager.getDefaultDisplay();
-            displayMetrics = new DisplayMetrics();
-            display.getMetrics(displayMetrics);
-            this.xdpi = displayMetrics.xdpi;
-            this.ydpi = displayMetrics.ydpi;
-        }//if
+        this.stroke = n_stroke;
         this.widthInch = width_inch;
         this.intensity = intensity;
-        this.xpixels = (float) (this.xdpi * this.widthInch);
-        this.ypixels = (float) (this.ydpi * this.widthInch);
-        this.pixels = Math.max(xpixels, ypixels);
-        this.color = Color.rgb((int) Math.max(intensity, 0), (int) Math.max(intensity, 0), (int) Math.max(intensity, 0));
-        this.mTextPaint.setColor(color);
-        this.mTextPaint.setTextSize(pixels);
-        this.mTextPaint.setTypeface(this.typeface);
-        if (string == null) {
-            this.string = getTconString(n_stroke);
-        } else {
-            this.string = string;
-        }//if
+        this.string = string;
 
-        setOnClickListener(new OnClickListener() {
+        this.mTextPaint = new TextPaint();
+
+        // Update TextPaint and text measurements from attributes
+        this.invalidateTextPaintAndMeasurements();
+
+        this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean previously_touched = touched;
+                boolean previously_touched = ConChartView.this.touched;
                 if (conChartViews != null) {
                     for (ConChartView conChartView : conChartViews) {
                         conChartView.touched = false;
                     }//for
                 }//if
-                touched = !previously_touched;
+                ConChartView.this.touched = !previously_touched;
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     @Override
@@ -99,7 +84,7 @@ public class ConChartView extends View {
                             tone_generator.startTone(ToneGenerator.TONE_PROP_BEEP);
                         } catch (Exception e) {
                             // failed on emulator devices
-                            Log.e(getClass().getSimpleName(), e.getMessage());
+                            Log.e(this.getClass().getSimpleName(), e.getMessage());
                         }
                     }//run
                 });//post
@@ -108,29 +93,53 @@ public class ConChartView extends View {
     }// custom constructor
 
     public ConChartView(Context context) {
-        this(context, null);
+        super(context);
+        this.context = context;
     }//Seventeen
 
     public ConChartView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        this.context = context;
+        this.obtainStyledAttributes(context, attrs, 0);
+        this.invalidateTextPaintAndMeasurements();
     }//Seventeen
 
     public ConChartView(Context context, AttributeSet attrs, int defStyle) {
-        this(context, context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_widthInch, 1),
-                context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getFloat(R.styleable.ConChartView_intensity, 1),
-                null,
-                context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getString(R.styleable.ConChartView_string),
-                context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_nStroke, 17), Typeface.MONOSPACE);
+        super(context, attrs, defStyle);
+        this.context = context;
+        this.obtainStyledAttributes(context, attrs, defStyle);
+        this.invalidateTextPaintAndMeasurements();
     }//Seventeen
 
-    private void invalidateTextPaintAndMeasurements() {
-        try {
-            mTextPaint.setColor(this.color);
+    private void obtainStyledAttributes(Context context, AttributeSet attrs, int defStyle) {
+        this.widthInch = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_widthInch, DEFAULT_WIDTH_INCH);
+        this.intensity = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getFloat(R.styleable.ConChartView_intensity, DEFAULT_INTENSITY);
+        this.string = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getString(R.styleable.ConChartView_string);
+        this.stroke = context.obtainStyledAttributes(attrs, R.styleable.ConChartView, defStyle, 0).getInt(R.styleable.ConChartView_nStroke, 17);
+    }
 
-            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        } catch (Exception e) {
-            //e.printStackTrace();
-        }//try
+    private void invalidateTextPaintAndMeasurements() {
+        if (displayMetrics == null) {
+            final WindowManager window_manager = (WindowManager) this.context.getSystemService(Context.WINDOW_SERVICE);
+            final Display display = window_manager.getDefaultDisplay();
+            displayMetrics = new DisplayMetrics();
+            display.getMetrics(displayMetrics);
+        }
+        xdpi = displayMetrics.xdpi;
+        ydpi = displayMetrics.ydpi;
+        this.xpixels = (float) (xdpi * this.widthInch);
+        this.ypixels = (float) (ydpi * this.widthInch);
+        this.pixels = Math.max(this.xpixels, this.ypixels);
+        this.color = Color.rgb((int) Math.max(this.intensity, 0), (int) Math.max(this.intensity, 0), (int) Math.max(this.intensity, 0));
+        this.mTextPaint.setColor(this.color);
+        this.mTextPaint.setTextSize(this.pixels);
+        this.mTextPaint.setTextAlign(Paint.Align.LEFT);
+        this.mTextPaint.setTypeface(this.typeface);
+        if (this.string == null) {
+            this.string = this.getTconString(this.stroke);
+        }
+        //mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        //Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
     }//invalidateTextPaintAndMeasurements
 
     @Override
@@ -138,17 +147,17 @@ public class ConChartView extends View {
         super.onDraw(canvas);
         final int canvas_width = canvas.getWidth();
         final int canvas_height = canvas.getHeight();
-        final Paint.FontMetrics font_metrics = mTextPaint.getFontMetrics();
-        final float width_margin = (canvas_width - pixels) / 2;
-        final float height_margin = (canvas_height - pixels) / 2;
-        canvas.drawText(this.string, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), mTextPaint);
-        if (touched) {
+        final Paint.FontMetrics font_metrics = this.mTextPaint.getFontMetrics();
+        final float width_margin = (canvas_width - this.pixels) / 2;
+        final float height_margin = (canvas_height - this.pixels) / 2;
+        canvas.drawText(this.string, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), this.mTextPaint);
+        if (this.touched) {
             //this.setBackgroundColor(Color.RED);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                final Drawable frame = this.getResources().getDrawable(R.drawable.frame);
                 this.setBackgroundDrawable(frame);
             } else {
-                final Drawable frame = getResources().getDrawable(R.drawable.frame);
+                final Drawable frame = this.getResources().getDrawable(R.drawable.frame);
                 this.setBackground(frame);
             }
         } else {
@@ -165,8 +174,8 @@ public class ConChartView extends View {
         int width_size = MeasureSpec.getSize(widthMeasureSpec);
         int height_mode = MeasureSpec.getMode(heightMeasureSpec);
         int height_size = MeasureSpec.getSize(heightMeasureSpec);
-        setMeasuredDimension(MeasureSpec.makeMeasureSpec(getSuggestedMinimumWidth(), width_mode),
-                MeasureSpec.makeMeasureSpec(getSuggestedMinimumHeight(), height_mode));
+        this.setMeasuredDimension(MeasureSpec.makeMeasureSpec(this.getSuggestedMinimumWidth(), width_mode),
+                MeasureSpec.makeMeasureSpec(this.getSuggestedMinimumHeight(), height_mode));
     }//onMeasure
 
     private String getTconString(int n_stroke) {
@@ -177,15 +186,15 @@ public class ConChartView extends View {
     }//getTconString
 
     public Pair<Float, Integer> getResult() {
-        return new Pair<Float, Integer>(pixels, (int) intensity);
+        return new Pair<Float, Integer>(this.pixels, (int) this.intensity);
     }//getResult
 
     public boolean isTouched() {
-        return touched;
+        return this.touched;
     }
 
     @Override
     public String toString() {
-        return "(" + Float.toString(pixels) + "," + Integer.toString((int) intensity) + ")";
+        return "(" + Float.toString(this.pixels) + "," + Integer.toString((int) this.intensity) + ")";
     }//toString
 }//Seventeen
