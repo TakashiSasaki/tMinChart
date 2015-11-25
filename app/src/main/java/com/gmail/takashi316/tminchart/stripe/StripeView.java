@@ -27,11 +27,6 @@ public class StripeView extends FrameView {
     private StripeViewParams stripeViewParams;
     private ArrayList<StripeView> stripeViews;
 
-
-    public boolean isTouched() {
-        return this.stripeViewParams.touched;
-    }//isTouched
-
     public StripeView(Context context) {
         super(context);
         this.stripeViewParams = new StripeViewParams();
@@ -83,8 +78,8 @@ public class StripeView extends FrameView {
                 try {
                     for (StripeView stripe_view : StripeView.this.stripeViews) {
                         if (stripe_view != touched_stripe_view) {
-                            if (stripe_view.isTouched()) {
-                                stripe_view.setTouched(false);
+                            if (stripe_view.stripeViewParams.touched) {
+                                stripe_view.stripeViewParams.touched = false;
                                 stripe_view.postInvalidate();
                             }//if
                         }//if
