@@ -17,7 +17,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gmail.takashi316.tminchart.DisplayDpi;
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,7 +70,8 @@ public class MinChartFragment extends Fragment {
         this.buttonStartResultFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationDrawerFragment.NavigationDrawerCallbacks) MinChartFragment.this.getActivity()).onNavigationDrawerItemSelected(3);
+                //((NavigationDrawerFragment.NavigationDrawerCallbacks) MinChartFragment.this.getActivity()).onNavigationDrawerItemSelected(3);
+                getActivity().finish();
             }//onClick
         });
 

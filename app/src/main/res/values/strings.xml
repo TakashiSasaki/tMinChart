@@ -23,5 +23,6 @@
     <string name="title_activity_blank">blank</string>
     <string name="title_activity_header_label_view">HeaderLabelViewActivity</string>
     <string name="title_activity_log">LogActivity</string>
+    <string name="title_activity_con_chart">ConChartActivity</string>
 
 </resources>
