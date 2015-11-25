@@ -15,7 +15,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.fragment.NavigationDrawerFragment;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class ConChartFragment extends Fragment {
     ArrayList<ArrayList<ConChartView>> seventeenArrayLists = new ArrayList<ArrayList<ConChartView>>();
 
     public static ConChartFragment newInstance(int n_strokes, int n_rows, int n_columns, double max_inch,
-                                                double size_ratio, double contrast_ratio, Typeface typeface) {
+                                               double size_ratio, double contrast_ratio, Typeface typeface) {
         ConChartFragment fragment = new ConChartFragment();
         Bundle args = new Bundle();
         args.putInt("nStrokes", n_strokes);
@@ -82,7 +81,8 @@ public class ConChartFragment extends Fragment {
         this.buttonStartTminChartFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(2);
+                //((NavigationDrawerFragment.NavigationDrawerCallbacks) getActivity()).onNavigationDrawerItemSelected(2);
+                getActivity().finish();
             }//onClick
         });
 
