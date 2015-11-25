@@ -102,10 +102,6 @@ public class StripeView extends FrameView {
         this.stripeViews = stripe_views;
     }//setStripeViews
 
-    public void setHorizontal(boolean horizontal) {
-        this.stripeViewParams.horizontal = horizontal;
-    }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
