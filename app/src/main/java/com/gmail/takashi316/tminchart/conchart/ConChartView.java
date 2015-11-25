@@ -30,6 +30,7 @@ class ConChartViewParams {
     public String string;
     public double intensity;
     public int color;
+    public float pixels;
 }
 
 public class ConChartView extends View {
@@ -38,7 +39,6 @@ public class ConChartView extends View {
     private TextPaint mTextPaint;
     static private float xdpi, ydpi;
     private float xpixels, ypixels;
-    private float pixels;
     private boolean touched = false;
     //private String string;
     private int stroke;
@@ -134,10 +134,10 @@ public class ConChartView extends View {
         ydpi = displayMetrics.ydpi;
         this.xpixels = (float) (xdpi * this.conChartViewParams.widthInch);
         this.ypixels = (float) (ydpi * this.conChartViewParams.widthInch);
-        this.pixels = Math.max(this.xpixels, this.ypixels);
+        this.conChartViewParams.pixels = Math.max(this.xpixels, this.ypixels);
         this.conChartViewParams.color = Color.rgb((int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0));
         this.mTextPaint.setColor(this.conChartViewParams.color);
-        this.mTextPaint.setTextSize(this.pixels);
+        this.mTextPaint.setTextSize(this.conChartViewParams.pixels);
         this.mTextPaint.setTextAlign(Paint.Align.LEFT);
         this.mTextPaint.setTypeface(this.typeface);
         if (this.conChartViewParams.string == null) {
@@ -153,8 +153,8 @@ public class ConChartView extends View {
         final int canvas_width = canvas.getWidth();
         final int canvas_height = canvas.getHeight();
         final Paint.FontMetrics font_metrics = this.mTextPaint.getFontMetrics();
-        final float width_margin = (canvas_width - this.pixels) / 2;
-        final float height_margin = (canvas_height - this.pixels) / 2;
+        final float width_margin = (canvas_width - this.conChartViewParams.pixels) / 2;
+        final float height_margin = (canvas_height - this.conChartViewParams.pixels) / 2;
         canvas.drawText(this.conChartViewParams.string, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), this.mTextPaint);
         if (this.touched) {
             //this.setBackgroundColor(Color.RED);
@@ -191,7 +191,7 @@ public class ConChartView extends View {
     }//getTconString
 
     public Pair<Float, Integer> getResult() {
-        return new Pair<Float, Integer>(this.pixels, (int) this.conChartViewParams.intensity);
+        return new Pair<Float, Integer>(this.conChartViewParams.pixels, (int) this.conChartViewParams.intensity);
     }//getResult
 
     public boolean isTouched() {
@@ -200,6 +200,6 @@ public class ConChartView extends View {
 
     @Override
     public String toString() {
-        return "(" + Float.toString(this.pixels) + "," + Integer.toString((int) this.conChartViewParams.intensity) + ")";
+        return "(" + Float.toString(this.conChartViewParams.pixels) + "," + Integer.toString((int) this.conChartViewParams.intensity) + ")";
     }//toString
 }//Seventeen
