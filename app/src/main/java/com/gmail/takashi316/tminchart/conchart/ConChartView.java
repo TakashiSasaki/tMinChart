@@ -130,10 +130,10 @@ public class ConChartView extends View {
             displayMetrics = new DisplayMetrics();
             display.getMetrics(displayMetrics);
         }
-        conChartViewParams.xDpi = displayMetrics.xdpi;
-        conChartViewParams.yDpi = displayMetrics.ydpi;
-        this.conChartViewParams.xPixels = (float) (conChartViewParams.xDpi * this.conChartViewParams.widthInch);
-        this.conChartViewParams.yPixels = (float) (conChartViewParams.yDpi * this.conChartViewParams.widthInch);
+        this.conChartViewParams.xDpi = displayMetrics.xdpi;
+        this.conChartViewParams.yDpi = displayMetrics.ydpi;
+        this.conChartViewParams.xPixels = (float) (this.conChartViewParams.xDpi * this.conChartViewParams.widthInch);
+        this.conChartViewParams.yPixels = (float) (this.conChartViewParams.yDpi * this.conChartViewParams.widthInch);
         this.conChartViewParams.pixels = Math.max(this.conChartViewParams.xPixels, this.conChartViewParams.yPixels);
         this.conChartViewParams.color = Color.rgb((int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0));
         this.mTextPaint.setColor(this.conChartViewParams.color);
