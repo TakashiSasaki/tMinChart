@@ -3,7 +3,6 @@ package com.gmail.takashi316.tminchart.stripe;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -94,12 +93,16 @@ public class StripeFragment extends Fragment {
             table_row.addView(text_view_row_index);
             ArrayList<StripeView> stripe_views = new ArrayList<StripeView>();
             for (int column = 0; column < this.nTableColumns; ++column) {
-                StripeView stripe_view = new StripeView(context);
+                StripeView stripe_view = new StripeView(context,
+                        this.foregroundColorSequence[column],
+                        this.foregroundWidthSequence.get(row),
+                        this.backgroundColorSequence[column],
+                        this.backgroundWidthSequence.get(row));
                 stripe_view.setStripeViews(stripe_views);
-                stripe_view.setBackgroundColor(this.backgroundColorSequence[column]);
-                stripe_view.setBackgroundWidth(this.backgroundWidthSequence.get(row));
-                stripe_view.setForegroundColor(this.foregroundColorSequence[column]);
-                stripe_view.setForegroundWidth(this.foregroundWidthSequence.get(row));
+                //stripe_view.setBackgroundColor(this.backgroundColorSequence[column]);
+                //stripe_view.setBackgroundWidth(this.backgroundWidthSequence.get(row));
+                //stripe_view.setForegroundColor(this.foregroundColorSequence[column]);
+                //stripe_view.setForegroundWidth(this.foregroundWidthSequence.get(row));
                 stripe_view.setHorizontal(false);
                 stripe_view.setPadding(this.frameWidth, this.frameWidth, this.frameWidth, this.frameWidth);
                 final TableRow.LayoutParams layout_params = new TableRow.LayoutParams();

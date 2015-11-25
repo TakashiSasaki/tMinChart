@@ -52,6 +52,15 @@ public class StripeView extends FrameView {
         this.init();
     }//StripeView constructor
 
+    public StripeView(Context context, int foreground_color, int foreground_width, int background_color, int background_width) {
+        super(context);
+        this.stripeViewParams.foregroundColor = foreground_color;
+        this.stripeViewParams.foregroundWidth = foreground_width;
+        this.stripeViewParams.backgroundColor = background_color;
+        this.stripeViewParams.backgroundWidth = background_width;
+        this.init();
+    }
+
     private void obtainStyledAttributes(AttributeSet attrs, int defStyle) {
         final TypedArray typed_array = this.getContext().obtainStyledAttributes(
                 attrs, R.styleable.StripeView, defStyle, 0);
