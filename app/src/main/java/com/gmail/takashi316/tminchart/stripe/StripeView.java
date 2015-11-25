@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 class StripeViewParams {
     public boolean horizontal = false;
+    public int foregroundWidth = 1;
+    public int backgroundWidth = 1;
 }
 
 public class StripeView extends FrameView {
@@ -24,8 +26,7 @@ public class StripeView extends FrameView {
     private Paint foregroundPaint;
     private Paint backgroundPaint;
     private int frameColor = Color.RED;
-    private int foregroundWidth = 1;
-    private int backgroundWidth = 1;
+
 
     public boolean isTouched() {
         return touched;
@@ -115,11 +116,11 @@ public class StripeView extends FrameView {
     }
 
     public void setForegroundWidth(int foreground_width) {
-        this.foregroundWidth = foreground_width;
+        this.stripeViewParams.foregroundWidth = foreground_width;
     }
 
     public void setBackgroundWidth(int background_width) {
-        this.backgroundWidth = background_width;
+        this.stripeViewParams.backgroundWidth = background_width;
     }
 
     @Override
@@ -185,24 +186,24 @@ public class StripeView extends FrameView {
             int left = getPaddingLeft();
             int right = canvas.getWidth() - getPaddingRight();
             while (top < canvas.getHeight()) {
-                Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + top + this.backgroundWidth);
-                canvas.drawRect(left, top, right, top + this.backgroundWidth, this.backgroundPaint);
-                top += backgroundWidth;
-                Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + top + this.foregroundWidth);
-                canvas.drawRect(left, top, right, top + this.foregroundWidth, this.foregroundPaint);
-                top += foregroundWidth;
+                Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + top + this.stripeViewParams.backgroundWidth);
+                canvas.drawRect(left, top, right, top + this.stripeViewParams.backgroundWidth, this.backgroundPaint);
+                top += this.stripeViewParams.backgroundWidth;
+                Log.v(this.getClass().getSimpleName(), "horizontal rectangle. left=" + left + " top=" + top + " right=" + right + " bottom=" + top + this.stripeViewParams.foregroundWidth);
+                canvas.drawRect(left, top, right, top + this.stripeViewParams.foregroundWidth, this.foregroundPaint);
+                top += this.stripeViewParams.foregroundWidth;
             }//while
         } else {
             int top = getPaddingTop();
             int bottom = canvas.getHeight() - getPaddingBottom();
             int left = getPaddingLeft();
             while (left < canvas.getWidth()) {
-                Log.v(this.getClass().getSimpleName(), "vertical rectangle. left=" + left + " top=" + top + " right=" + this.backgroundWidth + " bottom=" + bottom);
-                canvas.drawRect(left, top, left + this.backgroundWidth, bottom, this.backgroundPaint);
-                left += backgroundWidth;
-                Log.v(this.getClass().getSimpleName(), "vertical rectangle. left=" + left + " top=" + top + " right=" + this.foregroundWidth + " bottom=" + bottom);
-                canvas.drawRect(left, top, left + this.foregroundWidth, bottom, this.foregroundPaint);
-                left += foregroundWidth;
+                Log.v(this.getClass().getSimpleName(), "vertical rectangle. left=" + left + " top=" + top + " right=" + this.stripeViewParams.backgroundWidth + " bottom=" + bottom);
+                canvas.drawRect(left, top, left + this.stripeViewParams.backgroundWidth, bottom, this.backgroundPaint);
+                left += this.stripeViewParams.backgroundWidth;
+                Log.v(this.getClass().getSimpleName(), "vertical rectangle. left=" + left + " top=" + top + " right=" + this.stripeViewParams.foregroundWidth + " bottom=" + bottom);
+                canvas.drawRect(left, top, left + this.stripeViewParams.foregroundWidth, bottom, this.foregroundPaint);
+                left += this.stripeViewParams.foregroundWidth;
             }//while
         }//if
         this.updateFrame(canvas);
