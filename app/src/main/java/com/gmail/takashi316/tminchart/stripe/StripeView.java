@@ -110,14 +110,6 @@ public class StripeView extends FrameView {
         this.stripeViewParams.frameColor = frame_color;
     }
 
-    public void setForegroundWidth(int foreground_width) {
-        this.stripeViewParams.foregroundWidth = foreground_width;
-    }
-
-    public void setBackgroundWidth(int background_width) {
-        this.stripeViewParams.backgroundWidth = background_width;
-    }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
