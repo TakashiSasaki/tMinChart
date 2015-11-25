@@ -13,11 +13,11 @@ import com.gmail.takashi316.tminchart.R;
 public class ConChartActivity extends Activity implements ConChartFragment.OnFragmentInteractionListener {
 
     private final int DEFAULT_STROKES = 17;
-    private final int DEFAULT_ROWS = 20;
-    private final int DEFAULT_COLUMNS = 20;
+    private final int DEFAULT_ROWS = 50;
+    private final int DEFAULT_COLUMNS = 50;
     private final double DEFAULT_MAX_INCH =  30.0 / 72.0;
-    private final double DEFAULT_SIZE_RATIO = Math.pow(0.1, 0.01);
-    private final double DEFAULT_CONTRAST_RATIO = Math.pow(0.1, 0.01);
+    private final double DEFAULT_SIZE_RATIO = Math.pow(0.1, 0.05);
+    private final double DEFAULT_CONTRAST_RATIO = Math.pow(0.1, 0.05);
     private final Typeface DEFAULT_TYPEFACE = Typeface.DEFAULT;
 
     private DisplayDpi displayDpi;
