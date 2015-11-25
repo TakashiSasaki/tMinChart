@@ -21,6 +21,7 @@ import android.view.WindowManager;
 
 import com.gmail.takashi316.tminchart.DailyChineseCharacter;
 import com.gmail.takashi316.tminchart.R;
+import com.gmail.takashi316.tminchart.log.Logger;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,14 +36,15 @@ class ConChartViewParams {
     public float xDpi;
     public float yDpi;
     public float xPixels, yPixels;
+    public boolean touched = false;
 }
 
 public class ConChartView extends View {
     private Context context;
     private ConChartViewParams conChartViewParams;
     private TextPaint mTextPaint;
-    private boolean touched = false;
     private Typeface typeface;
+    private Logger logger;
 
     static final private int DEFAULT_WIDTH_INCH = 1;
     static final private float DEFAULT_INTENSITY = 1;
@@ -70,13 +72,13 @@ public class ConChartView extends View {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean previously_touched = ConChartView.this.touched;
+                boolean previously_touched = ConChartView.this.conChartViewParams.touched;
                 if (conChartViews != null) {
                     for (ConChartView conChartView : conChartViews) {
-                        conChartView.touched = false;
+                        conChartView.conChartViewParams.touched = false;
                     }//for
                 }//if
-                ConChartView.this.touched = !previously_touched;
+                ConChartView.this.conChartViewParams.touched = !previously_touched;
                 Handler handler = new Handler();
                 handler.post(new Runnable() {
                     @Override
@@ -156,7 +158,7 @@ public class ConChartView extends View {
         final float width_margin = (canvas_width - this.conChartViewParams.pixels) / 2;
         final float height_margin = (canvas_height - this.conChartViewParams.pixels) / 2;
         canvas.drawText(this.conChartViewParams.string, width_margin, canvas_height - font_metrics.bottom - (height_margin / 2), this.mTextPaint);
-        if (this.touched) {
+        if (this.conChartViewParams.touched) {
             //this.setBackgroundColor(Color.RED);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                 final Drawable frame = this.getResources().getDrawable(R.drawable.frame);
@@ -195,7 +197,7 @@ public class ConChartView extends View {
     }//getResult
 
     public boolean isTouched() {
-        return this.touched;
+        return this.conChartViewParams.touched;
     }
 
     @Override
