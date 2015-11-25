@@ -66,7 +66,7 @@ public class StripeView extends FrameView {
                 attrs, R.styleable.StripeView, defStyle, 0);
         this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, this.stripeViewParams.horizontal));
         this.stripeViewParams.foregroundColor = typed_array.getColor(R.styleable.StripeView_foregroundColor, Color.BLACK);
-        this.setBackgroundColor(typed_array.getColor(R.styleable.StripeView_backgroundColor, Color.WHITE));
+        this.stripeViewParams.backgroundColor = typed_array.getColor(R.styleable.StripeView_backgroundColor, Color.WHITE);
         this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.stripeViewParams.frameColor));
         this.stripeViewParams.touched = typed_array.getBoolean(R.styleable.StripeView_touched, this.stripeViewParams.touched);
         typed_array.recycle();
@@ -105,14 +105,6 @@ public class StripeView extends FrameView {
     public void setHorizontal(boolean horizontal) {
         this.stripeViewParams.horizontal = horizontal;
     }
-
-    public void setForegroundColor(int foreground_color) {
-        this.stripeViewParams.foregroundColor = foreground_color;
-    }//setForegroundColor
-
-    public void setBackgroundColor(int background_color) {
-        this.stripeViewParams.backgroundColor = background_color;
-    }//setBackgroundColor
 
     public void setFrameColor(int frame_color) {
         this.stripeViewParams.frameColor = frame_color;
