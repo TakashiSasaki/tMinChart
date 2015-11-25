@@ -19,13 +19,13 @@ class StripeViewParams {
     public int backgroundWidth = 1;
     public int foregroundColor;
     public int backgroundColor;
+    public int frameColor = Color.RED;
 }
 
 public class StripeView extends FrameView {
     private StripeViewParams stripeViewParams;
     private boolean touched = false;
     private ArrayList<StripeView> stripeViews;
-    private int frameColor = Color.RED;
 
 
     public boolean isTouched() {
@@ -58,7 +58,7 @@ public class StripeView extends FrameView {
         this.setHorizontal(typed_array.getBoolean(R.styleable.StripeView_horizontal, this.stripeViewParams.horizontal));
         this.stripeViewParams.foregroundColor = typed_array.getColor(R.styleable.StripeView_foregroundColor, Color.BLACK);
         this.setBackgroundColor(typed_array.getColor(R.styleable.StripeView_backgroundColor, Color.WHITE));
-        this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.frameColor));
+        this.setFrameColor(typed_array.getColor(R.styleable.StripeView_frameColor, this.stripeViewParams.frameColor));
         this.touched = typed_array.getBoolean(R.styleable.StripeView_touched, this.touched);
         typed_array.recycle();
     }
@@ -106,7 +106,7 @@ public class StripeView extends FrameView {
     }//setBackgroundColor
 
     public void setFrameColor(int frame_color) {
-        this.frameColor = frame_color;
+        this.stripeViewParams.frameColor = frame_color;
     }
 
     public void setForegroundWidth(int foreground_width) {
@@ -210,7 +210,7 @@ public class StripeView extends FrameView {
 
     void updateFrame(Canvas canvas) {
         if (this.touched) {
-            this.drawFrame(canvas, this.frameColor);
+            this.drawFrame(canvas, this.stripeViewParams.frameColor);
         } else {
             final Paint background_paint = new Paint();
             background_paint.setColor(this.stripeViewParams.backgroundColor);
