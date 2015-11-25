@@ -29,8 +29,6 @@ import java.util.Random;
 public class ConChartView extends View {
 
     private TextPaint mTextPaint;
-    private float mTextWidth;
-    private float mTextHeight;
     private double widthInch;
     static private float xdpi, ydpi;
     private float xpixels, ypixels;
@@ -128,10 +126,8 @@ public class ConChartView extends View {
     private void invalidateTextPaintAndMeasurements() {
         try {
             mTextPaint.setColor(this.color);
-            mTextWidth = mTextPaint.measureText(this.string);
 
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-            mTextHeight = fontMetrics.bottom;
         } catch (Exception e) {
             //e.printStackTrace();
         }//try
