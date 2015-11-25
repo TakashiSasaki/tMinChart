@@ -32,14 +32,15 @@ class ConChartViewParams {
     public int color;
     public float pixels;
     public int stroke;
+    public float xDpi;
+    public float yDpi;
+    public float xPixels, yPixels;
 }
 
 public class ConChartView extends View {
     private Context context;
     private ConChartViewParams conChartViewParams;
     private TextPaint mTextPaint;
-    static private float xdpi, ydpi;
-    private float xpixels, ypixels;
     private boolean touched = false;
     private Typeface typeface;
 
@@ -56,10 +57,10 @@ public class ConChartView extends View {
         this.context = context;
         this.conChartViewParams = new ConChartViewParams();
         this.conChartViewParams.widthInch = width_inch;
-        this.typeface = typeface;
         this.conChartViewParams.stroke = n_stroke;
         this.conChartViewParams.intensity = intensity;
         this.conChartViewParams.string = string;
+        this.typeface = typeface;
 
         this.mTextPaint = new TextPaint();
 
@@ -129,11 +130,11 @@ public class ConChartView extends View {
             displayMetrics = new DisplayMetrics();
             display.getMetrics(displayMetrics);
         }
-        xdpi = displayMetrics.xdpi;
-        ydpi = displayMetrics.ydpi;
-        this.xpixels = (float) (xdpi * this.conChartViewParams.widthInch);
-        this.ypixels = (float) (ydpi * this.conChartViewParams.widthInch);
-        this.conChartViewParams.pixels = Math.max(this.xpixels, this.ypixels);
+        conChartViewParams.xDpi = displayMetrics.xdpi;
+        conChartViewParams.yDpi = displayMetrics.ydpi;
+        this.conChartViewParams.xPixels = (float) (conChartViewParams.xDpi * this.conChartViewParams.widthInch);
+        this.conChartViewParams.yPixels = (float) (conChartViewParams.yDpi * this.conChartViewParams.widthInch);
+        this.conChartViewParams.pixels = Math.max(this.conChartViewParams.xPixels, this.conChartViewParams.yPixels);
         this.conChartViewParams.color = Color.rgb((int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0), (int) Math.max(this.conChartViewParams.intensity, 0));
         this.mTextPaint.setColor(this.conChartViewParams.color);
         this.mTextPaint.setTextSize(this.conChartViewParams.pixels);
