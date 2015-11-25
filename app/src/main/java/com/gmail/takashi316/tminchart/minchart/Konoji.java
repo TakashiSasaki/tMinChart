@@ -32,10 +32,10 @@ public class Konoji extends View {
     static Random random = new Random();
     private ArrayList<Konoji> konojis;
     Context context;
-    private int xGap;
-    private int yGap;
-    private int viewWidth;
-    private int viewHeight;
+    //private int xGap;
+    //private int yGap;
+    //private int viewWidth;
+    //private int viewHeight;
 
     public boolean isTouched() {
         return this.touched;
@@ -94,10 +94,10 @@ public class Konoji extends View {
         this.konojiParams.xDpi = display_metrics.xdpi;
         this.konojiParams.yDpi = display_metrics.ydpi;
         this.konojiParams.orientation = random.nextInt(3) * 3;
-        this.xGap = (int) (this.konojiParams.xDpi * this.konojiParams.gapInch);
-        this.yGap = (int) (this.konojiParams.yDpi * this.konojiParams.gapInch);
-        this.viewWidth = (int) (this.konojiParams.widthInch * this.konojiParams.xDpi);
-        this.viewHeight = (int) (this.konojiParams.widthInch * this.konojiParams.yDpi);
+        this.konojiParams.xGap = (int) (this.konojiParams.xDpi * this.konojiParams.gapInch);
+        this.konojiParams.yGap = (int) (this.konojiParams.yDpi * this.konojiParams.gapInch);
+        this.konojiParams.viewWidth = (int) (this.konojiParams.widthInch * this.konojiParams.xDpi);
+        this.konojiParams.viewHeight = (int) (this.konojiParams.widthInch * this.konojiParams.yDpi);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -166,28 +166,28 @@ public class Konoji extends View {
             this.setBackgroundColor(Color.WHITE);
             //konoji_paint.setColor(Color.BLACK);
         }//if
-        final int top_margin = (this.viewHeight - this.xGap * 3) / 2;
-        final int left_margin = (this.viewWidth - this.yGap * 3) / 2;
+        final int top_margin = (this.konojiParams.viewHeight - this.konojiParams.xGap * 3) / 2;
+        final int left_margin = (this.konojiParams.viewWidth - this.konojiParams.yGap * 3) / 2;
         final Paint konoji_paint = new Paint();
-        canvas.drawRect(left_margin, top_margin, this.xGap * 3 - 1 + left_margin, this.yGap * 3 - 1 + top_margin, konoji_paint);
+        canvas.drawRect(left_margin, top_margin, this.konojiParams.xGap * 3 - 1 + left_margin, this.konojiParams.yGap * 3 - 1 + top_margin, konoji_paint);
         final Paint gap_paint = new Paint();
         gap_paint.setColor(Color.WHITE);
         switch (this.konojiParams.orientation) {
             case 0:
-                canvas.drawRect(left_margin + this.xGap, top_margin, this.xGap * 2 - 1 + left_margin, this.yGap * 2 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin + this.konojiParams.xGap, top_margin, this.konojiParams.xGap * 2 - 1 + left_margin, this.konojiParams.yGap * 2 - 1 + top_margin, gap_paint);
                 break;
             case 3:
-                canvas.drawRect(left_margin + this.xGap, top_margin + this.yGap, this.xGap * 3 - 1 + left_margin, this.yGap * 2 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin + this.konojiParams.xGap, top_margin + this.konojiParams.yGap, this.konojiParams.xGap * 3 - 1 + left_margin, this.konojiParams.yGap * 2 - 1 + top_margin, gap_paint);
                 break;
             case 6:
-                canvas.drawRect(left_margin + this.xGap, top_margin + this.yGap, this.xGap * 2 - 1 + left_margin, this.yGap * 3 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin + this.konojiParams.xGap, top_margin + this.konojiParams.yGap, this.konojiParams.xGap * 2 - 1 + left_margin, this.konojiParams.yGap * 3 - 1 + top_margin, gap_paint);
                 break;
             case 9:
-                canvas.drawRect(left_margin, top_margin + this.yGap, this.xGap * 2 - 1 + left_margin, this.yGap * 2 - 1 + top_margin, gap_paint);
+                canvas.drawRect(left_margin, top_margin + this.konojiParams.yGap, this.konojiParams.xGap * 2 - 1 + left_margin, this.konojiParams.yGap * 2 - 1 + top_margin, gap_paint);
                 break;
             default:
-                canvas.drawLine(left_margin, top_margin, this.xGap * 3 - 1 + left_margin, this.yGap * 3 - 1 + this.yGap, gap_paint);
-                canvas.drawLine(this.xGap * 3 - 1 + left_margin, top_margin, left_margin, this.yGap * 3 - 1 + this.yGap, gap_paint);
+                canvas.drawLine(left_margin, top_margin, this.konojiParams.xGap * 3 - 1 + left_margin, this.konojiParams.yGap * 3 - 1 + this.konojiParams.yGap, gap_paint);
+                canvas.drawLine(this.konojiParams.xGap * 3 - 1 + left_margin, top_margin, left_margin, this.konojiParams.yGap * 3 - 1 + this.konojiParams.yGap, gap_paint);
                 break;
         }//switch
     }
