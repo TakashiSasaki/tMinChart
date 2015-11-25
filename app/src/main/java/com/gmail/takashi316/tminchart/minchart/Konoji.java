@@ -28,9 +28,6 @@ import java.util.Random;
 public class Konoji extends View {
     private KonojiParams konojiParams;
     private Logger logger;
-    //private float xDpi;
-    //private float yDpi;
-    private int orientation;
     private boolean touched = false;
     static Random random = new Random();
     private ArrayList<Konoji> konojis;
@@ -84,7 +81,7 @@ public class Konoji extends View {
         final TypedArray a = this.getContext().obtainStyledAttributes(
                 attribute_set, R.styleable.Konoji, defStyle, 0);
         this.konojiParams.gapInch = a.getInt(R.styleable.Konoji_gapInch, 30);
-        this.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
+        this.konojiParams.orientation = a.getInt(R.styleable.Konoji_orientation, 0);
         this.touched = a.getBoolean(R.styleable.Konoji_touched, false);
         a.recycle();
     }
@@ -96,7 +93,7 @@ public class Konoji extends View {
         display.getMetrics(display_metrics);
         this.konojiParams.xDpi = display_metrics.xdpi;
         this.konojiParams.yDpi = display_metrics.ydpi;
-        this.orientation = random.nextInt(3) * 3;
+        this.konojiParams.orientation = random.nextInt(3) * 3;
         this.xGap = (int) (this.konojiParams.xDpi * this.konojiParams.gapInch);
         this.yGap = (int) (this.konojiParams.yDpi * this.konojiParams.gapInch);
         this.viewWidth = (int) (this.konojiParams.widthInch * this.konojiParams.xDpi);
@@ -175,7 +172,7 @@ public class Konoji extends View {
         canvas.drawRect(left_margin, top_margin, this.xGap * 3 - 1 + left_margin, this.yGap * 3 - 1 + top_margin, konoji_paint);
         final Paint gap_paint = new Paint();
         gap_paint.setColor(Color.WHITE);
-        switch (this.orientation) {
+        switch (this.konojiParams.orientation) {
             case 0:
                 canvas.drawRect(left_margin + this.xGap, top_margin, this.xGap * 2 - 1 + left_margin, this.yGap * 2 - 1 + top_margin, gap_paint);
                 break;
