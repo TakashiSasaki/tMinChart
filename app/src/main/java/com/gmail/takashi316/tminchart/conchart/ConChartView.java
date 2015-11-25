@@ -57,6 +57,7 @@ public class ConChartView extends View {
     public ConChartView(Context context, double width_inch, double intensity, final ArrayList<ConChartView> conChartViews, String string, int n_stroke, Typeface typeface) {
         super(context);
         this.context = context;
+        this.logger = new Logger(context);
         this.conChartViewParams = new ConChartViewParams();
         this.conChartViewParams.widthInch = width_inch;
         this.conChartViewParams.stroke = n_stroke;
@@ -72,7 +73,8 @@ public class ConChartView extends View {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean previously_touched = ConChartView.this.conChartViewParams.touched;
+                ConChartView.this.logger.log(ConChartView.this.conChartViewParams);
+                final boolean previously_touched = ConChartView.this.conChartViewParams.touched;
                 if (conChartViews != null) {
                     for (ConChartView conChartView : conChartViews) {
                         conChartView.conChartViewParams.touched = false;
@@ -102,17 +104,20 @@ public class ConChartView extends View {
     public ConChartView(Context context) {
         super(context);
         this.context = context;
+        this.logger = new Logger(context);
     }//Seventeen
 
     public ConChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        this.logger = new Logger(context);
         this.obtainStyledAttributes(context, attrs, 0);
         this.invalidateTextPaintAndMeasurements();
     }//Seventeen
 
     public ConChartView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        this.logger = new Logger(context);
         this.context = context;
         this.obtainStyledAttributes(context, attrs, defStyle);
         this.invalidateTextPaintAndMeasurements();
