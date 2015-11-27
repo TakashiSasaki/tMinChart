@@ -190,6 +190,8 @@ public class StripeView extends FrameView {
             }//while
         }//if
         this.updateFrame(canvas);
+        this.setWillNotCacheDrawing(false);
+        this.setDrawingCacheEnabled(true);
     }//onDraw
 
     void updateFrame(Canvas canvas) {

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.gmail.takashi316.tminchart.R;
 
-public class VerticalWhiteOnBlack extends Activity
+public class HorizontalWhiteOnBlack extends Activity
         implements StripeFragment.OnFragmentInteractionListener {
 
     final int COLUMNS = 50;
@@ -34,7 +34,7 @@ public class VerticalWhiteOnBlack extends Activity
         bundle.putInt("backgroundColor", Color.BLACK);
         bundle.putInt("frameWidth", 5);
         bundle.putInt("viewMargin", 5);
-        bundle.putBoolean("horizontal", false);
+        bundle.putBoolean("horizontal", true);
         fragment.setArguments(bundle);
 
         this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();

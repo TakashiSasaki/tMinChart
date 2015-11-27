@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TableLayout;
 
 import com.gmail.takashi316.tminchart.R;
 
@@ -18,7 +17,6 @@ public class VerticalBlackOnWhite extends Activity
     final int ROWS = 45;
     final double COLOR_RATIO = Math.pow(0.01, 0.05);
     final double PIXEL_RATIO = Math.pow(0.01, 0.1);
-    TableLayout tableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,6 @@ public class VerticalBlackOnWhite extends Activity
         Bundle bundle = new Bundle();
         bundle.putInt("nTableRows", ROWS);
         bundle.putInt("nTableColumns", COLUMNS);
-        //bundle.putInt("nSteps", COLUMNS - 1);
         bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.BLACK, Color.WHITE, COLOR_RATIO, COLUMNS));
         bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.white(COLUMNS));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(50, 1, ROWS - 1, true));
@@ -37,6 +34,7 @@ public class VerticalBlackOnWhite extends Activity
         bundle.putInt("backgroundColor", Color.WHITE);
         bundle.putInt("frameWidth", 5);
         bundle.putInt("viewMargin", 5);
+        bundle.putBoolean("horizontal", false);
         fragment.setArguments(bundle);
 
         this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.gmail.takashi316.tminchart.R;
 
-public class VerticalWhiteOnBlack extends Activity
+public class HorizontalBlackOnWhite extends Activity
         implements StripeFragment.OnFragmentInteractionListener {
 
     final int COLUMNS = 50;
@@ -27,14 +27,14 @@ public class VerticalWhiteOnBlack extends Activity
         Bundle bundle = new Bundle();
         bundle.putInt("nTableRows", ROWS);
         bundle.putInt("nTableColumns", COLUMNS);
-        bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.WHITE, Color.BLACK, COLOR_RATIO, COLUMNS));
-        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.black(COLUMNS));
+        bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.BLACK, Color.WHITE, COLOR_RATIO, COLUMNS));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.white(COLUMNS));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(50, 1, ROWS - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(50, 1, ROWS - 1, true));
-        bundle.putInt("backgroundColor", Color.BLACK);
+        bundle.putInt("backgroundColor", Color.WHITE);
         bundle.putInt("frameWidth", 5);
         bundle.putInt("viewMargin", 5);
-        bundle.putBoolean("horizontal", false);
+        bundle.putBoolean("horizontal", true);
         fragment.setArguments(bundle);
 
         this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();

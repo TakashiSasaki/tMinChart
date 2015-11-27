@@ -29,6 +29,7 @@ public class StripeFragment extends Fragment {
     private ArrayList<Integer> backgroundWidthSequence, foregroundWidthSequence;
     private int frameWidth, viewMargin;
     private int backgroundColor, labelColor;
+    private boolean horizontal;
 
     public StripeFragment() {
         // Required empty public constructor
@@ -47,6 +48,7 @@ public class StripeFragment extends Fragment {
         this.viewMargin = getArguments().getInt("viewMargin");
         this.backgroundColor = getArguments().getInt("backgroundColor");
         this.labelColor = getArguments().getInt("labelColor");
+        this.horizontal = getArguments().getBoolean("horizontal");
 
         this.onFragmentInteractionListener = (OnFragmentInteractionListener) getActivity();
     }//onCreate
@@ -101,7 +103,7 @@ public class StripeFragment extends Fragment {
                         this.foregroundColorSequence.get(column),
                         this.foregroundWidthSequence.get(row),
                         this.backgroundColorSequence.get(column),
-                        this.backgroundWidthSequence.get(row), false);
+                        this.backgroundWidthSequence.get(row), horizontal);
                 stripe_view.setStripeViews(stripe_views);
                 //stripe_view.setBackgroundColor(this.backgroundColorSequence[column]);
                 //stripe_view.setBackgroundWidth(this.backgroundWidthSequence.get(row));
