@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".stripe.StripeViewTestActivity"
+            android:name=".stripe.StripeFragmentActivity"
             android:label="@string/title_activity_stripe_view_test"
             android:launchMode="singleInstance"
             android:theme="@style/BlueBackground">

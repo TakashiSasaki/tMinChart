@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.gmail.takashi316.tminchart.R;
 
-public class StripeViewTestActivity extends Activity
+public class StripeFragmentActivity extends Activity
         implements StripeFragment.OnFragmentInteractionListener {
 
     final int COLUMNS = 26;
