@@ -29,8 +29,8 @@ public class StripeFragmentActivity extends Activity
         bundle.putInt("nTableRows", ROWS);
         bundle.putInt("nTableColumns", COLUMNS);
         bundle.putInt("nSteps", COLUMNS - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS))).arithmetic(Color.WHITE, Color.BLACK));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS))).white());
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.arithmetic(Color.WHITE, Color.BLACK, getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS)));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.white(getResources().getInteger(R.integer.STRIPE_FRAGMENT_COLUMNS)));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
         bundle.putInt("frameWidth", 10);

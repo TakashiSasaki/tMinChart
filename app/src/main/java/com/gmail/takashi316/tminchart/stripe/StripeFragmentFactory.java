@@ -14,8 +14,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).arithmetic(Color.WHITE, Color.BLACK));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).white());
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.arithmetic(Color.WHITE, Color.BLACK, columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.white(columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -33,8 +33,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).arithmetic(Color.BLACK, Color.WHITE));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).white());
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.arithmetic(Color.BLACK, Color.WHITE, columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.white(columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -51,8 +51,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).arithmetic(Color.WHITE, Color.BLACK));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).black());
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.arithmetic(Color.WHITE, Color.BLACK, columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.black(columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -69,8 +69,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).arithmetic(Color.BLACK, Color.WHITE));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).black());
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.arithmetic(Color.BLACK, Color.WHITE, columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.black(columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -87,8 +87,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).decrement(Color.WHITE, Color.rgb(1, 1, 1)));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).white());
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.decrement(Color.WHITE, Color.rgb(1, 1, 1), columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.white(columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -105,8 +105,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).increment(Color.BLACK, Color.rgb(1, 1, 1)));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).black());
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.increment(Color.BLACK, Color.rgb(1, 1, 1), columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.black(columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -123,8 +123,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).increment(Color.rgb(128, 128, 128), Color.rgb(1, 1, 1)));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).color(Color.rgb(128, 128, 128)));
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.increment(Color.rgb(128, 128, 128), Color.rgb(1, 1, 1), columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.monotone(Color.rgb(128, 128, 128), columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -141,8 +141,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).increment(Color.rgb(128, 128, 128), Color.rgb(1, 1, 1)));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).color(Color.rgb(128, 128, 128)));
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.increment(Color.rgb(128, 128, 128), Color.rgb(1, 1, 1), columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.monotone(Color.rgb(128, 128, 128), columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);
@@ -159,8 +159,8 @@ public class StripeFragmentFactory {
         bundle.putInt("nTableRows", rows);
         bundle.putInt("nTableColumns", columns);
         bundle.putInt("nSteps", columns - 1);
-        bundle.putIntArray("foregroundColorSequence", (new ColorSequence(columns)).arithmetic(Color.BLACK, Color.RED));
-        bundle.putIntArray("backgroundColorSequence", (new ColorSequence(columns)).color(Color.RED));
+        bundle.putIntegerArrayList("foregroundColorSequence", ColorSequence.arithmetic(Color.BLACK, Color.RED, columns));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.monotone(Color.RED, columns));
         bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, rows - 1, true));
         bundle.putInt("frameWidth", 10);

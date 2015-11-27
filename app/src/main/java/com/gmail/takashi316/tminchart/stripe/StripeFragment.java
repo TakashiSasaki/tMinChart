@@ -25,7 +25,7 @@ public class StripeFragment extends Fragment {
     private TableLayout tableLayoutStripe;
     private OnFragmentInteractionListener onFragmentInteractionListener;
     private int nTableRows, nTableColumns;
-    private int[] backgroundColorSequence, foregroundColorSequence;
+    private ArrayList<Integer> backgroundColorSequence, foregroundColorSequence;
     private ArrayList<Integer> backgroundWidthSequence, foregroundWidthSequence;
     private int frameWidth, viewMargin;
 
@@ -38,8 +38,8 @@ public class StripeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.nTableRows = getArguments().getInt("nTableRows");
         this.nTableColumns = getArguments().getInt("nTableColumns");
-        this.backgroundColorSequence = getArguments().getIntArray("backgroundColorSequence");
-        this.foregroundColorSequence = getArguments().getIntArray("foregroundColorSequence");
+        this.backgroundColorSequence = getArguments().getIntegerArrayList("backgroundColorSequence");
+        this.foregroundColorSequence = getArguments().getIntegerArrayList("foregroundColorSequence");
         this.backgroundWidthSequence = getArguments().getIntegerArrayList("backgroundWidthSequence");
         this.foregroundWidthSequence = getArguments().getIntegerArrayList("foregroundWidthSequence");
         this.frameWidth = getArguments().getInt("frameWidth");
@@ -94,9 +94,9 @@ public class StripeFragment extends Fragment {
             ArrayList<StripeView> stripe_views = new ArrayList<StripeView>();
             for (int column = 0; column < this.nTableColumns; ++column) {
                 StripeView stripe_view = new StripeView(context,
-                        this.foregroundColorSequence[column],
+                        this.foregroundColorSequence.get(column),
                         this.foregroundWidthSequence.get(row),
-                        this.backgroundColorSequence[column],
+                        this.backgroundColorSequence.get(column),
                         this.backgroundWidthSequence.get(row), false);
                 stripe_view.setStripeViews(stripe_views);
                 //stripe_view.setBackgroundColor(this.backgroundColorSequence[column]);
