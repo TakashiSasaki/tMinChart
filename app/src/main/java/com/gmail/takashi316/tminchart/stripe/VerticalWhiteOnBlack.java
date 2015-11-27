@@ -31,12 +31,12 @@ public class VerticalWhiteOnBlack extends Activity
         bundle.putInt("nTableColumns", COLUMNS);
         //bundle.putInt("nSteps", COLUMNS - 1);
         bundle.putIntegerArrayList("foregroundColorSequence", new ColorSequence(Color.WHITE, Color.BLACK, COLOR_RATIO, COLUMNS));
-        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.white(COLUMNS));
-        bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
-        bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(100, 1, ROWS - 1, true));
+        bundle.putIntegerArrayList("backgroundColorSequence", ColorSequence.black(COLUMNS));
+        bundle.putIntegerArrayList("foregroundWidthSequence", new PixelSequence(50, 1, ROWS - 1, true));
+        bundle.putIntegerArrayList("backgroundWidthSequence", new PixelSequence(50, 1, ROWS - 1, true));
         bundle.putInt("backgroundColor", Color.BLACK);
-        bundle.putInt("frameWidth", 10);
-        bundle.putInt("viewMargin", 10);
+        bundle.putInt("frameWidth", 5);
+        bundle.putInt("viewMargin", 5);
         fragment.setArguments(bundle);
 
         this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
