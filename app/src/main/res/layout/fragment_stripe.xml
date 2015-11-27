@@ -2,22 +2,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:background="@android:color/holo_blue_light"
+    android:padding="0dp"
     tools:context="com.gmail.takashi316.tminchart.stripe.StripeFragment">
 
     <ScrollView
         android:id="@+id/scrollViewStripe"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light">
 
             <TableLayout
                 android:id="@+id/tableLayoutStripe"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:layout_gravity="left|top"></TableLayout>
+                android:layout_gravity="left|top"
+                android:layout_margin="0dp"
+                android:background="@android:color/holo_red_dark"
+                android:minHeight="100dp"
+                android:minWidth="100dp"
+                android:padding="0dp"></TableLayout>
         </HorizontalScrollView>
     </ScrollView>
 
