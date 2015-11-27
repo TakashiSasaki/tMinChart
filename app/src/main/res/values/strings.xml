@@ -24,5 +24,6 @@
     <string name="title_activity_header_label_view">HeaderLabelViewActivity</string>
     <string name="title_activity_log">LogActivity</string>
     <string name="title_activity_con_chart">ConChartActivity</string>
+    <string name="title_activity_stripe_view">StripeViewActivity</string>
 
 </resources>

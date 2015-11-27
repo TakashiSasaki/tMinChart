@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.gmail.takashi316.tminchart.stripe.StripeViewActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutStripeViewTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <view
+            android:id="@+id/view2"
+            class="com.gmail.takashi316.tminchart.stripe.StripeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            app:backgroundColor="#0000FF"
+            app:foregroundColor="#FF0000"
+            app:frameColor="#ff41ff00"
+            app:gapInch="0.1"
+            app:horizontal="false"
+            app:vertical="true" />
+
+
+        <view
+            android:id="@+id/view2"
+            class="com.gmail.takashi316.tminchart.stripe.StripeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:backgroundColor="#00FF00"
+            app:foregroundColor="#ffff2700"
+            app:frameColor="#ffbb00ff"
+            app:gapInch="0.2"
+            app:horizontal="true"
+            app:vertical="false" />
+    </LinearLayout>
+</RelativeLayout>

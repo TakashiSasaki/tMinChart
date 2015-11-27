@@ -24,18 +24,16 @@
             android:name=".stripe.StripeViewTestActivity"
             android:label="@string/title_activity_stripe_view_test"
             android:launchMode="singleInstance"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/BlueBackground">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gmail.takashi316.tminchart.MainActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".location.LoationThreadTestActivity"
             android:label="@string/title_activity_loation_thread_test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
         <activity
@@ -52,7 +50,6 @@
             android:label="@string/title_activity_header_label_view">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
         <activity
@@ -67,67 +64,61 @@
         <activity
             android:name=".conchart.ConChartActivity"
             android:label="@string/title_activity_con_chart">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
-
         </activity>
         <activity
             android:name=".conchart.ConChart17Activity"
             android:label="17画">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".conchart.ConChart13Activity"
             android:label="13画">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".conchart.ConChart10Activity"
             android:label="10画">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".conchart.ConChart7Activity"
             android:label="7画">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".conchart.ConChart5Activity"
             android:label="5画">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".stripe.StripeViewActivity"
+            android:label="@string/title_activity_stripe_view">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
     </application>
 

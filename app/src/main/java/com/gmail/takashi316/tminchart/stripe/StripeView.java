@@ -24,7 +24,7 @@ class StripeViewParams {
 }
 
 public class StripeView extends FrameView {
-    private StripeViewParams stripeViewParams;
+    private StripeViewParams stripeViewParams = new StripeViewParams();
     private ArrayList<StripeView> stripeViews;
 
     public StripeView(Context context) {
