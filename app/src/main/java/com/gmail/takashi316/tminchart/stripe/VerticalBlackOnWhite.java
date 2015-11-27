@@ -72,6 +72,6 @@ public class VerticalBlackOnWhite extends Activity
 
     @Override
     public void onStripeFinished() {
-
+        this.finish();
     }
 }
