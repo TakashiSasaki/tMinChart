@@ -28,24 +28,20 @@ public class StripeView extends FrameView {
     private StripeViewParams stripeViewParams = new StripeViewParams();
     private ArrayList<StripeView> stripeViews;
     static private Logger logger;
-    Context context;
 
     public StripeView(Context context) {
         super(context);
-        this.context = context;
         this.init();
     }//StripeViewConstructor
 
     public StripeView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
         this.obtainStyledAttributes(attrs, 0);
         this.init();
     }//StripeView constructor
 
     public StripeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        this.context = context;
         this.stripeViewParams = new StripeViewParams();
         this.obtainStyledAttributes(attrs, defStyle);
         this.init();
@@ -53,7 +49,6 @@ public class StripeView extends FrameView {
 
     public StripeView(Context context, int foreground_color, int foreground_width, int background_color, int background_width, boolean horizontal) {
         super(context);
-        this.context = context;
         this.stripeViewParams.foregroundColor = foreground_color;
         this.stripeViewParams.foregroundWidth = foreground_width;
         this.stripeViewParams.backgroundColor = background_color;
@@ -74,9 +69,6 @@ public class StripeView extends FrameView {
     }
 
     private void init() {
-        if (this.logger == null) {
-            this.logger = new Logger(this.context);
-        }
 
         this.setOnClickListener(new OnClickListener() {
 
@@ -95,6 +87,9 @@ public class StripeView extends FrameView {
                 } catch (NullPointerException e) {
                 }//try
                 touched_stripe_view.toggleTouched();
+                if (logger == null) {
+                    logger = new Logger(getContext());
+                }
                 logger.log(stripeViewParams);
                 touched_stripe_view.postInvalidate();
             }//onClick
