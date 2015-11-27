@@ -28,6 +28,7 @@ public class StripeFragment extends Fragment {
     private ArrayList<Integer> backgroundColorSequence, foregroundColorSequence;
     private ArrayList<Integer> backgroundWidthSequence, foregroundWidthSequence;
     private int frameWidth, viewMargin;
+    private int backgroundColor, labelColor;
 
     public StripeFragment() {
         // Required empty public constructor
@@ -44,6 +45,8 @@ public class StripeFragment extends Fragment {
         this.foregroundWidthSequence = getArguments().getIntegerArrayList("foregroundWidthSequence");
         this.frameWidth = getArguments().getInt("frameWidth");
         this.viewMargin = getArguments().getInt("viewMargin");
+        this.backgroundColor = getArguments().getInt("backgroundColor");
+        this.labelColor = getArguments().getInt("labelColor");
 
         this.onFragmentInteractionListener = (OnFragmentInteractionListener) getActivity();
     }//onCreate
@@ -56,6 +59,7 @@ public class StripeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_stripe, container, false);
         this.buttonFinishStripe = (Button) view.findViewById(R.id.buttonFinishStripe);
         this.tableLayoutStripe = (TableLayout) view.findViewById(R.id.tableLayoutStripe);
+        this.tableLayoutStripe.setBackgroundColor(this.backgroundColor);
 
         this.buttonFinishStripe.setOnClickListener(new View.OnClickListener() {
             @Override

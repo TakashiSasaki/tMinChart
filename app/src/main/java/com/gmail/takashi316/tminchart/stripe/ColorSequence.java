@@ -20,9 +20,31 @@ public class ColorSequence extends ArrayList<Integer> {
     int startColor;
     int endColor;
     int diffColor;
+    double ratio;
 
     private ColorSequence() {
         super();
+    }
+
+    public ColorSequence(final int start_color, final int end_color, final double ratio, final int size) {
+        super();
+        this.startColor = start_color;
+        this.ratio = ratio;
+        this.mode = Mode.GEOMETRIC;
+        final double start_red = Color.red(start_color);
+        final double start_green = Color.green(start_color);
+        final double start_blue = Color.blue(start_color);
+        final double end_red = Color.red(end_color);
+        final double end_green = Color.green(end_color);
+        final double end_blue = Color.blue(end_color);
+        for (int i = 0; i < size; ++i) {
+            final double ratio_i = Math.pow(ratio, i);
+            final double red = start_red * ratio_i + end_red * (1.0 - ratio_i);
+            final double green = start_green * ratio_i + end_green * (1.0 - ratio_i);
+            final double blue = start_blue * ratio_i + end_blue * (1.0 - ratio_i);
+            final int color = Color.rgb((int) Math.round(red), (int) Math.round(green), (int) Math.round(blue));
+            this.add(color);
+        }//for
     }
 
     static public ColorSequence geometric(final int start_color, final int end_color, final int size) {
