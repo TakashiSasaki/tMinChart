@@ -87,7 +87,8 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         this.preferences = PreferenceManager.getDefaultSharedPreferences(this);
         setContentView(R.layout.activity_tmin_chart);
-        this.getActionBar().hide();
+        ActionBar action_bar = this.getActionBar();
+        if (action_bar != null) action_bar.hide();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);

@@ -1,5 +1,6 @@
 package com.gmail.takashi316.tminchart.minchart;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -18,7 +19,8 @@ public class MinChartActivity extends Activity implements MinChartFragment.OnFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_minchart);
-        this.getActionBar().hide();
+        ActionBar action_bar = this.getActionBar();
+        if (action_bar != null) action_bar.hide();
         this.display = new DisplayDpi(this);
 
         Fragment fragment = null;
