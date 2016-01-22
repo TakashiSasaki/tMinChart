@@ -26,7 +26,7 @@ public class LogSqliteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
-            db.execSQL("DROP TABLE Log");
+            //db.execSQL("DROP TABLE Log");
         } catch (SQLException sql_exception) {
         }
         this.onCreate(db);
