@@ -8,8 +8,9 @@ android {
         applicationId "com.gmail.takashi316.tminchart_beta"
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 182
-        versionName "1.8.2.20160122"
+        versionCode 183
+        versionName "1.8.3.20160126"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -36,4 +37,13 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'commons-validator:commons-validator:1.4.0'
+
+    androidTestCompile 'com.android.support.test:runner:0.4'
+    androidTestCompile 'com.android.support.test:rules:0.4'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    //androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 }
