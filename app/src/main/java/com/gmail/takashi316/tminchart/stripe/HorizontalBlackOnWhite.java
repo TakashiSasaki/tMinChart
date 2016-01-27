@@ -37,7 +37,8 @@ public class HorizontalBlackOnWhite extends Activity
         bundle.putBoolean("horizontal", true);
         fragment.setArguments(bundle);
 
-        this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        //this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        this.getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
     }//onCreate
 
 
