@@ -1,3 +1,5 @@
+package com.gmail.takashi316.tminchart.stripe;
+
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -6,7 +8,6 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import com.gmail.takashi316.tminchart.R;
-import com.gmail.takashi316.tminchart.stripe.StripeViewActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
