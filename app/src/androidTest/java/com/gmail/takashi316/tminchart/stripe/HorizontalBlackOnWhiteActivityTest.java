@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class StripeFragmentActivityTest {
+public class HorizontalBlackOnWhiteActivityTest {
     @Rule
-    public ActivityTestRule<StripeFragmentActivity> activityTestRule = new ActivityTestRule<>(StripeFragmentActivity.class);
+    public ActivityTestRule<HorizontalBlackOnWhite> activityTestRule = new ActivityTestRule<>(HorizontalBlackOnWhite.class);
 
     @Before
     public void init() {
