@@ -21,7 +21,7 @@ public class StripeFragmentActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stripe_view_test);
+        setContentView(R.layout.activity_stripe_fragment);
         this.viewGroup = (ViewGroup) this.findViewById(R.id.container);
 
         Fragment fragment = new StripeFragment();

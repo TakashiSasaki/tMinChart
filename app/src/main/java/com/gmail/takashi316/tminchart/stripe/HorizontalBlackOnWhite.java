@@ -22,7 +22,7 @@ public class HorizontalBlackOnWhite extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stripe_view_test);
+        setContentView(R.layout.activity_stripe_fragment);
 
         final Fragment fragment = new StripeFragment();
         Bundle bundle = new Bundle();
