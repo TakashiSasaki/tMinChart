@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.gmail.takashi316.tminchart.R;
 
@@ -23,7 +24,7 @@ public class HorizontalBlackOnWhite extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stripe_view_test);
 
-        Fragment fragment = new StripeFragment();
+        final Fragment fragment = new StripeFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("nTableRows", ROWS);
         bundle.putInt("nTableColumns", COLUMNS);
@@ -37,8 +38,14 @@ public class HorizontalBlackOnWhite extends Activity
         bundle.putBoolean("horizontal", true);
         fragment.setArguments(bundle);
 
-        //this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-        this.getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        findViewById(R.id.buttonStart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //this.getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+            }
+        });
+
     }//onCreate
 
 
