@@ -6,3 +6,6 @@
 .DS_Store
 /build
 ~$joyo2010.xlsx
+captures/SystemInfo*.txt
+.gitignore.swp
+
