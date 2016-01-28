@@ -1,5 +1,6 @@
 package com.gmail.takashi316.tminchart.stripe;
 
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
@@ -7,9 +8,11 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+import android.util.Log;
 
 import com.gmail.takashi316.tminchart.R;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,18 +31,20 @@ public class HorizontalBlackOnWhiteActivityTest {
 
     @Test
     public void createActivity() throws InterruptedException {
+        Log.v(this.getClass().getSimpleName(), Build.TYPE);
+        Assert.assertEquals("eng", Build.TYPE);
         Espresso.onView(ViewMatchers.withId(R.id.buttonStart)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeUp());
-        Thread.sleep(1000);
-        Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeUp());
-        Thread.sleep(1000);
-        Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeUp());
-        Thread.sleep(1000);
         Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeLeft());
         Thread.sleep(1000);
         Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeLeft());
         Thread.sleep(1000);
         Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeRight());
+        Thread.sleep(1000);
+        Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeUp());
+        Thread.sleep(1000);
+        Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeUp());
+        Thread.sleep(1000);
+        Espresso.onView(ViewMatchers.withId(R.id.fragmentStripe)).perform(ViewActions.swipeDown());
         Thread.sleep(1000);
     }
 }
