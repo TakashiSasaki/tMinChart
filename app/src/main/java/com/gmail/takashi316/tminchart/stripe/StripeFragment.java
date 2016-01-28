@@ -83,6 +83,7 @@ public class StripeFragment extends Fragment {
 
         for (int row = 0; row < this.nTableRows; ++row) {
             TableRow table_row = new TableRow(context);
+            table_row.setVisibility(View.GONE);
             TextView text_view_row_index = new TextView(context);
             text_view_row_index.setTextSize(TEXT_SIZE);
             text_view_row_index.setText(Integer.toString(row));
@@ -109,6 +110,7 @@ public class StripeFragment extends Fragment {
                 table_row.addView(stripe_view);
             }//for
             this.tableLayoutStripe.addView(table_row);
+            table_row.setVisibility(View.VISIBLE);
         }//for
         this.tableLayoutStripe.setVisibility(View.VISIBLE);
         return view;
