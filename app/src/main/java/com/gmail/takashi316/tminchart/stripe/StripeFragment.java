@@ -59,6 +59,7 @@ public class StripeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_stripe, container, false);
         this.tableLayoutStripe = (TableLayout) view.findViewById(R.id.tableLayoutStripe);
         this.tableLayoutStripe.setBackgroundColor(this.backgroundColor);
+        this.tableLayoutStripe.setVisibility(View.GONE);
 
         final int TEXT_SIZE = 50;
         final Context context = this.getActivity();
@@ -109,6 +110,7 @@ public class StripeFragment extends Fragment {
             }//for
             this.tableLayoutStripe.addView(table_row);
         }//for
+        this.tableLayoutStripe.setVisibility(View.VISIBLE);
         return view;
     }//onCreateView
 
