@@ -139,7 +139,7 @@ public class StripeView extends FrameView {
             Log.v(this.getClass().getSimpleName(), "height_mode is unknown");
             height_size = 400;
         }//if
-        Log.v(this.getClass().getSimpleName(), "width_size=" + width_size + " height_size=" + height_size);
+        //Log.v(this.getClass().getSimpleName(), "width_size=" + width_size + " height_size=" + height_size);
         this.setMeasuredDimension(MeasureSpec.makeMeasureSpec(width_size, width_mode),
                 MeasureSpec.makeMeasureSpec(height_size, height_mode));
     }//onMeasure
