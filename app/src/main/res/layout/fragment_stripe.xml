@@ -15,6 +15,7 @@
         android:background="@android:color/holo_green_light">
 
         <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_orange_light">
@@ -31,14 +32,5 @@
                 android:padding="0dp"></TableLayout>
         </HorizontalScrollView>
     </ScrollView>
-
-    <Button
-        android:id="@+id/buttonFinishStripe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:text="計測「Stripe」を終了"
-        android:textSize="30dp" />
-
 
 </FrameLayout>

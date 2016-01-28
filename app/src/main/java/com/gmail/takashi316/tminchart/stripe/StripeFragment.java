@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 public class StripeFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
-    private Button buttonFinishStripe;
     private TableLayout tableLayoutStripe;
     private OnFragmentInteractionListener onFragmentInteractionListener;
     private int nTableRows, nTableColumns;
@@ -59,16 +57,8 @@ public class StripeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stripe, container, false);
-        this.buttonFinishStripe = (Button) view.findViewById(R.id.buttonFinishStripe);
         this.tableLayoutStripe = (TableLayout) view.findViewById(R.id.tableLayoutStripe);
         this.tableLayoutStripe.setBackgroundColor(this.backgroundColor);
-
-        this.buttonFinishStripe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onFragmentInteractionListener.onStripeFinished();
-            }//onClick
-        });
 
         final int TEXT_SIZE = 50;
         final Context context = this.getActivity();
@@ -122,12 +112,11 @@ public class StripeFragment extends Fragment {
         return view;
     }//onCreateView
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }//if
-    }//onButtonPressed
+    @Override
+    public void onStop() {
+        super.onStop();
+        onFragmentInteractionListener.onStripeFinished();
+    }
 
     @Override
     public void onAttach(Activity activity) {
