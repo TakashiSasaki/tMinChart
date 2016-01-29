@@ -7,6 +7,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -30,13 +31,24 @@ public class SandboxActivityTest {
     }
 
     @Test
-    public void test() throws InterruptedException {
+    public void testWithId() throws InterruptedException {
         Espresso.onView(ViewMatchers.withId(android.R.id.content + 11111111)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(android.R.id.content + 22222222)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(android.R.id.content + 33333333)).check(ViewAssertions.matches(ViewMatchers.withText("" + 2)));
         Espresso.onView(ViewMatchers.withId(android.R.id.content + 11111111)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(android.R.id.content + 22222222)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(android.R.id.content + 33333333)).check(ViewAssertions.matches(ViewMatchers.withText("" + 4)));
+        Thread.sleep(WAIT_MILLS);
+    }
+
+    @Test
+    public void testWithTagValue() throws InterruptedException {
+        Espresso.onView(ViewMatchers.withTagValue(Matchers.is((Object) 1))).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withTagValue(Matchers.is((Object) 2))).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withTagValue(Matchers.is((Object) 3))).check(ViewAssertions.matches(ViewMatchers.withText("" + 2)));
+        Espresso.onView(ViewMatchers.withTagValue(Matchers.is((Object) 1))).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withTagValue(Matchers.is((Object) 2))).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withTagValue(Matchers.is((Object) 3))).check(ViewAssertions.matches(ViewMatchers.withText("" + 4)));
         Thread.sleep(WAIT_MILLS);
     }
 }
