@@ -143,6 +143,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".sandbox.SandboxActivity"
+            android:label="SandboxActivity"></activity>
     </application>
 
 </manifest>
