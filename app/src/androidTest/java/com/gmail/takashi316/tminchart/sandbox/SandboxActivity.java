@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class SandboxActivity extends Activity {
     ViewGroup content;
     LinearLayout linearLayout;
-    Button button1, button2;
+    Button button1, button2, button3;
     TextView textView;
     int count;
 
@@ -40,9 +40,17 @@ public class SandboxActivity extends Activity {
         button2.setOnClickListener(onClickListener);
         this.linearLayout.addView(button2);
 
+        this.button3 = new Button(this);
+        button3.setId(android.R.id.content + 33333333);
+        button3.setTag(2);
+        button3.setText("button 3");
+        button3.setBackgroundColor(Color.BLUE);
+        button3.setOnClickListener(onClickListener);
+        this.linearLayout.addView(button3);
+
         textView = new TextView(this);
-        textView.setId(android.R.id.content + 33333333);
-        textView.setTag(3);
+        textView.setId(android.R.id.content + 44444444);
+        textView.setTag(4);
         this.linearLayout.addView(textView);
     }
 
